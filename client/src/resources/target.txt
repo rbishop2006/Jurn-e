@@ -1,0 +1,35 @@
+aside section
+aside avatar, username, active status
+aside shows trips
+aside shows fusers
+aside chat window
+aside chat window optional full width (able to persist)
+
+header section
+header dashboard (displays sitename, space for more)
+
+main section
+main column view
+
+main all trips displayed select option (scroll view)
+main all trips info (location, dates, families, checklist)
+
+new trip template
+new trip invite other families/fusers
+
+phase 1 trip discussion/voting platform
+phase 1 trip dates with input
+phase 1 trip location with input
+phase 1 hotel/AirBnB (links) with input
+phase 1 drive/fly (links) with input
+
+phase 2 trip header (displays trip, family, fuser)
+phase 2 generate checklist based off of inputs
+phase 2 trip foreign/domestic (passports needed?)
+phase 2 trip reminders (checklist of frequently needed items/ medications, notify bank, credit cards, etc.)
+phase 2 trip todos list (family or fuser assignments)
+phase 2 trip activities (suggestions/discussion/voting platform)
+phase 2 trip activities (book/paid status, planner scheme)
+phase 2 trip planner view (shows time/locations and fusers attending)
+
+have chat with other fusers

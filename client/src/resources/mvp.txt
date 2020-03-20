@@ -1,0 +1,29 @@
+MVP
+
+decide on MVP, Target and Icebox features
+create wireframes
+create GitHub repository
+create todos for all features
+setup (boilerplate / dependencies)
+database family profile (linking to other trips)
+database fuser profile (linking to other trips)
+database trip profile
+
+register families with fusers
+login fusers
+logout
+
+display fuser info
+create a trip
+
+input fields for fusers to enter trip details
+
+display existing trips
+display of trip details
+checklist of trip actions
+
+header section
+aside section
+main section
+phase 1
+phase 2

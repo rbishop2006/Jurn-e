@@ -1,0 +1,21 @@
+social media section
+facebook
+twitter
+instagram
+
+resources section
+resources maps
+resources Open Table
+resources Yelp!
+resources Groupon
+resources Weather
+resources push notifications
+
+aside direct message families or fusers
+aside call fusers
+
+phase 1 drive/fly (links api call for flights, rental cars)
+phase 1 hotel/AirBnB (api call for lodging)
+
+phase 2 trip expenses (split expenses, paid status)
+phase 2 trip photos (take photos and upload to photo album of the trip)
