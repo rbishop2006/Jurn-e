@@ -42,6 +42,7 @@ router.post("/register/user", (req, res, next) => {
 })
 
 router.post("/jurn", (req, res, next) => {
+  const id = req.body.id
   const jname = req.body.jname
   const user_id = req.body.user_id
   const fam_id = req.body.fam_id
@@ -56,11 +57,11 @@ router.post("/jurn", (req, res, next) => {
       })
     } else {
       const sql4 =
-        "INSERT INTO jurn (jname, user_id, fam_id, location) VALUES (?, ?, ?, ?)"
+        "INSERT INTO jurn (id, jname, user_id, fam_id, location) VALUES (?, ?, ?, ?, ?)"
 
       conn.query(
         sql4,
-        [jname, user_id, fam_id, location],
+        [id, jname, user_id, fam_id, location],
         (err4, results4, fields4) => {
           console.log(req.body)
 
@@ -124,37 +125,38 @@ router.post("/location", (req, res, next) => {
 
 // LOGIN USERS BELOW
 
-// router.post("/user/login", (req, res, next) => {
-//   const email = req.body.email
-//   const password = req.body.password
+router.post("/login/user", (req, res, next) => {
+  const email = req.body.username
+  const password = req.body.password
 
-//   const getSQL = "SELECT email, salt, password FROM users WHERE email = ?"
+  const getSQL = "SELECT email, salt, password FROM user WHERE email = ?"
 
-//   conn.query(getSQL, [email], (salterr, saltresults, saltfields) => {
-//     if (saltresults.length > 0) {
-//       const salt = saltresults[0].salt
-//       const userpass = saltresults[0].password
+  conn.query(getSQL, [email], (salterr, saltresults, saltfields) => {
+    if (saltresults.length > 0) {
+      const salt = saltresults[0].salt
+      const userpass = saltresults[0].password
 
-//       if (sha512(password + salt) === userpass) {
-//         //log them in
-//         const token = jwt.sign(
-//           { email: email, project: "jurn-e" },
-//           config.get("secret")
-//         )
-//         res.json({
-//           token: token
-//         })
-//       } else {
-//         res.status(401).json({
-//           message: "Invalid email or password"
-//         })
-//       }
-//     } else {
-//       res.status(401).json({
-//         message: "Invalid email or password"
-//       })
-//     }
-//   })
-// })
+      if (sha512(password + salt) === userpass) {
+        //log them in
+
+        const token = jwt.sign(
+          { email: email, project: "Jurn-e" },
+          config.get("secret")
+        )
+        res.json({
+          token: token
+        })
+      } else {
+        res.status(401).json({
+          message: "Invalid email or password"
+        })
+      }
+    } else {
+      res.status(401).json({
+        message: "Invalid email or password"
+      })
+    }
+  })
+})
 
 module.exports = router
