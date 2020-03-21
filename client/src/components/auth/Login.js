@@ -12,7 +12,7 @@ export default props => {
   function handleLogin(e) {
     e.preventDefault()
     signin(username, password).then(profile => {
-      props.history.push("/jurn(e)/dashboard")
+      props.history.push("/jurn(e)/paths")
     })
   }
 
