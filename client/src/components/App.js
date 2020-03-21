@@ -15,7 +15,7 @@ export default props => {
           <Suspense fallback={<div>Loading...</div>}>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <Route exact path="/" render={() => <Redirect to="/jurn(e)" />} />
+            <Route exact path="/" render={() => <Redirect to="/login" />} />
             <AuthRoute path="/jurn(e)/:page" component={Paths} />
           </Suspense>
         </div>

@@ -18,7 +18,7 @@ export default props => {
 
   return (
     <div className="loginDiv">
-      <h1>ChatRoom</h1>
+      <h1>Jurn(e)</h1>
       <Form onSubmit={handleLogin}>
         <Form.Field>
           <input

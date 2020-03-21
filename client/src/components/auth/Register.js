@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { api, useAuth } from "react-auth"
 import { Link } from "react-router-dom"
-import validator from "validator"
+// import validator from "validator"
 import { Button, Form } from "semantic-ui-react"
-import "../../styles/Login.css"
+// import "../../styles/Login.css"
 
 export default props => {
   const { signin } = useAuth()
