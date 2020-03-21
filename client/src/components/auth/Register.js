@@ -40,9 +40,9 @@ export default props => {
     // }
 
     // if (valid) {
-    api.post("/register", { email, password }).then(data => {
+    api.post("/register/user", { email, password }).then(data => {
       signin(email, password).then(() => {
-        props.history.push("/jurn(e)/dashboard")
+        props.history.push("/jurn(e)/paths")
       })
     })
   }
