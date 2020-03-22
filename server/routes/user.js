@@ -125,7 +125,7 @@ router.post("/location", (req, res, next) => {
 
 // LOGIN USERS BELOW
 
-router.post("/login/user", (req, res, next) => {
+router.post("/login", (req, res, next) => {
   const email = req.body.username
   const password = req.body.password
 
