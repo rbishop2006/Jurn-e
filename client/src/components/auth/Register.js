@@ -42,7 +42,7 @@ export default props => {
     // if (valid) {
     api.post("/register/user", { email, password }).then(data => {
       signin(email, password).then(() => {
-        props.history.push("/jurn(e)/paths")
+        props.history.push("/Jurn(e)/paths")
       })
     })
   }
