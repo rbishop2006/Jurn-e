@@ -10,7 +10,7 @@ const Dashboard = React.lazy(() => import("./jurn(e)/Dashboard"))
 
 export default props => {
   return (
-    <AuthProvider>
+    <AuthProvider redirectUrl="/Jurne">
       <Router>
         <div>
           <Suspense fallback={<div>Loading...</div>}>
