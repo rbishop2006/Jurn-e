@@ -135,11 +135,10 @@ router.post("/login", (req, res, next) => {
 
         const token = jwt.sign(
           {
-            user_id: user_id,
-            fname: fname,
-            lname: lname,
+            // fname: fname,
+            // lname: lname,
             email: email,
-            cell_phone: cell_phone,
+            // cell_phone: cell_phone,
             project: "Jurn-e"
           },
           config.get("secret")
