@@ -6,7 +6,7 @@ const config = require("config")
 const conn = require("../db")
 const randomString = require("../utils/randomstring.js")
 
-router.post("/register/user", (req, res, next) => {
+router.post("/register", (req, res, next) => {
   const email = req.body.email
   const fname = req.body.fname
   const lname = req.body.lname
@@ -42,11 +42,10 @@ router.post("/register/user", (req, res, next) => {
 })
 
 router.post("/jurn", (req, res, next) => {
-  const id = req.body.id
   const jname = req.body.jname
   const user_id = req.body.user_id
-  const fam_id = req.body.fam_id
-  const location = req.body.location
+  // const fam_id = req.body.fam_id
+  // const location = req.body.location
 
   const checkSQL3 = "SELECT count(1) as count FROM jurn WHERE jname = ?"
 
@@ -56,20 +55,15 @@ router.post("/jurn", (req, res, next) => {
         message: "jurn already exists"
       })
     } else {
-      const sql4 =
-        "INSERT INTO jurn (id, jname, user_id, fam_id, location) VALUES (?, ?, ?, ?, ?)"
+      const sql4 = "INSERT INTO jurn (jname, user_id) VALUES (?, ?)"
 
-      conn.query(
-        sql4,
-        [id, jname, user_id, fam_id, location],
-        (err4, results4, fields4) => {
-          console.log(req.body)
+      conn.query(sql4, [jname, user_id], (err4, results4, fields4) => {
+        console.log(req.body)
 
-          res.json({
-            message: "jurn added successfully"
-          })
-        }
-      )
+        res.json({
+          message: "jurn added successfully"
+        })
+      })
     }
   })
 })
@@ -100,7 +94,7 @@ router.post("/register/family", (req, res, next) => {
 
 router.post("/location", (req, res, next) => {
   const loc_name = req.body.loc_name
-  const jurn_id = req.body.jurn_id
+  const jname = req.body.jname
 
   const checkSQL7 = "SELECT count(1) as count FROM location WHERE loc_name = ?"
 
@@ -110,9 +104,9 @@ router.post("/location", (req, res, next) => {
         message: "location already exists"
       })
     } else {
-      const sql8 = "INSERT INTO location (loc_name, jurn_id) VALUES (?, ?)"
+      const sql8 = "INSERT INTO location (loc_name, jname) VALUES (?, ?)"
 
-      conn.query(sql8, [loc_name, jurn_id], (err8, results8, fields8) => {
+      conn.query(sql8, [loc_name, jname], (err8, results8, fields8) => {
         console.log(req.body)
 
         res.json({
@@ -140,7 +134,14 @@ router.post("/login", (req, res, next) => {
         //log them in
 
         const token = jwt.sign(
-          { email: email, project: "Jurn-e" },
+          {
+            user_id: user_id,
+            fname: fname,
+            lname: lname,
+            email: email,
+            cell_phone: cell_phone,
+            project: "Jurn-e"
+          },
           config.get("secret")
         )
         res.json({
