@@ -46,7 +46,7 @@ export default props => {
       <Feed>
         <Feed.Event>
           <Feed.Label>
-            <img src="https://place-hold.it/25" />
+            <img src="https://place-hold.it/25" alt="placeholder" />
           </Feed.Label>
           <Feed.Content>
             <Feed.Summary>
