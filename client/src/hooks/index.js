@@ -1,1 +1,1 @@
-export { useDashboard } from "../redux/ducks/dashboard"
+export { useJurns } from "../redux/ducks/dashboard"

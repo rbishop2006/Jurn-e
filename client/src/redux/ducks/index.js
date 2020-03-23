@@ -1,1 +1,1 @@
-export { default as dashboardState } from "./dashboard"
+export { default as JurnsState } from "./dashboard"

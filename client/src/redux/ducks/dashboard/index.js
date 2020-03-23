@@ -1,28 +1,28 @@
 import { useSelector, useDispatch } from "react-redux"
 import { api } from "react-auth"
 
-const GET_DASHBOARD = "dashboard/GET_DASHBOARD"
+const GET_JURNS = "dashboard/GET_JURNS"
 
 const initialState = {
-  dashboard: ""
+  jurns: []
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_DASHBOARD:
+    case GET_JURNS:
       return { dashboard: action.payload }
     default:
       return state
   }
 }
 
-function getDashboard() {
+function getJurns() {
   return dispatch => {
     api
       .get("/dashboard")
       .then(resp => {
         dispatch({
-          type: GET_DASHBOARD,
+          type: GET_JURNS,
           payload: resp.data.dashboard
         })
       })
@@ -30,10 +30,21 @@ function getDashboard() {
   }
 }
 
-export function useDashboard() {
-  const dispatch = useDispatch()
-  const dashboard = useSelector(appState => appState.dashboardState.dashboard)
-  const get = () => dispatch(getDashboard())
+function createJurn(user_id, jname, fam_id) {
+  return dispatch => {
+    api.post("/dashboard", { user_id, jname, fam_id }).then(resp => {
+      dispatch(getJurns())
+    })
+  }
+}
 
-  return { dashboard, get }
+export function useJurns() {
+  const dispatch = useDispatch()
+  const jurns = useSelector(appState => appState.JurnsState.jurns)
+  const sendJurn = (user_id, jname, fam_id) => {
+    dispatch(createJurn(user_id, jname, fam_id))
+  }
+  const get = () => dispatch(getJurns())
+
+  return { jurns, get, sendJurn }
 }
