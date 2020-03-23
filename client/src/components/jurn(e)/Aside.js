@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useAuth } from "react-auth"
 import { Icon, Button, Divider, Menu, Feed, List } from "semantic-ui-react"
 
