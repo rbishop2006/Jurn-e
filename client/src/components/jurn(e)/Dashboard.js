@@ -4,8 +4,10 @@ import React from "react"
 import Main from "./Main"
 import Aside from "./Aside"
 import "../../styles/dashboard.scss"
+import { useDashboard } from "../../hooks"
 
 export default props => {
+  const { get } = useDashboard()
   return (
     <div className="grid">
       <Aside />

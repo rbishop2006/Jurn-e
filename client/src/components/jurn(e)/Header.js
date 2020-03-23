@@ -1,18 +1,18 @@
 import React, { useState } from "react"
 import { Header, Button, Form } from "semantic-ui-react"
 // import { useAuth } from "react-auth"
-import { useJurns } from "../../hooks"
+import { useDashboard } from "../../hooks"
 
 export default props => {
-  const { sendJurn } = useJurns()
-  const [newJurne, setNewJurne] = useState("")
+  const { sendJurn } = useDashboard()
+  const [newJurn, setNewJurn] = useState("")
   // const { profile } = useAuth()
 
   function handleSubmit(e) {
     e.preventDefault()
     sendJurn({
       // user: user_id,
-      jname: newJurne,
+      jname: newJurn,
       timestamp: new Date().getTime()
     })
   }
@@ -23,13 +23,13 @@ export default props => {
       <Form onSubmit={handleSubmit} className="create">
         <Form.Group inline widths="equal">
           <Form.Field>
-            <label>Create a new Jurn(e)</label>
+            <label htmlFor="newJurn">Create a new Jurn(e)</label>
             <input
-              id="newJurne"
+              id="newJurn"
               className="messageText"
-              value={newJurne}
+              value={newJurn}
               type="text"
-              onChange={e => setNewJurne(e.target.value)}
+              onChange={e => setNewJurn(e.target.value)}
               placeholder="ex. Cancun 2020"
             />
             <Button type="submit">Create</Button>
