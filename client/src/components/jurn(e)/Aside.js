@@ -1,16 +1,23 @@
-import React, { useState } from "react"
+import React from "react"
 import { useAuth } from "react-auth"
 import { Icon, Button, Divider, Menu, Feed, List } from "semantic-ui-react"
+import { useDashboard } from "../../hooks"
 
 export default props => {
   const { signout, profile } = useAuth()
+  const { dashboard } = useDashboard()
+
+  const user = dashboard.user
+
+  console.log(dashboard)
+  console.log(dashboard.user)
 
   return (
     <aside>
       <div className="userProfile">
         <div className="profileDiv">
           <Icon name="user secret" color="grey" size="big" />
-          <p className="user">{profile.fname}</p>
+          <p className="user">{user && user.fname}</p>
           <p className="status"></p>
         </div>
         <Button onClick={e => signout()}>Log out</Button>
