@@ -4,7 +4,7 @@ import { Card, Image } from "semantic-ui-react"
 import { useDashboard } from "../../hooks"
 
 export default props => {
-  // const { jurns } = useDashboard()
+  const { jurns } = useDashboard()
 
   return (
     <main>
@@ -24,16 +24,16 @@ export default props => {
             </Card>
           })} */}
 
-          {/* {jurns.map((jurn,i) => {
+          {jurns.map((jurn, i) => (
             <Card centered fluid key={"jurn" + i}>
-            <Image src="https://place-hold.it/800x200" />
-            <Card.Content>
-              <Card.Header>{jurn.jname}</Card.Header>
-              <Card.Meta>{jurn.location}</Card.Meta>
-              <Card.Meta>{"People going: " + users.length}</Card.Meta>
-            </Card.Content>
-          </Card>
-          })} */}
+              <Image src="https://place-hold.it/800x200" />
+              <Card.Content>
+                <Card.Header>{jurns.jname}</Card.Header>
+                <Card.Meta>{jurns.location}</Card.Meta>
+                <Card.Meta>{"People going: " + 3}</Card.Meta>
+              </Card.Content>
+            </Card>
+          ))}
 
           <Card centered fluid>
             <Image src="https://place-hold.it/800x200" />
