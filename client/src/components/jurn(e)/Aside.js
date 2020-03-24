@@ -25,7 +25,7 @@ export default props => {
       <Divider />
       <h5>Jurn(e)s</h5>
       {jurns.map((each, i) => (
-        <Menu vertical className="menu">
+        <Menu key={"jurn" + i} vertical className="menu">
           <Menu.Item name={each.jname} active={true} />
         </Menu>
       ))}

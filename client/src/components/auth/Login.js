@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { useAuth } from "react-auth"
 import { Link } from "react-router-dom"
-// import "../../styles/Login.css"
 import { Button, Form } from "semantic-ui-react"
+import "../../styles/Login.scss"
 
 export default props => {
   const [username, setUserName] = useState("")
@@ -37,12 +37,11 @@ export default props => {
           />
         </Form.Field>
         <Button type="submit">Log in</Button>
+        <div className="linkDiv">
+          <p>New user?</p>
+          <Link to="/register">Register Here</Link>
+        </div>
       </Form>
-      <div className="linkDiv">
-        <p>New user?</p>
-        <Link to="/register">Register Here</Link>
-        {/* <Link to="/chatroom">ChatRoom</Link> */}
-      </div>
     </div>
   )
 }

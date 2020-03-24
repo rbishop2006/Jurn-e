@@ -3,12 +3,16 @@ import { api, useAuth } from "react-auth"
 import { Link } from "react-router-dom"
 // import validator from "validator"
 import { Button, Form } from "semantic-ui-react"
-// import "../../styles/Login.css"
+import "../../styles/Login.scss"
 
 export default props => {
   const { signin } = useAuth()
   const [email, setEmail] = useState("")
   const [emailError, setEmailError] = useState("")
+  const [fname, setFname] = useState("")
+  const [fnameError, setFnameError] = useState("")
+  const [lname, setLname] = useState("")
+  const [lnameError, setLnameError] = useState("")
   const [password, setPassword] = useState("")
   const [passwordError, setPasswordError] = useState("")
   const [confirm, setConfirm] = useState("")
@@ -53,6 +57,7 @@ export default props => {
       <h1>Register</h1>
       <Form onSubmit={handleRegister}>
         <Form.Field>
+          {/* <Form.Input fluid label="First name" placeholder="First name" error /> */}
           <label className={emailError ? "error" : ""} htmlFor="email">
             Email {emailError && emailError}
           </label>
@@ -62,7 +67,33 @@ export default props => {
             value={email}
             className={emailError ? "errorBox" : ""}
             onChange={e => setEmail(e.target.value)}
-            placeholder="Enter you email"
+            placeholder="johnsmith@email.com"
+          />
+        </Form.Field>
+        <Form.Field>
+          <label className={fnameError ? "error" : ""} htmlFor="fname">
+            First Name {fnameError && fnameError}
+          </label>
+          <input
+            id="fname"
+            type="text"
+            value={fname}
+            className={fnameError ? "errorBox" : ""}
+            onChange={e => setFname(e.target.value)}
+            placeholder="ex. John"
+          />
+        </Form.Field>
+        <Form.Field>
+          <label className={lnameError ? "error" : ""} htmlFor="lname">
+            Last Name {lnameError && lnameError}
+          </label>
+          <input
+            id="lname"
+            type="text"
+            value={lname}
+            className={lnameError ? "errorBox" : ""}
+            onChange={e => setLname(e.target.value)}
+            placeholder="ex. Smith"
           />
         </Form.Field>
         <Form.Field>
@@ -92,10 +123,11 @@ export default props => {
           />
         </Form.Field>
         <Button type="submit">Register</Button>
+        <div className="linkDiv">
+          <p>Already a Jurn(ease) member?</p>
+          <Link to="/login">Click Here</Link>
+        </div>
       </Form>
-      <div className="logoutDiv">
-        <Link to="/login">Log in</Link>
-      </div>
     </div>
   )
 }
