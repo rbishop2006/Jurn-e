@@ -30,8 +30,6 @@ router.post("/register", (req, res, next) => {
         sql2,
         [email, fname, lname, fam_id, cell_phone, password, salt],
         (err2, results2, fields2) => {
-          console.log(req.body)
-
           res.json({
             message: "user added successfully"
           })
@@ -44,8 +42,6 @@ router.post("/register", (req, res, next) => {
 router.post("/jurn", (req, res, next) => {
   const jname = req.body.jname
   const user_id = req.body.user_id
-  // const fam_id = req.body.fam_id
-  // const location = req.body.location
 
   const checkSQL3 = "SELECT count(1) as count FROM jurn WHERE jname = ?"
 
@@ -58,8 +54,6 @@ router.post("/jurn", (req, res, next) => {
       const sql4 = "INSERT INTO jurn (jname, user_id) VALUES (?, ?)"
 
       conn.query(sql4, [jname, user_id], (err4, results4, fields4) => {
-        console.log(req.body)
-
         res.json({
           message: "jurn added successfully"
         })

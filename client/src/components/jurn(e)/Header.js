@@ -4,18 +4,17 @@ import { Header, Button, Form } from "semantic-ui-react"
 import { useDashboard } from "../../hooks"
 
 export default props => {
-  const { sendJurn } = useDashboard()
+  const { sendJurn, user } = useDashboard()
   const [newJurn, setNewJurn] = useState("")
-  // const { profile } = useAuth()
 
   // Function to handle submitting a new Jurn from the form
   function handleSubmit(e) {
     e.preventDefault()
-    sendJurn({
-      // user: user_id,
-      jname: newJurn,
-      timestamp: new Date().getTime()
-    })
+    sendJurn(
+      user.id,
+      newJurn
+      // timestamp: new Date().getTime()
+    )
   }
 
   return (
