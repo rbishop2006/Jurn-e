@@ -5,7 +5,7 @@ import { useDashboard } from "../../hooks"
 
 export default props => {
   const { signout } = useAuth()
-  const { user, jurns } = useDashboard()
+  const { user, jurns, reminders } = useDashboard()
 
   console.log(jurns)
   console.log()
