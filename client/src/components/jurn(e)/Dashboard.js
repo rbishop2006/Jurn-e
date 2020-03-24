@@ -1,13 +1,11 @@
 import React, { useEffect } from "react"
-// import { Button } from "semantic-ui-react"
 import Main from "./Main"
 import Aside from "./Aside"
 import "../../styles/dashboard.scss"
 import { useDashboard } from "../../hooks"
-import { useAuth } from "react-auth"
 
 export default props => {
-  const { get, dashboard } = useDashboard()
+  const { get } = useDashboard()
 
   useEffect(() => {
     get()
