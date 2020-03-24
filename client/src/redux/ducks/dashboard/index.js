@@ -33,9 +33,9 @@ function getDashboard() {
   }
 }
 
-function createJurn(user_id, jname, fam_id) {
+function createJurn(user_id, jname) {
   return dispatch => {
-    api.post("/jurn", { user_id, jname, fam_id }).then(resp => {
+    api.post("/jurn", { user_id, jname }).then(resp => {
       dispatch(getDashboard())
     })
   }
@@ -47,8 +47,8 @@ export function useDashboard() {
   const user = useSelector(appState => appState.DashboardState.user)
 
   const get = () => dispatch(getDashboard())
-  const sendJurn = (user_id, jname, fam_id) => {
-    dispatch(createJurn(user_id, jname, fam_id))
+  const sendJurn = (user_id, jname) => {
+    dispatch(createJurn(user_id, jname))
   }
 
   return { jurns, user, get, sendJurn }
