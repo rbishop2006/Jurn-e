@@ -24,10 +24,11 @@ export default props => {
       </div>
       <Divider />
       <h5>Jurn(e)s</h5>
-      <Menu vertical className="menu">
-        <Menu.Item name="Jurn 1" active={true} />
-        <Menu.Item name="Jurn 2" active={true} />
-      </Menu>
+      {jurns.map((each, i) => (
+        <Menu vertical className="menu">
+          <Menu.Item name={each.jname} active={true} />
+        </Menu>
+      ))}
       <Divider />
       <h5>Users</h5>
       <List>
