@@ -4,6 +4,7 @@ const conn = require("../db")
 const decode = require("jsonwebtoken").decode
 router.get("/dashboard", (req, res, next) => {
   const profile = decode(req.headers.authorization.substring(7))
+  console.log(profile)
   const dashResults = {}
   const sql = `SELECT
 view.jname, view.loc_name, view.user_id, user.fname, user.lname, user.fam_id, family.fam_name, user.email, user.cell_phone
