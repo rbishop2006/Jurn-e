@@ -4,7 +4,11 @@ import { Link } from "react-router-dom"
 export default props => {
   return (
     <div>
-      <h1>Hello World</h1>
+      <h1>Jurn(e)</h1>
+      <h2>
+        A place to help ease the stress of planning your next Journey aka
+        Jurn(e)
+      </h2>
       <div className="logoutDiv">
         <Link to="/login">Log in</Link>
       </div>

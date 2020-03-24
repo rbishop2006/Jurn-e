@@ -8,6 +8,7 @@ export default props => {
   const [newJurn, setNewJurn] = useState("")
   // const { profile } = useAuth()
 
+  // Function to handle submitting a new Jurn from the form
   function handleSubmit(e) {
     e.preventDefault()
     sendJurn({
