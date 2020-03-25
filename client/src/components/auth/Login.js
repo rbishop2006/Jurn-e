@@ -48,23 +48,6 @@ export default props => {
           type="password"
           onChange={e => setPassword(e.target.value)}
         />
-
-        {/* <Form.Field>
-          <input
-            type="text"
-            value={username}
-            onChange={e => setUserName(e.target.value)}
-            placeholder="Enter your email"
-          />
-        </Form.Field>
-        <Form.Field>
-          <input
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-        </Form.Field> */}
         <Button type="submit">Log in</Button>
         <div className="linkDiv">
           <p>New user?</p>

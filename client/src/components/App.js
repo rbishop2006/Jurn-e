@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 import { AuthProvider, AuthRoute } from "react-auth"
 import "semantic-ui-css/semantic.min.css"
 
-const Jurne = React.lazy(() => import("./jurn(e)/Jurne"))
+const Jurne = React.lazy(() => import("./Jurne"))
 const Login = React.lazy(() => import("./auth/Login"))
 const Register = React.lazy(() => import("./auth/Register"))
-const Dashboard = React.lazy(() => import("./jurn(e)/Dashboard"))
+const Dashboard = React.lazy(() => import("./dashboard/Dashboard"))
 
 export default props => {
   return (
