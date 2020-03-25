@@ -1,6 +1,6 @@
 import React, { Suspense } from "react"
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
-import { AuthProvider, AuthRoute, useAuth } from "react-auth"
+import { AuthProvider, AuthRoute } from "react-auth"
 import "semantic-ui-css/semantic.min.css"
 
 const Jurne = React.lazy(() => import("./jurn(e)/Jurne"))
@@ -9,8 +9,6 @@ const Register = React.lazy(() => import("./auth/Register"))
 const Dashboard = React.lazy(() => import("./jurn(e)/Dashboard"))
 
 export default props => {
-  const { profile } = useAuth()
-
   return (
     <AuthProvider redirectUrl="/Jurne">
       <Router>

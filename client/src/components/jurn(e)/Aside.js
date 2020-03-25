@@ -5,10 +5,7 @@ import { useDashboard } from "../../hooks"
 
 export default props => {
   const { signout } = useAuth()
-  const { user, jurns, reminders } = useDashboard()
-
-  console.log(jurns)
-  console.log()
+  const { user, jurns } = useDashboard()
 
   return (
     <aside>
@@ -25,7 +22,7 @@ export default props => {
       <Divider />
       <h5>Jurn(e)s</h5>
       {jurns.map((each, i) => (
-        <Menu vertical className="menu">
+        <Menu key={"jurn" + i} vertical className="menu">
           <Menu.Item name={each.jname} active={true} />
         </Menu>
       ))}

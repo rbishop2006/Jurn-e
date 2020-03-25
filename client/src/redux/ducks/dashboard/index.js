@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from "react-redux"
-import { useEffect } from "react"
 import { api } from "react-auth"
 
 const GET_DASHBOARD = "dashboard/GET_DASHBOARD"
