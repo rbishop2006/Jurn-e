@@ -1,6 +1,6 @@
 import React from "react"
 import Header from "./Header"
-import { Card, Image, Menu } from "semantic-ui-react"
+import { Card, Image, List } from "semantic-ui-react"
 import { useDashboard } from "../../hooks"
 
 export default props => {
@@ -19,12 +19,12 @@ export default props => {
                 <Card.Header>{each.jname}</Card.Header>
                 <Card.Meta>{each.location}</Card.Meta>
                 <Card.Meta>{"People going: " + 3}</Card.Meta>
-                <h5>Reminders</h5>
-                {reminders.map((each, i) => (
-                  <Menu vertical className="menu" key={"reminder" + i}>
-                    <Menu.Item name={each.reminder} active={true} />
-                  </Menu>
-                ))}
+                <Card.Header textAlign="center">Reminders</Card.Header>
+                <List divided verticalAlign="middle">
+                  {reminders.map((each, i) => (
+                    <List.Item>{each.reminder}</List.Item>
+                  ))}
+                </List>
               </Card.Content>
             </Card>
           ))}
