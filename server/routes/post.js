@@ -7,7 +7,7 @@ const conn = require("../db")
 const randomString = require("../utils/randomstring.js")
 
 router.post("/register", (req, res, next) => {
-  const email = req.body.email
+  const email = req.body.username
   const fname = req.body.fname
   const lname = req.body.lname
   const fam_id = req.body.fam_id

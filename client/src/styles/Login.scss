@@ -1,0 +1,40 @@
+.loginDiv,
+.registerDiv {
+  width: 35%;
+  margin: 100px auto;
+  border: 1px solid black;
+
+  h1 {
+    text-align: center;
+  }
+
+  .ui.form {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    grid-gap: 10px;
+
+    .field {
+      margin: 0;
+      width: 75%;
+    }
+
+    button {
+      margin: 20px 0px;
+      cursor: pointer;
+    }
+
+    .linkDiv {
+      display: flex;
+
+      p {
+        margin: 0px 10px 0px 0px;
+      }
+
+      a {
+        margin: 0px 0px 0px 10px;
+      }
+    }
+  }
+}

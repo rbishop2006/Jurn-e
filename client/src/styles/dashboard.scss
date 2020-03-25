@@ -7,10 +7,6 @@
   left: 0;
   bottom: 0;
 
-  .divider {
-    margin: 0;
-  }
-
   aside {
     background: lightgrey;
 
@@ -43,6 +39,10 @@
         padding: 2px 6px 4px 6px;
       }
     }
+
+    .divider {
+      margin: 0;
+    }
   }
 
   header {
@@ -53,15 +53,6 @@
     height: 100px;
     background: white;
     text-align: center;
-
-    // .field {
-    //   display: inline-block;
-    // }
-
-    // .create {
-    //   display: flex;
-    //   justify-content: center;
-    // }
   }
 
   .dashMain {
