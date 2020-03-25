@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 import { api, useAuth } from "react-auth"
 import { Link } from "react-router-dom"
-// import validator from "validator"
+import validator from "validator"
 import { Button, Form } from "semantic-ui-react"
 import "../../styles/Login.scss"
 
 export default props => {
   const { signin } = useAuth()
-  const [email, setEmail] = useState("")
-  const [emailError, setEmailError] = useState("")
+  const [username, setUsername] = useState("")
+  const [usernameError, setUsernameError] = useState("")
   const [fname, setFname] = useState("")
   const [fnameError, setFnameError] = useState("")
   const [lname, setLname] = useState("")
@@ -20,37 +20,51 @@ export default props => {
 
   function handleRegister(e) {
     e.preventDefault()
-    // let valid = true
+    let valid = true
 
-    // if (!validator.isAlpha(username, "en-US")) {
-    //   valid = false
-    //   setUsernameError(` -- Can't be blank & can only contain letters`)
-    // } else {
-    //   setUsernameError("")
-    // }
+    if (!validator.isEmail(username)) {
+      valid = false
+      setUsernameError(` - Please enter valid email address`)
+    } else {
+      setUsernameError("")
+    }
 
-    // if (!validator.isAlphanumeric(password, "en-US")) {
-    //   valid = false
-    //   setPasswordError(` -- Can't be blank`)
-    // } else {
-    //   setPasswordError("")
-    // }
+    if (!validator.isAlpha(fname, "en-US")) {
+      valid = false
+      setFnameError(` - Can't be blank & can only contain letters`)
+    } else {
+      setFnameError("")
+    }
 
-    // if (!validator.equals(confirm, password)) {
-    //   valid = false
-    //   setConfirmError(` -- Must match password`)
-    // } else {
-    //   setConfirmError("")
-    // }
+    if (!validator.isAlpha(lname, "en-US")) {
+      valid = false
+      setLnameError(` - Can't be blank & can only contain letters`)
+    } else {
+      setLnameError("")
+    }
 
-    // if (valid) {
-    api.post("/register", { email, password }).then(data => {
-      signin(email, password).then(() => {
-        props.history.push("/Jurne/dashboard")
+    if (!validator.isAlphanumeric(password, "en-US")) {
+      valid = false
+      setPasswordError(` - Can't be blank`)
+    } else {
+      setPasswordError("")
+    }
+
+    if (!validator.equals(confirm, password)) {
+      valid = false
+      setConfirmError(` - Must match password`)
+    } else {
+      setConfirmError("")
+    }
+
+    if (valid) {
+      api.post("/register", { username, fname, lname, password }).then(data => {
+        signin(username, password).then(() => {
+          props.history.push("/Jurne/dashboard")
+        })
       })
-    })
+    }
   }
-  // }
 
   return (
     <div className="registerDiv">
@@ -58,15 +72,15 @@ export default props => {
       <Form onSubmit={handleRegister}>
         <Form.Field>
           {/* <Form.Input fluid label="First name" placeholder="First name" error /> */}
-          <label className={emailError ? "error" : ""} htmlFor="email">
-            Email {emailError && emailError}
+          <label className={usernameError ? "error" : ""} htmlFor="email">
+            Email {usernameError && usernameError}
           </label>
           <input
             id="email"
             type="email"
-            value={email}
-            className={emailError ? "errorBox" : ""}
-            onChange={e => setEmail(e.target.value)}
+            value={username}
+            className={usernameError ? "errorBox" : ""}
+            onChange={e => setUsername(e.target.value)}
             placeholder="johnsmith@email.com"
           />
         </Form.Field>

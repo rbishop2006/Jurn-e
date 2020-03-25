@@ -5,22 +5,51 @@ import { Button, Form } from "semantic-ui-react"
 import "../../styles/Login.scss"
 
 export default props => {
-  const [username, setUserName] = useState("")
+  const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState(false)
   const { signin } = useAuth()
 
   function handleLogin(e) {
     e.preventDefault()
-    signin(username, password).then(profile => {
-      props.history.push("/Jurne/dashboard")
-    })
+    signin(username, password)
+      .then(profile => {
+        props.history.push("/Jurne/dashboard")
+      })
+      .catch(e => {
+        setError(true)
+        setPassword("")
+        setUsername("")
+      })
   }
 
   return (
     <div className="loginDiv">
       <h1>Jurn(e)</h1>
       <Form onSubmit={handleLogin}>
-        <Form.Field>
+        <Form.Input
+          error={
+            error
+              ? { content: "Invalid username or password", pointing: "below" }
+              : false
+          }
+          fluid
+          label="Email"
+          placeholder="ex. JohnSmith@email.com"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+        />
+        <Form.Input
+          error={error}
+          fluid
+          label="Password"
+          placeholder="password"
+          value={password}
+          type="password"
+          onChange={e => setPassword(e.target.value)}
+        />
+
+        {/* <Form.Field>
           <input
             type="text"
             value={username}
@@ -35,7 +64,7 @@ export default props => {
             onChange={e => setPassword(e.target.value)}
             placeholder="Password"
           />
-        </Form.Field>
+        </Form.Field> */}
         <Button type="submit">Log in</Button>
         <div className="linkDiv">
           <p>New user?</p>
