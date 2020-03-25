@@ -29,7 +29,7 @@ function getDashboard() {
           payload: {
             jurns: resp.dashboard.jurn,
             user: resp.dashboard.user,
-            reminders: resp.dashboard.reminders
+            reminders: resp.dashboard.rem
           }
         })
       })

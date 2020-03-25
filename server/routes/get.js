@@ -4,6 +4,7 @@ const conn = require("../db")
 const decode = require("jsonwebtoken").decode
 router.get("/dashboard", (req, res, next) => {
   const profile = decode(req.headers.authorization.substring(7))
+  // working on Postman
 
   const dashResults = {}
   const sql = `SELECT
@@ -25,13 +26,25 @@ FROM
       WHERE user.email = ?`
     conn.query(sql2, [email], (err2, results2, fields2) => {
       dashResults.user = results2[0]
+      const jname = req.body.jname
 
-      const sql3 = `SELECT * FROM reminder`
-      conn.query(sql3, (err3, results3, fields3) => {
-        dashResults.reminders = results3
+      const sql3 = `SELECT rem
+      FROM reminder
+      WHERE jname = "Washington"`
+      conn.query(sql3, [jname], (err3, results3, fields3) => {
+        dashResults.rem = results3
         res.json({ dashboard: dashResults })
       })
     })
+  })
+})
+
+router.get("/location", (req, res, next) => {
+  const jname = req.body.jname
+  const sqlL = "SELECT loc_name FROM location WHERE jname = ?"
+  conn.query(sqlL, [jname], (errL, resultsL, fieldsL) => {
+    console.log(resultsL)
+    res.json(resultsL)
   })
 })
 module.exports = router
