@@ -42,9 +42,7 @@ router.post("/register", (req, res, next) => {
 router.post("/jurn", (req, res, next) => {
   const jname = req.body.jname
   const user_id = req.body.user_id
-
   const checkSQL3 = "SELECT count(1) as count FROM jurn WHERE jname = ?"
-
   conn.query(checkSQL3, [jname], (err3, results3, fields3) => {
     if (results3[0].count > 0) {
       res.status(409).json({
@@ -52,11 +50,40 @@ router.post("/jurn", (req, res, next) => {
       })
     } else {
       const sql4 = "INSERT INTO jurn (jname, user_id) VALUES (?, ?)"
-
       conn.query(sql4, [jname, user_id], (err4, results4, fields4) => {
-        res.json({
-          message: "jurn added successfully"
-        })
+        const sqlR = `INSERT INTO reminder (jname, rem)
+
+        VALUES 
+        (?,"Alert your credit card company"),
+        (?,"Contact your cell phone company"),
+        (?,"Notify your home security system operator"),
+        (?,"Confirm all reservations"),
+        (?,"Make advance payments on bills that have due dates during your trip"),
+        (?,"Check the weather"),
+        (?,"Eat, throw out, or give away any perishable food"),
+        (?,"Leave an itinerary with a friend or family member"),
+        (?,"Place a hold on your mail delivery"),
+        (?,"Bring in outdoor furniture")`
+        conn.query(
+          sqlR,
+          [
+            jname,
+            jname,
+            jname,
+            jname,
+            jname,
+            jname,
+            jname,
+            jname,
+            jname,
+            jname
+          ],
+          (errR, resultsR, fieldsR) => {
+            res.json({
+              message: "jurn added successfully"
+            })
+          }
+        )
       })
     }
   })
