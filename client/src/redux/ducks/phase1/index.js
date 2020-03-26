@@ -38,6 +38,12 @@ function createLocation(location, jname) {
   }
 }
 
+function finalLocation(location, jurn_id) {
+  return dispatch => {
+    api.patch("/jurn", { location, jurn_id }).catch()
+  }
+}
+
 export function useLocations() {
   const dispatch = useDispatch()
   const locations = useSelector(appState => appState.LocationsState.locations)
@@ -45,6 +51,8 @@ export function useLocations() {
   const sendLocation = (location, jname) => {
     dispatch(createLocation(location, jname))
   }
+  const updateLocation = (location, jurn_id) =>
+    dispatch(finalLocation(location, jurn_id))
 
-  return { locations, getLocs, sendLocation }
+  return { locations, getLocs, sendLocation, updateLocation }
 }
