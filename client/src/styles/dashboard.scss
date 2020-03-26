@@ -85,8 +85,10 @@
       text-align: center;
     }
 
-    .suggestDiv {
+    .locationDiv,
+    .hotelDiv {
       border: 1px solid black;
+      padding: 20px;
 
       .ui.form {
         text-align: center;

@@ -30,7 +30,7 @@ FROM
 
       const sql3 = `SELECT rem
       FROM reminder
-      WHERE jname = "Washington"`
+      WHERE jname = "Holland"`
       conn.query(sql3, [jname], (err3, results3, fields3) => {
         dashResults.rem = results3
         res.json({ dashboard: dashResults })
