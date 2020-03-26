@@ -22,9 +22,7 @@ export default props => {
                   <Card.Header textAlign="center">Reminders</Card.Header>
                   <List divided verticalAlign="middle">
                     {reminders.map((each, i) => (
-                      <List.Item key={"reminder" + i}>
-                        {each.reminder}
-                      </List.Item>
+                      <List.Item key={"reminder" + i}>{each.rem}</List.Item>
                     ))}
                   </List>
                 </Card.Content>
