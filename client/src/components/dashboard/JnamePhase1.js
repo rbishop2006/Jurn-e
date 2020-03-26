@@ -8,19 +8,21 @@ export default props => {
   const [selection, setSelection] = useState("")
   const { locations, getLocs, sendLocation } = useLocations()
 
+  const jname = props.match.params.jname
+
   function handleSubmit(e) {
     e.preventDefault()
-    sendLocation(location, props.match.params.jname)
+    sendLocation(location, jname)
     setLocation("")
   }
 
-  // useEffect(() => {
-  //   getLocs(props.match.params.jname)
-  // }, [])
+  useEffect(() => {
+    getLocs()
+  }, [])
 
   return (
     <div className="phase1">
-      <h1>{props.match.params.jname}</h1>
+      <h1>{jname}</h1>
       <div className="suggestDiv">
         <Form onSubmit={handleSubmit}>
           <Form.Input
