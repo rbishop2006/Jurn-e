@@ -51,45 +51,67 @@ router.post("/jurn", (req, res, next) => {
     } else {
       const sql4 = "INSERT INTO jurn (jname, user_id) VALUES (?, ?)"
       conn.query(sql4, [jname, user_id], (err4, results4, fields4) => {
-        res.json({
-          message: "jurn added successfully"
-        })
+        const sqlGetJurn_id = `SELECT jurn_id
+        FROM jurn
+        WHERE jname = ?`
+        conn.query(
+          sqlGetJurn_id,
+          [jname],
+          (errGetJurn_id, resultsGetJurn_id, fieldsGetJurn_id) => {
+            const jurn_id = resultsGetJurn_id[0].jurn_id
+
+            const sqlLinks = `INSERT INTO link (user_id, jurn_id) VALUES (?, ?)`
+            conn.query(
+              sqlLinks,
+              [user_id, jurn_id],
+              (errLinks, resultsLinks, fieldsLinks) => {
+                res.json({
+                  message: "jurn added successfully"
+                })
+              }
+            )
+          }
+        )
       })
     }
   })
 })
 
-// const sqlR = `INSERT INTO reminder (jname, rem)
-
-// VALUES
-// (?,"Alert your credit card company"),
-// (?,"Contact your cell phone company"),
-// (?,"Notify your home security system operator"),
-// (?,"Confirm all reservations"),
-// (?,"Make advance payments on bills that have due dates during your trip"),
-// (?,"Check the weather"),
-// (?,"Eat, throw out, or give away any perishable food"),
-// (?,"Leave an itinerary with a friend or family member"),
-// (?,"Place a hold on your mail delivery"),
-// (?,"Bring in outdoor furniture")`
-// conn.query(
-//   sqlR,
-//   [
-//     jname,
-//     jname,
-//     jname,
-//     jname,
-//     jname,
-//     jname,
-//     jname,
-//     jname,
-//     jname,
-//     jname
-//   ],
-//   (errR, resultsR, fieldsR) => {
-
-//   }
-// )
+router.post("/phase1", (req, res, next) => {
+  const jurn_id = req.body.jurn_id
+  const sqlR = `INSERT INTO reminder (rem, status, jurn_id)
+  VALUES
+      ("Alert your credit card company", "active", ?),
+      ("Contact your cell phone company","active", ?),
+      ("Notify your home security system operator","active", ?),
+      ("Confirm all reservations","active", ?),
+      ("Make advance payments on bills that have due dates during your trip","active", ?),
+      ("Check the weather","active", ?),
+      ("Eat, throw out, or give away any perishable food","active", ?),
+      ("Leave an itinerary with a friend or family member","active", ?),
+      ("Place a hold on your mail delivery","active", ?),
+      ("Bring in outdoor furniture","active", ?)`
+  conn.query(
+    sqlR,
+    [
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id
+    ],
+    (errR, resultsR, fieldsR) => {
+      res.json({
+        message: "phase 1 added successfully"
+      })
+    }
+  )
+})
 
 router.post("/register/family", (req, res, next) => {
   const fam_name = req.body.fam_name

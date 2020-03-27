@@ -6,37 +6,47 @@ router.get("/dashboard", (req, res, next) => {
   const profile = decode(req.headers.authorization.substring(7))
   // working on Postman
 
-  const dashResults = {}
+  const dashResults = {
+    jurns: [],
+    user: {}
+  }
   //trying email filter
-  const email = profile.email
-  const sql =
-    //working on new dashboard
-    `SELECT
-view.id, view.jname, view.loc_name, view.user_id, user.fname, user.lname, user.fam_id, family.fam_name, user.email, user.cell_phone
-FROM
-((SELECT
-  jurn.jname, location.loc_name, jurn.user_id, jurn.id
-  FROM
-  jurn
-  LEFT JOIN location ON jurn.jname = location.jname) as VIEW
-    LEFT JOIN user ON view.user_id = user.id)
-    LEFT JOIN family ON family.id = user.fam_id
-    WHERE email = ?`
-  conn.query(sql, [email], (err, results, fields) => {
-    dashResults.jurn = results
 
-    const sql2 = `SELECT user.id, user.email, user.fname, user.lname, user.fam_id, user.cell_phone
-      FROM user
-      WHERE user.email = ?`
-    conn.query(sql2, [email], (err2, results2, fields2) => {
-      dashResults.user = results2[0]
-      //needs to be fixed
-      jurn_id = "1"
-      const sql3 = `SELECT rem
-      FROM reminder
-      WHERE jurn_id = ?`
-      conn.query(sql3, [jurn_id], (err3, results3, fields3) => {
-        dashResults.rem = results3
+  const email = profile.email
+  const sqlId = `SELECT user_id
+  FROM user
+  WHERE email = ?`
+
+  conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
+    const user_id = resultsId[0].user_id
+    //trying mikes codes
+
+    const sql = `SELECT jurn.jurn_id, jurn.jname, jurn.location, jurn.user_id, user.fname, user.lname, user.fam_id, user.email, user.cell_phone, family.fam_name, reminder.rem
+FROM jurn
+LEFT JOIN user ON jurn.user_id = user.user_id
+LEFT JOIN family ON family.user_id = user.user_id
+LEFT JOIN reminder ON reminder.jurn_id = jurn.jurn_id
+WHERE user.user_id = ?`
+    conn.query(sql, [user_id], (err, results, fields) => {
+      results.forEach(item => {
+        if (dashResults.jurns.filter(j => j.id === item.jurn_id).length > 0) {
+          dashResults.jurns
+            .find(j => j.id === item.jurn_id)
+            .reminders.push(item.rem)
+        } else {
+          dashResults.jurns.push({
+            id: item.jurn_id,
+            name: item.jname,
+            reminders: [item.rem]
+          })
+        }
+      })
+
+      const sql2 = `SELECT user.user_id, user.email, user.fname, user.lname, user.fam_id, user.cell_phone
+        FROM user
+        WHERE user.user_id = ?`
+      conn.query(sql2, [user_id], (err2, results2, fields2) => {
+        dashResults.user = results2[0]
         res.json({ dashboard: dashResults })
       })
     })
@@ -48,7 +58,6 @@ router.get("/location", (req, res, next) => {
   const jname = req.body.jname
   const sqlL = "SELECT loc_name FROM location WHERE jname = ?"
   conn.query(sqlL, [jname], (errL, resultsL, fieldsL) => {
-    console.log(resultsL)
     res.json(resultsL)
   })
 })
