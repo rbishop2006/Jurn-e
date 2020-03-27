@@ -3,6 +3,7 @@ import Main from "./Main"
 import Header from "./Header"
 import Aside from "./Aside"
 import JnamePhase1 from "./JnamePhase1"
+import JnamePhase2 from "./JnamePhase2"
 import "../../styles/dashboard.scss"
 import { useDashboard } from "../../hooks"
 import { Route } from "react-router-dom"
@@ -14,12 +15,14 @@ export default props => {
     get()
   }, [])
 
+  /* //working on JnamePhase2 component */
   return (
     <div className="grid">
       <Aside />
       <Header history={props.history} />
       <Route exact path="/Jurne/dashboard" component={Main} />
-      <Route path="/Jurne/dashboard/:jurn_id" component={JnamePhase1} />
+      <Route exact path="/Jurne/dashboard/:jurn_id" component={JnamePhase1} />
+      <Route path="/Jurne/dashboard/final/:jurn_id" component={JnamePhase2} />
     </div>
   )
 }
