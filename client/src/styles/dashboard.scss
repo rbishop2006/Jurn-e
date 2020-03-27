@@ -53,6 +53,32 @@
     height: 100px;
     background: white;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+    .header {
+      margin: 0;
+    }
+
+    .ui.form {
+      width: 50%;
+
+      .inline,
+      .fields {
+        margin: 0;
+
+        .field {
+          padding: 0;
+          width: 100%;
+
+          input {
+            width: 70%;
+          }
+        }
+      }
+    }
   }
 
   .dashMain {
@@ -85,19 +111,23 @@
       text-align: center;
     }
 
-    .locationDiv,
-    .hotelDiv {
-      border: 1px solid black;
-      padding: 20px;
+    .suggestDiv {
+      background: white;
 
-      .ui.form {
-        text-align: center;
-        padding: 0;
-        display: flex;
+      .locationSect,
+      .hotelSect {
+        border: 1px solid black;
+        padding: 20px;
 
-        .field {
-          margin: 0;
-          width: 60%;
+        .ui.form {
+          text-align: center;
+          padding: 0;
+          display: flex;
+
+          .field {
+            margin: 0;
+            width: 60%;
+          }
         }
       }
     }

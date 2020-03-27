@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { Header, Button, Form } from "semantic-ui-react"
-// import { useAuth } from "react-auth"
 import { useDashboard } from "../../hooks"
+import { Link } from "react-router-dom"
+import "../../styles/dashboard.scss"
 
 export default props => {
   const { sendJurn, user } = useDashboard()
@@ -14,14 +15,16 @@ export default props => {
       user.id,
       newJurn
       // timestamp: new Date().getTime()
-    )
+    ).then(profile => {
+      props.history.push("/Jurne/:jurn_id")
+    })
   }
 
   return (
     <header>
-      <Header as="h1">Jurn(e)</Header>
+      <Header as="h1">Jurn(ease)</Header>
       <Form onSubmit={handleSubmit} className="create">
-        <Form.Group inline widths="equal">
+        <Form.Group inline>
           <Form.Field>
             <label htmlFor="newJurn">Create a new Jurn(e)</label>
             <input
@@ -32,10 +35,15 @@ export default props => {
               onChange={e => setNewJurn(e.target.value)}
               placeholder="ex. Cancun 2020"
             />
-            <Button type="submit">Create</Button>
+            <Button attached="right" type="submit">
+              Create
+            </Button>
           </Form.Field>
         </Form.Group>
       </Form>
+      <Link to="/Jurne/dashboard">
+        <Button type="button">Dashboard</Button>
+      </Link>
     </header>
   )
 }
