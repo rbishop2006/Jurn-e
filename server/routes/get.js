@@ -61,4 +61,16 @@ router.get("/location", (req, res, next) => {
     res.json(resultsL)
   })
 })
+
+router.get("/phase2/: jurn_id", (req, res, next) => {
+  console.log(req.params)
+  const jurn_id = req.params.jurn_id
+  const sqlP2 = `SELECT rem, status
+  FROM reminder
+  WHERE jurn_id = ?`
+  conn.query(sqlP2, [jurn_id], (errP2, resultsP2, fieldsP2) => {
+    res.json(resultsP2)
+  })
+})
+
 module.exports = router

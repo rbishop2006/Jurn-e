@@ -1,9 +1,19 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { List, Checkbox, Tab } from "semantic-ui-react"
 import { useLocations, useDashboard } from "../../hooks"
+import { usePhase2 } from "../../hooks"
 
 export default props => {
   const jurns = useDashboard()
+  const { reminders, getP2 } = usePhase2()
+  console.log(reminders)
+  console.log(props)
+  const jurn_id = props.match.params.jurn_id
+
+  useEffect(() => {
+    getP2(jurn_id)
+  }, [])
+
   const panes = [
     {
       menuItem: "Hotels",
