@@ -137,7 +137,7 @@ router.post("/register/family", (req, res, next) => {
 
 router.post("/location", (req, res, next) => {
   const loc_name = req.body.location
-  const jname = req.body.jname
+  const jurn_id = req.body.jurn_id
 
   const checkSQL7 = "SELECT count(1) as count FROM location WHERE loc_name = ?"
 

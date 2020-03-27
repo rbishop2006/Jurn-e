@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const conn = require("../db")
 const decode = require("jsonwebtoken").decode
+
 router.get("/dashboard", (req, res, next) => {
   const profile = decode(req.headers.authorization.substring(7))
   // working on Postman
@@ -11,7 +12,6 @@ router.get("/dashboard", (req, res, next) => {
     user: {}
   }
   //trying email filter
-
   const email = profile.email
   const sqlId = `SELECT user_id
   FROM user
@@ -22,11 +22,11 @@ router.get("/dashboard", (req, res, next) => {
     //trying mikes codes
 
     const sql = `SELECT jurn.jurn_id, jurn.jname, jurn.location, jurn.user_id, user.fname, user.lname, user.fam_id, user.email, user.cell_phone, family.fam_name, reminder.rem
-FROM jurn
-LEFT JOIN user ON jurn.user_id = user.user_id
-LEFT JOIN family ON family.user_id = user.user_id
-LEFT JOIN reminder ON reminder.jurn_id = jurn.jurn_id
-WHERE user.user_id = ?`
+    FROM jurn
+    LEFT JOIN user ON jurn.user_id = user.user_id
+    LEFT JOIN family ON family.user_id = user.user_id
+    LEFT JOIN reminder ON reminder.jurn_id = jurn.jurn_id
+    WHERE user.user_id = ?`
     conn.query(sql, [user_id], (err, results, fields) => {
       results.forEach(item => {
         if (dashResults.jurns.filter(j => j.id === item.jurn_id).length > 0) {
