@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { Form, Button, Radio } from "semantic-ui-react"
-import { useLocations, useDashboard } from "../../hooks"
+import { usePhase1, useDashboard } from "../../hooks"
 
 export default props => {
-  const { jurns } = useDashboard()
-  const { locations, getLocs, sendLocation, updateLocation } = useLocations()
+  const { phase1, updatePhase1, sendLocation, updateChoices } = usePhase1()
+  console.log(phase1)
   const [location, setLocation] = useState("")
   const [finalLocation, setFinalLocation] = useState("")
   // const [hotel, setHotel] = useState("")
@@ -13,30 +13,24 @@ export default props => {
 
   function handleLocSug(e) {
     e.preventDefault()
-    sendLocation(location, props.match.params.jurn_id)
+    sendLocation(location, props.match.params.id)
     setLocation("")
   }
-
-  // function handleHotelSug(e) {
-  //   e.preventDefault()
-  //   sendLocation(location, props.match.params.jname)
-  //   setLocation("")
-  // }
 
   function handleFinalPlans(e) {
     e.preventDefault()
-    updateLocation(location, props.match.params.jname)
+    updateChoices(location, props.match.params.id)
     setLocation("")
   }
 
-  // useEffect(() => {
-  //   getLocs(props.match.params.jurn_id)
-  // }, [])
+  useEffect(() => {
+    updatePhase1(props.match.params.jurn_id)
+  }, [props.match.params])
 
   return (
     <div className="phase1">
       {/* Title h1 below not working right.  Look at pulling from params */}
-      <h1>{jurns.length > 0 && jurns[0].name}</h1>
+      <h1>{props.match.params.jurn_id}</h1>
       <Form className="suggestDiv" onSubmit={handleFinalPlans}>
         <Form.Group onSubmit={handleLocSug} className="locationSect">
           <Form.Input

@@ -53,11 +53,11 @@ router.get("/dashboard", (req, res, next) => {
   })
 })
 
-router.get("/location", (req, res, next) => {
-  console.log(req.body.jname)
-  const jname = req.body.jname
-  const sqlL = "SELECT loc_name FROM location WHERE jname = ?"
-  conn.query(sqlL, [jname], (errL, resultsL, fieldsL) => {
+router.get("/phase1/:jurn_id", (req, res, next) => {
+  const jurn_id = req.params.jurn_id
+  console.log(jurn_id)
+  const sqlL = "SELECT loc_name FROM location WHERE jurn_id = ?"
+  conn.query(sqlL, [jurn_id], (errL, resultsL, fieldsL) => {
     res.json(resultsL)
   })
 })

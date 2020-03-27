@@ -36,11 +36,16 @@ function getDashboard() {
 }
 
 function createJurn(user_id, jname) {
-  return dispatch => {
-    api.post("/jurn", { user_id, jname }).then(resp => {
-      dispatch(getDashboard())
-    })
-  }
+  return new Promise((resolve, reject) => {
+    api
+      .post("/jurn", { user_id, jname })
+      .then(resp => {
+        resolve(resp.id)
+      })
+      .catch(e => {
+        reject()
+      })
+  })
 }
 
 export function useDashboard() {
@@ -49,9 +54,7 @@ export function useDashboard() {
   const user = useSelector(appState => appState.DashboardState.user)
 
   const get = () => dispatch(getDashboard())
-  const sendJurn = (user_id, jname) => {
-    dispatch(createJurn(user_id, jname))
-  }
+  const sendJurn = (user_id, jname) => createJurn(user_id, jname)
 
   return { jurns, user, get, sendJurn }
 }
