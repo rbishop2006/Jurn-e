@@ -6,6 +6,7 @@ const protectedRoutes = require("./routes/protected.js")
 const app = express()
 const config = require("config")
 const port = 3001
+const createError = require("http-errors")
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
