@@ -54,22 +54,16 @@ router.post("/jurn", (req, res, next) => {
         const sqlGetJurn_id = `SELECT jurn_id
         FROM jurn
         WHERE jname = ?`
+        const jurn_id = results4.insertId
+        const sqlLinks = `INSERT INTO link (user_id, jurn_id) VALUES (?, ?)`
         conn.query(
-          sqlGetJurn_id,
-          [jname],
-          (errGetJurn_id, resultsGetJurn_id, fieldsGetJurn_id) => {
-            const jurn_id = resultsGetJurn_id[0].jurn_id
-
-            const sqlLinks = `INSERT INTO link (user_id, jurn_id) VALUES (?, ?)`
-            conn.query(
-              sqlLinks,
-              [user_id, jurn_id],
-              (errLinks, resultsLinks, fieldsLinks) => {
-                res.json({
-                  message: "jurn added successfully"
-                })
-              }
-            )
+          sqlLinks,
+          [user_id, jurn_id],
+          (errLinks, resultsLinks, fieldsLinks) => {
+            res.json({
+              message: "jurn added successfully",
+              id: jurn_id
+            })
           }
         )
       })

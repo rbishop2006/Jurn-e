@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import "../../styles/dashboard.scss"
 
 export default props => {
-  const { sendJurn, user } = useDashboard()
+  const { sendJurn, user, get } = useDashboard()
   const [newJurn, setNewJurn] = useState("")
 
   // Function to handle submitting a new Jurn from the below form
@@ -15,10 +15,11 @@ export default props => {
       user.user_id,
       newJurn
       // timestamp: new Date().getTime()
-    )
-    // .then(profile => {
-    //   props.history.push("/Jurne/:jurn_id")
-    // })
+    ).then(id => {
+      get()
+      props.history.push("/Jurne/dashboard/" + id)
+    })
+    setNewJurn("")
   }
 
   return (

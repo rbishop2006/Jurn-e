@@ -19,9 +19,9 @@ export default props => {
   return (
     <div className="grid">
       <Aside />
-      <Header />
+      <Header history={props.history} />
       <Route exact path="/Jurne/dashboard" component={Main} />
-      <Route exact path="/Jurne/dashboard/:jname" component={JnamePhase1} />
+      <Route exact path="/Jurne/dashboard/:jurn_id" component={JnamePhase1} />
       <Route path="/Jurne/dashboard/final/:jurn_id" component={JnamePhase2} />
     </div>
   )

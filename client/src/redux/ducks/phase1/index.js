@@ -1,15 +1,15 @@
 import { useSelector, useDispatch } from "react-redux"
 import { api } from "react-auth"
 
-const GET_LOCATIONS = "phase1/GET_LOCATIONS"
+const GET_PHASE1 = "phase1/GET_PHASE1"
 
 const initialState = {
-  locations: []
+  phase1: []
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_LOCATIONS:
+    case GET_PHASE1:
       return { ...state, ...action.payload }
 
     default:
@@ -17,15 +17,14 @@ export default (state = initialState, action) => {
   }
 }
 
-function getLocations() {
+function getPhase1(jurn_id) {
   return dispatch => {
     api
-      .get("/location")
+      .get("/phase1/" + jurn_id)
       .then(resp => {
-        console.log(resp)
         dispatch({
-          type: GET_LOCATIONS,
-          payload: resp.data
+          type: GET_PHASE1,
+          payload: resp
         })
       })
       .catch()
@@ -38,21 +37,21 @@ function createLocation(location, jurn_id) {
   }
 }
 
-function finalLocation(location, jurn_id) {
+function finalChoices(location, jurn_id) {
   return dispatch => {
     api.patch("/jurn", { location, jurn_id }).catch()
   }
 }
 
-export function useLocations() {
+export function usePhase1() {
   const dispatch = useDispatch()
-  const locations = useSelector(appState => appState.LocationsState.locations)
-  const getLocs = () => dispatch(getLocations())
+  const phase1 = useSelector(appState => appState.Phase1State.locations)
+  const updatePhase1 = jurn_id => dispatch(getPhase1(jurn_id))
   const sendLocation = (location, jname) => {
     dispatch(createLocation(location, jname))
   }
-  const updateLocation = (location, jurn_id) =>
-    dispatch(finalLocation(location, jurn_id))
+  const updateChoices = (location, jurn_id) =>
+    dispatch(finalChoices(location, jurn_id))
 
-  return { locations, getLocs, sendLocation, updateLocation }
+  return { phase1, updatePhase1, sendLocation, updateChoices }
 }
