@@ -32,9 +32,9 @@ function getLocations() {
   }
 }
 
-function createLocation(location, jname) {
+function createLocation(location, jurn_id) {
   return dispatch => {
-    api.post("/location", { location, jname }).catch()
+    api.post("/location", { location, jurn_id }).catch()
   }
 }
 

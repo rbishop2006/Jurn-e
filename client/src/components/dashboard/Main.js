@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 
 export default props => {
   const { jurns } = useDashboard()
-  console.log(jurns)
 
   return (
     <main>
@@ -13,7 +12,7 @@ export default props => {
         {/* This is where we display info about each Jurn in the database */}
         <div className="cardDiv">
           {jurns.map((jurn, i) => (
-            <Link key={"jurn" + i} to={"/Jurne/dashboard/" + jurn.name}>
+            <Link key={"jurn" + i} to={"/Jurne/dashboard/" + jurn.id}>
               <Card centered fluid>
                 <Image src="https://place-hold.it/800x200" />
                 <Card.Content>

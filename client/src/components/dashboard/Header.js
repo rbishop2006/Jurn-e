@@ -8,17 +8,17 @@ export default props => {
   const { sendJurn, user } = useDashboard()
   const [newJurn, setNewJurn] = useState("")
 
-  // Function to handle submitting a new Jurn from the form
+  // Function to handle submitting a new Jurn from the below form
   function handleSubmit(e) {
     e.preventDefault()
     sendJurn(
       user.user_id,
       newJurn
-
       // timestamp: new Date().getTime()
-    ).then(profile => {
-      props.history.push("/Jurne/:jurn_id")
-    })
+    )
+    // .then(profile => {
+    //   props.history.push("/Jurne/:jurn_id")
+    // })
   }
 
   return (
@@ -36,9 +36,7 @@ export default props => {
               onChange={e => setNewJurn(e.target.value)}
               placeholder="ex. Cancun 2020"
             />
-            <Button attached="right" type="submit">
-              Create
-            </Button>
+            <Button type="submit">Create</Button>
           </Form.Field>
         </Form.Group>
       </Form>

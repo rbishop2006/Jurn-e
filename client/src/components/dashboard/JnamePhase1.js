@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { Form, Button, Radio } from "semantic-ui-react"
-import { useLocations } from "../../hooks"
+import { useLocations, useDashboard } from "../../hooks"
 
 export default props => {
+  const { jurns } = useDashboard()
   const { locations, getLocs, sendLocation, updateLocation } = useLocations()
   const [location, setLocation] = useState("")
   const [finalLocation, setFinalLocation] = useState("")
@@ -12,7 +13,7 @@ export default props => {
 
   function handleLocSug(e) {
     e.preventDefault()
-    sendLocation(location, jname)
+    sendLocation(location, props.match.params.jurn_id)
     setLocation("")
   }
 
@@ -34,7 +35,8 @@ export default props => {
 
   return (
     <div className="phase1">
-      <h1>{props.match.params.jname}</h1>
+      {/* Title h1 below not working right.  Look at pulling from params */}
+      <h1>{jurns.length > 0 && jurns[0].name}</h1>
       <Form className="suggestDiv" onSubmit={handleFinalPlans}>
         <Form.Group onSubmit={handleLocSug} className="locationSect">
           <Form.Input
