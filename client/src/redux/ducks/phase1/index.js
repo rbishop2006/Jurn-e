@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import { api } from "react-auth"
 
-const GET_LOCATIONS = "locations/GET_LOCATIONS"
+const GET_LOCATIONS = "phase1/GET_LOCATIONS"
 
 const initialState = {
   locations: []
@@ -22,6 +22,7 @@ function getLocations() {
     api
       .get("/location")
       .then(resp => {
+        console.log(resp)
         dispatch({
           type: GET_LOCATIONS,
           payload: resp.data

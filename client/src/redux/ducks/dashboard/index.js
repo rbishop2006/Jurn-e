@@ -5,8 +5,7 @@ const GET_DASHBOARD = "dashboard/GET_DASHBOARD"
 
 const initialState = {
   jurns: [],
-  user: {},
-  reminders: []
+  user: {}
 }
 
 export default (state = initialState, action) => {
@@ -27,9 +26,8 @@ function getDashboard() {
         dispatch({
           type: GET_DASHBOARD,
           payload: {
-            jurns: resp.dashboard.jurn,
-            user: resp.dashboard.user,
-            reminders: resp.dashboard.rem
+            jurns: resp.dashboard.jurns,
+            user: resp.dashboard.user
           }
         })
       })
@@ -49,12 +47,11 @@ export function useDashboard() {
   const dispatch = useDispatch()
   const jurns = useSelector(appState => appState.DashboardState.jurns)
   const user = useSelector(appState => appState.DashboardState.user)
-  const reminders = useSelector(appState => appState.DashboardState.reminders)
 
   const get = () => dispatch(getDashboard())
   const sendJurn = (user_id, jname) => {
     dispatch(createJurn(user_id, jname))
   }
 
-  return { jurns, user, reminders, get, sendJurn }
+  return { jurns, user, get, sendJurn }
 }

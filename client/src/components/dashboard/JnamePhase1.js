@@ -10,9 +10,11 @@ export default props => {
   const [finalHotel, setFinalHotel] = useState("")
   // const [error, setError] = useState(false)
 
+  const jname = props.match.params.jname
+
   function handleSubmit(e) {
     e.preventDefault()
-    sendLocation(location, props.match.params.jname)
+    sendLocation(location, jname)
     setLocation("")
   }
 
