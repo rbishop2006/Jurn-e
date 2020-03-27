@@ -4,25 +4,26 @@ import { useDashboard } from "../../hooks"
 import { Link } from "react-router-dom"
 
 export default props => {
-  const { jurns, reminders } = useDashboard()
+  const { jurns } = useDashboard()
+  console.log(jurns)
 
   return (
     <main>
       <div className="dashMain">
         {/* This is where we display info about each Jurn in the database */}
         <div className="cardDiv">
-          {jurns.map((each, i) => (
-            <Link key={"jurn" + i} to={"/Jurne/dashboard/" + each.jname}>
+          {jurns.map((jurn, i) => (
+            <Link key={"jurn" + i} to={"/Jurne/dashboard/" + jurn.name}>
               <Card centered fluid>
                 <Image src="https://place-hold.it/800x200" />
                 <Card.Content>
-                  <Card.Header>{each.jname}</Card.Header>
-                  <Card.Meta>{each.location}</Card.Meta>
+                  <Card.Header>{jurn.name}</Card.Header>
+                  <Card.Meta>{jurn.location}</Card.Meta>
                   <Card.Meta>{"People going: " + 3}</Card.Meta>
                   <Card.Header textAlign="center">Reminders</Card.Header>
                   <List divided verticalAlign="middle">
-                    {reminders.map((each, i) => (
-                      <List.Item key={"reminder" + i}>{each.rem}</List.Item>
+                    {jurn.reminders.map((reminder, i) => (
+                      <List.Item key={"reminder" + i}>{reminder}</List.Item>
                     ))}
                   </List>
                 </Card.Content>

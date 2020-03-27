@@ -12,8 +12,9 @@ export default props => {
   function handleSubmit(e) {
     e.preventDefault()
     sendJurn(
-      user.id,
+      user.user_id,
       newJurn
+
       // timestamp: new Date().getTime()
     ).then(profile => {
       props.history.push("/Jurne/:jurn_id")

@@ -51,42 +51,66 @@ router.post("/jurn", (req, res, next) => {
     } else {
       const sql4 = "INSERT INTO jurn (jname, user_id) VALUES (?, ?)"
       conn.query(sql4, [jname, user_id], (err4, results4, fields4) => {
-        const sqlR = `INSERT INTO reminder (jname, rem)
-
-        VALUES 
-        (?,"Alert your credit card company"),
-        (?,"Contact your cell phone company"),
-        (?,"Notify your home security system operator"),
-        (?,"Confirm all reservations"),
-        (?,"Make advance payments on bills that have due dates during your trip"),
-        (?,"Check the weather"),
-        (?,"Eat, throw out, or give away any perishable food"),
-        (?,"Leave an itinerary with a friend or family member"),
-        (?,"Place a hold on your mail delivery"),
-        (?,"Bring in outdoor furniture")`
+        const sqlGetJurn_id = `SELECT jurn_id
+        FROM jurn
+        WHERE jname = ?`
         conn.query(
-          sqlR,
-          [
-            jname,
-            jname,
-            jname,
-            jname,
-            jname,
-            jname,
-            jname,
-            jname,
-            jname,
-            jname
-          ],
-          (errR, resultsR, fieldsR) => {
-            res.json({
-              message: "jurn added successfully"
-            })
+          sqlGetJurn_id,
+          [jname],
+          (errGetJurn_id, resultsGetJurn_id, fieldsGetJurn_id) => {
+            const jurn_id = resultsGetJurn_id[0].jurn_id
+
+            const sqlLinks = `INSERT INTO link (user_id, jurn_id) VALUES (?, ?)`
+            conn.query(
+              sqlLinks,
+              [user_id, jurn_id],
+              (errLinks, resultsLinks, fieldsLinks) => {
+                res.json({
+                  message: "jurn added successfully"
+                })
+              }
+            )
           }
         )
       })
     }
   })
+})
+
+router.post("/phase1", (req, res, next) => {
+  const jurn_id = req.body.jurn_id
+  const sqlR = `INSERT INTO reminder (rem, status, jurn_id)
+  VALUES
+      ("Alert your credit card company", "active", ?),
+      ("Contact your cell phone company","active", ?),
+      ("Notify your home security system operator","active", ?),
+      ("Confirm all reservations","active", ?),
+      ("Make advance payments on bills that have due dates during your trip","active", ?),
+      ("Check the weather","active", ?),
+      ("Eat, throw out, or give away any perishable food","active", ?),
+      ("Leave an itinerary with a friend or family member","active", ?),
+      ("Place a hold on your mail delivery","active", ?),
+      ("Bring in outdoor furniture","active", ?)`
+  conn.query(
+    sqlR,
+    [
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id,
+      jurn_id
+    ],
+    (errR, resultsR, fieldsR) => {
+      res.json({
+        message: "phase 1 added successfully"
+      })
+    }
+  )
 })
 
 router.post("/register/family", (req, res, next) => {
@@ -103,8 +127,6 @@ router.post("/register/family", (req, res, next) => {
       const sql6 = "INSERT INTO family (fam_name) VALUES (?)"
 
       conn.query(sql6, [fam_name], (err6, results6, fields6) => {
-        console.log(req.body)
-
         res.json({
           message: "family added successfully"
         })
@@ -128,8 +150,6 @@ router.post("/location", (req, res, next) => {
       const sql8 = "INSERT INTO location (loc_name, jname) VALUES (?, ?)"
 
       conn.query(sql8, [loc_name, jname], (err8, results8, fields8) => {
-        console.log(req.body)
-
         res.json({
           message: "location added successfully"
         })
@@ -156,10 +176,7 @@ router.post("/login", (req, res, next) => {
 
         const token = jwt.sign(
           {
-            // fname: fname,
-            // lname: lname,
             email: email,
-            // cell_phone: cell_phone,
             project: "Jurn-e"
           },
           config.get("secret")

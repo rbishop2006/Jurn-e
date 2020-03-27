@@ -12,7 +12,7 @@ export default props => {
 
   function handleLocSug(e) {
     e.preventDefault()
-    sendLocation(location, props.match.params.jname)
+    sendLocation(location, jname)
     setLocation("")
   }
 
