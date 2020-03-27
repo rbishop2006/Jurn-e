@@ -135,6 +135,8 @@ router.post("/register/family", (req, res, next) => {
   })
 })
 
+//need to look at this again, incorp jurn_id
+
 router.post("/location", (req, res, next) => {
   const loc_name = req.body.location
   const jurn_id = req.body.jurn_id
