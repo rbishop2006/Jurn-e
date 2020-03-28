@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
 function getPhase2(jurn_id) {
   return dispatch => {
     api
-      .get("/phase2" + jurn_id)
+      .get("/phase2/" + jurn_id)
       .then(resp => {
         dispatch({
           type: GET_PHASE2,
