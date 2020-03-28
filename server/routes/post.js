@@ -129,8 +129,6 @@ router.post("/register/family", (req, res, next) => {
   })
 })
 
-//need to look at this again, incorp jurn_id
-
 router.post("/location", (req, res, next) => {
   const loc_name = req.body.location
   const jurn_id = req.body.jurn_id
@@ -138,19 +136,13 @@ router.post("/location", (req, res, next) => {
   const checkSQL7 = "SELECT count(1) as count FROM location WHERE loc_name = ?"
 
   conn.query(checkSQL7, [loc_name], (err7, results7, fields7) => {
-    if (results7[0].count > 0) {
-      res.status(409).json({
-        message: "location already exists"
-      })
-    } else {
-      const sql8 = "INSERT INTO location (loc_name, jurn_id) VALUES (?, ?)"
+    const sql8 = "INSERT INTO location (loc_name, jurn_id) VALUES (?, ?)"
 
-      conn.query(sql8, [loc_name, jurn_id], (err8, results8, fields8) => {
-        res.json({
-          message: "location added successfully"
-        })
+    conn.query(sql8, [loc_name, jurn_id], (err8, results8, fields8) => {
+      res.json({
+        message: "location added successfully"
       })
-    }
+    })
   })
 })
 

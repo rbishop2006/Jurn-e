@@ -18,8 +18,6 @@ export default props => {
 
   function handleLocSug(e) {
     e.preventDefault()
-    console.log(props.match.params.jurn_id)
-    console.log(location)
     sendLocation(location, props.match.params.jurn_id)
     setLocation("")
     updatePhase1(props.match.params.jurn_id)
@@ -33,7 +31,7 @@ export default props => {
 
   useEffect(() => {
     updatePhase1(props.match.params.jurn_id)
-  }, [])
+  }, [location])
 
   return (
     <div className="phase1">
@@ -67,8 +65,7 @@ export default props => {
   )
 }
 
-{
-  /* <Form.Radio
+/* <Form.Radio
             label="Blue Forest"
             value="Blue Forest"
             checked={finalLocation === "Blue Forest"}
@@ -80,10 +77,8 @@ export default props => {
             checked={finalLocation === "Downtown"}
             onChange={e => setFinalLocation(e.target.value)}
           /> */
-}
 
-{
-  /* <Form onSubmit={handleHotelSug} className="hotelSect">
+/* <Form onSubmit={handleHotelSug} className="hotelSect">
           <Form.Input
             fluid
             label="Hotel Ideas"
@@ -107,4 +102,3 @@ export default props => {
           </Form.Field>
           ))} 
         </Form> */
-}

@@ -47,7 +47,6 @@ router.get("/dashboard", (req, res, next) => {
         WHERE user.user_id = ?`
       conn.query(sql2, [user_id], (err2, results2, fields2) => {
         dashResults.user = results2[0]
-        console.log(results2[0])
         res.json({ dashboard: dashResults })
       })
     })
@@ -60,11 +59,13 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
     locations: [],
     jname: {}
   }
+  // Where we get the Jurn name based on the Jurn Id that is sent in URL
   const sqlJname = `SELECT jname
   FROM jurn
   WHERE jurn_id = ?`
   conn.query(sqlJname, [jurn_id], (errJname, resultsJname, fieldsJname) => {
     P1Results.jname = resultsJname[0]
+    // Where we retrieve the locations associated with the Jurn ID
     const sqlLocName = `SELECT loc_name
     FROM location
     WHERE location.jurn_id = ?`
@@ -73,11 +74,11 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
       [jurn_id],
       (errLocName, resultsLocName, fieldsLocName) => {
         resultsLocName.forEach(item => {
+          console.log(resultsLocName)
           P1Results.locations.push({
             location: item.loc_name
           })
         })
-        console.log(P1Results)
         res.json({ phase1: P1Results })
       }
     )
