@@ -4,6 +4,8 @@ import { api } from "react-auth"
 const GET_PHASE2 = "phase2/GET_PHASE2"
 
 const initialState = {
+  jname: {},
+  location: {},
   reminders: []
 }
 
@@ -22,10 +24,13 @@ function getPhase2(jurn_id) {
     api
       .get("/phase2/" + jurn_id)
       .then(resp => {
+        console.log(resp)
         dispatch({
           type: GET_PHASE2,
           payload: {
-            reminders: resp.reminders
+            jname: resp.phase2.jname,
+            location: resp.phase2.location,
+            reminders: resp.phase2.reminders
           }
         })
       })
@@ -35,8 +40,10 @@ function getPhase2(jurn_id) {
 
 export function usePhase2() {
   const dispatch = useDispatch()
+  const jname = useSelector(appState => appState.Phase2State.jname)
+  const location = useSelector(appState => appState.Phase2State.location)
   const reminders = useSelector(appState => appState.Phase2State.reminders)
-  const getP2 = jurn_id => dispatch(getPhase2(jurn_id))
+  const updatePhase2 = jurn_id => dispatch(getPhase2(jurn_id))
 
-  return { reminders, getP2 }
+  return { jname, location, reminders, updatePhase2 }
 }

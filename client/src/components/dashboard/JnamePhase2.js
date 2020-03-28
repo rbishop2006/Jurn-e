@@ -1,16 +1,16 @@
 import React, { useEffect } from "react"
 import { List, Checkbox, Tab } from "semantic-ui-react"
-import { useLocations, useDashboard } from "../../hooks"
-import { usePhase2 } from "../../hooks"
+import { usePhase2, useDashboard } from "../../hooks"
 
 export default props => {
   const jurns = useDashboard()
-  const { reminders, getP2 } = usePhase2()
+  const { jname, location, reminders, updatePhase2 } = usePhase2()
+
   const jurn_id = props.match.params.jurn_id
 
   useEffect(() => {
-    getP2(jurn_id)
-  }, [jurn_id, reminders])
+    updatePhase2(props.match.params.jurn_id)
+  }, [props.match.params.jurn_id])
 
   const panes = [
     {
@@ -61,26 +61,18 @@ export default props => {
 
   return (
     <div className="phase2">
-      <h1 className="p2header">Jurn Name Here</h1>
-      <h3 className="p2location">Location Here</h3>
+      <h1 className="p2header">{jname.jname}</h1>
+      <h3 className="p2location">{location.location}</h3>
       <div className="p2TodoAndChecklist">
         <List className="p2Checklist">
-          <h5>Reminders</h5>
-          <Checkbox label="REMINDERS lorem ipsum dolor sit amet lorem ispem" />
-          <Checkbox label="REMINDERS lorem ipsum dolor sit amet lorem ispem" />
-          <Checkbox label="REMINDERS lorem ipsum dolor sit amet lorem ispem" />
-          <Checkbox label="REMINDERS lorem ipsum dolor sit amet lorem ispem" />
-          <Checkbox label="REMINDERS lorem ipsum dolor sit amet lorem ispem" />
-          <Checkbox label="REMINDERS lorem ipsum dolor sit amet lorem ispem" />
-          <Checkbox label="REMINDERS lorem ipsum dolor sit amet lorem ispem" />
-          <Checkbox label="REMINDERS lorem ipsum dolor sit amet lorem ispem" />
-        </List>
-        <List className="p2Todolist">
-          <h5>Todos</h5>
-          <Checkbox label="Todos Placeholder" />
-          <Checkbox label="Todos Placeholder" />
-          <Checkbox label="Todos Placeholder" />
-          <Checkbox label="Todos Placeholder" />
+          <h5>Reminders and Todos</h5>
+          {reminders.map((reminder, i) => (
+            <Checkbox
+              key={"reminder" + i}
+              value={reminder.reminder}
+              label={reminder.reminder}
+            />
+          ))}
         </List>
       </div>
       <div className="p2details">

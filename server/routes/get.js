@@ -86,12 +86,38 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
 
 router.get("/phase2/:jurn_id", (req, res, next) => {
   const jurn_id = req.params.jurn_id
-  const sqlP2 = `SELECT rem, status
-  FROM reminder
-  WHERE jurn_id = ?`
-  conn.query(sqlP2, [jurn_id], (errP2, resultsP2, fieldsP2) => {
-    res.json(resultsP2)
-  })
+  const P2Results = {
+    jname: {},
+    location: {},
+    reminders: []
+  }
+  const sqlP2JnameLocName = `SELECT jurn.jname, jurn.location
+  FROM jurn
+  WHERE jurn.jurn_id = ?`
+  conn.query(
+    sqlP2JnameLocName,
+    [jurn_id],
+    (errJnameLocName, resultsJnameLocName, fieldsJnameLocName) => {
+      P2Results.jname = resultsJnameLocName[0]
+      P2Results.location = resultsJnameLocName[0]
+
+      const sqlReminders = `SELECT rem
+      FROM reminder
+      WHERE jurn_id = ?`
+      conn.query(
+        sqlReminders,
+        [jurn_id],
+        (errReminders, resultsReminders, fieldsReminders) => {
+          resultsReminders.forEach(item => {
+            P2Results.reminders.push({
+              reminder: item.rem
+            })
+          })
+          res.json({ phase2: P2Results })
+        }
+      )
+    }
+  )
 })
 
 module.exports = router
