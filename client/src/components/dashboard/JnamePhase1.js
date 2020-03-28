@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Form, Button } from "semantic-ui-react"
+import { Form, Button, Radio } from "semantic-ui-react"
 import { usePhase1 } from "../../hooks"
 
 export default props => {
@@ -12,6 +12,8 @@ export default props => {
   } = usePhase1()
   const [location, setLocation] = useState("")
   const [finalLocation, setFinalLocation] = useState("")
+  const [checkedValue, setCheckedValue] = useState("")
+  console.log(finalLocation)
   // const [hotel, setHotel] = useState("")
   // const [finalHotel, setFinalHotel] = useState("")
   // const [error, setError] = useState(false)
@@ -47,20 +49,21 @@ export default props => {
           />
           <Form.Button>Submit</Form.Button>
         </Form.Group>
-        <Form.Group inline>
+        <Form.Field inline>
           {locations.map((location, i) => (
-            <Form.Radio
+            <Radio
               key={"location" + i}
               label={location.location}
+              name="radioGroup"
               value={location.location}
-              checked={finalLocation === location.location}
-              onChange={e => setFinalLocation(e.target.value)}
+              onChange={e => setFinalLocation(location.location)}
+              checked={location.location == finalLocation}
             />
           ))}
-        </Form.Group>
+        </Form.Field>
         {/* onSubmit={handleFinalPlans} */}
-        <Button type="submit">Finalize Plans</Button>
       </Form>
+      <Button type="submit">Finalize Plans</Button>
     </div>
   )
 }
