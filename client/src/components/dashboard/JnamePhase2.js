@@ -6,13 +6,11 @@ import { usePhase2 } from "../../hooks"
 export default props => {
   const jurns = useDashboard()
   const { reminders, getP2 } = usePhase2()
-  console.log(reminders)
-  console.log(props)
   const jurn_id = props.match.params.jurn_id
 
   useEffect(() => {
     getP2(jurn_id)
-  }, [])
+  }, [jurn_id, reminders])
 
   const panes = [
     {
