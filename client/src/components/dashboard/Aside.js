@@ -2,6 +2,7 @@ import React from "react"
 import { useAuth } from "react-auth"
 import { Icon, Button, Divider, Menu, Feed, List } from "semantic-ui-react"
 import { useDashboard } from "../../hooks"
+import { Link } from "react-router-dom"
 
 export default props => {
   const { signout } = useAuth()
@@ -20,11 +21,13 @@ export default props => {
         <Button onClick={e => signout()}>Log out</Button>
       </div>
       <Divider />
-      <h5>Jurn(e)s</h5>
-      {jurns.map((each, i) => (
-        <Menu key={"jurn" + i} vertical className="menu">
-          <Menu.Item name={each.name} active={true} />
-        </Menu>
+      <h5>Jurn(e)s - (still planning)</h5>
+      {jurns.map((jurn, i) => (
+        <Link key={"jurn" + i} to={"/Jurne/dashboard/" + jurn.id}>
+          <Menu vertical className="menu">
+            <Menu.Item name={jurn.name} active={true} />
+          </Menu>
+        </Link>
       ))}
       <Divider />
       <h5>Users</h5>

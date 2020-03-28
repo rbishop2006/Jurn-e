@@ -12,7 +12,7 @@ export default props => {
         {/* This is where we display info about each Jurn in the database */}
         <div className="cardDiv">
           {jurns.map((jurn, i) => (
-            <Link key={"jurn" + i} to={"/Jurne/dashboard/" + jurn.id}>
+            <Link key={"jurn" + i} to={"/Jurne/dashboard/final/" + jurn.id}>
               <Card centered fluid>
                 <Image src="https://place-hold.it/800x200" />
                 <Card.Content>
