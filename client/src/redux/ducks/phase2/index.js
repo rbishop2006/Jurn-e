@@ -4,7 +4,7 @@ import { api } from "react-auth"
 const GET_PHASE2 = "phase2/GET_PHASE2"
 
 const initialState = {
-  reminders: []
+  phase2: []
 }
 
 export default (state = initialState, action) => {
@@ -20,13 +20,12 @@ export default (state = initialState, action) => {
 function getPhase2(jurn_id) {
   return dispatch => {
     api
-      .get("/phase2" + jurn_id)
+      .get("/phase2/" + jurn_id)
       .then(resp => {
+        console.log(resp)
         dispatch({
           type: GET_PHASE2,
-          payload: {
-            reminders: resp.reminders
-          }
+          payload: resp
         })
       })
       .catch()
@@ -35,8 +34,8 @@ function getPhase2(jurn_id) {
 
 export function usePhase2() {
   const dispatch = useDispatch()
-  const reminders = useSelector(appState => appState.Phase2State.reminders)
+  const phase2 = useSelector(appState => appState.Phase2State.phase2)
   const getP2 = jurn_id => dispatch(getPhase2(jurn_id))
 
-  return { reminders, getP2 }
+  return { phase2, getP2 }
 }
