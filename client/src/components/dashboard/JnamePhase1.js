@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react"
-import { Form, Button, Radio } from "semantic-ui-react"
-import { usePhase1, useDashboard } from "../../hooks"
+import { Form, Button } from "semantic-ui-react"
+import { usePhase1 } from "../../hooks"
 
 export default props => {
-  const { phase1, updatePhase1, sendLocation, updateChoices } = usePhase1()
-  console.log(phase1)
+  const {
+    jname,
+    locations,
+    updatePhase1,
+    sendLocation,
+    updateChoices
+  } = usePhase1()
   const [location, setLocation] = useState("")
   const [finalLocation, setFinalLocation] = useState("")
   // const [hotel, setHotel] = useState("")
@@ -13,26 +18,26 @@ export default props => {
 
   function handleLocSug(e) {
     e.preventDefault()
-    sendLocation(location, props.match.params.id)
+    sendLocation(location, props.match.params.jurn_id)
     setLocation("")
+    updatePhase1(props.match.params.jurn_id)
   }
 
-  function handleFinalPlans(e) {
-    e.preventDefault()
-    updateChoices(location, props.match.params.id)
-    setLocation("")
-  }
+  // function handleFinalPlans(e) {
+  //   e.preventDefault()
+  //   updateChoices(location, props.match.params.id)
+  //   setLocation("")
+  // }
 
   useEffect(() => {
     updatePhase1(props.match.params.jurn_id)
-  }, [props.match.params])
+  }, [props.match.params.jurn_id, location])
 
   return (
     <div className="phase1">
-      {/* Title h1 below not working right.  Look at pulling from params */}
-      <h1>{props.match.params.jurn_id}</h1>
-      <Form className="suggestDiv" onSubmit={handleFinalPlans}>
-        <Form.Group onSubmit={handleLocSug} className="locationSect">
+      <h1>{jname.jname}</h1>
+      <Form className="suggestDiv" onSubmit={handleLocSug}>
+        <Form.Group className="locationSect">
           <Form.Input
             fluid
             label="Make a suggestion for locations"
@@ -40,20 +45,27 @@ export default props => {
             value={location}
             onChange={e => setLocation(e.target.value)}
           />
-          <Button attached="right" type="submit">
-            Suggest
-          </Button>
+          <Form.Button>Submit</Form.Button>
         </Form.Group>
-        {/* {locations.map((each, i) => ( */}
         <Form.Group inline>
-          <Form.Radio
-            label="East Side"
-            value="East Side"
-            checked={finalLocation === "East Side"}
-            onChange={e => setFinalLocation(e.target.value)}
-          />
-          {/* ))} */}
-          <Form.Radio
+          {locations.map((location, i) => (
+            <Form.Radio
+              key={"location" + i}
+              label={location.location}
+              value={location.location}
+              checked={finalLocation === location.location}
+              onChange={e => setFinalLocation(e.target.value)}
+            />
+          ))}
+        </Form.Group>
+        {/* onSubmit={handleFinalPlans} */}
+        <Button type="submit">Finalize Plans</Button>
+      </Form>
+    </div>
+  )
+}
+
+/* <Form.Radio
             label="Blue Forest"
             value="Blue Forest"
             checked={finalLocation === "Blue Forest"}
@@ -64,10 +76,9 @@ export default props => {
             value="Downtown"
             checked={finalLocation === "Downtown"}
             onChange={e => setFinalLocation(e.target.value)}
-          />
-        </Form.Group>
+          /> */
 
-        {/* <Form onSubmit={handleHotelSug} className="hotelSect">
+/* <Form onSubmit={handleHotelSug} className="hotelSect">
           <Form.Input
             fluid
             label="Hotel Ideas"
@@ -90,9 +101,4 @@ export default props => {
             />
           </Form.Field>
           ))} 
-        </Form> */}
-        <Button type="submit">Finalize Plans</Button>
-      </Form>
-    </div>
-  )
-}
+        </Form> */
