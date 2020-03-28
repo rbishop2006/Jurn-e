@@ -84,11 +84,7 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
   })
 })
 
-<<<<<<< HEAD
 router.get("/phase2/:jurn_id", (req, res, next) => {
-=======
-router.get("/phase2/: jurn_id", (req, res, next) => {
->>>>>>> master
   const jurn_id = req.params.jurn_id
   const sqlP2 = `SELECT rem, status
   FROM reminder
