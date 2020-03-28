@@ -31,7 +31,7 @@ export default props => {
 
   useEffect(() => {
     updatePhase1(props.match.params.jurn_id)
-  }, [location])
+  }, [props.match.params.jurn_id, location])
 
   return (
     <div className="phase1">

@@ -74,7 +74,6 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
       [jurn_id],
       (errLocName, resultsLocName, fieldsLocName) => {
         resultsLocName.forEach(item => {
-          console.log(resultsLocName)
           P1Results.locations.push({
             location: item.loc_name
           })
