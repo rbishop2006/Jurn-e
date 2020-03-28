@@ -21,8 +21,17 @@ export default props => {
       <Aside />
       <Header history={props.history} />
       <Route exact path="/Jurne/dashboard" component={Main} />
-      <Route exact path="/Jurne/dashboard/:jurn_id" component={JnamePhase1} />
-      <Route path="/Jurne/dashboard/final/:jurn_id" component={JnamePhase2} />
+      <Route
+        exact
+        path="/Jurne/dashboard/:jurn_id"
+        component={JnamePhase1}
+        history={props.history}
+      />
+      <Route
+        path="/Jurne/dashboard/final/:jurn_id"
+        component={JnamePhase2}
+        history={props.history}
+      />
     </div>
   )
 }

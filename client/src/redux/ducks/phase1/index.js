@@ -4,7 +4,8 @@ import { api } from "react-auth"
 const GET_PHASE1 = "phase1/GET_PHASE1"
 
 const initialState = {
-  phase1: []
+  locations: [],
+  jname: {}
 }
 
 export default (state = initialState, action) => {
@@ -24,7 +25,10 @@ function getPhase1(jurn_id) {
       .then(resp => {
         dispatch({
           type: GET_PHASE1,
-          payload: resp
+          payload: {
+            locations: resp.phase1.locations,
+            jname: resp.phase1.jname
+          }
         })
       })
       .catch()
@@ -45,7 +49,8 @@ function finalChoices(location, jurn_id) {
 
 export function usePhase1() {
   const dispatch = useDispatch()
-  const phase1 = useSelector(appState => appState.Phase1State.locations)
+  const jname = useSelector(appState => appState.Phase1State.jname)
+  const locations = useSelector(appState => appState.Phase1State.locations)
   const updatePhase1 = jurn_id => dispatch(getPhase1(jurn_id))
   const sendLocation = (location, jname) => {
     dispatch(createLocation(location, jname))
@@ -53,5 +58,5 @@ export function usePhase1() {
   const updateChoices = (location, jurn_id) =>
     dispatch(finalChoices(location, jurn_id))
 
-  return { phase1, updatePhase1, sendLocation, updateChoices }
+  return { jname, locations, updatePhase1, sendLocation, updateChoices }
 }

@@ -47,6 +47,7 @@ router.get("/dashboard", (req, res, next) => {
         WHERE user.user_id = ?`
       conn.query(sql2, [user_id], (err2, results2, fields2) => {
         dashResults.user = results2[0]
+        console.log(results2[0])
         res.json({ dashboard: dashResults })
       })
     })
@@ -55,15 +56,35 @@ router.get("/dashboard", (req, res, next) => {
 
 router.get("/phase1/:jurn_id", (req, res, next) => {
   const jurn_id = req.params.jurn_id
-  console.log(jurn_id)
-  const sqlL = "SELECT loc_name FROM location WHERE jurn_id = ?"
-  conn.query(sqlL, [jurn_id], (errL, resultsL, fieldsL) => {
-    res.json(resultsL)
+  const P1Results = {
+    locations: [],
+    jname: {}
+  }
+  const sqlJname = `SELECT jname
+  FROM jurn
+  WHERE jurn_id = ?`
+  conn.query(sqlJname, [jurn_id], (errJname, resultsJname, fieldsJname) => {
+    P1Results.jname = resultsJname[0]
+    const sqlLocName = `SELECT loc_name
+    FROM location
+    WHERE location.jurn_id = ?`
+    conn.query(
+      sqlLocName,
+      [jurn_id],
+      (errLocName, resultsLocName, fieldsLocName) => {
+        resultsLocName.forEach(item => {
+          P1Results.locations.push({
+            location: item.loc_name
+          })
+        })
+        console.log(P1Results)
+        res.json({ phase1: P1Results })
+      }
+    )
   })
 })
 
 router.get("/phase2/: jurn_id", (req, res, next) => {
-  console.log(req.params)
   const jurn_id = req.params.jurn_id
   const sqlP2 = `SELECT rem, status
   FROM reminder

@@ -143,9 +143,9 @@ router.post("/location", (req, res, next) => {
         message: "location already exists"
       })
     } else {
-      const sql8 = "INSERT INTO location (loc_name, jname) VALUES (?, ?)"
+      const sql8 = "INSERT INTO location (loc_name, jurn_id) VALUES (?, ?)"
 
-      conn.query(sql8, [loc_name, jname], (err8, results8, fields8) => {
+      conn.query(sql8, [loc_name, jurn_id], (err8, results8, fields8) => {
         res.json({
           message: "location added successfully"
         })
