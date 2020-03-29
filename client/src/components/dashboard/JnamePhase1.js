@@ -13,10 +13,10 @@ export default props => {
   const [location, setLocation] = useState("")
   const [finalLocation, setFinalLocation] = useState("")
   const jurn_id = props.match.params.jurn_id
-  console.log(jurn_id)
   // const [hotel, setHotel] = useState("")
   // const [finalHotel, setFinalHotel] = useState("")
   // const [error, setError] = useState(false)
+  console.log(props.match.path)
 
   function handleLocSug(e) {
     e.preventDefault()
@@ -27,12 +27,9 @@ export default props => {
 
   function handleFinalPlans(e) {
     e.preventDefault()
-    console.log(finalLocation)
-    console.log(jurn_id)
-    updateChoices(finalLocation, jurn_id)
-    // .then(profile => {
-    //   props.history.push("/Jurne/dashboard/final/" + jurn_id)
-    // })
+    updateChoices(finalLocation, jurn_id).then(jurn_id => {
+      props.history.push("/Jurne/dashboard/final/" + jurn_id)
+    })
   }
 
   useEffect(() => {
