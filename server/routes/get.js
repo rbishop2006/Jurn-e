@@ -120,4 +120,23 @@ router.get("/phase2/:jurn_id", (req, res, next) => {
   )
 })
 
+router.get("/reminders/:jurn_id", (req, res, next) => {
+  const status = (req.query && req.query.status) || null
+  console.log(status)
+  let statussql = ""
+  const jurn_id = req.params.jurn_id
+  if (status) {
+    statussql = " AND status = ?"
+  }
+  const sqlRems = `SELECT rem, status, rem_id
+  FROM reminder
+  WHERE jurn_id = ? ${statussql}`
+  console.log(sqlRems)
+  const vars = status ? [jurn_id, status] : [jurn_id]
+  conn.query(sqlRems, vars, (errRems, resultsrems, fieldsRems) => {
+    res.json(resultsrems)
+  })
+})
+// res.json({ results: resultsrems, count: resultsrems.length })
+
 module.exports = router

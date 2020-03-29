@@ -1,15 +1,18 @@
 import React, { useEffect } from "react"
 import { List, Checkbox, Tab } from "semantic-ui-react"
-import { usePhase2, useDashboard } from "../../hooks"
+import { usePhase2 } from "../../hooks"
+import { useRems } from "../../hooks"
 
 export default props => {
-  const jurns = useDashboard()
-  const { jname, location, reminders, updatePhase2 } = usePhase2()
-
-  const jurn_id = props.match.params.jurn_id
+  const { jurnInfo, reminders, updatePhase2 } = usePhase2()
+  const { rems, updateRems } = useRems()
 
   useEffect(() => {
     updatePhase2(props.match.params.jurn_id)
+  }, [props.match.params.jurn_id])
+
+  useEffect(() => {
+    updateRems(props.match.params.jurn_id)
   }, [props.match.params.jurn_id])
 
   const panes = [
@@ -61,17 +64,13 @@ export default props => {
 
   return (
     <div className="phase2">
-      <h1 className="p2header">{jname.jname}</h1>
-      <h3 className="p2location">{location.location}</h3>
+      <h1 className="p2header">{jurnInfo.jname}</h1>
+      <h3 className="p2location">{jurnInfo.location}</h3>
       <div className="p2TodoAndChecklist">
         <List className="p2Checklist">
           <h5>Reminders and Todos</h5>
-          {reminders.map((reminder, i) => (
-            <Checkbox
-              key={"reminder" + i}
-              value={reminder.reminder}
-              label={reminder.reminder}
-            />
+          {rems.map((rem, i) => (
+            <Checkbox key={"reminder" + i} value={rem.rem} label={rem.rem} />
           ))}
         </List>
       </div>
