@@ -43,7 +43,7 @@ function createLocation(location, jurn_id) {
 
 function finalChoices(location, jurn_id) {
   return dispatch => {
-    api.patch("/jurn", { location, jurn_id }).catch()
+    api.post("/phase1", { location, jurn_id }).catch()
   }
 }
 

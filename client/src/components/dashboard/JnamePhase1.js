@@ -12,24 +12,28 @@ export default props => {
   } = usePhase1()
   const [location, setLocation] = useState("")
   const [finalLocation, setFinalLocation] = useState("")
-  const [checkedValue, setCheckedValue] = useState("")
-  console.log(finalLocation)
+  const jurn_id = props.match.params.jurn_id
+  console.log(jurn_id)
   // const [hotel, setHotel] = useState("")
   // const [finalHotel, setFinalHotel] = useState("")
   // const [error, setError] = useState(false)
 
   function handleLocSug(e) {
     e.preventDefault()
-    sendLocation(location, props.match.params.jurn_id)
+    sendLocation(location, jurn_id)
     setLocation("")
-    updatePhase1(props.match.params.jurn_id)
+    updatePhase1(jurn_id)
   }
 
-  // function handleFinalPlans(e) {
-  //   e.preventDefault()
-  //   updateChoices(location, props.match.params.id)
-  //   setLocation("")
-  // }
+  function handleFinalPlans(e) {
+    e.preventDefault()
+    console.log(finalLocation)
+    console.log(jurn_id)
+    updateChoices(finalLocation, jurn_id)
+    // .then(profile => {
+    //   props.history.push("/Jurne/dashboard/final/" + jurn_id)
+    // })
+  }
 
   useEffect(() => {
     updatePhase1(props.match.params.jurn_id)
@@ -57,13 +61,15 @@ export default props => {
               name="radioGroup"
               value={location.location}
               onChange={e => setFinalLocation(location.location)}
-              checked={location.location == finalLocation}
+              checked={location.location === finalLocation}
             />
           ))}
         </Form.Field>
         {/* onSubmit={handleFinalPlans} */}
       </Form>
-      <Button type="submit">Finalize Plans</Button>
+      <Form onSubmit={handleFinalPlans}>
+        <Button type="submit">Finalize Plans</Button>
+      </Form>
     </div>
   )
 }
