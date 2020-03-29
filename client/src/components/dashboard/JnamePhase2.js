@@ -5,7 +5,7 @@ import { useRems } from "../../hooks"
 
 export default props => {
   const { jurnInfo, reminders, updatePhase2 } = usePhase2()
-  const { rems, updateRems } = useRems()
+  const { rems, updateRems, remsCount } = useRems()
 
   useEffect(() => {
     updatePhase2(props.match.params.jurn_id)
@@ -68,11 +68,13 @@ export default props => {
       <h3 className="p2location">{jurnInfo.location}</h3>
       <div className="p2TodoAndChecklist">
         <List className="p2Checklist">
-          <h5>Reminders and Todos</h5>
+          <h5>add Reminders/Todos</h5>
+
           {rems.map((rem, i) => (
             <Checkbox key={"reminder" + i} value={rem.rem} label={rem.rem} />
           ))}
         </List>
+        <h5> Reminders and Todos left: {remsCount}</h5>
       </div>
       <div className="p2details">
         <Tab menu={{ secondary: true, pointing: true }} panes={panes} />

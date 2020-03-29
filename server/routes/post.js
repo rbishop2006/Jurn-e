@@ -146,6 +146,29 @@ router.post("/location", (req, res, next) => {
   })
 })
 
+//still testing addRem
+
+router.post("/addrem/:jurn_id"),
+  (req, res, next) => {
+    console.log(req.body)
+    const jurn_id = req.body.jurn_id
+    const rem = req.body.rem
+
+    const sqlAddRem = `INSERT INTO reminder
+  (rem, jurn_id)
+  VALUES
+  (?, ?)`
+    conn.query(
+      sqlAddRem,
+      [jurn_id, rem],
+      (errAddrem, resultsAddRem, fieldsAddRem) => {
+        res.json({
+          message: "rem added successfully"
+        })
+      }
+    )
+  }
+
 // LOGIN USERS BELOW
 
 router.post("/login", (req, res, next) => {
