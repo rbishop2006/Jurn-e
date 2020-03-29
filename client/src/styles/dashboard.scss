@@ -72,9 +72,15 @@
         .field {
           padding: 0;
           width: 100%;
+          display: grid;
+          justify-items: center;
 
           input {
-            width: 70%;
+            width: 100%;
+          }
+
+          button {
+            width: 50%;
           }
         }
       }
