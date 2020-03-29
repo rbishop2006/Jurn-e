@@ -11,11 +11,7 @@ export default props => {
   // Function to handle submitting a new Jurn from the below form
   function handleSubmit(e) {
     e.preventDefault()
-    sendJurn(
-      user.user_id,
-      newJurn
-      // timestamp: new Date().getTime()
-    ).then(id => {
+    sendJurn(user.user_id, newJurn).then(id => {
       get()
       props.history.push("/Jurne/dashboard/" + id)
     })

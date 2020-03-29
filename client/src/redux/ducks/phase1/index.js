@@ -42,9 +42,16 @@ function createLocation(location, jurn_id) {
 }
 
 function finalChoices(location, jurn_id) {
-  return dispatch => {
-    api.patch("/jurn", { location, jurn_id }).catch()
-  }
+  return new Promise((resolve, reject) => {
+    api
+      .post("/phase1", { location, jurn_id })
+      .then(() => {
+        resolve(jurn_id)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
 }
 
 export function usePhase1() {
@@ -55,8 +62,7 @@ export function usePhase1() {
   const sendLocation = (location, jname) => {
     dispatch(createLocation(location, jname))
   }
-  const updateChoices = (location, jurn_id) =>
-    dispatch(finalChoices(location, jurn_id))
+  const updateChoices = (location, jurn_id) => finalChoices(location, jurn_id)
 
   return { jname, locations, updatePhase1, sendLocation, updateChoices }
 }

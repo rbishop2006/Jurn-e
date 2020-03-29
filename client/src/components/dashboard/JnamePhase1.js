@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Form, Button } from "semantic-ui-react"
+import { Form, Button, Radio } from "semantic-ui-react"
 import { usePhase1 } from "../../hooks"
 
 export default props => {
@@ -12,22 +12,25 @@ export default props => {
   } = usePhase1()
   const [location, setLocation] = useState("")
   const [finalLocation, setFinalLocation] = useState("")
+  const jurn_id = props.match.params.jurn_id
   // const [hotel, setHotel] = useState("")
   // const [finalHotel, setFinalHotel] = useState("")
   // const [error, setError] = useState(false)
+  console.log(props.match.path)
 
   function handleLocSug(e) {
     e.preventDefault()
-    sendLocation(location, props.match.params.jurn_id)
+    sendLocation(location, jurn_id)
     setLocation("")
-    updatePhase1(props.match.params.jurn_id)
+    updatePhase1(jurn_id)
   }
 
-  // function handleFinalPlans(e) {
-  //   e.preventDefault()
-  //   updateChoices(location, props.match.params.id)
-  //   setLocation("")
-  // }
+  function handleFinalPlans(e) {
+    e.preventDefault()
+    updateChoices(finalLocation, jurn_id).then(jurn_id => {
+      props.history.push("/Jurne/dashboard/final/" + jurn_id)
+    })
+  }
 
   useEffect(() => {
     updatePhase1(props.match.params.jurn_id)
@@ -47,18 +50,21 @@ export default props => {
           />
           <Form.Button>Submit</Form.Button>
         </Form.Group>
-        <Form.Group inline>
+        <Form.Field inline>
           {locations.map((location, i) => (
-            <Form.Radio
+            <Radio
               key={"location" + i}
               label={location.location}
+              name="radioGroup"
               value={location.location}
-              checked={finalLocation === location.location}
-              onChange={e => setFinalLocation(e.target.value)}
+              onChange={e => setFinalLocation(location.location)}
+              checked={location.location === finalLocation}
             />
           ))}
-        </Form.Group>
+        </Form.Field>
         {/* onSubmit={handleFinalPlans} */}
+      </Form>
+      <Form onSubmit={handleFinalPlans}>
         <Button type="submit">Finalize Plans</Button>
       </Form>
     </div>

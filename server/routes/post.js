@@ -73,6 +73,7 @@ router.post("/jurn", (req, res, next) => {
 
 router.post("/phase1", (req, res, next) => {
   const jurn_id = req.body.jurn_id
+  const location = req.body.location
   const sqlR = `INSERT INTO reminder (rem, status, jurn_id)
   VALUES
       ("Alert your credit card company", "active", ?),
@@ -100,9 +101,19 @@ router.post("/phase1", (req, res, next) => {
       jurn_id
     ],
     (errR, resultsR, fieldsR) => {
-      res.json({
-        message: "phase 1 added successfully"
-      })
+      const sqlUpdateLoc = `UPDATE jurn
+      SET location = ?
+      WHERE jurn_id = ?`
+
+      conn.query(
+        sqlUpdateLoc,
+        [location, jurn_id],
+        (errUpLoc, resultsUpLoc, fieldsUpLoc) => {
+          res.json({
+            message: "location updated and reminders added"
+          })
+        }
+      )
     }
   )
 })
