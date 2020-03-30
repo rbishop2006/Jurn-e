@@ -16,7 +16,6 @@ export default props => {
   // const [hotel, setHotel] = useState("")
   // const [finalHotel, setFinalHotel] = useState("")
   // const [error, setError] = useState(false)
-  console.log(props.match.path)
 
   function handleLocSug(e) {
     e.preventDefault()
