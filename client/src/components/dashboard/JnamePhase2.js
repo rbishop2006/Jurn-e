@@ -108,12 +108,12 @@ export default props => {
                 key={"reminder" + i}
                 value={rem.rem}
                 label={
-                  rem.status == "completed" ? (
+                  rem.status === "completed" ? (
                     <span className="completed">
                       <Checkbox
                         value={rem.rem}
                         label={rem.rem}
-                        checked={rem.status == "completed"}
+                        checked={rem.status === "completed"}
                         onChange={e => toggleRem(rem.rem_id, jurn_id)}
                       />
                     </span>
@@ -121,7 +121,7 @@ export default props => {
                     rem.rem
                   )
                 }
-                checked={rem.status == "completed"}
+                checked={rem.status === "completed"}
                 onChange={e => toggleRem(rem.rem_id, jurn_id)}
               />
             ))}
