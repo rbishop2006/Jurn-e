@@ -123,9 +123,6 @@
 
   .dashMain {
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     top: 100px;
     left: 250px;
     right: 0;
@@ -134,7 +131,10 @@
     overflow: auto;
 
     .cardDiv {
-      width: 800px;
+      margin: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-gap: 40px;
     }
   }
 
