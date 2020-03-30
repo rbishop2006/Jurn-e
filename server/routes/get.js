@@ -122,7 +122,7 @@ router.get("/phase2/:jurn_id", (req, res, next) => {
 
 router.get("/reminders/:jurn_id", (req, res, next) => {
   const status = (req.query && req.query.status) || null
-  console.log(status)
+
   let statussql = ""
   const jurn_id = req.params.jurn_id
   if (status) {
@@ -131,12 +131,37 @@ router.get("/reminders/:jurn_id", (req, res, next) => {
   const sqlRems = `SELECT rem, status, rem_id
   FROM reminder
   WHERE jurn_id = ? ${statussql}`
-  console.log(sqlRems)
   const vars = status ? [jurn_id, status] : [jurn_id]
   conn.query(sqlRems, vars, (errRems, resultsrems, fieldsRems) => {
     res.json(resultsrems)
   })
 })
+
+router.delete("/reminder/:rem_id", (req, res, next) => {
+  const rem_id = req.params.rem_id
+  const sqlClear = `DELETE FROM reminder
+  WHERE rem_id = ?`
+  conn.query(
+    sqlClear,
+    [rem_id],
+    (errsqlClear, resultssqlClear, fieldssqlClear) => {
+      res.json({
+        message: "reminder deleted"
+      })
+    }
+  )
+})
+
+router.get("/togglerem/:rem_id", (req, res, next) => {
+  const rem_id = req.params.rem_id
+  const sqlRemId = `SELECT status, rem_id
+  FROM reminder
+  WHERE rem_id = ?`
+  conn.query(sqlRemId, [rem_id], (errRemId, resultsRemId, fieldsRemId) => {
+    res.json(resultsRemId[0])
+  })
+})
+
 // res.json({ results: resultsrems, count: resultsrems.length })
 
 module.exports = router

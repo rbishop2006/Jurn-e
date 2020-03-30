@@ -33,36 +33,33 @@ function getRems(jurn_id) {
   }
 }
 
-//still testing addRem
-
-function addReminder(jurn_id, item) {
+function addReminder(item, jurn_id) {
   return dispatch => {
-    api.post("/addrem/" + jurn_id, item).then(resp => {
+    api.post("/addrem", { item, jurn_id }).then(resp => {
       dispatch(getRems(jurn_id))
     })
   }
 }
 
-//working on delete
-function deleteRem(jurn_id, rem_id) {
+function remComplete(rem_id, jurn_id) {
   return dispatch => {
-    api.delete("/delrem/" + rem_id, jurn_id).then(resp => {
+    api.patch("/remcomplete", { rem_id }).then(resp => {
       dispatch(getRems(jurn_id))
     })
   }
 }
 
-//working on toggle
-function toggleReminder(jurn_id, rem_id) {
+function toggleReminder(rem_id, jurn_id) {
   return dispatch => {
-    api.get("/reminder/" + rem_id).then(resp => {
-      const reminder = resp.data
-      if (reminder.status === "completed") {
-        api.patch("/reminder/" + rem_id, { status: "active" }).then(resp => {
+    api.get("/togglerem/" + rem_id).then(resp => {
+      const status = resp.status
+      const rem_id = resp.rem_id
+      if (status == "completed") {
+        api.patch("/reminder", { rem_id, status: "active" }).then(resp => {
           dispatch(getRems(jurn_id))
         })
       } else {
-        api.patch("/reminder/" + rem_id, { status: "completed" }).then(resp => {
+        api.patch("/reminder", { rem_id, status: "completed" }).then(resp => {
           dispatch(getRems(jurn_id))
         })
       }
@@ -70,18 +67,21 @@ function toggleReminder(jurn_id, rem_id) {
   }
 }
 
-//working on filter
-function filterReminders(filter, jurn_id) {
+function filterReminders(status, jurn_id) {
+  console.log(status, jurn_id)
   return dispatch => {
     let query = ""
-    if (filter === "all") {
+    if (status === "all") {
       query = ""
-    } else if (filter === "completed") {
+      console.log(query)
+    } else if (status === "completed") {
       query = "?status=completed"
-    } else if (filter === "active") {
+      console.log(query)
+    } else if (status === "active") {
       query = "?status=active"
+      console.log(query)
     }
-    api.get(`/reminders/${query}/${jurn_id}`).then(resp => {
+    api.get(`/reminders/${jurn_id}${query}`).then(resp => {
       dispatch({
         type: GET_REMS,
         payload: resp
@@ -92,10 +92,8 @@ function filterReminders(filter, jurn_id) {
 }
 
 function getRemsCount(jurn_id) {
-  console.log(jurn_id)
   return dispatch => {
     api.get(`/reminders/${jurn_id}?status=active`).then(resp => {
-      console.log(resp)
       dispatch({
         type: SET_REMSCOUNT,
         payload: resp.length
@@ -104,16 +102,14 @@ function getRemsCount(jurn_id) {
   }
 }
 
-//working on clear reminders
-
 function clearReminders(jurn_id) {
   return dispatch => {
-    api.get(`reminders/${jurn_id}?status=completed`).then(resp => {
+    api.get(`/reminders/${jurn_id}?status=completed`).then(resp => {
       Promise.all(
         resp.map(
           rem =>
             new Promise((resolve, reject) => {
-              api.delete("/reminder/" + rem.id).then(resp => {
+              api.delete("/reminder/" + rem.rem_id).then(resp => {
                 resolve()
               })
             })
@@ -130,19 +126,19 @@ export function useRems() {
   const rems = useSelector(appState => appState.RemindersState.rems)
   const remsCount = useSelector(appState => appState.RemindersState.remsCount)
   const addRem = (item, jurn_id) => dispatch(addReminder(item, jurn_id))
-  const delRem = (rem_id, jurn_id) => dispatch(deleteRem(rem_id, jurn_id))
+  const remComp = (rem_id, jurn_id) => dispatch(remComplete(rem_id, jurn_id))
   const toggleRem = (rem_id, jurn_id) =>
     dispatch(toggleReminder(rem_id, jurn_id))
-  const filterRems = (filter, jurn_id) =>
-    dispatch(filterReminders(filter, jurn_id))
+  const filterRems = (status, jurn_id) =>
+    dispatch(filterReminders(status, jurn_id))
+
   const clearRems = jurn_id => dispatch(clearReminders(jurn_id))
   const updateRems = jurn_id => dispatch(getRems(jurn_id))
-  console.log(remsCount)
   return {
     rems,
     remsCount,
     addRem,
-    delRem,
+    remComp,
     toggleRem,
     filterRems,
     clearRems,
