@@ -3,6 +3,7 @@ import { useAuth } from "react-auth"
 import { Icon, Button, Divider, Menu, Feed, List } from "semantic-ui-react"
 import { useDashboard } from "../../hooks"
 import { Link } from "react-router-dom"
+import "../../styles/dashboard.scss"
 
 export default props => {
   const { signout } = useAuth()
@@ -23,11 +24,14 @@ export default props => {
       <Divider />
       <h5>Jurn(e)s - (still planning)</h5>
       {jurns.map((jurn, i) => (
-        <Link key={"jurn" + i} to={"/Jurne/dashboard/" + jurn.id}>
-          <Menu vertical className="menu">
-            <Menu.Item name={jurn.name} active={true} />
-          </Menu>
-        </Link>
+        <Menu key={"jurn" + i} vertical id="menu">
+          <Menu.Item name={jurn.name} active={true} id="menuItem">
+            <p>{jurn.name}</p>
+            <Link to={"/Jurne/dashboard/" + jurn.id}>
+              <Button type="button">Edit</Button>
+            </Link>
+          </Menu.Item>
+        </Menu>
       ))}
       <Divider />
       <h5>Users</h5>

@@ -1,20 +1,28 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { Button } from "semantic-ui-react"
+import "../styles/frontPage.scss"
 
 export default props => {
   return (
-    <div>
-      <h1>Jurn(e)</h1>
-      <h2>
-        A place to help ease the stress of planning your next Journey aka
-        Jurn(e)
-      </h2>
-      <div className="logoutDiv">
-        <Link to="/login">Log in</Link>
+    <div className="frontwrapper">
+      <div className="frontHeader">
+        <Link to="/login" className="logIn">
+          Log in
+        </Link>
+        <Link to="/register">
+          <Button type="button" className="signUp">
+            Sign up for <em>free</em>
+          </Button>
+        </Link>
       </div>
-      <div className="linkDiv">
-        <p>New user?</p>
-        <Link to="/register">Register Here</Link>
+      <div className="frontMain">
+        <h1>
+          Jurn(<em>ease</em>)
+        </h1>
+        <h2>
+          Plan vacation events together with <em>ease</em>.
+        </h2>
       </div>
     </div>
   )

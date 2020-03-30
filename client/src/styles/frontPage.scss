@@ -1,0 +1,33 @@
+h1,
+h2 {
+  text-align: center;
+}
+
+.frontHeader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 60px;
+  // background-color: lightblue;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  a {
+    margin: 0px 20px;
+
+    .signUp {
+      width: 150px;
+      color: #4183c4;
+    }
+  }
+}
+
+.frontMain {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 60px;
+}
