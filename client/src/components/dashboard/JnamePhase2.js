@@ -5,12 +5,11 @@ import { useRems } from "../../hooks"
 
 export default props => {
   const [item, setItem] = useState("")
-  const { jurnInfo, reminders, updatePhase2 } = usePhase2()
+  const { jurnInfo, updatePhase2 } = usePhase2()
   const {
     rems,
     remsCount,
     addRem,
-    // remComp,
     toggleRem,
     filterRems,
     clearRems,
@@ -89,81 +88,91 @@ export default props => {
     <div className="phase2">
       <h1 className="p2header">{jurnInfo.jname}</h1>
       <h3 className="p2location">{jurnInfo.location}</h3>
-      <div className="p2TodoAndChecklist">
-        <List className="p2Checklist">
-          <Form onSubmit={handleSubmit}>
-            <Form.Input
-              fluid
-              label=""
-              placeholder=""
-              value={item}
-              onChange={e => setItem(e.target.value)}
-            />
-            <Form.Button>Submit</Form.Button>
-          </Form>
-          <h5>add Reminders/Todos</h5>
+      <div className="p2ChecklistAndActivies">
+        <div>
+          <List className="p2Checklist">
+            <Form onSubmit={handleSubmit}>
+              <Form.Input
+                fluid
+                label="add Reminders here..."
+                placeholder='ex. "arrange for a petsitter"'
+                value={item}
+                onChange={e => setItem(e.target.value)}
+              />
+              <Form.Button>Submit</Form.Button>
+            </Form>
+            <h5>Reminders</h5>
 
-          {rems.map((rem, i) => (
-            <Checkbox
-              key={"reminder" + i}
-              value={rem.rem}
-              label={rem.rem}
-              onChange={e => toggleRem(rem.rem_id, jurn_id)}
-            />
-          ))}
-        </List>
-        <Form>
-          <Form.Field>
-            <Radio
-              label="Active"
-              name="filterRems"
-              checked={view === "active" ? true : false}
-              onChange={e => changeView("active")}
-            />
-            <Radio
-              label="Completed"
-              name="filterRems"
-              checked={view === "completed" ? true : false}
-              onChange={e => changeView("completed")}
-            />
-            <Radio
-              label="All"
-              name="filterRems"
-              checked={view === "all" ? true : false}
-              onChange={e => changeView("all")}
-            />
-          </Form.Field>
-        </Form>
-        <Button type="button" onClick={e => clearRems(jurn_id)}>
-          Clear Completed
-        </Button>
-        <h5> Reminders and Todos left: {remsCount}</h5>
+            {rems.map((rem, i) => (
+              <Checkbox
+                key={"reminder" + i}
+                value={rem.rem}
+                label={rem.rem}
+                onChange={e => toggleRem(rem.rem_id, jurn_id)}
+              />
+            ))}
+          </List>
+          <Form>
+            <Form.Field className="P2filters">
+              <Radio
+                label="Active"
+                name="filterRems"
+                checked={view === "active" ? true : false}
+                onChange={e => changeView("active")}
+              />
+              <Radio
+                label="Completed"
+                name="filterRems"
+                checked={view === "completed" ? true : false}
+                onChange={e => changeView("completed")}
+              />
+              <Radio
+                label="All"
+                name="filterRems"
+                checked={view === "all" ? true : false}
+                onChange={e => changeView("all")}
+              />
+            </Form.Field>
+            <Button type="button" onClick={e => clearRems(jurn_id)}>
+              Clear Completed
+            </Button>
+            <h5> Reminders left: {remsCount}</h5>
+          </Form>
+        </div>
+        <div>
+          <List bulleted>
+            <Form>
+              <Form.Input
+                fluid
+                label="add Activies here..."
+                placeholder='ex. "play mini golf"'
+              />
+              <Form.Button>Submit</Form.Button>
+              <h5>Activies</h5>
+            </Form>
+            <List.Item>
+              <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
+            </List.Item>
+            <List.Item>
+              <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
+            </List.Item>
+            <List.Item>
+              <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
+            </List.Item>
+            <List.Item>
+              <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
+            </List.Item>
+            <List.Item>
+              <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
+            </List.Item>
+            <List.Item>
+              <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
+            </List.Item>
+          </List>
+        </div>
       </div>
       <div className="p2details">
         <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
-
-        <h5>Activities</h5>
-
-        <List bulleted>
-          <List.Item>
-            <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
-          </List.Item>
-          <List.Item>
-            <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
-          </List.Item>
-          <List.Item>
-            <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
-          </List.Item>
-          <List.Item>
-            <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
-          </List.Item>
-          <List.Item>
-            <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
-          </List.Item>
-          <List.Item>
-            <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
-          </List.Item>
-        </List>
       </div>
     </div>
   )

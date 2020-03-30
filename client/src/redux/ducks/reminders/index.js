@@ -41,14 +41,6 @@ function addReminder(item, jurn_id) {
   }
 }
 
-function remComplete(rem_id, jurn_id) {
-  return dispatch => {
-    api.patch("/remcomplete", { rem_id }).then(resp => {
-      dispatch(getRems(jurn_id))
-    })
-  }
-}
-
 function toggleReminder(rem_id, jurn_id) {
   return dispatch => {
     api.get("/togglerem/" + rem_id).then(resp => {
@@ -126,22 +118,29 @@ export function useRems() {
   const rems = useSelector(appState => appState.RemindersState.rems)
   const remsCount = useSelector(appState => appState.RemindersState.remsCount)
   const addRem = (item, jurn_id) => dispatch(addReminder(item, jurn_id))
-  const remComp = (rem_id, jurn_id) => dispatch(remComplete(rem_id, jurn_id))
   const toggleRem = (rem_id, jurn_id) =>
     dispatch(toggleReminder(rem_id, jurn_id))
   const filterRems = (status, jurn_id) =>
     dispatch(filterReminders(status, jurn_id))
-
   const clearRems = jurn_id => dispatch(clearReminders(jurn_id))
   const updateRems = jurn_id => dispatch(getRems(jurn_id))
   return {
     rems,
     remsCount,
     addRem,
-    remComp,
     toggleRem,
     filterRems,
     clearRems,
     updateRems
   }
 }
+
+// function remComplete(rem_id, jurn_id) {
+//   return dispatch => {
+//     api.patch("/remcomplete", { rem_id }).then(resp => {
+//       dispatch(getRems(jurn_id))
+//     })
+//   }
+// }
+// const remComp = (rem_id, jurn_id) => dispatch(remComplete(rem_id, jurn_id))
+// remComp,
