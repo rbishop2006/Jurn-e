@@ -183,8 +183,10 @@
       text-align: center;
     }
 
-    .p2TodoAndChecklist {
+    .p2ChecklistAndActivies {
       margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
 
       .p2Checklist {
         margin-bottom: 0;
@@ -193,10 +195,21 @@
       .ui.checkbox {
         display: block;
       }
+
+      .P2filters {
+        display: flex;
+        margin-top: 15px;
+      }
+
+      .ui.radio.checkbox {
+        margin-right: 10px;
+      }
     }
 
     .p2details {
       margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
     }
   }
 }
