@@ -20,7 +20,7 @@ export default props => {
 
   return (
     <header>
-      <img src="/assets/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
+      <img src="/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
       <Form onSubmit={handleSubmit} className="create">
         <Form.Group inline>
           <Form.Field>

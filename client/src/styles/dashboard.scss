@@ -44,25 +44,30 @@
       text-align: center;
     }
 
-    #menu {
-      margin: 10px auto;
-      width: 90%;
+    .jurnList {
+      max-height: 350px;
+      overflow: auto;
 
-      #menuItem {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      #menu {
+        margin: 10px auto;
+        width: 90%;
 
-        p {
-          margin: 0;
-        }
+        #menuItem {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
 
-        a {
-          margin: 0;
+          p {
+            margin: 0;
+          }
 
-          button {
-            margin: 0px 0px;
-            padding: 8px;
+          a {
+            margin: 0;
+
+            button {
+              margin: 0px 0px;
+              padding: 8px;
+            }
           }
         }
       }
