@@ -60,18 +60,14 @@ function toggleReminder(rem_id, jurn_id) {
 }
 
 function filterReminders(status, jurn_id) {
-  console.log(status, jurn_id)
   return dispatch => {
     let query = ""
     if (status === "all") {
       query = ""
-      console.log(query)
     } else if (status === "completed") {
       query = "?status=completed"
-      console.log(query)
     } else if (status === "active") {
       query = "?status=active"
-      console.log(query)
     }
     api.get(`/reminders/${jurn_id}${query}`).then(resp => {
       dispatch({

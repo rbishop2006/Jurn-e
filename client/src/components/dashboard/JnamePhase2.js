@@ -107,13 +107,33 @@ export default props => {
               <Checkbox
                 key={"reminder" + i}
                 value={rem.rem}
-                label={rem.rem}
+                label={
+                  rem.status == "completed" ? (
+                    <span className="completed">
+                      <Checkbox
+                        value={rem.rem}
+                        label={rem.rem}
+                        checked={rem.status == "completed"}
+                        onChange={e => toggleRem(rem.rem_id, jurn_id)}
+                      />
+                    </span>
+                  ) : (
+                    rem.rem
+                  )
+                }
+                checked={rem.status == "completed"}
                 onChange={e => toggleRem(rem.rem_id, jurn_id)}
               />
             ))}
           </List>
           <Form>
             <Form.Field className="P2filters">
+              <Radio
+                label="All"
+                name="filterRems"
+                checked={view === "all" ? true : false}
+                onChange={e => changeView("all")}
+              />
               <Radio
                 label="Active"
                 name="filterRems"
@@ -125,12 +145,6 @@ export default props => {
                 name="filterRems"
                 checked={view === "completed" ? true : false}
                 onChange={e => changeView("completed")}
-              />
-              <Radio
-                label="All"
-                name="filterRems"
-                checked={view === "all" ? true : false}
-                onChange={e => changeView("all")}
               />
             </Form.Field>
             <Button type="button" onClick={e => clearRems(jurn_id)}>

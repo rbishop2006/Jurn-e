@@ -51,9 +51,7 @@ router.post("/jurn", (req, res, next) => {
     } else {
       const sql4 = "INSERT INTO jurn (jname, user_id) VALUES (?, ?)"
       conn.query(sql4, [jname, user_id], (err4, results4, fields4) => {
-        const sqlGetJurn_id = `SELECT jurn_id
-        FROM jurn
-        WHERE jname = ?`
+        const sqlGetJurn_id = `SELECT jurn_id FROM jurn WHERE jname = ?`
         const jurn_id = results4.insertId
         const sqlLinks = `INSERT INTO link (user_id, jurn_id) VALUES (?, ?)`
         conn.query(
@@ -101,9 +99,7 @@ router.post("/phase1", (req, res, next) => {
       jurn_id
     ],
     (errR, resultsR, fieldsR) => {
-      const sqlUpdateLoc = `UPDATE jurn
-      SET location = ?
-      WHERE jurn_id = ?`
+      const sqlUpdateLoc = `UPDATE jurn SET location = ? WHERE jurn_id = ?`
 
       conn.query(
         sqlUpdateLoc,
@@ -160,10 +156,7 @@ router.post("/location", (req, res, next) => {
 router.post("/addrem", (req, res, next) => {
   const jurn_id = req.body.jurn_id
   const rem = req.body.item
-  const sqlAddRem = `INSERT INTO reminder
-  (rem, jurn_id)
-  VALUES
-  (?, ?)`
+  const sqlAddRem = `INSERT INTO reminder (rem, jurn_id) VALUES (?, ?)`
   conn.query(
     sqlAddRem,
     [rem, jurn_id],
@@ -178,9 +171,7 @@ router.post("/addrem", (req, res, next) => {
 router.patch("/remcomplete", (req, res, next) => {
   const rem_id = req.body.rem_id
 
-  const sqlremComplete = `UPDATE reminder
-  SET status = "completed"
-  WHERE rem_id = ?`
+  const sqlremComplete = `UPDATE reminder SET status = "completed" WHERE rem_id = ?`
 
   conn.query(
     sqlremComplete,
@@ -196,11 +187,8 @@ router.patch("/remcomplete", (req, res, next) => {
 router.patch("/reminder", (req, res, next) => {
   const rem_id = req.body.rem_id
   const status = req.body.status
-  console.log(rem_id, status)
 
-  const sqlToggleRem = `UPDATE reminder
-  SET status = ?
-  WHERE rem_id = ?`
+  const sqlToggleRem = `UPDATE reminder SET status = ? WHERE rem_id = ?`
 
   conn.query(
     sqlToggleRem,
