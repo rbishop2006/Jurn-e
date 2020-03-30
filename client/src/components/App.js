@@ -12,7 +12,7 @@ export default props => {
   return (
     <AuthProvider redirectUrl="/Jurne">
       <Router>
-        <div>
+        <div className="app">
           <Suspense fallback={<div>Loading...</div>}>
             <Route exact path="/Jurne" component={Jurne} />
             <Route path="/login" component={Login} />

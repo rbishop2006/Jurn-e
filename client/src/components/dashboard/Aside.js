@@ -21,18 +21,20 @@ export default props => {
         </div>
         <Button onClick={e => signout()}>Log out</Button>
       </div>
-      <Divider />
+      {/* <Divider /> */}
       <h5>Jurn(e)s - (still planning)</h5>
-      {jurns.map((jurn, i) => (
-        <Menu key={"jurn" + i} vertical id="menu">
-          <Menu.Item name={jurn.name} active={true} id="menuItem">
-            <p>{jurn.name}</p>
-            <Link to={"/Jurne/dashboard/" + jurn.id}>
-              <Button type="button">Edit</Button>
-            </Link>
-          </Menu.Item>
-        </Menu>
-      ))}
+      <div className="jurnList">
+        {jurns.map((jurn, i) => (
+          <Menu key={"jurn" + i} vertical id="menu">
+            <Menu.Item name={jurn.name} active={true} id="menuItem">
+              <p>{jurn.name}</p>
+              <Link to={"/Jurne/dashboard/" + jurn.id}>
+                <Button type="button">Edit</Button>
+              </Link>
+            </Menu.Item>
+          </Menu>
+        ))}
+      </div>
       <Divider />
       <h5>Users</h5>
       <List>

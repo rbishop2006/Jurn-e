@@ -8,7 +8,7 @@
 .registerDiv {
   width: 25%;
   margin: 200px auto;
-  border: 3px solid rgb(0, 119, 150);
+  border: 3px solid #4183c4;
 
   padding: 30px;
   display: grid;
@@ -21,9 +21,8 @@
     width: 100%;
   }
 
-  button {
-    margin: 20px 0px;
-    cursor: pointer;
+  .ui.button {
+    color: #4183c4;
   }
 
   .linkDiv {

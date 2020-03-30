@@ -26,7 +26,7 @@ export default props => {
   return (
     <div>
       <Link to={"/Jurne"} className="logo">
-        <img src="/assets/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
+        <img src="/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
       </Link>
       <Form onSubmit={handleLogin} className="loginDiv">
         <Form.Input

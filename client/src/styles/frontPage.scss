@@ -1,6 +1,14 @@
+html,
+body,
+.app,
+#root,
 .frontWrapper {
-  background: url(/assets/JurnEase-background.png);
-  background-size: cover;
+  height: 100%;
+}
+
+.frontWrapper {
+  background: url("/JurnEase-background.png");
+  background-size: contain;
   background-repeat: no-repeat;
 }
 
@@ -17,26 +25,15 @@ h2 {
   height: 60px;
   // background-color: lightblue;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 
-  img {
-    height: 58px;
-    margin: 0px 0px 0px 20px;
-  }
+  a {
+    margin: 0px 20px;
 
-  div {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    a {
-      margin: 0px 20px;
-
-      .signUp {
-        width: 150px;
-        color: #4183c4;
-      }
+    .signUp {
+      width: 150px;
+      color: #4183c4;
     }
   }
 }
@@ -47,4 +44,21 @@ h2 {
   right: 0;
   bottom: 0;
   top: 60px;
+  color: #4183c4;
+
+  .tagline {
+    position: absolute;
+    width: 25%;
+    right: 10%;
+    bottom: 45%;
+
+    h1 {
+      text-align: center;
+    }
+
+    p {
+      word-spacing: 0.3em;
+      letter-spacing: 0.1em;
+    }
+  }
 }
