@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Card } from "semantic-ui-react"
+import { Card, Image } from "semantic-ui-react"
 import { useDashboard, useRems } from "../../hooks"
 import { Link } from "react-router-dom"
 
@@ -20,7 +20,7 @@ export default props => {
           {jurns.map((jurn, i) => (
             <Link key={"jurn" + i} to={"/Jurne/dashboard/final/" + jurn.id}>
               <Card centered>
-                {/* <Image src="https://place-hold.it/200x200" /> */}
+                <Image src="https://place-hold.it/200x200" />
                 <Card.Content>
                   <Card.Header>{jurn.name}</Card.Header>
                   <Card.Meta>{jurn.location}</Card.Meta>
