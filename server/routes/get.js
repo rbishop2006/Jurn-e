@@ -35,6 +35,7 @@ router.get("/dashboard", (req, res, next) => {
           dashResults.jurns.push({
             id: item.jurn_id,
             name: item.jname,
+            location: item.location,
             reminders: [item.rem]
           })
         }
