@@ -153,25 +153,24 @@
 
     .suggestDiv {
       background: white;
+      width: 600px;
+      margin: auto;
+      display: grid;
+      justify-content: center;
 
       .locationSect,
       .hotelSect {
-        border: 1px solid black;
         padding: 20px;
-
-        .ui.form {
-          text-align: center;
-          padding: 0;
-          display: flex;
-
-          .field {
-            margin: 0;
-            width: 60%;
-          }
-        }
+        margin: auto;
       }
     }
+    .ui.form {
+      font-size: 1rem;
+      text-align: center;
+      margin-top: 30px;
+    }
   }
+
   .phase2 {
     position: absolute;
     top: 100px;

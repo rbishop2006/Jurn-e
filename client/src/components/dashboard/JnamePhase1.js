@@ -48,7 +48,6 @@ export default props => {
             value={location}
             onChange={e => setLocation(e.target.value)}
           />
-          <Form.Button>Submit</Form.Button>
         </Form.Group>
         <Form.Field inline>
           {locations.map((location, i) => (
@@ -62,6 +61,7 @@ export default props => {
             />
           ))}
         </Form.Field>
+        <Form.Button>Submit</Form.Button>
         {/* onSubmit={handleFinalPlans} */}
       </Form>
       <Form onSubmit={handleFinalPlans}>
