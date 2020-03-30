@@ -157,6 +157,62 @@ router.post("/location", (req, res, next) => {
   })
 })
 
+router.post("/addrem", (req, res, next) => {
+  const jurn_id = req.body.jurn_id
+  const rem = req.body.item
+  const sqlAddRem = `INSERT INTO reminder
+  (rem, jurn_id)
+  VALUES
+  (?, ?)`
+  conn.query(
+    sqlAddRem,
+    [rem, jurn_id],
+    (errAddrem, resultsAddRem, fieldsAddRem) => {
+      res.json({
+        message: "rem added successfully"
+      })
+    }
+  )
+})
+
+router.patch("/remcomplete", (req, res, next) => {
+  const rem_id = req.body.rem_id
+
+  const sqlremComplete = `UPDATE reminder
+  SET status = "completed"
+  WHERE rem_id = ?`
+
+  conn.query(
+    sqlremComplete,
+    [rem_id],
+    (errremComplete, resultsremComplete, fieldsremComplete) => {
+      res.json({
+        message: "status updated to completed"
+      })
+    }
+  )
+})
+
+router.patch("/reminder", (req, res, next) => {
+  const rem_id = req.body.rem_id
+  const status = req.body.status
+  console.log(rem_id, status)
+
+  const sqlToggleRem = `UPDATE reminder
+  SET status = ?
+  WHERE rem_id = ?`
+
+  conn.query(
+    sqlToggleRem,
+    [status, rem_id],
+    (errToggleRem, resultsToggleRem, fieldsToggleRem) => {
+      res.json({
+        message: "status updated"
+      })
+    }
+  )
+})
+
 // LOGIN USERS BELOW
 
 router.post("/login", (req, res, next) => {
