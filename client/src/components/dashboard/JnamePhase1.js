@@ -61,7 +61,7 @@ export default props => {
             />
           ))}
         </Form.Field>
-        <Form.Button>Submit</Form.Button>
+        {/* <Form.Button>Submit</Form.Button> */}
         {/* onSubmit={handleFinalPlans} */}
       </Form>
       <Form onSubmit={handleFinalPlans}>

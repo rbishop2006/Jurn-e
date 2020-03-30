@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { List, Checkbox, Tab, Form, Radio, Button } from "semantic-ui-react"
-import { usePhase2 } from "../../hooks"
-import { useRems } from "../../hooks"
+import { usePhase2, useRems } from "../../hooks"
+import { Link } from "react-router-dom"
 
 export default props => {
   const [item, setItem] = useState("")
@@ -86,8 +86,13 @@ export default props => {
 
   return (
     <div className="phase2">
-      <h1 className="p2header">{jurnInfo.jname}</h1>
-      <h3 className="p2location">{jurnInfo.location}</h3>
+      <div>
+        <h1 className="p2header">{jurnInfo.jname}</h1>
+        <h3 className="p2location">{jurnInfo.location}</h3>
+        <Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
+          <Button type="button">Edit</Button>
+        </Link>
+      </div>
       <div className="p2ChecklistAndActivies">
         <div>
           <List className="p2Checklist">
