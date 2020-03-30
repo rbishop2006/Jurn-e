@@ -13,9 +13,7 @@ router.get("/dashboard", (req, res, next) => {
   }
   //trying email filter
   const email = profile.email
-  const sqlId = `SELECT user_id
-  FROM user
-  WHERE email = ?`
+  const sqlId = `SELECT user_id FROM user WHERE email = ?`
 
   conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
     const user_id = resultsId[0].user_id
@@ -43,8 +41,7 @@ router.get("/dashboard", (req, res, next) => {
       })
 
       const sql2 = `SELECT user.user_id, user.email, user.fname, user.lname, user.fam_id, user.cell_phone
-        FROM user
-        WHERE user.user_id = ?`
+        FROM user WHERE user.user_id = ?`
       conn.query(sql2, [user_id], (err2, results2, fields2) => {
         dashResults.user = results2[0]
         res.json({ dashboard: dashResults })
@@ -60,15 +57,11 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
     jname: {}
   }
   // Where we get the Jurn name based on the Jurn Id that is sent in URL
-  const sqlJname = `SELECT jname
-  FROM jurn
-  WHERE jurn_id = ?`
+  const sqlJname = `SELECT jname FROM jurn WHERE jurn_id = ?`
   conn.query(sqlJname, [jurn_id], (errJname, resultsJname, fieldsJname) => {
     P1Results.jname = resultsJname[0]
     // Where we retrieve the locations associated with the Jurn ID
-    const sqlLocName = `SELECT loc_name
-    FROM location
-    WHERE location.jurn_id = ?`
+    const sqlLocName = `SELECT loc_name FROM location WHERE location.jurn_id = ?`
     conn.query(
       sqlLocName,
       [jurn_id],
@@ -91,9 +84,7 @@ router.get("/phase2/:jurn_id", (req, res, next) => {
     location: {},
     reminders: []
   }
-  const sqlP2JnameLocName = `SELECT jurn.jname, jurn.location
-  FROM jurn
-  WHERE jurn.jurn_id = ?`
+  const sqlP2JnameLocName = `SELECT jurn.jname, jurn.location FROM jurn WHERE jurn.jurn_id = ?`
   conn.query(
     sqlP2JnameLocName,
     [jurn_id],
@@ -101,9 +92,7 @@ router.get("/phase2/:jurn_id", (req, res, next) => {
       P2Results.jname = resultsJnameLocName[0]
       P2Results.location = resultsJnameLocName[0]
 
-      const sqlReminders = `SELECT rem
-      FROM reminder
-      WHERE jurn_id = ?`
+      const sqlReminders = `SELECT rem FROM reminder WHERE jurn_id = ?`
       conn.query(
         sqlReminders,
         [jurn_id],
@@ -128,9 +117,7 @@ router.get("/reminders/:jurn_id", (req, res, next) => {
   if (status) {
     statussql = " AND status = ?"
   }
-  const sqlRems = `SELECT rem, status, rem_id
-  FROM reminder
-  WHERE jurn_id = ? ${statussql}`
+  const sqlRems = `SELECT rem, status, rem_id FROM reminder WHERE jurn_id = ? ${statussql}`
   const vars = status ? [jurn_id, status] : [jurn_id]
   conn.query(sqlRems, vars, (errRems, resultsrems, fieldsRems) => {
     res.json(resultsrems)
@@ -139,8 +126,7 @@ router.get("/reminders/:jurn_id", (req, res, next) => {
 
 router.delete("/reminder/:rem_id", (req, res, next) => {
   const rem_id = req.params.rem_id
-  const sqlClear = `DELETE FROM reminder
-  WHERE rem_id = ?`
+  const sqlClear = `DELETE FROM reminder WHERE rem_id = ?`
   conn.query(
     sqlClear,
     [rem_id],
@@ -154,9 +140,7 @@ router.delete("/reminder/:rem_id", (req, res, next) => {
 
 router.get("/togglerem/:rem_id", (req, res, next) => {
   const rem_id = req.params.rem_id
-  const sqlRemId = `SELECT status, rem_id
-  FROM reminder
-  WHERE rem_id = ?`
+  const sqlRemId = `SELECT status, rem_id FROM reminder WHERE rem_id = ?`
   conn.query(sqlRemId, [rem_id], (errRemId, resultsRemId, fieldsRemId) => {
     res.json(resultsRemId[0])
   })

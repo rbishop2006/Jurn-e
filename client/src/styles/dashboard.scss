@@ -196,6 +196,10 @@
         display: block;
       }
 
+      .completed {
+        text-decoration: line-through;
+      }
+
       .P2filters {
         display: flex;
         margin-top: 15px;
