@@ -54,7 +54,7 @@ function toggleReminder(rem_id, jurn_id) {
     api.get("/togglerem/" + rem_id).then(resp => {
       const status = resp.status
       const rem_id = resp.rem_id
-      if (status == "completed") {
+      if (status === "completed") {
         api.patch("/reminder", { rem_id, status: "active" }).then(resp => {
           dispatch(getRems(jurn_id))
         })

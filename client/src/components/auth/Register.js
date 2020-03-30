@@ -67,9 +67,11 @@ export default props => {
   }
 
   return (
-    <div className="registerDiv">
-      <h1>Register</h1>
-      <Form onSubmit={handleRegister}>
+    <div>
+      <Link to={"/Jurne"} className="logo">
+        <img src="/assets/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
+      </Link>
+      <Form onSubmit={handleRegister} className="registerDiv">
         <Form.Field>
           {/* <Form.Input fluid label="First name" placeholder="First name" error /> */}
           <label className={usernameError ? "error" : ""} htmlFor="email">

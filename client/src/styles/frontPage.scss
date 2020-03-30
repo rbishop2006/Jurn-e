@@ -1,3 +1,9 @@
+.frontWrapper {
+  background: url(/assets/JurnEase-background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 h1,
 h2 {
   text-align: center;
@@ -11,15 +17,26 @@ h2 {
   height: 60px;
   // background-color: lightblue;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 
-  a {
-    margin: 0px 20px;
+  img {
+    height: 58px;
+    margin: 0px 0px 0px 20px;
+  }
 
-    .signUp {
-      width: 150px;
-      color: #4183c4;
+  div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    a {
+      margin: 0px 20px;
+
+      .signUp {
+        width: 150px;
+        color: #4183c4;
+      }
     }
   }
 }

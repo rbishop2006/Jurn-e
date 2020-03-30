@@ -10,7 +10,7 @@ export default props => {
     rems,
     remsCount,
     addRem,
-    remComp,
+    // remComp,
     toggleRem,
     filterRems,
     clearRems,

@@ -24,9 +24,11 @@ export default props => {
   }
 
   return (
-    <div className="loginDiv">
-      <h1>Jurn(e)</h1>
-      <Form onSubmit={handleLogin}>
+    <div>
+      <Link to={"/Jurne"} className="logo">
+        <img src="/assets/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
+      </Link>
+      <Form onSubmit={handleLogin} className="loginDiv">
         <Form.Input
           error={
             error

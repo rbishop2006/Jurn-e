@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Header, Button, Form } from "semantic-ui-react"
+import { Button, Form } from "semantic-ui-react"
 import { useDashboard } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/dashboard.scss"
@@ -20,11 +20,11 @@ export default props => {
 
   return (
     <header>
-      <Header as="h1">Jurn(ease)</Header>
+      <img src="/assets/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
       <Form onSubmit={handleSubmit} className="create">
         <Form.Group inline>
           <Form.Field>
-            <label htmlFor="newJurn">Create a new Jurn(e)</label>
+            {/* <label htmlFor="newJurn">Create a new Jurn(e)</label> */}
             <input
               id="newJurn"
               className="messageText"
@@ -33,7 +33,7 @@ export default props => {
               onChange={e => setNewJurn(e.target.value)}
               placeholder="ex. Cancun 2020"
             />
-            <Button type="submit">Create</Button>
+            <Button type="submit">Create a new Jurn(e)</Button>
           </Form.Field>
         </Form.Group>
       </Form>

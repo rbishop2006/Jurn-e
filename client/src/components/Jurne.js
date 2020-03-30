@@ -5,16 +5,19 @@ import "../styles/frontPage.scss"
 
 export default props => {
   return (
-    <div className="frontwrapper">
+    <div className="frontWrapper">
       <div className="frontHeader">
-        <Link to="/login" className="logIn">
-          Log in
-        </Link>
-        <Link to="/register">
-          <Button type="button" className="signUp">
-            Sign up for <em>free</em>
-          </Button>
-        </Link>
+        <img src="/assets/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
+        <div>
+          <Link to="/login" className="logIn">
+            Log in
+          </Link>
+          <Link to="/register">
+            <Button type="button" className="signUp">
+              Sign up for <em>free</em>
+            </Button>
+          </Link>
+        </div>
       </div>
       <div className="frontMain">
         <h1>
