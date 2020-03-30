@@ -1,10 +1,16 @@
-import React from "react"
-import { Card, Image, List } from "semantic-ui-react"
-import { useDashboard } from "../../hooks"
+import React, { useEffect } from "react"
+import { Card } from "semantic-ui-react"
+import { useDashboard, useRems } from "../../hooks"
 import { Link } from "react-router-dom"
 
 export default props => {
-  const { jurns } = useDashboard()
+  const { jurns, get } = useDashboard()
+  const { updateRems } = useRems()
+
+  useEffect(() => {
+    get()
+    updateRems()
+  }, [])
 
   return (
     <main>
@@ -13,18 +19,16 @@ export default props => {
         <div className="cardDiv">
           {jurns.map((jurn, i) => (
             <Link key={"jurn" + i} to={"/Jurne/dashboard/final/" + jurn.id}>
-              <Card centered fluid>
-                <Image src="https://place-hold.it/800x200" />
+              <Card centered>
+                {/* <Image src="https://place-hold.it/200x200" /> */}
                 <Card.Content>
                   <Card.Header>{jurn.name}</Card.Header>
                   <Card.Meta>{jurn.location}</Card.Meta>
+                  <Card.Meta>{"Families going: " + 1}</Card.Meta>
                   <Card.Meta>{"People going: " + 3}</Card.Meta>
-                  <Card.Header textAlign="center">Reminders</Card.Header>
-                  <List divided verticalAlign="middle">
-                    {jurn.reminders.map((reminder, i) => (
-                      <List.Item key={"reminder" + i}>{reminder}</List.Item>
-                    ))}
-                  </List>
+                  <Card.Meta>
+                    {`Things left to do before trip: ` + jurn.reminders.length}
+                  </Card.Meta>
                 </Card.Content>
               </Card>
             </Link>
@@ -34,3 +38,10 @@ export default props => {
     </main>
   )
 }
+
+/* <Card.Header textAlign="center">Reminders</Card.Header>
+<List divided verticalAlign="middle">
+  {jurn.reminders.map((reminder, i) => (
+    <List.Item key={"reminder" + i}>{reminder}</List.Item>
+  ))}
+</List> */
