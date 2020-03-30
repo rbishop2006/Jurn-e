@@ -9,11 +9,11 @@ import { useDashboard } from "../../hooks"
 import { Route } from "react-router-dom"
 
 export default props => {
-  const { get, jurns } = useDashboard()
+  const { get } = useDashboard()
 
   useEffect(() => {
     get()
-  }, [jurns])
+  }, [])
 
   /* //working on JnamePhase2 component */
   return (
