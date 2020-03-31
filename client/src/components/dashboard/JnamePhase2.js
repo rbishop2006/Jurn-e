@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { List, Checkbox, Tab, Form, Radio, Button } from "semantic-ui-react"
 import { usePhase2, useRems } from "../../hooks"
 import { Link } from "react-router-dom"
+import "../../styles/phase2.scss"
 
 export default props => {
   const [item, setItem] = useState("")
