@@ -18,9 +18,7 @@ export default props => {
   const [finalLocation, setFinalLocation] = useState("")
 <<<<<<< HEAD
   const jurn_id = props.match.params.jurn_id
-  // const [hotel, setHotel] = useState("")
-  // const [finalHotel, setFinalHotel] = useState("")
-  // const [error, setError] = useState(false)
+
 =======
   const [hotel, setHotel] = useState("")
   const [finalHotel, setFinalHotel] = useState("")
