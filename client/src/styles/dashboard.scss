@@ -134,7 +134,89 @@
       margin: 40px;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
-      grid-gap: 40px 0px;
+      grid-gap: 40px;
+    }
+  }
+
+  .phase1 {
+    position: absolute;
+    top: 100px;
+    left: 250px;
+    right: 0;
+    bottom: 0;
+    background: white;
+    overflow: auto;
+
+    h1 {
+      text-align: center;
+    }
+
+    .suggestDiv {
+      background: white;
+      margin: auto;
+      display: grid;
+      justify-content: center;
+
+      .locationSect,
+      .hotelSect {
+        padding: 20px;
+        margin: auto;
+      }
+    }
+    .ui.form {
+      font-size: 1rem;
+      text-align: center;
+      margin-top: 30px;
+    }
+  }
+
+  .phase2 {
+    position: absolute;
+    top: 100px;
+    left: 250px;
+    right: 0;
+    bottom: 0;
+    background: white;
+    overflow: auto;
+
+    .p2header {
+      text-align: center;
+    }
+    .p2location {
+      text-align: center;
+    }
+
+    .p2ChecklistAndActivies {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+
+      .p2Checklist {
+        margin-bottom: 0;
+      }
+
+      .ui.checkbox {
+        display: block;
+      }
+
+      .completed {
+        text-decoration: line-through;
+      }
+
+      .P2filters {
+        display: flex;
+        margin-top: 15px;
+      }
+
+      .ui.radio.checkbox {
+        margin-right: 10px;
+      }
+    }
+
+    .p2details {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
     }
   }
 }

@@ -153,11 +153,49 @@ router.delete("/reminder/:rem_id", (req, res, next) => {
   )
 })
 
+router.delete("/activity/:act_id", (req, res, next) => {
+  console.log(req.params.act_id)
+  const act_id = req.params.act_id
+  const sqlClearAct = `DELETE FROM activity WHERE act_id = ?`
+  conn.query(
+    sqlClearAct,
+    [act_id],
+    (errssqlClearAct, resultsssqlClearAct, fieldsssqlClearAct) => {
+      res.json({
+        message: "activity deleted"
+      })
+    }
+  )
+})
+
 router.get("/togglerem/:rem_id", (req, res, next) => {
   const rem_id = req.params.rem_id
   const sqlRemId = `SELECT status, rem_id FROM reminder WHERE rem_id = ?`
   conn.query(sqlRemId, [rem_id], (errRemId, resultsRemId, fieldsRemId) => {
     res.json(resultsRemId[0])
+  })
+})
+
+router.get("/activities/:jurn_id", (req, res, next) => {
+  const status = (req.query && req.query.status) || null
+
+  let statussql = ""
+  const jurn_id = req.params.jurn_id
+  if (status) {
+    statussql = " AND status = ?"
+  }
+  const sqlActs = `SELECT act, status, act_id FROM activity WHERE jurn_id = ? ${statussql}`
+  const vars = status ? [jurn_id, status] : [jurn_id]
+  conn.query(sqlActs, vars, (errActs, resultsActs, fieldsActs) => {
+    res.json(resultsActs)
+  })
+})
+
+router.get("/toggleact/:act_id", (req, res, next) => {
+  const act_id = req.params.act_id
+  const sqlActId = `SELECT status, act_id FROM activity WHERE act_id = ?`
+  conn.query(sqlActId, [act_id], (errActId, resultsActId, fieldsActId) => {
+    res.json(resultsActId[0])
   })
 })
 

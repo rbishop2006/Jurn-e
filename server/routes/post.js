@@ -247,6 +247,54 @@ router.patch("/reminder", (req, res, next) => {
   )
 })
 
+router.post("/addact", (req, res, next) => {
+  const jurn_id = req.body.jurn_id
+  const act = req.body.activity
+  const sqlAddact = `INSERT INTO activity (act, jurn_id) VALUES (?, ?)`
+  conn.query(
+    sqlAddact,
+    [act, jurn_id],
+    (errAddact, resultsAddact, fieldsAddact) => {
+      res.json({
+        message: "act added successfully"
+      })
+    }
+  )
+})
+
+router.patch("/actcomplete", (req, res, next) => {
+  const act_id = req.body.act_id
+
+  const sqlactComplete = `UPDATE activity SET status = "completed" WHERE act_id = ?`
+
+  conn.query(
+    sqlactComplete,
+    [act_id],
+    (erractComplete, resultsactComplete, fieldsactComplete) => {
+      res.json({
+        message: "status updated to completed"
+      })
+    }
+  )
+})
+
+router.patch("/activity", (req, res, next) => {
+  const act_id = req.body.act_id
+  const status = req.body.status
+
+  const sqlToggleAct = `UPDATE activity SET status = ? WHERE act_id = ?`
+
+  conn.query(
+    sqlToggleAct,
+    [status, act_id],
+    (errToggleAct, resultsToggleAct, fieldsToggleAct) => {
+      res.json({
+        message: "status updated"
+      })
+    }
+  )
+})
+
 // LOGIN USERS BELOW
 router.post("/login", (req, res, next) => {
   const email = req.body.username
