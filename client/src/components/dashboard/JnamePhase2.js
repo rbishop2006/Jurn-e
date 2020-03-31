@@ -32,11 +32,8 @@ export default props => {
 
   useEffect(() => {
     updatePhase2(props.match.params.jurn_id)
-  }, [props.match.params.jurn_id])
-
-  useEffect(() => {
     updateRems(props.match.params.jurn_id)
-  }, [props.match.params.jurn_id])
+  }, [props.match.params.jurn_id, item])
 
   const panes = [
     {
