@@ -200,7 +200,8 @@ router.post("/hotel", (req, res, next) => {
 
 router.post("/addrem", (req, res, next) => {
   const jurn_id = req.body.jurn_id
-  const rem = req.body.item
+  const rem = req.body.reminder
+  console.log(rem)
   const sqlAddRem = `INSERT INTO reminder (rem, jurn_id) VALUES (?, ?)`
   conn.query(
     sqlAddRem,

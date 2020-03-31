@@ -97,7 +97,8 @@ router.get("/phase2/:jurn_id", (req, res, next) => {
   const P2Results = {
     jname: {},
     location: {},
-    reminders: []
+    //trying to switch to activities
+    activities: []
   }
   const sqlP2JnameLocName = `SELECT jurn.jname, jurn.location FROM jurn WHERE jurn.jurn_id = ?`
   conn.query(
@@ -107,14 +108,14 @@ router.get("/phase2/:jurn_id", (req, res, next) => {
       P2Results.jname = resultsJnameLocName[0]
       P2Results.location = resultsJnameLocName[0]
 
-      const sqlReminders = `SELECT rem FROM reminder WHERE jurn_id = ?`
+      const sqlActivities = `SELECT act FROM activity WHERE jurn_id = ?`
       conn.query(
-        sqlReminders,
+        sqlActivities,
         [jurn_id],
-        (errReminders, resultsReminders, fieldsReminders) => {
-          resultsReminders.forEach(item => {
-            P2Results.reminders.push({
-              reminder: item.rem
+        (errActivities, resultsActivities, fieldsActivities) => {
+          resultsActivities.forEach(item => {
+            P2Results.activities.push({
+              activity: item.act
             })
           })
           res.json({ phase2: P2Results })
