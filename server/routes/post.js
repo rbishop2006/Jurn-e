@@ -72,44 +72,69 @@ router.post("/jurn", (req, res, next) => {
 router.post("/phase1", (req, res, next) => {
   const jurn_id = req.body.jurn_id
   const location = req.body.location
-  const sqlR = `INSERT INTO reminder (rem, status, jurn_id)
-  VALUES
-      ("Alert your credit card company", "active", ?),
-      ("Contact your cell phone company","active", ?),
-      ("Notify your home security system operator","active", ?),
-      ("Confirm all reservations","active", ?),
-      ("Make advance payments on bills that have due dates during your trip","active", ?),
-      ("Check the weather","active", ?),
-      ("Eat, throw out, or give away any perishable food","active", ?),
-      ("Leave an itinerary with a friend or family member","active", ?),
-      ("Place a hold on your mail delivery","active", ?),
-      ("Bring in outdoor furniture","active", ?)`
-  conn.query(
-    sqlR,
-    [
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id
-    ],
-    (errR, resultsR, fieldsR) => {
-      const sqlUpdateLoc = `UPDATE jurn SET location = ? WHERE jurn_id = ?`
+  const hotel = req.body.hotel
 
-      conn.query(
-        sqlUpdateLoc,
-        [location, jurn_id],
-        (errUpLoc, resultsUpLoc, fieldsUpLoc) => {
-          res.json({
-            message: "location updated and reminders added"
-          })
-        }
-      )
+  const sqlJurnPost = "SELECT rems_status FROM jurn WHERE jurn_id = ?"
+  conn.query(
+    sqlJurnPost,
+    [jurn_id],
+    (errJurnPost, resultsJurnPost, fieldsJurnPost) => {
+      console.log(resultsJurnPost[0].rems_status)
+      if (resultsJurnPost[0].rems_status == "posted") {
+        const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ? WHERE jurn_id = ?`
+
+        conn.query(
+          sqlUpdateJurn,
+          [location, hotel, jurn_id],
+          (errUpJurn, resultsUpJurn, fieldsUpJurn) => {
+            res.json({
+              message: "location, hotel updated"
+            })
+          }
+        )
+      } else {
+        const sqlR = `INSERT INTO reminder (rem, status, jurn_id)
+      VALUES
+          ("Alert your credit card company", "active", ?),
+          ("Contact your cell phone company","active", ?),
+          ("Notify your home security system operator","active", ?),
+          ("Confirm all reservations","active", ?),
+          ("Make advance payments on bills that have due dates during your trip","active", ?),
+          ("Check the weather","active", ?),
+          ("Eat, throw out, or give away any perishable food","active", ?),
+          ("Leave an itinerary with a friend or family member","active", ?),
+          ("Place a hold on your mail delivery","active", ?),
+          ("Bring in outdoor furniture","active", ?)`
+        conn.query(
+          sqlR,
+          [
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id
+          ],
+          (errR, resultsR, fieldsR) => {
+            // const rems_status = "posted"
+            const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ?,rems_status = "posted"  WHERE jurn_id = ?`
+
+            conn.query(
+              sqlUpdateJurn,
+              [location, hotel, jurn_id],
+              (errUpJurn, resultsUpJurn, fieldsUpJurn) => {
+                res.json({
+                  message: "location, hotel updated and reminders added"
+                })
+              }
+            )
+          }
+        )
+      }
     }
   )
 })
@@ -150,6 +175,27 @@ router.post("/location", (req, res, next) => {
         message: "location added successfully"
       })
     })
+  })
+})
+
+router.post("/hotel", (req, res, next) => {
+  const hotel_name = req.body.hotel
+  const jurn_id = req.body.jurn_id
+
+  const checkSQLHot = "SELECT count(1) as count FROM hotel WHERE hotel_name = ?"
+
+  conn.query(checkSQLHot, [hotel_name], (errHot, resultsHot, fieldsHot) => {
+    const sql8 = "INSERT INTO hotel (hotel_name, jurn_id) VALUES (?, ?)"
+
+    conn.query(
+      sql8,
+      [hotel_name, jurn_id],
+      (errHot2, resultsHot2, fieldsHot2) => {
+        res.json({
+          message: "hotel added successfully"
+        })
+      }
+    )
   })
 })
 
@@ -202,7 +248,6 @@ router.patch("/reminder", (req, res, next) => {
 })
 
 // LOGIN USERS BELOW
-
 router.post("/login", (req, res, next) => {
   const email = req.body.username
   const password = req.body.password

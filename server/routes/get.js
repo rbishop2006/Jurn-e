@@ -55,6 +55,7 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
   const jurn_id = req.params.jurn_id
   const P1Results = {
     locations: [],
+    hotels: [],
     jname: {}
   }
   // Where we get the Jurn name based on the Jurn Id that is sent in URL
@@ -72,7 +73,20 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
             location: item.loc_name
           })
         })
-        res.json({ phase1: P1Results })
+        // Where we retrieve the hotels associated with the Jurn ID
+        const sqlHotName = `SELECT hotel_name FROM hotel WHERE hotel.jurn_id = ?`
+        conn.query(
+          sqlHotName,
+          [jurn_id],
+          (errHotName, resultsHotName, fieldsHotName) => {
+            resultsHotName.forEach(item2 => {
+              P1Results.hotels.push({
+                hotel: item2.hotel_name
+              })
+            })
+            res.json({ phase1: P1Results })
+          }
+        )
       }
     )
   })

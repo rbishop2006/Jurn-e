@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Form, Button, Radio } from "semantic-ui-react"
 import { usePhase1 } from "../../hooks"
+import "../../styles/phase1.scss"
 
 export default props => {
   const {
@@ -8,14 +9,22 @@ export default props => {
     locations,
     updatePhase1,
     sendLocation,
-    updateChoices
+    sendHotel,
+    updateChoices,
+    hotels
   } = usePhase1()
+  const jurn_id = props.match.params.jurn_id
   const [location, setLocation] = useState("")
   const [finalLocation, setFinalLocation] = useState("")
+<<<<<<< HEAD
   const jurn_id = props.match.params.jurn_id
   // const [hotel, setHotel] = useState("")
   // const [finalHotel, setFinalHotel] = useState("")
   // const [error, setError] = useState(false)
+=======
+  const [hotel, setHotel] = useState("")
+  const [finalHotel, setFinalHotel] = useState("")
+>>>>>>> master
 
   function handleLocSug(e) {
     e.preventDefault()
@@ -24,9 +33,16 @@ export default props => {
     updatePhase1(jurn_id)
   }
 
+  function handleHotSug(e) {
+    e.preventDefault()
+    sendHotel(hotel, jurn_id)
+    setHotel("")
+    updatePhase1(jurn_id)
+  }
+
   function handleFinalPlans(e) {
     e.preventDefault()
-    updateChoices(finalLocation, jurn_id).then(jurn_id => {
+    updateChoices(finalLocation, finalHotel, jurn_id).then(jurn_id => {
       props.history.push("/Jurne/dashboard/final/" + jurn_id)
     })
   }
@@ -38,7 +54,7 @@ export default props => {
   return (
     <div className="phase1">
       <h1>{jname.jname}</h1>
-      <Form className="suggestDiv" onSubmit={handleLocSug}>
+      <Form className="suggestLocDiv" onSubmit={handleLocSug}>
         <Form.Group className="locationSect">
           <Form.Input
             fluid
@@ -60,8 +76,30 @@ export default props => {
             />
           ))}
         </Form.Field>
-        <Form.Button>Submit</Form.Button>
-        {/* onSubmit={handleFinalPlans} */}
+        {/* <Form.Button>Submit</Form.Button> */}
+      </Form>
+      <Form className="suggestHotDiv" onSubmit={handleHotSug}>
+        <Form.Group className="hotelSect">
+          <Form.Input
+            fluid
+            label="Make a suggestion for accommodations"
+            placeholder="ex. Four Seasons Maui"
+            value={hotel}
+            onChange={e => setHotel(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Field inline>
+          {hotels.map((hotel, i) => (
+            <Radio
+              key={"hotel" + i}
+              label={hotel.hotel}
+              name="radioGroup2"
+              value={hotel.hotel}
+              onChange={e => setFinalHotel(hotel.hotel)}
+              checked={hotel.hotel === finalHotel}
+            />
+          ))}
+        </Form.Field>
       </Form>
       <Form onSubmit={handleFinalPlans}>
         <Button type="submit">Finalize Plans</Button>
@@ -69,41 +107,3 @@ export default props => {
     </div>
   )
 }
-
-/* <Form.Radio
-            label="Blue Forest"
-            value="Blue Forest"
-            checked={finalLocation === "Blue Forest"}
-            onChange={e => setFinalLocation(e.target.value)}
-          />
-          <Form.Radio
-            label="Downtown"
-            value="Downtown"
-            checked={finalLocation === "Downtown"}
-            onChange={e => setFinalLocation(e.target.value)}
-          /> */
-
-/* <Form onSubmit={handleHotelSug} className="hotelSect">
-          <Form.Input
-            fluid
-            label="Hotel Ideas"
-            placeholder="ex. Four Seasons Maui"
-            value={hotel}
-            onChange={e => setHotel(e.target.value)}
-          />
-          <Button attached="right" type="submit">
-            Submit
-          </Button>
-        </Form>
-        <Form>
-          {hotels.map((each, i) => (
-          <Form.Field>
-            <Radio
-              label={hotel}
-              name="radioGroup"
-              value={finalHotel}
-              onChange={e => setFinalHotel(e.target.value)}
-            />
-          </Form.Field>
-          ))} 
-        </Form> */
