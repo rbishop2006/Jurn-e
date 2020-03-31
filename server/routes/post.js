@@ -72,6 +72,8 @@ router.post("/jurn", (req, res, next) => {
 router.post("/phase1", (req, res, next) => {
   const jurn_id = req.body.jurn_id
   const location = req.body.location
+  const hotel = req.body.hotel
+
   const sqlR = `INSERT INTO reminder (rem, status, jurn_id)
   VALUES
       ("Alert your credit card company", "active", ?),
@@ -99,14 +101,14 @@ router.post("/phase1", (req, res, next) => {
       jurn_id
     ],
     (errR, resultsR, fieldsR) => {
-      const sqlUpdateLoc = `UPDATE jurn SET location = ? WHERE jurn_id = ?`
+      const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ? WHERE jurn_id = ?`
 
       conn.query(
-        sqlUpdateLoc,
-        [location, jurn_id],
-        (errUpLoc, resultsUpLoc, fieldsUpLoc) => {
+        sqlUpdateJurn,
+        [location, hotel, jurn_id],
+        (errUpJurn, resultsUpJurn, fieldsUpJurn) => {
           res.json({
-            message: "location updated and reminders added"
+            message: "location, hotel updated and reminders added"
           })
         }
       )
@@ -150,6 +152,27 @@ router.post("/location", (req, res, next) => {
         message: "location added successfully"
       })
     })
+  })
+})
+
+router.post("/hotel", (req, res, next) => {
+  const hotel_name = req.body.hotel
+  const jurn_id = req.body.jurn_id
+
+  const checkSQLHot = "SELECT count(1) as count FROM hotel WHERE hotel_name = ?"
+
+  conn.query(checkSQLHot, [hotel_name], (errHot, resultsHot, fieldsHot) => {
+    const sql8 = "INSERT INTO hotel (hotel_name, jurn_id) VALUES (?, ?)"
+
+    conn.query(
+      sql8,
+      [hotel_name, jurn_id],
+      (errHot2, resultsHot2, fieldsHot2) => {
+        res.json({
+          message: "hotel added successfully"
+        })
+      }
+    )
   })
 })
 
@@ -202,7 +225,6 @@ router.patch("/reminder", (req, res, next) => {
 })
 
 // LOGIN USERS BELOW
-
 router.post("/login", (req, res, next) => {
   const email = req.body.username
   const password = req.body.password

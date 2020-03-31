@@ -1,0 +1,49 @@
+.phase2 {
+  position: absolute;
+  top: 100px;
+  left: 250px;
+  right: 0;
+  bottom: 0;
+  background: white;
+  overflow: auto;
+
+  .p2header {
+    text-align: center;
+  }
+  .p2location {
+    text-align: center;
+  }
+
+  .p2ChecklistAndActivies {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+
+    .p2Checklist {
+      margin-bottom: 0;
+    }
+
+    .ui.checkbox {
+      display: block;
+    }
+
+    .completed {
+      text-decoration: line-through;
+    }
+
+    .P2filters {
+      display: flex;
+      margin-top: 15px;
+    }
+
+    .ui.radio.checkbox {
+      margin-right: 10px;
+    }
+  }
+
+  .p2details {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+  }
+}
