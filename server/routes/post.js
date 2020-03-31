@@ -79,7 +79,6 @@ router.post("/phase1", (req, res, next) => {
     sqlJurnPost,
     [jurn_id],
     (errJurnPost, resultsJurnPost, fieldsJurnPost) => {
-      console.log(resultsJurnPost[0].rems_status)
       if (resultsJurnPost[0].rems_status == "posted") {
         const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ? WHERE jurn_id = ?`
 

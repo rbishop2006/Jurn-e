@@ -13,7 +13,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case GET_PHASE1:
       return { ...state, ...action.payload }
-
     default:
       return state
   }
