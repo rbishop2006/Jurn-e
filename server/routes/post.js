@@ -74,44 +74,67 @@ router.post("/phase1", (req, res, next) => {
   const location = req.body.location
   const hotel = req.body.hotel
 
-  const sqlR = `INSERT INTO reminder (rem, status, jurn_id)
-  VALUES
-      ("Alert your credit card company", "active", ?),
-      ("Contact your cell phone company","active", ?),
-      ("Notify your home security system operator","active", ?),
-      ("Confirm all reservations","active", ?),
-      ("Make advance payments on bills that have due dates during your trip","active", ?),
-      ("Check the weather","active", ?),
-      ("Eat, throw out, or give away any perishable food","active", ?),
-      ("Leave an itinerary with a friend or family member","active", ?),
-      ("Place a hold on your mail delivery","active", ?),
-      ("Bring in outdoor furniture","active", ?)`
+  const sqlJurnPost = "SELECT rems_status FROM jurn WHERE jurn_id = ?"
   conn.query(
-    sqlR,
-    [
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id,
-      jurn_id
-    ],
-    (errR, resultsR, fieldsR) => {
-      const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ? WHERE jurn_id = ?`
+    sqlJurnPost,
+    [jurn_id],
+    (errJurnPost, resultsJurnPost, fieldsJurnPost) => {
+      console.log(resultsJurnPost[0].rems_status)
+      if (resultsJurnPost[0].rems_status == "posted") {
+        const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ? WHERE jurn_id = ?`
 
-      conn.query(
-        sqlUpdateJurn,
-        [location, hotel, jurn_id],
-        (errUpJurn, resultsUpJurn, fieldsUpJurn) => {
-          res.json({
-            message: "location, hotel updated and reminders added"
-          })
-        }
-      )
+        conn.query(
+          sqlUpdateJurn,
+          [location, hotel, jurn_id],
+          (errUpJurn, resultsUpJurn, fieldsUpJurn) => {
+            res.json({
+              message: "location, hotel updated"
+            })
+          }
+        )
+      } else {
+        const sqlR = `INSERT INTO reminder (rem, status, jurn_id)
+      VALUES
+          ("Alert your credit card company", "active", ?),
+          ("Contact your cell phone company","active", ?),
+          ("Notify your home security system operator","active", ?),
+          ("Confirm all reservations","active", ?),
+          ("Make advance payments on bills that have due dates during your trip","active", ?),
+          ("Check the weather","active", ?),
+          ("Eat, throw out, or give away any perishable food","active", ?),
+          ("Leave an itinerary with a friend or family member","active", ?),
+          ("Place a hold on your mail delivery","active", ?),
+          ("Bring in outdoor furniture","active", ?)`
+        conn.query(
+          sqlR,
+          [
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id,
+            jurn_id
+          ],
+          (errR, resultsR, fieldsR) => {
+            // const rems_status = "posted"
+            const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ?,rems_status = "posted"  WHERE jurn_id = ?`
+
+            conn.query(
+              sqlUpdateJurn,
+              [location, hotel, jurn_id],
+              (errUpJurn, resultsUpJurn, fieldsUpJurn) => {
+                res.json({
+                  message: "location, hotel updated and reminders added"
+                })
+              }
+            )
+          }
+        )
+      }
     }
   )
 })
