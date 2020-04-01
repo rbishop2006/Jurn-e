@@ -45,11 +45,13 @@ router.get("/dashboard", (req, res, next) => {
         FROM user WHERE user.user_id = ?`
       conn.query(sql2, [user_id], (err2, results2, fields2) => {
         dashResults.user = results2[0]
+
         res.json({ dashboard: dashResults })
       })
     })
   })
 })
+// res.json({ results: resultsrems, count: resultsrems.length })
 
 router.get("/phase1/:jurn_id", (req, res, next) => {
   const jurn_id = req.params.jurn_id
