@@ -3,7 +3,7 @@ const router = express.Router()
 const conn = require("../db")
 const decode = require("jsonwebtoken").decode
 
-router.get("/dashboard", (req, res, next) => {
+router.get("/main", (req, res, next) => {
   const profile = decode(req.headers.authorization.substring(7))
 
   //trying on postman
