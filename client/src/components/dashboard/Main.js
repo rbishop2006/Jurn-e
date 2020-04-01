@@ -24,11 +24,14 @@ export default props => {
                 <Card.Content>
                   <Card.Header>{jurn.name}</Card.Header>
                   <Card.Meta>{jurn.location}</Card.Meta>
-                  <Card.Meta>{"Families going: " + 1}</Card.Meta>
-                  <Card.Meta>{"People going: " + 3}</Card.Meta>
                   <Card.Meta>
-                    {`Things left to do before trip: ` + jurn.reminders.length}
+                    {jurn.start_date} + {jurn.end_date}
                   </Card.Meta>
+                  <Card.Meta>
+                    {`Activities planned: ` + jurn.act_count}
+                  </Card.Meta>
+
+                  <Card.Meta>{`Reminders Left: ` + jurn.rem_count}</Card.Meta>
                 </Card.Content>
               </Card>
             </Link>

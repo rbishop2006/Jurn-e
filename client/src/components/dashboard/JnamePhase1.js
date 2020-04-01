@@ -76,11 +76,9 @@ export default props => {
 
   function handleFinalPlans(e) {
     e.preventDefault()
-    updateChoices(finalLocation, finalHotel, finalDate, jurn_id).then(
-      jurn_id => {
-        props.history.push("/Jurne/dashboard/final/" + jurn_id)
-      }
-    )
+    updateChoices(finalLocation, finalHotel, jurn_id).then(jurn_id => {
+      props.history.push("/Jurne/dashboard/final/" + jurn_id)
+    })
   }
 
   useEffect(() => {
