@@ -56,12 +56,6 @@ function createDateRange(date, jurn_id) {
   }
 }
 
-// function createDateRange(date, jurn_id) {
-//   return dispatch => {
-//     api.post("/daterange", { date, jurn_id }).catch()
-//   }
-// }
-
 function finalChoices(location, hotel, date, jurn_id) {
   return new Promise((resolve, reject) => {
     api

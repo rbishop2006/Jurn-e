@@ -122,8 +122,7 @@ router.post("/phase1", (req, res, next) => {
             jurn_id
           ],
           (errR, resultsR, fieldsR) => {
-            // const rems_status = "posted"
-            const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ?, start_date = ?, end_date = ? rems_status = "posted"  WHERE jurn_id = ?`
+            const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ?, start_date = ?, end_date = ?, rems_status = "posted"  WHERE jurn_id = ?`
 
             conn.query(
               sqlUpdateJurn,
@@ -212,7 +211,6 @@ router.post("/dates", (req, res, next) => {
 router.post("/addrem", (req, res, next) => {
   const jurn_id = req.body.jurn_id
   const rem = req.body.reminder
-  console.log(rem)
   const sqlAddRem = `INSERT INTO reminder (rem, jurn_id) VALUES (?, ?)`
   conn.query(
     sqlAddRem,
@@ -227,7 +225,6 @@ router.post("/addrem", (req, res, next) => {
 
 router.patch("/remcomplete", (req, res, next) => {
   const rem_id = req.body.rem_id
-
   const sqlremComplete = `UPDATE reminder SET status = "completed" WHERE rem_id = ?`
 
   conn.query(
@@ -244,7 +241,6 @@ router.patch("/remcomplete", (req, res, next) => {
 router.patch("/reminder", (req, res, next) => {
   const rem_id = req.body.rem_id
   const status = req.body.status
-
   const sqlToggleRem = `UPDATE reminder SET status = ? WHERE rem_id = ?`
 
   conn.query(
@@ -275,7 +271,6 @@ router.post("/addact", (req, res, next) => {
 
 router.patch("/actcomplete", (req, res, next) => {
   const act_id = req.body.act_id
-
   const sqlactComplete = `UPDATE activity SET status = "completed" WHERE act_id = ?`
 
   conn.query(
@@ -292,7 +287,6 @@ router.patch("/actcomplete", (req, res, next) => {
 router.patch("/activity", (req, res, next) => {
   const act_id = req.body.act_id
   const status = req.body.status
-
   const sqlToggleAct = `UPDATE activity SET status = ? WHERE act_id = ?`
 
   conn.query(
@@ -310,7 +304,6 @@ router.patch("/activity", (req, res, next) => {
 router.post("/login", (req, res, next) => {
   const email = req.body.username
   const password = req.body.password
-
   const getSQL = "SELECT email, salt, password FROM user WHERE email = ?"
 
   conn.query(getSQL, [email], (salterr, saltresults, saltfields) => {
