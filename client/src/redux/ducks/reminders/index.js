@@ -33,9 +33,9 @@ function getRems(jurn_id) {
   }
 }
 
-function addReminder(item, jurn_id) {
+function addReminder(reminder, jurn_id) {
   return dispatch => {
-    api.post("/addrem", { item, jurn_id }).then(resp => {
+    api.post("/addrem", { reminder, jurn_id }).then(resp => {
       dispatch(getRems(jurn_id))
     })
   }
@@ -113,7 +113,7 @@ export function useRems() {
   const dispatch = useDispatch()
   const rems = useSelector(appState => appState.RemindersState.rems)
   const remsCount = useSelector(appState => appState.RemindersState.remsCount)
-  const addRem = (item, jurn_id) => dispatch(addReminder(item, jurn_id))
+  const addRem = (reminder, jurn_id) => dispatch(addReminder(reminder, jurn_id))
   const toggleRem = (rem_id, jurn_id) =>
     dispatch(toggleReminder(rem_id, jurn_id))
   const filterRems = (status, jurn_id) =>

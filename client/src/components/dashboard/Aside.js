@@ -22,7 +22,13 @@ export default props => {
         <Button onClick={e => signout()}>Log out</Button>
       </div>
       {/* <Divider /> */}
-      <h5>Jurn(e)s</h5>
+      <h5>
+        Jurn
+        <span>
+          <em>(e)</em>
+        </span>
+        s
+      </h5>
       <div className="jurnList">
         {jurns.map((jurn, i) => (
           <Menu key={"jurn" + i} vertical id="menu">
