@@ -1,0 +1,98 @@
+aside {
+  background: rgb(175, 221, 239);
+
+  .userProfile {
+    height: 80px;
+    padding: 5px;
+    transition: height 0.7s;
+    overflow: hidden;
+  }
+
+  .expand {
+    height: 350px;
+    padding: 5px;
+    transition: height 0.7s;
+    overflow: hidden;
+  }
+
+  .profileDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+      align-items: center;
+    }
+
+    .logOut {
+      margin: 0;
+    }
+  }
+
+  .user {
+    color: rgb(0, 119, 150);
+    padding: 0;
+    margin: 1px 2px;
+  }
+
+  .status {
+    width: 10px;
+    height: 10px;
+    background: greenyellow;
+    border-radius: 50%;
+  }
+
+  .editProfile {
+    align-self: flex-end;
+  }
+
+  .profileForm {
+    display: flex;
+    flex-direction: column;
+
+    .updateProfile {
+      align-self: center;
+      width: 70%;
+    }
+  }
+
+  h5 {
+    text-align: center;
+  }
+
+  .jurnesDiv {
+    .jurnList {
+      max-height: 350px;
+      overflow: auto;
+
+      #menu {
+        margin: 10px auto;
+        width: 90%;
+
+        #menuItem {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          p {
+            margin: 0;
+          }
+
+          a {
+            margin: 0;
+
+            button {
+              margin: 0px 0px;
+              padding: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .divider {
+    margin: 0;
+  }
+}

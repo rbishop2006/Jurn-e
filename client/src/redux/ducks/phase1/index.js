@@ -62,10 +62,10 @@ function createDateRange(date, jurn_id) {
 //   }
 // }
 
-function finalChoices(location, hotel, jurn_id) {
+function finalChoices(location, hotel, date, jurn_id) {
   return new Promise((resolve, reject) => {
     api
-      .post("/phase1", { location, hotel, jurn_id })
+      .post("/phase1", { location, hotel, date, jurn_id })
       .then(() => {
         resolve(jurn_id)
       })
@@ -91,8 +91,8 @@ export function usePhase1() {
   const sendDates = (date, jname) => {
     dispatch(createDateRange(date, jname))
   }
-  const updateChoices = (location, hotel, jurn_id) =>
-    finalChoices(location, hotel, jurn_id)
+  const updateChoices = (location, hotel, date, jurn_id) =>
+    finalChoices(location, hotel, date, jurn_id)
 
   return {
     jname,
