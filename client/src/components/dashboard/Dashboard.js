@@ -15,10 +15,9 @@ export default props => {
     get()
   }, [])
 
-  /* //working on JnamePhase2 component */
   return (
     <div className="grid">
-      <Aside />
+      <Aside history={props.history} />
       <Header history={props.history} />
       <Route exact path="/Jurne/dashboard" component={Main} />
       <Route

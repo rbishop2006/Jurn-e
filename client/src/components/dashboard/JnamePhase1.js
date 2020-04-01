@@ -37,7 +37,6 @@ export default props => {
   const [view, setView] = useState("all")
   const [newRange, setNewRange] = useState([])
   const [finalDate, setFinalDate] = useState({})
-  console.log(finalDate)
 
   function handleDateSug(e) {
     e.preventDefault()
@@ -108,17 +107,13 @@ export default props => {
             <Radio
               key={"dateRange" + i}
               label={
-                moment(date.startDate).format("MMMM Do YYYY") +
+                moment(date.startDate).format("MMM Do, YYYY") +
                 " - " +
-                moment(date.endDate).format("MMMM Do YYYY")
+                moment(date.endDate).format("MMM Do, YYYY")
               }
               name="radioGroup3"
               value={date.startDate + "," + date.endDate}
               onChange={e => setFinalDate(date.startDate + "," + date.endDate)}
-              // {
-              //   start_date: date.startDate,
-              //   end_date: date.endDate
-              // }
               checked={date.startDate + "," + date.endDate === finalDate}
             />
           ))}

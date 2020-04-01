@@ -1,46 +1,21 @@
-import React from "react"
-import { useAuth } from "react-auth"
-import { Icon, Button, Divider, Menu, Feed, List } from "semantic-ui-react"
-import { useDashboard } from "../../hooks"
-import { Link } from "react-router-dom"
-import "../../styles/dashboard.scss"
+import React, { useEffect } from "react"
+import UserProfile from "./UserProfile"
+import AsideJurnes from "./AsideJurnes"
+import { Icon, Divider, Feed, List } from "semantic-ui-react"
+import { useAside } from "../../hooks"
+import "../../styles/aside.scss"
 
 export default props => {
-  const { signout } = useAuth()
-  const { user, jurns } = useDashboard()
+  const { fetchAside } = useAside()
+
+  useEffect(() => {
+    fetchAside()
+  }, [])
 
   return (
     <aside>
-      <div className="userProfile">
-        <div className="profileDiv">
-          <Icon name="user secret" color="grey" size="big" />
-          <p className="user">
-            {user.fname} {user.lname}
-          </p>
-          <p className="status"></p>
-        </div>
-        <Button onClick={e => signout()}>Log out</Button>
-      </div>
-      {/* <Divider /> */}
-      <h5>
-        Jurn
-        <span>
-          <em>(e)</em>
-        </span>
-        s
-      </h5>
-      <div className="jurnList">
-        {jurns.map((jurn, i) => (
-          <Menu key={"jurn" + i} vertical id="menu">
-            <Menu.Item name={jurn.name} active={true} id="menuItem">
-              <p>{jurn.name}</p>
-              <Link to={"/Jurne/dashboard/" + jurn.id}>
-                <Button type="button">Edit</Button>
-              </Link>
-            </Menu.Item>
-          </Menu>
-        ))}
-      </div>
+      <UserProfile />
+      <AsideJurnes />
       <Divider />
       <h5>Users</h5>
       <List>
