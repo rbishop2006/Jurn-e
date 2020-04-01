@@ -5,53 +5,36 @@ const decode = require("jsonwebtoken").decode
 
 router.get("/dashboard", (req, res, next) => {
   const profile = decode(req.headers.authorization.substring(7))
+
   //trying on postman
 
-  const dashResults = {
-    jurns: [],
-    user: {}
-  }
+  const dashResults = []
   const email = profile.email
   const sqlId = `SELECT user_id FROM user WHERE email = ?`
 
   conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
     const user_id = resultsId[0].user_id
-
-    const sql = `SELECT jurn.jurn_id, jurn.jname, jurn.location, jurn.user_id, user.fname, user.lname, user.fam_id, user.email, user.cell_phone, family.fam_name, reminder.rem
+    //new sql for dashboard
+    const sqlDashboard = `SELECT jurn_Table.jurn_id, jurn_Table.jname, jurn_Table.location, jurn_Table.start_date, jurn_Table.end_date, jurn_Table.rem_count, COUNT(activity.act) as act_count
+    FROM 
+    (SELECT jurn.jurn_id, jurn.jname, jurn.location, jurn.start_date, jurn.end_date, COUNT(reminder.rem) as rem_count
     FROM jurn
-    LEFT JOIN user ON jurn.user_id = user.user_id
-    LEFT JOIN family ON family.user_id = user.user_id
-    LEFT JOIN reminder ON reminder.jurn_id = jurn.jurn_id
-    WHERE user.user_id = ?`
-    conn.query(sql, [user_id], (err, results, fields) => {
-      results.forEach(item => {
-        if (dashResults.jurns.filter(j => j.id === item.jurn_id).length > 0) {
-          dashResults.jurns
-            .find(j => j.id === item.jurn_id)
-            .reminders.push(item.rem)
-        } else {
-          dashResults.jurns.push({
-            id: item.jurn_id,
-            name: item.jname,
-            location: item.location,
-            reminders: [item.rem]
-          })
-        }
-      })
-
-      const sql2 = `SELECT user.user_id, user.email, user.fname, user.lname, user.fam_id, user.cell_phone
-        FROM user WHERE user.user_id = ?`
-      conn.query(sql2, [user_id], (err2, results2, fields2) => {
-        dashResults.user = results2[0]
-
-        res.json({ dashboard: dashResults })
-        console.log(dashResults)
-      })
-    })
+    LEFT JOIN reminder ON jurn.jurn_id = reminder.jurn_id
+    LEFT JOIN user ON user.user_id = jurn.user_id
+    WHERE user.user_id = ?
+    GROUP BY jurn.jurn_id) AS jurn_Table
+    LEFT JOIN activity ON activity.jurn_id = jurn_Table.jurn_id
+    GROUP BY jurn_Table.jurn_id`
+    conn.query(
+      sqlDashboard,
+      [user_id],
+      (errsqlDashboard, resultssqlDashboard, fieldssqlDashboard) => {
+        console.log(resultssqlDashboard)
+        res.json({ dashboard: resultssqlDashboard })
+      }
+    )
   })
 })
-
-//trying aside
 
 router.get("/aside", (req, res, next) => {
   const profile = decode(req.headers.authorization.substring(7))
@@ -99,25 +82,6 @@ router.get("/aside", (req, res, next) => {
     )
   })
 })
-
-//trying RemCount sql
-// const sqlRemCount = `SELECT COUNT(rem)
-// FROM reminder
-// LEFT JOIN link ON link.jurn_id = reminder.jurn_id
-// WHERE link.user_id = ?`
-// conn.query(
-//   sqlRemCount,
-//   [user_id],
-//   (errRemCount, resultsRemCount, fieldsRemCount) => {
-//     console.log(resultsRemCount)
-//     resultsRemCount.forEach(item => {
-//       dashResults.jurns.push({
-//         count: item
-//       })
-//     })
-//   }
-// )
-// res.json({ results: resultsrems, count: resultsrems.length })
 
 router.get("/phase1/:jurn_id", (req, res, next) => {
   const jurn_id = req.params.jurn_id
@@ -285,3 +249,54 @@ router.get("/toggleact/:act_id", (req, res, next) => {
 // res.json({ results: resultsrems, count: resultsrems.length })
 
 module.exports = router
+
+// const sql = `SELECT jurn.jurn_id, jurn.jname, jurn.location, jurn.user_id, user.fname, user.lname, user.fam_id, user.email, user.cell_phone, family.fam_name, reminder.rem
+// FROM jurn
+// LEFT JOIN user ON jurn.user_id = user.user_id
+// LEFT JOIN family ON family.user_id = user.user_id
+// LEFT JOIN reminder ON reminder.jurn_id = jurn.jurn_id
+// WHERE user.user_id = ?`
+// conn.query(sql, [user_id], (err, results, fields) => {
+//   results.forEach(item => {
+//     if (dashResults.jurns.filter(j => j.id === item.jurn_id).length > 0) {
+//       dashResults.jurns
+//         .find(j => j.id === item.jurn_id)
+//         .reminders.push(item.rem)
+//     } else {
+//       dashResults.jurns.push({
+//         id: item.jurn_id,
+//         name: item.jname,
+//         location: item.location,
+//         reminders: [item.rem]
+//       })
+//     }
+//   })
+
+//   const sql2 = `SELECT user.user_id, user.email, user.fname, user.lname, user.fam_id, user.cell_phone
+//     FROM user WHERE user.user_id = ?`
+//   conn.query(sql2, [user_id], (err2, results2, fields2) => {
+//     dashResults.user = results2[0]
+
+//     res.json({ dashboard: dashResults })
+//     console.log(dashResults)
+//   })
+// })
+
+//trying RemCount sql
+// const sqlRemCount = `SELECT COUNT(rem)
+// FROM reminder
+// LEFT JOIN link ON link.jurn_id = reminder.jurn_id
+// WHERE link.user_id = ?`
+// conn.query(
+//   sqlRemCount,
+//   [user_id],
+//   (errRemCount, resultsRemCount, fieldsRemCount) => {
+//     console.log(resultsRemCount)
+//     resultsRemCount.forEach(item => {
+//       dashResults.jurns.push({
+//         count: item
+//       })
+//     })
+//   }
+// )
+// res.json({ results: resultsrems, count: resultsrems.length })
