@@ -113,13 +113,13 @@ export default props => {
                 moment(date.endDate).format("MMMM Do YYYY")
               }
               name="radioGroup3"
-              value={date.startDate + date.endDate}
-              onChange={e => setFinalDate(date.startDate + date.endDate)}
+              value={date.startDate + "," + date.endDate}
+              onChange={e => setFinalDate(date.startDate + "," + date.endDate)}
               // {
               //   start_date: date.startDate,
               //   end_date: date.endDate
               // }
-              checked={date.startDate + date.endDate === finalDate}
+              checked={date.startDate + "," + date.endDate === finalDate}
             />
           ))}
         </Form.Field>

@@ -70,6 +70,9 @@ router.post("/jurn", (req, res, next) => {
 })
 
 router.post("/phase1", (req, res, next) => {
+  const date = req.body.date.split(",")
+  const startDate = date[0]
+  const endDate = date[1]
   const jurn_id = req.body.jurn_id
   const location = req.body.location
   const hotel = req.body.hotel
@@ -80,14 +83,14 @@ router.post("/phase1", (req, res, next) => {
     [jurn_id],
     (errJurnPost, resultsJurnPost, fieldsJurnPost) => {
       if (resultsJurnPost[0].rems_status == "posted") {
-        const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ? WHERE jurn_id = ?`
+        const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ?, start_date = ?, end_date = ? WHERE jurn_id = ?`
 
         conn.query(
           sqlUpdateJurn,
-          [location, hotel, jurn_id],
+          [location, hotel, startDate, endDate, jurn_id],
           (errUpJurn, resultsUpJurn, fieldsUpJurn) => {
             res.json({
-              message: "location, hotel updated"
+              message: "location, hotel, dates updated"
             })
           }
         )
@@ -120,14 +123,14 @@ router.post("/phase1", (req, res, next) => {
           ],
           (errR, resultsR, fieldsR) => {
             // const rems_status = "posted"
-            const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ?,rems_status = "posted"  WHERE jurn_id = ?`
+            const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ?, start_date = ?, end_date = ? rems_status = "posted"  WHERE jurn_id = ?`
 
             conn.query(
               sqlUpdateJurn,
-              [location, hotel, jurn_id],
+              [location, hotel, startDate, endDate, jurn_id],
               (errUpJurn, resultsUpJurn, fieldsUpJurn) => {
                 res.json({
-                  message: "location, hotel updated and reminders added"
+                  message: "location, hotel, dates updated and reminders added"
                 })
               }
             )
@@ -188,29 +191,10 @@ router.post("/hotel", (req, res, next) => {
   )
 })
 
-// router.post("/daterange", (req, res, next) => {
-//   const date_range = req.body.date
-//   const jurn_id = req.body.jurn_id
-//   const sqlDR = "INSERT INTO daterange (date_range, jurn_id) VALUES (?, ?)"
-
-//   conn.query(
-//     sqlDR,
-//     [date_range, jurn_id],
-//     (errHotDR, resultsHotDR, fieldsHotDR) => {
-//       res.json({
-//         message: "date range added successfully"
-//       })
-//     }
-//   )
-// })
-
 router.post("/dates", (req, res, next) => {
-  // console.log(req.body)
   const start_date = req.body.date[0]
   const end_date = req.body.date[1]
   const jurn_id = req.body.jurn_id
-  // console.log(start_date)
-  // console.log(end_date)
   const sqlDateRange =
     "INSERT INTO date (start_date, end_date, jurn_id) VALUES (?, ?, ?)"
 

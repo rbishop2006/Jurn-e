@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import Main from "./Main"
 import Header from "./Header"
-import Aside from "./Aside"
+import Aside from "../aside/Aside"
 import JnamePhase1 from "./JnamePhase1"
 import JnamePhase2 from "./JnamePhase2"
 import "../../styles/dashboard.scss"
