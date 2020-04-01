@@ -8,7 +8,6 @@ router.get("/dashboard", (req, res, next) => {
 
   //trying on postman
 
-  const dashResults = []
   const email = profile.email
   const sqlId = `SELECT user_id FROM user WHERE email = ?`
 
