@@ -5,8 +5,8 @@ import { Link } from "react-router-dom"
 import "../../styles/phase2.scss"
 
 export default props => {
-  const [item, setItem] = useState("")
-  const { jurnInfo, updatePhase2 } = usePhase2()
+  const [reminder, setReminder] = useState("")
+  const { jurnInfo, updatePhase2, activities } = usePhase2()
   const {
     rems,
     remsCount,
@@ -20,8 +20,8 @@ export default props => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    addRem(item, jurn_id)
-    setItem("")
+    addRem(reminder, jurn_id)
+    setReminder("")
   }
   const [view, setView] = useState("all")
 
@@ -33,9 +33,21 @@ export default props => {
   useEffect(() => {
     updatePhase2(props.match.params.jurn_id)
     updateRems(props.match.params.jurn_id)
-  }, [props.match.params.jurn_id, item])
+  }, [props.match.params.jurn_id, reminder])
 
   const panes = [
+    {
+      menuItem: `Activities (${activities.length})`,
+      render: () => (
+        <Tab.Pane attached={false}>
+          <List bulleted>
+            {activities.map((activity, i) => (
+              <List.Item key={"activity" + i}> {activity.activity}</List.Item>
+            ))}
+          </List>
+        </Tab.Pane>
+      )
+    },
     {
       menuItem: "Hotels",
       render: () => (
@@ -68,17 +80,6 @@ export default props => {
           {/* <RentalCars history={props.history} /> */}
         </Tab.Pane>
       )
-    },
-    {
-      menuItem: "Restaurants",
-      render: () => (
-        <Tab.Pane attached={false}>
-          <p>RESTAURANTS lorem ipsum dolor</p>
-          <p>RESTAURANTS lorem ipsum dolor</p>
-          <p>RESTAURANTS lorem ipsum dolor</p>
-          {/* <Restaurants history={props.history} /> */}
-        </Tab.Pane>
-      )
     }
   ]
 
@@ -99,8 +100,8 @@ export default props => {
                 fluid
                 label="add Reminders here..."
                 placeholder='ex. "arrange for a petsitter"'
-                value={item}
-                onChange={e => setItem(e.target.value)}
+                value={reminder}
+                onChange={e => setReminder(e.target.value)}
               />
               <Form.Button>Submit</Form.Button>
             </Form>
@@ -156,40 +157,16 @@ export default props => {
             <h5> Reminders left: {remsCount}</h5>
           </Form>
         </div>
-        <div>
-          <List bulleted>
-            <Form>
-              <Form.Input
-                fluid
-                label="add Activies here..."
-                placeholder='ex. "play mini golf"'
-              />
-              <Form.Button>Submit</Form.Button>
-              <h5>Activies</h5>
-            </Form>
-            <List.Item>
-              <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
-            </List.Item>
-            <List.Item>
-              <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
-            </List.Item>
-            <List.Item>
-              <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
-            </List.Item>
-            <List.Item>
-              <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
-            </List.Item>
-            <List.Item>
-              <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
-            </List.Item>
-            <List.Item>
-              <List.Content>ACTIVITIES lorem ipsum dolor sit amet</List.Content>
-            </List.Item>
-          </List>
+        <div className="p2details">
+          <h5>
+            Jurn
+            <span>
+              <em>(e)</em>
+            </span>{" "}
+            Details
+          </h5>
+          <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
         </div>
-      </div>
-      <div className="p2details">
-        <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
       </div>
     </div>
   )

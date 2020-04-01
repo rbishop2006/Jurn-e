@@ -45,11 +45,13 @@ router.get("/dashboard", (req, res, next) => {
         FROM user WHERE user.user_id = ?`
       conn.query(sql2, [user_id], (err2, results2, fields2) => {
         dashResults.user = results2[0]
+
         res.json({ dashboard: dashResults })
       })
     })
   })
 })
+// res.json({ results: resultsrems, count: resultsrems.length })
 
 router.get("/phase1/:jurn_id", (req, res, next) => {
   const jurn_id = req.params.jurn_id
@@ -111,7 +113,8 @@ router.get("/phase2/:jurn_id", (req, res, next) => {
   const P2Results = {
     jname: {},
     location: {},
-    reminders: []
+    //trying to switch to activities
+    activities: []
   }
   const sqlP2JnameLocName = `SELECT jurn.jname, jurn.location FROM jurn WHERE jurn.jurn_id = ?`
   conn.query(
@@ -121,14 +124,14 @@ router.get("/phase2/:jurn_id", (req, res, next) => {
       P2Results.jname = resultsJnameLocName[0]
       P2Results.location = resultsJnameLocName[0]
 
-      const sqlReminders = `SELECT rem FROM reminder WHERE jurn_id = ?`
+      const sqlActivities = `SELECT act FROM activity WHERE jurn_id = ?`
       conn.query(
-        sqlReminders,
+        sqlActivities,
         [jurn_id],
-        (errReminders, resultsReminders, fieldsReminders) => {
-          resultsReminders.forEach(item => {
-            P2Results.reminders.push({
-              reminder: item.rem
+        (errActivities, resultsActivities, fieldsActivities) => {
+          resultsActivities.forEach(item => {
+            P2Results.activities.push({
+              activity: item.act
             })
           })
           res.json({ phase2: P2Results })

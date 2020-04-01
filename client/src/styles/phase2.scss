@@ -39,11 +39,9 @@
     .ui.radio.checkbox {
       margin-right: 10px;
     }
-  }
-
-  .p2details {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
+    .p2details {
+      display: block;
+      margin-top: 0;
+    }
   }
 }

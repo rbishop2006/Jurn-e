@@ -33,7 +33,12 @@ export default props => {
               onChange={e => setNewJurn(e.target.value)}
               placeholder="ex. Cancun 2020"
             />
-            <Button type="submit">Create a new Jurn(e)</Button>
+            <Button type="submit">
+              Create a new Jurn
+              <span>
+                <em>(e)</em>
+              </span>
+            </Button>
           </Form.Field>
         </Form.Group>
       </Form>

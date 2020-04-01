@@ -38,10 +38,3 @@ export default props => {
     </main>
   )
 }
-
-/* <Card.Header textAlign="center">Reminders</Card.Header>
-<List divided verticalAlign="middle">
-  {jurn.reminders.map((reminder, i) => (
-    <List.Item key={"reminder" + i}>{reminder}</List.Item>
-  ))}
-</List> */
