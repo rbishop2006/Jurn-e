@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { Card, Image } from "semantic-ui-react"
 import { useDashboard, useRems } from "../../hooks"
 import { Link } from "react-router-dom"
+import moment from "moment"
 
 export default props => {
   const { jurns, get } = useDashboard()
@@ -18,14 +19,18 @@ export default props => {
         {/* This is where we display info about each Jurn in the database */}
         <div className="cardDiv">
           {jurns.map((jurn, i) => (
-            <Link key={"jurn" + i} to={"/Jurne/dashboard/final/" + jurn.id}>
+            <Link
+              key={"jurn" + i}
+              to={"/Jurne/dashboard/final/" + jurn.jurn_id}
+            >
               <Card centered>
                 <Image src="https://place-hold.it/200x200" />
                 <Card.Content>
-                  <Card.Header>{jurn.name}</Card.Header>
+                  <Card.Header>{jurn.jname}</Card.Header>
                   <Card.Meta>{jurn.location}</Card.Meta>
                   <Card.Meta>
-                    {jurn.start_date} + {jurn.end_date}
+                    {moment(jurn.start_date).format("MMM Do, YYYY") + " - "}
+                    {moment(jurn.end_date).format("MMM Do, YYYY")}
                   </Card.Meta>
                   <Card.Meta>
                     {`Activities planned: ` + jurn.act_count}

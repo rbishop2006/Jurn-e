@@ -17,6 +17,8 @@ export default props => {
     updateRems
   } = useRems()
   const jurn_id = props.match.params.jurn_id
+  console.log(props)
+  console.log(jurn_id)
 
   function handleSubmit(e) {
     e.preventDefault()
