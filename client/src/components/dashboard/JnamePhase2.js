@@ -3,6 +3,7 @@ import { List, Checkbox, Tab, Form, Radio, Button } from "semantic-ui-react"
 import { usePhase2, useRems } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/phase2.scss"
+import moment from "moment"
 
 export default props => {
   const [reminder, setReminder] = useState("")
@@ -17,8 +18,7 @@ export default props => {
     updateRems
   } = useRems()
   const jurn_id = props.match.params.jurn_id
-  console.log(props)
-  console.log(jurn_id)
+  console.log(jurnInfo)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -51,13 +51,12 @@ export default props => {
       )
     },
     {
-      menuItem: "Hotels",
+      menuItem: "Accommodations",
       render: () => (
         <Tab.Pane attached={false}>
-          <p>HOTELS lorem ipsum dolor</p>
-          <p>HOTELS lorem ipsum dolor</p>
-          <p>HOTELS lorem ipsum dolor</p>
-          {/* <Hotels history={props.history} /> */}
+          <List bulleted>
+            <List.Item>{jurnInfo.hotel}</List.Item>
+          </List>
         </Tab.Pane>
       )
     },
@@ -88,8 +87,17 @@ export default props => {
   return (
     <div className="phase2">
       <div>
-        <h1 className="p2header">{jurnInfo.jname}</h1>
-        <h3 className="p2location">{jurnInfo.location}</h3>
+        <h1 className="p2header">
+          {jurnInfo.jname}
+          <em>
+            <h3>{jurnInfo.location}</h3>
+          </em>
+          <h4 className="p2location">
+            {moment(jurnInfo.start_date).format("MMM Do, YYYY") + " - "}
+            {moment(jurnInfo.end_date).format("MMM Do, YYYY")}
+          </h4>
+        </h1>
+
         <Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
           <Button type="button">Edit</Button>
         </Link>
