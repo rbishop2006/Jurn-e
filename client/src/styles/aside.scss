@@ -47,6 +47,16 @@ aside {
     align-self: flex-end;
   }
 
+  .profileForm {
+    display: flex;
+    flex-direction: column;
+
+    .updateProfile {
+      align-self: center;
+      width: 70%;
+    }
+  }
+
   h5 {
     text-align: center;
   }

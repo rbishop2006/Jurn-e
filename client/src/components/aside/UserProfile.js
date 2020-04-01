@@ -40,7 +40,7 @@ export default props => {
         <Icon name="edit" />
       </Button>
 
-      <Form>
+      <Form className="profileForm">
         {/* onClick={e => updateProfile()} */}
         <Form.Input
           fluid
@@ -63,10 +63,10 @@ export default props => {
           value={cellphone}
           onChange={e => setCellphone(e.target.value)}
         />
+        <Button type="submit" className="updateProfile">
+          Update Profile
+        </Button>
       </Form>
-      <Button type="submit" className="updateProfile">
-        Update
-      </Button>
     </div>
   )
 }
