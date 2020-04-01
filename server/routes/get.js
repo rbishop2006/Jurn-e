@@ -58,6 +58,7 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
   const P1Results = {
     locations: [],
     hotels: [],
+    dateRange: [],
     jname: {}
   }
   // Where we get the Jurn name based on the Jurn Id that is sent in URL
@@ -86,7 +87,20 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
                 hotel: item2.hotel_name
               })
             })
-            res.json({ phase1: P1Results })
+            const sqlGetDate = `SELECT start_date, end_date FROM date WHERE date.jurn_id = ?`
+            conn.query(
+              sqlGetDate,
+              [jurn_id],
+              (errGetDate, resultsGetDate, fieldsGetDate) => {
+                resultsGetDate.forEach(item3 => {
+                  P1Results.dateRange.push({
+                    startDate: item3.start_date,
+                    endDate: item3.end_date
+                  })
+                })
+                res.json({ phase1: P1Results })
+              }
+            )
           }
         )
       }

@@ -163,16 +163,11 @@ router.post("/register/family", (req, res, next) => {
 router.post("/location", (req, res, next) => {
   const loc_name = req.body.location
   const jurn_id = req.body.jurn_id
+  const sql8 = "INSERT INTO location (loc_name, jurn_id) VALUES (?, ?)"
 
-  const checkSQL7 = "SELECT count(1) as count FROM location WHERE loc_name = ?"
-
-  conn.query(checkSQL7, [loc_name], (err7, results7, fields7) => {
-    const sql8 = "INSERT INTO location (loc_name, jurn_id) VALUES (?, ?)"
-
-    conn.query(sql8, [loc_name, jurn_id], (err8, results8, fields8) => {
-      res.json({
-        message: "location added successfully"
-      })
+  conn.query(sql8, [loc_name, jurn_id], (err8, results8, fields8) => {
+    res.json({
+      message: "location added successfully"
     })
   })
 })
@@ -180,22 +175,54 @@ router.post("/location", (req, res, next) => {
 router.post("/hotel", (req, res, next) => {
   const hotel_name = req.body.hotel
   const jurn_id = req.body.jurn_id
+  const sql8 = "INSERT INTO hotel (hotel_name, jurn_id) VALUES (?, ?)"
 
-  const checkSQLHot = "SELECT count(1) as count FROM hotel WHERE hotel_name = ?"
+  conn.query(
+    sql8,
+    [hotel_name, jurn_id],
+    (errHot2, resultsHot2, fieldsHot2) => {
+      res.json({
+        message: "hotel added successfully"
+      })
+    }
+  )
+})
 
-  conn.query(checkSQLHot, [hotel_name], (errHot, resultsHot, fieldsHot) => {
-    const sql8 = "INSERT INTO hotel (hotel_name, jurn_id) VALUES (?, ?)"
+// router.post("/daterange", (req, res, next) => {
+//   const date_range = req.body.date
+//   const jurn_id = req.body.jurn_id
+//   const sqlDR = "INSERT INTO daterange (date_range, jurn_id) VALUES (?, ?)"
 
-    conn.query(
-      sql8,
-      [hotel_name, jurn_id],
-      (errHot2, resultsHot2, fieldsHot2) => {
-        res.json({
-          message: "hotel added successfully"
-        })
-      }
-    )
-  })
+//   conn.query(
+//     sqlDR,
+//     [date_range, jurn_id],
+//     (errHotDR, resultsHotDR, fieldsHotDR) => {
+//       res.json({
+//         message: "date range added successfully"
+//       })
+//     }
+//   )
+// })
+
+router.post("/dates", (req, res, next) => {
+  // console.log(req.body)
+  const start_date = req.body.date[0]
+  const end_date = req.body.date[1]
+  const jurn_id = req.body.jurn_id
+  // console.log(start_date)
+  // console.log(end_date)
+  const sqlDateRange =
+    "INSERT INTO date (start_date, end_date, jurn_id) VALUES (?, ?, ?)"
+
+  conn.query(
+    sqlDateRange,
+    [start_date, end_date, jurn_id],
+    (errDateRange, resultsDateRange, fieldsDateRange) => {
+      res.json({
+        message: "dates added successfully"
+      })
+    }
+  )
 })
 
 router.post("/addrem", (req, res, next) => {

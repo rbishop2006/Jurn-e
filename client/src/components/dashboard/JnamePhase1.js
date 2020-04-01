@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { Form, Button, Radio, List, Checkbox } from "semantic-ui-react"
 import { usePhase1, useActs } from "../../hooks"
+import SemanticDatepicker from "react-semantic-ui-datepickers"
+import moment from "moment"
 import "../../styles/phase1.scss"
 
 export default props => {
@@ -11,7 +13,9 @@ export default props => {
     sendLocation,
     sendHotel,
     updateChoices,
-    hotels
+    hotels,
+    sendDates,
+    dateRange
   } = usePhase1()
 
   const {
@@ -31,6 +35,19 @@ export default props => {
   const [finalHotel, setFinalHotel] = useState("")
   const [activity, setActivity] = useState("")
   const [view, setView] = useState("all")
+  const [newRange, setNewRange] = useState([])
+  const [finalDate, setFinalDate] = useState({})
+  console.log(finalDate)
+
+  function handleDateSug(e) {
+    e.preventDefault()
+    sendDates(newRange, jurn_id)
+    setNewRange([])
+  }
+
+  function onChange(e, data) {
+    setNewRange(data.value)
+  }
 
   function handleActivity(e) {
     e.preventDefault()
@@ -59,20 +76,56 @@ export default props => {
 
   function handleFinalPlans(e) {
     e.preventDefault()
-    updateChoices(finalLocation, finalHotel, jurn_id).then(jurn_id => {
-      props.history.push("/Jurne/dashboard/final/" + jurn_id)
-    })
+    updateChoices(finalLocation, finalHotel, finalDate, jurn_id).then(
+      jurn_id => {
+        props.history.push("/Jurne/dashboard/final/" + jurn_id)
+      }
+    )
   }
 
   useEffect(() => {
     updatePhase1(props.match.params.jurn_id)
     updateActs(props.match.params.jurn_id)
-  }, [props.match.params.jurn_id, location, hotel, activity])
+  }, [props.match.params.jurn_id, location, hotel, activity, newRange])
 
   return (
     <div className="phase1">
       <h1>{jname.jname}</h1>
+      <Form className="suggestDateDiv" onSubmit={handleDateSug}>
+        <h3>Dates Section</h3>
+        <SemanticDatepicker
+          locale="en-US"
+          onChange={onChange}
+          type="range"
+          format="MM-DD-YYYY"
+          pointing="right"
+          datePickerOnly={true}
+          value={newRange}
+        />
+        <Button type="submit">Submit Dates</Button>
+        <Form.Field inline>
+          {dateRange.map((date, i) => (
+            <Radio
+              key={"dateRange" + i}
+              label={
+                moment(date.startDate).format("MMMM Do YYYY") +
+                " - " +
+                moment(date.endDate).format("MMMM Do YYYY")
+              }
+              name="radioGroup3"
+              value={date.startDate + date.endDate}
+              onChange={e => setFinalDate(date.startDate + date.endDate)}
+              // {
+              //   start_date: date.startDate,
+              //   end_date: date.endDate
+              // }
+              checked={date.startDate + date.endDate === finalDate}
+            />
+          ))}
+        </Form.Field>
+      </Form>
       <Form className="suggestLocDiv" onSubmit={handleLocSug}>
+        <h3>Locations Section</h3>
         <Form.Group className="locationSect">
           <Form.Input
             fluid
@@ -94,9 +147,9 @@ export default props => {
             />
           ))}
         </Form.Field>
-        {/* <Form.Button>Submit</Form.Button> */}
       </Form>
       <Form className="suggestHotDiv" onSubmit={handleHotSug}>
+        <h3>Accommodations Section</h3>
         <Form.Group className="hotelSect">
           <Form.Input
             fluid
@@ -119,46 +172,42 @@ export default props => {
           ))}
         </Form.Field>
       </Form>
-      <Form onSubmit={handleFinalPlans}>
-        <Button type="submit">Finalize Plans</Button>
-      </Form>
 
       <Form onSubmit={handleActivity} className="p1Activities">
-        <Form.Input
-          fluid
-          label="add Activities here..."
-          placeholder='ex. "drinks on the patio after dinner"'
-          value={activity}
-          onChange={e => setActivity(e.target.value)}
-        />
-        <Form.Button>Submit</Form.Button>
-      </Form>
-      <h5>Activities</h5>
-
-      {acts.map((act, i) => (
-        <Checkbox
-          key={"activity" + i}
-          value={act.act}
-          label={
-            act.status === "completed" ? (
-              <span className="completed">
-                <Checkbox
-                  value={act.act}
-                  label={act.act}
-                  checked={act.status === "completed"}
-                  onChange={e => toggleAct(act.act_id, jurn_id)}
-                />
-              </span>
-            ) : (
-              act.act
-            )
-          }
-          checked={act.status === "completed"}
-          onChange={e => toggleAct(act.act_id, jurn_id)}
-        />
-      ))}
-
-      <Form>
+        <h3>Activities Section</h3>
+        <Form.Group className="activitySect">
+          <Form.Input
+            fluid
+            label="add Activities here..."
+            placeholder='ex. "drinks on the patio after dinner"'
+            value={activity}
+            onChange={e => setActivity(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Field>
+          {acts.map((act, i) => (
+            <Checkbox
+              key={"activity" + i}
+              value={act.act}
+              label={
+                act.status === "completed" ? (
+                  <span className="completed">
+                    <Checkbox
+                      value={act.act}
+                      label={act.act}
+                      checked={act.status === "completed"}
+                      onChange={e => toggleAct(act.act_id, jurn_id)}
+                    />
+                  </span>
+                ) : (
+                  act.act
+                )
+              }
+              checked={act.status === "completed"}
+              onChange={e => toggleAct(act.act_id, jurn_id)}
+            />
+          ))}
+        </Form.Field>
         <Form.Field className="p1ActFilters">
           <Radio
             label="All"
@@ -179,11 +228,13 @@ export default props => {
             onChange={e => changeView("completed")}
           />
         </Form.Field>
-
         <h5> Activities left: {actsCount}</h5>
       </Form>
       <Form onSubmit={e => clearActs(jurn_id)}>
         <Button type="submit">Clear Completed</Button>
+      </Form>
+      <Form onSubmit={handleFinalPlans} className="commitPlans">
+        <Button type="submit">Commit Changes</Button>
       </Form>
     </div>
   )
