@@ -97,7 +97,6 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
                   })
                 })
                 res.json({ phase1: P1Results })
-                console.log(P1Results)
               }
             )
           }

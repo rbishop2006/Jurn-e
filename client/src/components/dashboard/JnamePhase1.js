@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Form, Button, Radio, List, Checkbox } from "semantic-ui-react"
 import { usePhase1, useActs } from "../../hooks"
 import SemanticDatepicker from "react-semantic-ui-datepickers"
-// import "react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css"
+import moment from "moment"
 import "../../styles/phase1.scss"
 
 export default props => {
@@ -35,13 +35,13 @@ export default props => {
   const [finalHotel, setFinalHotel] = useState("")
   const [activity, setActivity] = useState("")
   const [view, setView] = useState("all")
-  const [currentRange, setNewRange] = useState([])
-  const [finalDate, setFinalDate] = useState([])
-  console.log(currentRange)
+  const [newRange, setNewRange] = useState([])
+  const [finalDate, setFinalDate] = useState({})
+  console.log(finalDate)
 
   function handleDateSug(e) {
     e.preventDefault()
-    sendDates(currentRange, jurn_id)
+    sendDates(newRange, jurn_id)
     setNewRange([])
   }
 
@@ -76,15 +76,17 @@ export default props => {
 
   function handleFinalPlans(e) {
     e.preventDefault()
-    updateChoices(finalLocation, finalHotel, jurn_id).then(jurn_id => {
-      props.history.push("/Jurne/dashboard/final/" + jurn_id)
-    })
+    updateChoices(finalLocation, finalHotel, finalDate, jurn_id).then(
+      jurn_id => {
+        props.history.push("/Jurne/dashboard/final/" + jurn_id)
+      }
+    )
   }
 
   useEffect(() => {
     updatePhase1(props.match.params.jurn_id)
     updateActs(props.match.params.jurn_id)
-  }, [props.match.params.jurn_id, location, hotel, activity, currentRange])
+  }, [props.match.params.jurn_id, location, hotel, activity, newRange])
 
   return (
     <div className="phase1">
@@ -98,17 +100,25 @@ export default props => {
           format="MM-DD-YYYY"
           pointing="right"
           datePickerOnly={true}
-          value={currentRange}
+          value={newRange}
         />
         <Button type="submit">Submit Dates</Button>
         <Form.Field inline>
           {dateRange.map((date, i) => (
             <Radio
               key={"dateRange" + i}
-              label={date.startDate + " through " + date.endDate}
+              label={
+                moment(date.startDate).format("MMMM Do YYYY") +
+                " - " +
+                moment(date.endDate).format("MMMM Do YYYY")
+              }
               name="radioGroup3"
               value={date.startDate + date.endDate}
               onChange={e => setFinalDate(date.startDate + date.endDate)}
+              // {
+              //   start_date: date.startDate,
+              //   end_date: date.endDate
+              // }
               checked={date.startDate + date.endDate === finalDate}
             />
           ))}

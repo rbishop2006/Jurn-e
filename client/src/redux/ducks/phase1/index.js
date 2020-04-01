@@ -24,7 +24,6 @@ function getPhase1(jurn_id) {
     api
       .get("/phase1/" + jurn_id)
       .then(resp => {
-        console.log(resp)
         dispatch({
           type: GET_PHASE1,
           payload: {
