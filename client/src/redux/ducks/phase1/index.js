@@ -6,6 +6,7 @@ const GET_PHASE1 = "phase1/GET_PHASE1"
 const initialState = {
   locations: [],
   hotels: [],
+  dateRange: [],
   jname: {}
 }
 
@@ -23,12 +24,14 @@ function getPhase1(jurn_id) {
     api
       .get("/phase1/" + jurn_id)
       .then(resp => {
+        console.log(resp)
         dispatch({
           type: GET_PHASE1,
           payload: {
             locations: resp.phase1.locations,
             jname: resp.phase1.jname,
-            hotels: resp.phase1.hotels
+            hotels: resp.phase1.hotels,
+            dateRange: resp.phase1.dateRange
           }
         })
       })
@@ -48,6 +51,18 @@ function createHotel(hotel, jurn_id) {
   }
 }
 
+function createDateRange(date, jurn_id) {
+  return dispatch => {
+    api.post("/dates", { date, jurn_id }).catch()
+  }
+}
+
+// function createDateRange(date, jurn_id) {
+//   return dispatch => {
+//     api.post("/daterange", { date, jurn_id }).catch()
+//   }
+// }
+
 function finalChoices(location, hotel, jurn_id) {
   return new Promise((resolve, reject) => {
     api
@@ -66,12 +81,16 @@ export function usePhase1() {
   const jname = useSelector(appState => appState.Phase1State.jname)
   const locations = useSelector(appState => appState.Phase1State.locations)
   const hotels = useSelector(appState => appState.Phase1State.hotels)
+  const dateRange = useSelector(appState => appState.Phase1State.dateRange)
   const updatePhase1 = jurn_id => dispatch(getPhase1(jurn_id))
   const sendLocation = (location, jname) => {
     dispatch(createLocation(location, jname))
   }
   const sendHotel = (hotel, jname) => {
     dispatch(createHotel(hotel, jname))
+  }
+  const sendDates = (date, jname) => {
+    dispatch(createDateRange(date, jname))
   }
   const updateChoices = (location, hotel, jurn_id) =>
     finalChoices(location, hotel, jurn_id)
@@ -80,9 +99,11 @@ export function usePhase1() {
     jname,
     locations,
     hotels,
+    dateRange,
     updatePhase1,
     sendLocation,
     sendHotel,
+    sendDates,
     updateChoices
   }
 }

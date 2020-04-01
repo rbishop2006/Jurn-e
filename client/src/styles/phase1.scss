@@ -21,14 +21,16 @@
     justify-content: center;
 
     .locationSect,
-    .hotelSect {
+    .hotelSect,
+    .activitySect {
       padding: 20px;
       margin: auto;
     }
   }
-  .ui.form {
-    font-size: 1rem;
-    text-align: center;
-    margin-top: 30px;
+
+  .commitPlans {
+    position: absolute;
+    right: 0%;
+    top: 0%;
   }
 }
