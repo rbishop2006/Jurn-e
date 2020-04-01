@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
 function getDashboard() {
   return dispatch => {
     api
-      .get("/dashboard")
+      .get("/main")
       .then(resp => {
         console.log(resp)
         dispatch({

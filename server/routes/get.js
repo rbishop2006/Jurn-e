@@ -3,7 +3,7 @@ const router = express.Router()
 const conn = require("../db")
 const decode = require("jsonwebtoken").decode
 
-router.get("/dashboard", (req, res, next) => {
+router.get("/main", (req, res, next) => {
   const profile = decode(req.headers.authorization.substring(7))
 
   //trying on postman
@@ -143,7 +143,7 @@ router.get("/phase2/:jurn_id", (req, res, next) => {
     location: {},
     activities: []
   }
-  const sqlP2JnameLocName = `SELECT jurn.jname, jurn.location FROM jurn WHERE jurn.jurn_id = ?`
+  const sqlP2JnameLocName = `SELECT jurn.jname, jurn.location, jurn.hotel, jurn.start_date, jurn.end_date FROM jurn WHERE jurn.jurn_id = ?`
   conn.query(
     sqlP2JnameLocName,
     [jurn_id],
