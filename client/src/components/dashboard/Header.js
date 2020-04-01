@@ -1,19 +1,20 @@
 import React, { useState } from "react"
 import { Button, Form } from "semantic-ui-react"
-import { useDashboard } from "../../hooks"
+import { useDashboard, useAside } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/dashboard.scss"
 
 export default props => {
-  const { sendJurn, user, get } = useDashboard()
+  const { sendJurn, get } = useDashboard()
+  const { aUser } = useAside()
   const [newJurn, setNewJurn] = useState("")
 
   // Function to handle submitting a new Jurn from the below form
   function handleSubmit(e) {
     e.preventDefault()
-    sendJurn(user.user_id, newJurn).then(id => {
+    sendJurn(aUser.user_id, newJurn).then(user_id => {
       get()
-      props.history.push("/Jurne/dashboard/" + id)
+      props.history.push("/Jurne/dashboard/" + user_id)
     })
     setNewJurn("")
   }
@@ -24,7 +25,6 @@ export default props => {
       <Form onSubmit={handleSubmit} className="create">
         <Form.Group inline>
           <Form.Field>
-            {/* <label htmlFor="newJurn">Create a new Jurn(e)</label> */}
             <input
               id="newJurn"
               className="messageText"
