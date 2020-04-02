@@ -1,6 +1,8 @@
 const express = require("express")
 const postRoutes = require("./routes/post")
 const getRoutes = require("./routes/get")
+const patchRoutes = require("./routes/patch")
+const deleteRoutes = require("./routes/delete")
 const expressjwt = require("express-jwt")
 const protectedRoutes = require("./routes/protected.js")
 const app = express()
@@ -13,6 +15,8 @@ app.use(express.json())
 
 app.use("/api", postRoutes)
 app.use("/api", getRoutes)
+app.use("/api", patchRoutes)
+app.use("/api", deleteRoutes)
 
 app.use("/api", expressjwt({ secret: config.get("secret") }), protectedRoutes)
 
