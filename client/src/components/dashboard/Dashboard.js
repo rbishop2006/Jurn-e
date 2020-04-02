@@ -17,7 +17,7 @@ export default props => {
 
   return (
     <div className="grid">
-      <Aside history={props.history} />
+      <Aside />
       <Header history={props.history} />
       <Route exact path="/Jurne/dashboard" component={Main} />
       <Route

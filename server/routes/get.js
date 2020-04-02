@@ -65,7 +65,7 @@ router.get("/aside", (req, res, next) => {
             })
           }
         })
-        const sqlAsideUser = `SELECT user.user_id, user.fname, user.lname, user.email, user.cell_phone
+        const sqlAsideUser = `SELECT user.user_id, user.fname, user.lname, user.email, user.cell_phone, user.avatar
         FROM user
         WHERE user.user_id = ?`
         conn.query(

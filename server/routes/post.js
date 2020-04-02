@@ -23,8 +23,7 @@ router.post("/register", (req, res, next) => {
         message: "email already exists"
       })
     } else {
-      const sql2 =
-        "INSERT INTO user (email, fname, lname, fam_id, cell_phone, password, salt) VALUES (?, ?, ?, ?, ?, ?, ?)"
+      const sql2 = `INSERT INTO user (email, fname, lname, fam_id, cell_phone, password, salt, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, "user")`
 
       conn.query(
         sql2,
@@ -337,6 +336,27 @@ router.patch("/activity", (req, res, next) => {
     (errToggleAct, resultsToggleAct, fieldsToggleAct) => {
       res.json({
         message: "status updated"
+      })
+    }
+  )
+})
+
+// Update user table in database
+router.patch("/updateprofile", (req, res, next) => {
+  const fname = req.body.fname
+  const lname = req.body.lname
+  const cellphone = req.body.cellphone
+  const avatar = req.body.avatar
+  const user_id = req.body.user_id
+
+  const sqlProf = `UPDATE user SET fname = ?, lname = ?, cell_phone = ?, avatar = ? WHERE user_id = ?`
+
+  conn.query(
+    sqlProf,
+    [fname, lname, cellphone, avatar, user_id],
+    (errProf, resultsProf, fieldsProf) => {
+      res.json({
+        message: "profile updated"
       })
     }
   )
