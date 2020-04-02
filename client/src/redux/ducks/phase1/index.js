@@ -56,6 +56,12 @@ function createDateRange(date, jurn_id) {
   }
 }
 
+function createInvite(firstName, lastName, jurn_id) {
+  return dispatch => {
+    api.post("/invite", { firstName, lastName, jurn_id }).catch()
+  }
+}
+
 function finalChoices(location, hotel, date, jurn_id) {
   return new Promise((resolve, reject) => {
     api
@@ -87,6 +93,9 @@ export function usePhase1() {
   }
   const updateChoices = (location, hotel, date, jurn_id) =>
     finalChoices(location, hotel, date, jurn_id)
+  const sendInvite = (firstName, lastName, jurn_id) => {
+    dispatch(createInvite(firstName, lastName, jurn_id))
+  }
 
   return {
     jname,
@@ -97,6 +106,7 @@ export function usePhase1() {
     sendLocation,
     sendHotel,
     sendDates,
-    updateChoices
+    updateChoices,
+    sendInvite
   }
 }

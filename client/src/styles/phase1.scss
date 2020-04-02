@@ -24,9 +24,16 @@
 
     .locationSect,
     .hotelSect,
-    .activitySect {
+    .activitySect,
+    .datesSect {
       padding: 20px;
       margin: auto;
+    }
+
+    .inviteSect {
+      input {
+        width: 100%;
+      }
     }
   }
 

@@ -125,32 +125,36 @@ export default props => {
       </Form>
       <Form className="suggestDateDiv" onSubmit={handleDateSug}>
         <h3>Dates Section</h3>
-        <SemanticDatepicker
-          locale="en-US"
-          onChange={onChange}
-          type="range"
-          format="MM-DD-YYYY"
-          pointing="right"
-          datePickerOnly={true}
-          value={newRange}
-        />
-        <Button type="submit">Submit Dates</Button>
-        <Form.Field inline>
-          {dateRange.map((date, i) => (
-            <Radio
-              key={"dateRange" + i}
-              label={
-                moment(date.startDate).format("MMM Do, YYYY") +
-                " - " +
-                moment(date.endDate).format("MMM Do, YYYY")
-              }
-              name="radioGroup3"
-              value={date.startDate + "," + date.endDate}
-              onChange={e => setFinalDate(date.startDate + "," + date.endDate)}
-              checked={date.startDate + "," + date.endDate === finalDate}
-            />
-          ))}
-        </Form.Field>
+        <Form.Group className="datesSect">
+          <SemanticDatepicker
+            locale="en-US"
+            onChange={onChange}
+            type="range"
+            format="MM-DD-YYYY"
+            pointing="right"
+            datePickerOnly={true}
+            value={newRange}
+          />
+          <Button type="submit">Submit Dates</Button>
+          <Form.Field inline>
+            {dateRange.map((date, i) => (
+              <Radio
+                key={"dateRange" + i}
+                label={
+                  moment(date.startDate).format("MMM Do, YYYY") +
+                  " - " +
+                  moment(date.endDate).format("MMM Do, YYYY")
+                }
+                name="radioGroup3"
+                value={date.startDate + "," + date.endDate}
+                onChange={e =>
+                  setFinalDate(date.startDate + "," + date.endDate)
+                }
+                checked={date.startDate + "," + date.endDate === finalDate}
+              />
+            ))}
+          </Form.Field>
+        </Form.Group>
       </Form>
       <Form className="suggestLocDiv" onSubmit={handleLocSug}>
         <h3>Locations Section</h3>
@@ -162,19 +166,19 @@ export default props => {
             value={location}
             onChange={e => setLocation(e.target.value)}
           />
+          <Form.Field inline>
+            {locations.map((location, i) => (
+              <Radio
+                key={"location" + i}
+                label={location.location}
+                name="radioGroup"
+                value={location.location}
+                onChange={e => setFinalLocation(location.location)}
+                checked={location.location === finalLocation}
+              />
+            ))}
+          </Form.Field>
         </Form.Group>
-        <Form.Field inline>
-          {locations.map((location, i) => (
-            <Radio
-              key={"location" + i}
-              label={location.location}
-              name="radioGroup"
-              value={location.location}
-              onChange={e => setFinalLocation(location.location)}
-              checked={location.location === finalLocation}
-            />
-          ))}
-        </Form.Field>
       </Form>
       <Form className="suggestHotDiv" onSubmit={handleHotSug}>
         <h3>Accommodations Section</h3>
@@ -186,21 +190,21 @@ export default props => {
             value={hotel}
             onChange={e => setHotel(e.target.value)}
           />
-        </Form.Group>
-        <Form.Field inline>
-          {hotels.map((hotel, i) => (
-            <Radio
-              key={"hotel" + i}
-              label={hotel.hotel}
-              name="radioGroup2"
-              value={hotel.hotel}
-              onChange={e => setFinalHotel(hotel.hotel)}
-              checked={hotel.hotel === finalHotel}
-            />
-          ))}
-        </Form.Field>
-      </Form>
 
+          <Form.Field inline>
+            {hotels.map((hotel, i) => (
+              <Radio
+                key={"hotel" + i}
+                label={hotel.hotel}
+                name="radioGroup2"
+                value={hotel.hotel}
+                onChange={e => setFinalHotel(hotel.hotel)}
+                checked={hotel.hotel === finalHotel}
+              />
+            ))}
+          </Form.Field>
+        </Form.Group>
+      </Form>
       <Form onSubmit={handleActivity} className="p1Activities">
         <h3>Activities Section</h3>
         <Form.Group className="activitySect">
