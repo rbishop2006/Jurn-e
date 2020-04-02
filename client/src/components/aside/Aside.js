@@ -16,7 +16,6 @@ export default props => {
     <aside>
       <UserProfile />
       <AsideJurnes />
-      <Divider />
       <h5>Users</h5>
       <List>
         <List.Item>

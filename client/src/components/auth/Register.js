@@ -73,7 +73,6 @@ export default props => {
       </Link>
       <Form onSubmit={handleRegister} className="registerDiv">
         <Form.Field>
-          {/* <Form.Input fluid label="First name" placeholder="First name" error /> */}
           <label className={usernameError ? "error" : ""} htmlFor="email">
             Email {usernameError && usernameError}
           </label>

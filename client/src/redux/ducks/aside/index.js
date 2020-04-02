@@ -23,7 +23,6 @@ function getAside() {
     api
       .get("/aside")
       .then(resp => {
-        console.log(resp)
         dispatch({
           type: GET_ASIDE,
           payload: {
@@ -36,12 +35,26 @@ function getAside() {
   }
 }
 
+function updateProfile(fname, lname, cellphone, avatar, user_id) {
+  return dispatch => {
+    api
+      .patch("/updateprofile", { fname, lname, cellphone, avatar, user_id })
+      .then(resp => {
+        dispatch(getAside())
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+}
+
 export function useAside() {
   const dispatch = useDispatch()
   const aJurns = useSelector(appState => appState.AsideState.jurns)
   const aUser = useSelector(appState => appState.AsideState.user)
-
+  const sendProfile = (fname, lname, cellphone, avatar, user_id) =>
+    dispatch(updateProfile(fname, lname, cellphone, avatar, user_id))
   const fetchAside = () => dispatch(getAside())
 
-  return { aJurns, aUser, fetchAside }
+  return { aJurns, aUser, fetchAside, sendProfile }
 }
