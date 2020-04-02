@@ -18,7 +18,6 @@ export default props => {
     updateRems
   } = useRems()
   const jurn_id = props.match.params.jurn_id
-  console.log(jurnInfo)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -87,16 +86,14 @@ export default props => {
   return (
     <div className="phase2">
       <div>
-        <h1 className="p2header">
-          {jurnInfo.jname}
-          <em>
-            <h3>{jurnInfo.location}</h3>
-          </em>
-          <h4 className="p2location">
-            {moment(jurnInfo.start_date).format("MMM Do, YYYY") + " - "}
-            {moment(jurnInfo.end_date).format("MMM Do, YYYY")}
-          </h4>
-        </h1>
+        <h1 className="p2header">{jurnInfo.jname} </h1>
+        <em>
+          <h3>{jurnInfo.location}</h3>
+        </em>
+        <h4 className="p2location">
+          {moment(jurnInfo.start_date).format("MMM Do, YYYY") + " - "}
+          {moment(jurnInfo.end_date).format("MMM Do, YYYY")}
+        </h4>
 
         <Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
           <Button type="button">Edit</Button>

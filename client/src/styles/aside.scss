@@ -9,7 +9,7 @@ aside {
   }
 
   .expand {
-    height: 350px;
+    height: 425px;
     padding: 5px;
     transition: height 0.7s;
     overflow: hidden;
@@ -51,6 +51,14 @@ aside {
     display: flex;
     flex-direction: column;
 
+    .input {
+      margin: 5px 0px;
+    }
+
+    .dropdown {
+      margin: 0 0 1em 0;
+    }
+
     .updateProfile {
       align-self: center;
       width: 70%;
@@ -59,11 +67,12 @@ aside {
 
   h5 {
     text-align: center;
+    margin: 4px 0px;
   }
 
   .jurnesDiv {
     .jurnList {
-      max-height: 350px;
+      max-height: 230px;
       overflow: auto;
 
       #menu {
@@ -74,6 +83,7 @@ aside {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          padding: 10px 5px;
 
           p {
             margin: 0;
@@ -84,7 +94,7 @@ aside {
 
             button {
               margin: 0px 0px;
-              padding: 8px;
+              padding: 5px 0px 5px 5px;
             }
           }
         }

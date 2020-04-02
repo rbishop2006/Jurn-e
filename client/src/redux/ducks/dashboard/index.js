@@ -22,7 +22,6 @@ function getDashboard() {
     api
       .get("/main")
       .then(resp => {
-        console.log(resp)
         dispatch({
           type: GET_DASHBOARD,
           payload: resp.dashboard
