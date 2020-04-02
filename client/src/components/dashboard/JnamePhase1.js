@@ -15,7 +15,8 @@ export default props => {
     updateChoices,
     hotels,
     sendDates,
-    dateRange
+    dateRange,
+    sendInvite
   } = usePhase1()
 
   const {
@@ -29,6 +30,8 @@ export default props => {
   } = useActs()
 
   const jurn_id = props.match.params.jurn_id
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [location, setLocation] = useState("")
   const [finalLocation, setFinalLocation] = useState("")
   const [hotel, setHotel] = useState("")
@@ -37,6 +40,14 @@ export default props => {
   const [view, setView] = useState("all")
   const [newRange, setNewRange] = useState([])
   const [finalDate, setFinalDate] = useState({})
+
+  function handleInvite(e) {
+    e.preventDefault()
+    sendInvite(firstName, lastName, jurn_id)
+    setFirstName("")
+    setLastName("")
+    updatePhase1(jurn_id)
+  }
 
   function handleDateSug(e) {
     e.preventDefault()
@@ -90,6 +101,28 @@ export default props => {
   return (
     <div className="phase1">
       <h1>{jname.jname}</h1>
+      <Form className="inviteDiv" onSubmit={handleInvite}>
+        <h3>
+          Invite Travelers to go on this Jurn(<em>e</em>)
+        </h3>
+        <Form.Group className="inviteSect">
+          <Form.Input
+            fluid
+            label="First Name"
+            placeholder="ex. Mary"
+            value={firstName}
+            onChange={e => setFirstName(e.target.value)}
+          />
+          <Form.Input
+            fluid
+            label="Last Name"
+            placeholder="ex. Smith"
+            value={lastName}
+            onChange={e => setLastName(e.target.value)}
+          />
+        </Form.Group>
+        <Button type="submit">Invite</Button>
+      </Form>
       <Form className="suggestDateDiv" onSubmit={handleDateSug}>
         <h3>Dates Section</h3>
         <SemanticDatepicker
