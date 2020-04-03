@@ -9,7 +9,7 @@ import { useMain } from "../../hooks"
 import { Route } from "react-router-dom"
 
 export default props => {
-  const { get, jurns } = useMain()
+  const { get } = useMain()
 
   useEffect(() => {
     get()

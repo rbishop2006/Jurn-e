@@ -1,0 +1,19 @@
+.activitiesDiv {
+  background: white;
+  width: 600px;
+  margin: auto;
+  display: grid;
+  justify-content: center;
+  border: 1px solid black;
+
+  .activitySect {
+    padding: 20px;
+    margin: auto;
+  }
+}
+
+.commitPlans {
+  position: absolute;
+  right: 0%;
+  top: 0%;
+}

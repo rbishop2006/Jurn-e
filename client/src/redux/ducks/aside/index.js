@@ -5,7 +5,8 @@ const GET_ASIDE = "aside/GET_ASIDE"
 
 const initialState = {
   jurns: [],
-  user: {}
+  user: {},
+  pendJurns: []
 }
 
 export default (state = initialState, action) => {
@@ -27,7 +28,8 @@ function getAside() {
           type: GET_ASIDE,
           payload: {
             jurns: resp.aside.jurns,
-            user: resp.aside.user
+            user: resp.aside.user,
+            pendJurns: resp.aside.pendJurns
           }
         })
       })
@@ -52,9 +54,10 @@ export function useAside() {
   const dispatch = useDispatch()
   const aJurns = useSelector(appState => appState.AsideState.jurns)
   const aUser = useSelector(appState => appState.AsideState.user)
+  const pendingJurns = useSelector(appState => appState.AsideState.pendJurns)
   const sendProfile = (fname, lname, cellphone, avatar, user_id) =>
     dispatch(updateProfile(fname, lname, cellphone, avatar, user_id))
   const fetchAside = () => dispatch(getAside())
 
-  return { aJurns, aUser, fetchAside, sendProfile }
+  return { aJurns, aUser, pendingJurns, fetchAside, sendProfile }
 }

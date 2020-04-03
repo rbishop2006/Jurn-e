@@ -109,76 +109,122 @@ router.post("/jurn", (req, res, next) => {
   })
 })
 
-router.post("/phase1", (req, res, next) => {
+router.post("/finaldates", (req, res, next) => {
+  const jurn_id = req.body.jurn_id
   const date = req.body.date.split(",")
   const startDate = date[0]
   const endDate = date[1]
-  const jurn_id = req.body.jurn_id
-  const location = req.body.location
-  const hotel = req.body.hotel
+  const sqlUpdateJurnDate = `UPDATE jurn SET start_date = ?, end_date = ? WHERE jurn_id = ?`
 
-  const sqlJurnPost = "SELECT rems_status FROM jurn WHERE jurn_id = ?"
   conn.query(
-    sqlJurnPost,
-    [jurn_id],
-    (errJurnPost, resultsJurnPost, fieldsJurnPost) => {
-      if (resultsJurnPost[0].rems_status == "posted") {
-        const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ?, start_date = ?, end_date = ? WHERE jurn_id = ?`
-
-        conn.query(
-          sqlUpdateJurn,
-          [location, hotel, startDate, endDate, jurn_id],
-          (errUpJurn, resultsUpJurn, fieldsUpJurn) => {
-            res.json({
-              message: "location, hotel, dates updated"
-            })
-          }
-        )
-      } else {
-        const sqlR = `INSERT INTO reminder (rem, status, jurn_id)
-      VALUES
-          ("Alert your credit card company", "active", ?),
-          ("Contact your cell phone company","active", ?),
-          ("Notify your home security system operator","active", ?),
-          ("Confirm all reservations","active", ?),
-          ("Make advance payments on bills that have due dates during your trip","active", ?),
-          ("Check the weather","active", ?),
-          ("Eat, throw out, or give away any perishable food","active", ?),
-          ("Leave an itinerary with a friend or family member","active", ?),
-          ("Place a hold on your mail delivery","active", ?),
-          ("Bring in outdoor furniture","active", ?)`
-        conn.query(
-          sqlR,
-          [
-            jurn_id,
-            jurn_id,
-            jurn_id,
-            jurn_id,
-            jurn_id,
-            jurn_id,
-            jurn_id,
-            jurn_id,
-            jurn_id,
-            jurn_id
-          ],
-          (errR, resultsR, fieldsR) => {
-            const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ?, start_date = ?, end_date = ?, rems_status = "posted"  WHERE jurn_id = ?`
-
-            conn.query(
-              sqlUpdateJurn,
-              [location, hotel, startDate, endDate, jurn_id],
-              (errUpJurn, resultsUpJurn, fieldsUpJurn) => {
-                res.json({
-                  message: "location, hotel, dates updated and reminders added"
-                })
-              }
-            )
-          }
-        )
-      }
+    sqlUpdateJurnDate,
+    [startDate, endDate, jurn_id],
+    (errUpdateJurnDate, resultsUpdateJurnDate, fieldsUpdateJurnDate) => {
+      res.json({
+        message: "dates updated"
+      })
     }
   )
 })
+
+router.post("/finallocation", (req, res, next) => {
+  const jurn_id = req.body.jurn_id
+  const location = req.body.location
+  const sqlUpdateJurnLoc = `UPDATE jurn SET location = ? WHERE jurn_id = ?`
+
+  conn.query(
+    sqlUpdateJurnLoc,
+    [location, jurn_id],
+    (errUpdateJurnLoc, resultsUpdateJurnLoc, fieldsUpdateJurnLoc) => {
+      res.json({
+        message: "location updated"
+      })
+    }
+  )
+})
+
+router.post("/finalhotel", (req, res, next) => {
+  const jurn_id = req.body.jurn_id
+  const hotel = req.body.hotel
+  const sqlUpdateJurnHot = `UPDATE jurn SET hotel = ? WHERE jurn_id = ?`
+
+  conn.query(
+    sqlUpdateJurnHot,
+    [hotel, jurn_id],
+    (errUpdateJurnHot, resultsUpdateJurnHot, fieldsUpdateJurnHot) => {
+      res.json({
+        message: "hotel updated"
+      })
+    }
+  )
+})
+
+// router.post("/phase1", (req, res, next) => {
+//   const jurn_id = req.body.jurn_id
+//   const hotel = req.body.hotel
+
+//   const sqlJurnPost = "SELECT rems_status FROM jurn WHERE jurn_id = ?"
+//   conn.query(
+//     sqlJurnPost,
+//     [jurn_id],
+//     (errJurnPost, resultsJurnPost, fieldsJurnPost) => {
+//       if (resultsJurnPost[0].rems_status == "posted") {
+//         const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ?, start_date = ?, end_date = ? WHERE jurn_id = ?`
+
+//         conn.query(
+//           sqlUpdateJurn,
+//           [location, hotel, startDate, endDate, jurn_id],
+//           (errUpJurn, resultsUpJurn, fieldsUpJurn) => {
+//             res.json({
+//               message: "location, hotel, dates updated"
+//             })
+//           }
+//         )
+//       } else {
+//         const sqlR = `INSERT INTO reminder (rem, status, jurn_id)
+//       VALUES
+//           ("Alert your credit card company", "active", ?),
+//           ("Contact your cell phone company","active", ?),
+//           ("Notify your home security system operator","active", ?),
+//           ("Confirm all reservations","active", ?),
+//           ("Make advance payments on bills that have due dates during your trip","active", ?),
+//           ("Check the weather","active", ?),
+//           ("Eat, throw out, or give away any perishable food","active", ?),
+//           ("Leave an itinerary with a friend or family member","active", ?),
+//           ("Place a hold on your mail delivery","active", ?),
+//           ("Bring in outdoor furniture","active", ?)`
+//         conn.query(
+//           sqlR,
+//           [
+//             jurn_id,
+//             jurn_id,
+//             jurn_id,
+//             jurn_id,
+//             jurn_id,
+//             jurn_id,
+//             jurn_id,
+//             jurn_id,
+//             jurn_id,
+//             jurn_id
+//           ],
+//           (errR, resultsR, fieldsR) => {
+//             const sqlUpdateJurn = `UPDATE jurn SET location = ?, hotel = ?, start_date = ?, end_date = ?, rems_status = "posted"  WHERE jurn_id = ?`
+
+//             conn.query(
+//               sqlUpdateJurn,
+//               [location, hotel, startDate, endDate, jurn_id],
+//               (errUpJurn, resultsUpJurn, fieldsUpJurn) => {
+//                 res.json({
+//                   message: "location, hotel, dates updated and reminders added"
+//                 })
+//               }
+//             )
+//           }
+//         )
+//       }
+//     }
+//   )
+// })
 
 router.post("/register/family", (req, res, next) => {
   const fam_name = req.body.fam_name

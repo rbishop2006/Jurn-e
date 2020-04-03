@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import "../../styles/aside.scss"
 
 export default props => {
-  const { aJurns } = useAside()
+  const { aJurns, pendingJurns } = useAside()
 
   return (
     <div className="jurnesDiv">
@@ -30,11 +30,11 @@ export default props => {
         Jurn<em>(e)</em> invitations
       </h5>
       <div className="jurnList">
-        {aJurns.map((jurn, i) => (
-          <Menu key={"jurn" + i} vertical id="menu">
-            <Menu.Item name={jurn.name} active={true} id="menuItem">
-              <p>{jurn.name}</p>
-              <Link to={"/Jurne/dashboard/" + jurn.id}>
+        {pendingJurns.map((pendJurn, i) => (
+          <Menu key={"pendJurn" + i} vertical id="menu">
+            <Menu.Item name={pendJurn.name} active={true} id="menuItem">
+              <p>{pendJurn.name}</p>
+              <Link to={"/Jurne/dashboard/" + pendJurn.id}>
                 <Button type="button">Edit</Button>
               </Link>
             </Menu.Item>
