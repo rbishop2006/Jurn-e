@@ -6,7 +6,7 @@ const GET_PHASE1 = "phase1/GET_PHASE1"
 const initialState = {
   locations: [],
   hotels: [],
-  dateRange: [],
+  dateRanges: [],
   jname: {}
 }
 
@@ -30,7 +30,7 @@ function getPhase1(jurn_id) {
             locations: resp.phase1.locations,
             jname: resp.phase1.jname,
             hotels: resp.phase1.hotels,
-            dateRange: resp.phase1.dateRange
+            dateRanges: resp.phase1.dateRange
           }
         })
       })
@@ -69,12 +69,51 @@ function finalChoices(location, hotel, date, jurn_id) {
   })
 }
 
+function finalDates(date, jurn_id) {
+  return new Promise((resolve, reject) => {
+    api
+      .post("/finaldates", { date, jurn_id })
+      .then(() => {
+        resolve(jurn_id)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
+function finalLocation(location, jurn_id) {
+  return new Promise((resolve, reject) => {
+    api
+      .post("/finallocation", { location, jurn_id })
+      .then(() => {
+        resolve(jurn_id)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
+function finalHotel(hotel, jurn_id) {
+  return new Promise((resolve, reject) => {
+    api
+      .post("/finalhotel", { hotel, jurn_id })
+      .then(() => {
+        resolve(jurn_id)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
 export function usePhase1() {
   const dispatch = useDispatch()
   const jname = useSelector(appState => appState.Phase1State.jname)
   const locations = useSelector(appState => appState.Phase1State.locations)
   const hotels = useSelector(appState => appState.Phase1State.hotels)
-  const dateRange = useSelector(appState => appState.Phase1State.dateRange)
+  const dateRanges = useSelector(appState => appState.Phase1State.dateRanges)
   const updatePhase1 = jurn_id => dispatch(getPhase1(jurn_id))
   const sendLocation = (location, jname) => {
     dispatch(createLocation(location, jname))
@@ -87,16 +126,23 @@ export function usePhase1() {
   }
   const updateChoices = (location, hotel, date, jurn_id) =>
     finalChoices(location, hotel, date, jurn_id)
+  const updateFinalDates = (date, jurn_id) => finalDates(date, jurn_id)
+  const updateFinalLocation = (location, jurn_id) =>
+    finalLocation(location, jurn_id)
+  const updateFinalHotel = (hotel, jurn_id) => finalHotel(hotel, jurn_id)
 
   return {
     jname,
     locations,
     hotels,
-    dateRange,
+    dateRanges,
     updatePhase1,
     sendLocation,
     sendHotel,
     sendDates,
-    updateChoices
+    updateChoices,
+    updateFinalDates,
+    updateFinalLocation,
+    updateFinalHotel
   }
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Form, Button, Radio, List, Checkbox } from "semantic-ui-react"
 import { useInvited } from "../../hooks"
-import "../../styles/inviteUsers.scss"
+import "../../styles/phase1/inviteUsers.scss"
 
 export default props => {
   const {
@@ -15,7 +15,6 @@ export default props => {
   const jurn_id = props.match.params.jurn_id
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
-  console.log(jurn_id)
 
   function handleInvite(e) {
     e.preventDefault()
@@ -30,8 +29,8 @@ export default props => {
   }, [jurn_id, firstName, lastName])
 
   return (
-    <div>
-      <Form className="inviteDiv" onSubmit={handleInvite}>
+    <div className="inviteDiv">
+      <Form onSubmit={handleInvite}>
         <h3>
           Invite Travelers to go on this Jurn(<em>e</em>)
         </h3>

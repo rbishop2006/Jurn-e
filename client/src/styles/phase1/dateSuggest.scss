@@ -1,0 +1,13 @@
+.suggestDateDiv {
+  background: white;
+  width: 600px;
+  margin: auto;
+  display: grid;
+  justify-content: center;
+  border: 1px solid black;
+
+  .datesSect {
+    padding: 20px;
+    margin: auto;
+  }
+}
