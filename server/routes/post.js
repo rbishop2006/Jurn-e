@@ -88,10 +88,19 @@ router.post("/jurn", (req, res, next) => {
           sqlLinks,
           [user_id, jurn_id],
           (errLinks, resultsLinks, fieldsLinks) => {
-            res.json({
-              message: "jurn added successfully",
-              id: jurn_id
-            })
+            const sqlStart = `INSERT INTO invite
+            (jurn_id, user_id, inv_status)
+            VALUES(?,?,"accepted")`
+            conn.query(
+              sqlStart,
+              [jurn_id, user_id],
+              (errStart, resultsStart, fieldStart) => {
+                res.json({
+                  message: "jurn added successfully",
+                  id: jurn_id
+                })
+              }
+            )
           }
         )
       })

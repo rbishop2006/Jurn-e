@@ -214,4 +214,54 @@ router.get("/toggleact/:act_id", (req, res, next) => {
   })
 })
 
+router.get("/invited/:jurn_id", (req, res, next) => {
+  const jurn_id = req.params.jurn_id
+  const invitedResults = {
+    pending: [],
+    accepted: [],
+    declined: []
+  }
+
+  const sqlAcc = `SELECT user.fname, user.lname, user.avatar 
+  FROM invite
+  LEFT JOIN user ON invite.user_id = user.user_id
+  WHERE inv_status = "accepted" AND jurn_id = ?`
+  conn.query(sqlAcc, [jurn_id], (errAcc, resultsAcc, fieldsAcc) => {
+    resultsAcc.forEach(item => {
+      invitedResults.accepted.push({
+        fname: item.fname,
+        lname: item.lname,
+        avatar: item.avatar
+      })
+    })
+    const sqlPend = `SELECT user.fname, user.lname, user.avatar 
+    FROM invite
+    LEFT JOIN user ON invite.user_id = user.user_id
+    WHERE inv_status = "pending" AND jurn_id = ?`
+    conn.query(sqlPend, [jurn_id], (errPend, resultsPend, fieldsPend) => {
+      resultsPend.forEach(item1 => {
+        invitedResults.pending.push({
+          fname: item1.fname,
+          lname: item1.lname,
+          avatar: item1.avatar
+        })
+      })
+      const sqlDec = `SELECT user.fname, user.lname, user.avatar 
+      FROM invite
+      LEFT JOIN user ON invite.user_id = user.user_id
+      WHERE inv_status = "declined" AND jurn_id = ?`
+      conn.query(sqlDec, [jurn_id], (errDec, resultsDec, fieldsDec) => {
+        resultsDec.forEach(item1 => {
+          invitedResults.declined.push({
+            fname: item1.fname,
+            lname: item1.lname,
+            avatar: item1.avatar
+          })
+        })
+        res.json({ invited: invitedResults })
+      })
+    })
+  })
+})
+
 module.exports = router
