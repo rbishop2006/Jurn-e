@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import { api } from "react-auth"
 
-const GET_DASHBOARD = "dashboard/GET_DASHBOARD"
+const GET_MAIN = "MAIN/GET_Main"
 
 const initialState = {
   jurns: []
@@ -9,22 +9,25 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_DASHBOARD:
-      return { ...state, jurns: action.payload }
+    case GET_MAIN:
+      return { ...state, ...action.payload }
 
     default:
       return state
   }
 }
 
-function getDashboard() {
+function getMain() {
   return dispatch => {
     api
       .get("/main")
       .then(resp => {
+        console.log(resp)
         dispatch({
-          type: GET_DASHBOARD,
-          payload: resp.dashboard
+          type: GET_MAIN,
+          payload: {
+            jurns: resp.main
+          }
         })
       })
       .catch()
@@ -44,11 +47,11 @@ function createJurn(user_id, jname) {
   })
 }
 
-export function useDashboard() {
+export function useMain() {
   const dispatch = useDispatch()
-  const jurns = useSelector(appState => appState.DashboardState.jurns)
+  const jurns = useSelector(appState => appState.MainState.jurns)
 
-  const get = () => dispatch(getDashboard())
+  const get = () => dispatch(getMain())
   const sendJurn = (user_id, jname) => createJurn(user_id, jname)
 
   return { jurns, get, sendJurn }

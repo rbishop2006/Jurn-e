@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { List, Checkbox, Tab, Form, Radio, Button } from "semantic-ui-react"
-import { usePhase2, useRems } from "../../hooks"
+import { usePhase2, useRems, useInvited } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/phase2.scss"
 import moment from "moment"
 
 export default props => {
+  const { accepted, updateInvited } = useInvited()
   const [reminder, setReminder] = useState("")
   const { jurnInfo, updatePhase2, activities } = usePhase2()
   const {
@@ -32,11 +33,27 @@ export default props => {
   }
 
   useEffect(() => {
-    updatePhase2(props.match.params.jurn_id)
-    updateRems(props.match.params.jurn_id)
-  }, [props.match.params.jurn_id, reminder])
+    updatePhase2(jurn_id)
+    updateRems(jurn_id)
+    updateInvited(jurn_id)
+  }, [jurn_id, reminder])
 
   const panes = [
+    {
+      menuItem: `People going: (${accepted.length})`,
+      render: () => (
+        <Tab.Pane attached={false}>
+          <List bulleted>
+            {accepted.map((accept, i) => (
+              <List.Item key={"accept" + i}>
+                <List.Icon name={accept.avatar} />
+                <List.Content>{accept.fname + " " + accept.lname}</List.Content>
+              </List.Item>
+            ))}
+          </List>
+        </Tab.Pane>
+      )
+    },
     {
       menuItem: `Activities (${activities.length})`,
       render: () => (
