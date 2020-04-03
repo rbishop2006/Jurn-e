@@ -1,16 +1,14 @@
 import React, { useEffect } from "react"
 import { Card, Image } from "semantic-ui-react"
-import { useDashboard, useRems } from "../../hooks"
+import { useMain, useRems } from "../../hooks"
 import { Link } from "react-router-dom"
 import moment from "moment"
 
 export default props => {
-  const { jurns, get } = useDashboard()
-  const { updateRems } = useRems()
+  const { jurns, get } = useMain()
 
   useEffect(() => {
     get()
-    updateRems()
   }, [])
 
   return (
@@ -32,7 +30,7 @@ export default props => {
                     {moment(jurn.start_date).format("MMM Do, YYYY") + " - "}
                     {moment(jurn.end_date).format("MMM Do, YYYY")}
                   </Card.Meta>
-                  <Card.Meta>{`People going: ` + jurn.accept_count}</Card.Meta>
+                  <Card.Meta>{`People going: ` + jurn.going_count}</Card.Meta>
                   <Card.Meta>{`Pending invites: ` + jurn.pend_count}</Card.Meta>
                   <Card.Meta>
                     {`Activities planned: ` + jurn.act_count}

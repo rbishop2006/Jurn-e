@@ -5,11 +5,11 @@ import Aside from "../aside/Aside"
 import JnamePhase1 from "../phase1/JnamePhase1"
 import JnamePhase2 from "./JnamePhase2"
 import "../../styles/dashboard.scss"
-import { useDashboard } from "../../hooks"
+import { useMain } from "../../hooks"
 import { Route } from "react-router-dom"
 
 export default props => {
-  const { get, jurns } = useDashboard()
+  const { get, jurns } = useMain()
 
   useEffect(() => {
     get()

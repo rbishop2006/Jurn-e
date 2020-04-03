@@ -7,37 +7,51 @@ router.get("/main", (req, res, next) => {
   const profile = decode(req.headers.authorization.substring(7))
 
   //trying on postman
-
   const email = profile.email
   const sqlId = `SELECT user_id FROM user WHERE email = ?`
-
   conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
     const user_id = resultsId[0].user_id
-    const sqlDashboard = `SELECT jurn_Table3.jurn_id, jurn_Table3.jname, jurn_Table3.location, jurn_Table3.start_date, jurn_Table3.end_date, jurn_Table3.accept_count, jurn_Table3.pend_count, jurn_Table3.rem_count, COUNT(activity.act) as act_count
-    FROM
-    (SELECT jurn_Table2.jurn_id, jurn_Table2.jname, jurn_Table2.location, jurn_Table2.start_date, jurn_Table2.end_date, jurn_Table2.accept_count, jurn_Table2.pend_count, COUNT(reminder.rem) as rem_count
-    FROM
-    (SELECT jurn_Table1.jurn_id, jurn_Table1.jname, jurn_Table1.location, jurn_Table1.start_date, jurn_Table1.end_date, jurn_Table1.accept_count, COUNT(inv_status) as pend_count
-    FROM
-    (SELECT jurn.jurn_id, jurn.jname, jurn.location, jurn.start_date, jurn.end_date, COUNT(inv_status) as accept_count
-    FROM jurn
-    LEFT JOIN invite ON jurn.jurn_id = invite.jurn_id
-    LEFT JOIN user ON user.user_id = jurn.user_id
-    WHERE invite.inv_status = "accepted" AND invite.user_id = ?
-    GROUP BY jurn.jurn_id) AS jurn_Table1
-    LEFT JOIN invite ON invite.jurn_id = jurn_Table1.jurn_id AND inv_status = "pending"
-    GROUP BY jurn_Table1.jurn_id) AS jurn_Table2
-    LEFT JOIN reminder ON jurn_Table2.jurn_id = reminder.jurn_id
-    GROUP BY jurn_Table2.jurn_id) as jurn_Table3
-    LEFT JOIN activity ON activity.jurn_id = jurn_Table3.jurn_id
-    GROUP BY jurn_Table3.jurn_id`
-    conn.query(
-      sqlDashboard,
-      [user_id],
-      (errsqlDashboard, resultssqlDashboard, fieldssqlDashboard) => {
-        res.json({ dashboard: resultssqlDashboard })
-      }
-    )
+    const sqlLink = `SELECT jurn_id
+    FROM link
+    WHERE user_id = ?`
+    conn.query(sqlLink, [user_id], (errLink, resultsLink, fieldsLink) => {
+      let jurnIdSql = ""
+      resultsLink.forEach((item, i) => {
+        if (i === 0) {
+          jurnIdSql += " WHERE invite.jurn_id = ? "
+        } else {
+          jurnIdSql += ` OR invite.jurn_id = ? `
+        }
+      })
+      console.log(jurnIdSql)
+
+      const sqlJurnDetails = `SELECT jurn_Table3.jurn_id, jurn_Table3.jname, jurn_Table3.location, jurn_Table3.start_date,jurn_Table3.end_date, jurn_Table3.going_count, jurn_Table3.pend_count, jurn_Table3.rem_count, COUNT(activity.act) as act_count
+      FROM
+      (SELECT jurn_Table2.jurn_id, jurn_Table2.jname, jurn_Table2.location, jurn_Table2.start_date, jurn_Table2.end_date, jurn_Table2.going_count, jurn_Table2.pend_count, COUNT(reminder.rem) as rem_count
+      FROM
+      (SELECT jurn_Table1.jurn_id, jurn_Table1.jname, jurn_Table1.location, jurn_Table1.start_date, jurn_Table1.end_date, jurn_Table1.going_count, COUNT(invite.inv_status) as pend_count
+      FROM
+      (SELECT jurn.jurn_id, jurn.jname, jurn.location, jurn.start_date, jurn.end_date, COUNT(invite.inv_status) as going_count
+      FROM jurn
+      LEFT JOIN invite ON jurn.jurn_id = invite.jurn_id
+      ${jurnIdSql} AND invite.inv_status = "accepted"
+      GROUP BY jurn.jurn_id) as jurn_Table1
+      LEFT JOIN invite ON jurn_Table1.jurn_id = invite.jurn_id AND invite.inv_status = "pending"
+      GROUP BY jurn_Table1.jurn_id) as jurn_Table2
+      LEFT JOIN reminder ON jurn_Table2.jurn_id = reminder.jurn_id
+      GROUP BY jurn_Table2.jurn_id) as jurn_Table3
+      LEFT JOIN activity ON activity.jurn_id = jurn_Table3.jurn_id
+      GROUP BY jurn_Table3.jurn_id`
+      console.log(sqlJurnDetails)
+      conn.query(
+        sqlJurnDetails,
+        resultsLink.map(item => item.jurn_id),
+        (errJurnDetails, resultsJurnDetails, fieldsJurnDetails) => {
+          console.log(errJurnDetails)
+          res.json({ main: resultsJurnDetails })
+        }
+      )
+    })
   })
 })
 
@@ -301,3 +315,46 @@ module.exports = router
 //         GROUP BY jurn2_Table.jurn_id) AS jurn3_Table
 //         LEFT JOIN invite ON invite.jurn_id = jurn3_Table.jurn_id AND inv_status = "pending"
 //         GROUP BY jurn3_Table.jurn_id
+// SELECT jurn_Table3.jurn_id, jurn_Table3.jname, jurn_Table3.location, jurn_Table3.start_date, jurn_Table3.end_date, jurn_Table3.accept_count, jurn_Table3.pend_count, jurn_Table3.rem_count, COUNT(activity.act) as act_count
+//     FROM
+//     (SELECT jurn_Table2.jurn_id, jurn_Table2.jname, jurn_Table2.location, jurn_Table2.start_date, jurn_Table2.end_date, jurn_Table2.accept_count, jurn_Table2.pend_count, COUNT(reminder.rem) as rem_count
+//     FROM
+//     (SELECT jurn_Table1.jurn_id, jurn_Table1.jname, jurn_Table1.location, jurn_Table1.start_date, jurn_Table1.end_date, jurn_Table1.accept_count, COUNT(inv_status) as pend_count
+//     FROM
+//     (SELECT jurn.jurn_id, jurn.jname, jurn.location, jurn.start_date, jurn.end_date, COUNT(inv_status) as accept_count
+//     FROM jurn
+//     LEFT JOIN invite ON jurn.jurn_id = invite.jurn_id
+//     LEFT JOIN user ON user.user_id = jurn.user_id
+//     WHERE invite.inv_status = "accepted" AND invite.user_id = ?
+//     GROUP BY jurn.jurn_id) AS jurn_Table1
+//     LEFT JOIN invite ON invite.jurn_id = jurn_Table1.jurn_id AND inv_status = "pending"
+//     GROUP BY jurn_Table1.jurn_id) AS jurn_Table2
+//     LEFT JOIN reminder ON jurn_Table2.jurn_id = reminder.jurn_id
+//     GROUP BY jurn_Table2.jurn_id) as jurn_Table3
+//     LEFT JOIN activity ON activity.jurn_id = jurn_Table3.jurn_id
+//     GROUP BY jurn_Table3.jurn_id
+// conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
+//   const user_id = resultsId[0].user_id
+//   const sqlDashboard = `SELECT jurn_Table2.jurn_id, jurn_Table2.jname, jurn_Table2.location, jurn_Table2.start_date, jurn_Table2.end_date, jurn_Table2.rem_count, COUNT(activity.act) as act_count
+//   FROM
+//   (SELECT jurn_Table1.jurn_id, jurn_Table1.jname, jurn_Table1.location, jurn_Table1.start_date, jurn_Table1.end_date, COUNT(reminder.rem) as rem_count
+//   FROM
+//   (SELECT jurn.jurn_id, jurn.jname, jurn.location, jurn.start_date, jurn.end_date
+//       FROM jurn
+//       LEFT JOIN invite ON jurn.jurn_id = invite.jurn_id
+//       LEFT JOIN user ON user.user_id = jurn.user_id
+//       WHERE invite.user_id = ? and invite.inv_status = "accepted"
+//       GROUP BY jurn.jurn_id) as jurn_Table1
+//        LEFT JOIN reminder ON jurn_Table1.jurn_id = reminder.jurn_id
+//       GROUP BY jurn_Table1.jurn_id) as jurn_Table2
+//     LEFT JOIN activity ON activity.jurn_id = jurn_Table2.jurn_id
+//       GROUP BY jurn_Table2.jurn_id`
+//   conn.query(
+//     sqlDashboard,
+//     [user_id],
+//     (errsqlDashboard, resultssqlDashboard, fieldssqlDashboard) => {
+//       console.log(resultssqlDashboard)
+//       res.json({ dashboard: resultssqlDashboard })
+//     }
+//   )
+// })
