@@ -6,6 +6,7 @@ import "../../styles/dashboard.scss"
 
 export default props => {
   const { sendJurn, get } = useDashboard()
+  const { fetchAside } = useAside()
   const { aUser } = useAside()
   const [newJurn, setNewJurn] = useState("")
 
@@ -14,6 +15,7 @@ export default props => {
     e.preventDefault()
     sendJurn(aUser.user_id, newJurn).then(user_id => {
       get()
+      fetchAside()
       props.history.push("/Jurne/dashboard/" + user_id)
     })
     setNewJurn("")

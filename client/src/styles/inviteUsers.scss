@@ -1,0 +1,13 @@
+.inviteDiv {
+  background: white;
+  width: 600px;
+  margin: auto;
+  display: grid;
+  justify-content: center;
+
+  .inviteSect {
+    input {
+      width: 100%;
+    }
+  }
+}
