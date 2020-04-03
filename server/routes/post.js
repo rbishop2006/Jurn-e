@@ -50,6 +50,7 @@ router.post("/invite", (req, res, next) => {
     sqlUser_id,
     [fname, lname],
     (errUser_id, resultsUser_id, fieldsUser_id) => {
+      console.log(resultsUser_id)
       const user_id = resultsUser_id[0].user_id
 
       const sqlInvite = `INSERT INTO invite

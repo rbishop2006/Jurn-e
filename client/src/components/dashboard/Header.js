@@ -1,11 +1,11 @@
 import React, { useState } from "react"
 import { Button, Form } from "semantic-ui-react"
-import { useDashboard, useAside } from "../../hooks"
+import { useMain, useAside } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/dashboard.scss"
 
 export default props => {
-  const { sendJurn, get } = useDashboard()
+  const { sendJurn, get } = useMain()
   const { fetchAside } = useAside()
   const { aUser } = useAside()
   const [newJurn, setNewJurn] = useState("")
