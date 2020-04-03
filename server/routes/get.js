@@ -13,7 +13,7 @@ router.get("/main", (req, res, next) => {
 
   conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
     const user_id = resultsId[0].user_id
-    const sqlDashboard = ` SELECT jurn_Table3.jurn_id, jurn_Table3.jname, jurn_Table3.location, jurn_Table3.start_date, jurn_Table3.end_date, jurn_Table3.accept_count, jurn_Table3.pend_count, jurn_Table3.rem_count, COUNT(activity.act) as act_count
+    const sqlDashboard = `SELECT jurn_Table3.jurn_id, jurn_Table3.jname, jurn_Table3.location, jurn_Table3.start_date, jurn_Table3.end_date, jurn_Table3.accept_count, jurn_Table3.pend_count, jurn_Table3.rem_count, COUNT(activity.act) as act_count
     FROM
     (SELECT jurn_Table2.jurn_id, jurn_Table2.jname, jurn_Table2.location, jurn_Table2.start_date, jurn_Table2.end_date, jurn_Table2.accept_count, jurn_Table2.pend_count, COUNT(reminder.rem) as rem_count
     FROM
