@@ -39,8 +39,8 @@ router.post("/register", (req, res, next) => {
 })
 
 router.post("/invite", (req, res, next) => {
-  const fname = req.body.fname
-  const lname = req.body.lname
+  const fname = req.body.firstName
+  const lname = req.body.lastName
   const jurn_id = req.body.jurn_id
 
   const sqlUser_id = `SELECT user.user_id
@@ -60,20 +60,9 @@ router.post("/invite", (req, res, next) => {
         sqlInvite,
         [jurn_id, user_id],
         (errInvite, resultsInvite, fieldsInvite) => {
-          const invitee_id = resultsInvite.insertId
-
-          const sqlLinkUp = `UPDATE link
-          SET invitee_id = ?
-          WHERE user_id = ? AND jurn_id = ?`
-          conn.query(
-            sqlLinkUp,
-            [invitee_id, user_id, jurn_id],
-            (errLinkUp, resultsLinkUp, fieldsLinkUp) => {
-              res.json({
-                message: "pending invite"
-              })
-            }
-          )
+          res.json({
+            message: "pending invite"
+          })
         }
       )
     }
@@ -99,10 +88,19 @@ router.post("/jurn", (req, res, next) => {
           sqlLinks,
           [user_id, jurn_id],
           (errLinks, resultsLinks, fieldsLinks) => {
-            res.json({
-              message: "jurn added successfully",
-              id: jurn_id
-            })
+            const sqlStart = `INSERT INTO invite
+            (jurn_id, user_id, inv_status)
+            VALUES(?,?,"accepted")`
+            conn.query(
+              sqlStart,
+              [jurn_id, user_id],
+              (errStart, resultsStart, fieldStart) => {
+                res.json({
+                  message: "jurn added successfully",
+                  id: jurn_id
+                })
+              }
+            )
           }
         )
       })
@@ -317,3 +315,12 @@ router.post("/login", (req, res, next) => {
 })
 
 module.exports = router
+
+// const invitee_id = resultsInvite.insertId
+// const sqlLinkUp = `UPDATE link
+// SET invitee_id = ?
+// WHERE user_id = ? AND jurn_id = ?`
+// conn.query(
+//   sqlLinkUp,
+//   [invitee_id, user_id, jurn_id],
+//   (errLinkUp, resultsLinkUp, fieldsLinkUp) => { })
