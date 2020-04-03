@@ -13,17 +13,25 @@ router.get("/main", (req, res, next) => {
 
   conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
     const user_id = resultsId[0].user_id
-    //new sql for dashboard
-    const sqlDashboard = `SELECT jurn_Table.jurn_id, jurn_Table.jname, jurn_Table.location, jurn_Table.start_date, jurn_Table.end_date, jurn_Table.rem_count, COUNT(activity.act) as act_count
-    FROM 
-    (SELECT jurn.jurn_id, jurn.jname, jurn.location, jurn.start_date, jurn.end_date, COUNT(reminder.rem) as rem_count
-    FROM jurn
-    LEFT JOIN reminder ON jurn.jurn_id = reminder.jurn_id
-    LEFT JOIN user ON user.user_id = jurn.user_id
-    WHERE user.user_id = ?
-    GROUP BY jurn.jurn_id) AS jurn_Table
-    LEFT JOIN activity ON activity.jurn_id = jurn_Table.jurn_id
-    GROUP BY jurn_Table.jurn_id`
+    //new sql for trying to get counts
+    const sqlDashboard = `SELECT jurn3_Table.jurn_id, jurn3_Table.jname, jurn3_Table.location, jurn3_Table.start_date, jurn3_Table.end_date, jurn3_Table.rem_count, jurn3_Table.act_count, jurn3_Table.accept_count, COUNT(inv_status) as pend_count
+    FROM
+    (SELECT jurn2_Table.jurn_id,jurn2_Table.jname, jurn2_Table.location, jurn2_Table.start_date, jurn2_Table.end_date, jurn2_Table.rem_count, jurn2_Table.act_count, COUNT(inv_status) as accept_count
+    FROM
+    (SELECT jurn_Table.jurn_id, jurn_Table.jname, jurn_Table.location, jurn_Table.start_date, jurn_Table.end_date, jurn_Table.rem_count, COUNT(activity.act) as act_count
+        FROM 
+        (SELECT jurn.jurn_id, jurn.jname, jurn.location, jurn.start_date, jurn.end_date, COUNT(reminder.rem) as rem_count
+        FROM jurn
+        LEFT JOIN reminder ON jurn.jurn_id = reminder.jurn_id
+        LEFT JOIN user ON user.user_id = jurn.user_id
+        WHERE user.user_id = ?
+        GROUP BY jurn.jurn_id) AS jurn_Table
+        LEFT JOIN activity ON activity.jurn_id = jurn_Table.jurn_id
+        GROUP BY jurn_Table.jurn_id) AS jurn2_Table
+        LEFT JOIN invite ON invite.jurn_id = jurn2_Table.jurn_id AND invite.inv_status = "accepted"
+        GROUP BY jurn2_Table.jurn_id) AS jurn3_Table
+        LEFT JOIN invite ON invite.jurn_id = jurn3_Table.jurn_id AND inv_status = "pending"
+        GROUP BY jurn3_Table.jurn_id`
     conn.query(
       sqlDashboard,
       [user_id],
@@ -265,3 +273,14 @@ router.get("/invited/:jurn_id", (req, res, next) => {
 })
 
 module.exports = router
+
+// `SELECT jurn_Table.jurn_id, jurn_Table.jname, jurn_Table.location, jurn_Table.start_date, jurn_Table.end_date, jurn_Table.rem_count, COUNT(activity.act) as act_count
+//     // FROM
+//     // (SELECT jurn.jurn_id, jurn.jname, jurn.location, jurn.start_date, jurn.end_date, COUNT(reminder.rem) as rem_count
+//     // FROM jurn
+//     // LEFT JOIN reminder ON jurn.jurn_id = reminder.jurn_id
+//     // LEFT JOIN user ON user.user_id = jurn.user_id
+//     // WHERE user.user_id = ?
+//     // GROUP BY jurn.jurn_id) AS jurn_Table
+//     // LEFT JOIN activity ON activity.jurn_id = jurn_Table.jurn_id
+//     // GROUP BY jurn_Table.jurn_id`

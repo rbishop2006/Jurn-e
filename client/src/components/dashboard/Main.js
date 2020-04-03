@@ -32,6 +32,8 @@ export default props => {
                     {moment(jurn.start_date).format("MMM Do, YYYY") + " - "}
                     {moment(jurn.end_date).format("MMM Do, YYYY")}
                   </Card.Meta>
+                  <Card.Meta>{`People going: ` + jurn.accept_count}</Card.Meta>
+                  <Card.Meta>{`Pending invites: ` + jurn.pend_count}</Card.Meta>
                   <Card.Meta>
                     {`Activities planned: ` + jurn.act_count}
                   </Card.Meta>
