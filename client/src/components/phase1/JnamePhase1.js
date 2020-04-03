@@ -10,15 +10,8 @@ import { usePhase1 } from "../../hooks"
 import "../../styles/phase1/phase1.scss"
 
 export default props => {
-  const { jname, updatePhase1, updateChoices } = usePhase1()
+  const { jname, updatePhase1 } = usePhase1()
   const jurn_id = props.match.params.jurn_id
-
-  // function handleFinalPlans(e) {
-  //   e.preventDefault()
-  //   updateChoices(jurn_id).then(jurn_id => {
-  //     props.history.push("/Jurne/dashboard/final/" + jurn_id)
-  //   })
-  // }
 
   useEffect(() => {
     updatePhase1(props.match.params.jurn_id)

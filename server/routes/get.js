@@ -43,10 +43,10 @@ router.get("/main", (req, res, next) => {
 
 router.get("/aside", (req, res, next) => {
   const profile = decode(req.headers.authorization.substring(7))
-  //trying on postman
   const asideResults = {
     jurns: [],
-    user: {}
+    user: {},
+    pendJurns: []
   }
   const email = profile.email
   const sqlId = `SELECT user_id FROM user WHERE email = ?`
@@ -80,7 +80,24 @@ router.get("/aside", (req, res, next) => {
           [user_id],
           (errAsideUser, resultsAsideUser, fieldsAsideUser) => {
             asideResults.user = resultsAsideUser[0]
-            res.json({ aside: asideResults })
+
+            const sqlPendJurn = `SELECT jurn.jname, jurn.jurn_id
+            FROM jurn
+            LEFT JOIN invite ON invite.jurn_id = jurn.jurn_id
+            WHERE inv_status = "pending" AND invite.user_id = ?`
+            conn.query(
+              sqlPendJurn,
+              [user_id],
+              (errPendJurn, resultsPendJurn, filedsPendJurn) => {
+                resultsPendJurn.forEach(item => {
+                  asideResults.pendJurns.push({
+                    id: item.jurn_id,
+                    name: item.jname
+                  })
+                })
+                res.json({ aside: asideResults })
+              }
+            )
           }
         )
       }

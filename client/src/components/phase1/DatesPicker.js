@@ -16,6 +16,7 @@ export default props => {
     e.preventDefault()
     sendDates(newRange, jurn_id)
     setNewRange([])
+    updatePhase1(jurn_id)
   }
 
   function onChange(e, data) {
@@ -26,6 +27,7 @@ export default props => {
     e.preventDefault()
     updateFinalDates(finalDate, jurn_id)
     setFinalDate({})
+    updatePhase2(jurn_id)
   }
 
   useEffect(() => {
