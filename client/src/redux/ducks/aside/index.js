@@ -50,6 +50,32 @@ function updateProfile(fname, lname, cellphone, avatar, user_id) {
   }
 }
 
+function updateAccept(user_id, jurn_id) {
+  return dispatch => {
+    api
+      .patch("/updateaccept", { user_id, jurn_id })
+      .then(resp => {
+        dispatch(getAside())
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+}
+
+function updateDecline(user_id, jurn_id) {
+  return dispatch => {
+    api
+      .patch("/updateDecline", { user_id, jurn_id })
+      .then(resp => {
+        dispatch(getAside())
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+}
+
 export function useAside() {
   const dispatch = useDispatch()
   const aJurns = useSelector(appState => appState.AsideState.jurns)
@@ -58,6 +84,18 @@ export function useAside() {
   const sendProfile = (fname, lname, cellphone, avatar, user_id) =>
     dispatch(updateProfile(fname, lname, cellphone, avatar, user_id))
   const fetchAside = () => dispatch(getAside())
+  const sendAccept = (user_id, jurn_id) =>
+    dispatch(updateAccept(user_id, jurn_id))
+  const sendDecline = (user_id, jurn_id) =>
+    dispatch(updateDecline(user_id, jurn_id))
 
-  return { aJurns, aUser, pendingJurns, fetchAside, sendProfile }
+  return {
+    aJurns,
+    aUser,
+    pendingJurns,
+    fetchAside,
+    sendProfile,
+    sendDecline,
+    sendAccept
+  }
 }
