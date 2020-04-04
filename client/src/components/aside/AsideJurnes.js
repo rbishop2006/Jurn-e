@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Button, Menu, Icon } from "semantic-ui-react"
-import { useAside } from "../../hooks"
+import { useAside, useMain } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/aside.scss"
 
@@ -16,11 +16,14 @@ export default props => {
   } = useAside()
   const user_id = aUser.user_id
 
+  const { get } = useMain()
+
   function handleAccept(e, jurn_id) {
     e.preventDefault()
     setJurnId(jurn_id)
     sendAccept(user_id, jurn_id)
     fetchAside()
+    get()
   }
 
   function handleDecline(e, jurn_id) {
@@ -28,6 +31,7 @@ export default props => {
     setJurnId(jurn_id)
     sendDecline(user_id, jurn_id)
     fetchAside()
+    get()
   }
 
   return (

@@ -50,20 +50,53 @@ router.post("/invite", (req, res, next) => {
     sqlUser_id,
     [fname, lname],
     (errUser_id, resultsUser_id, fieldsUser_id) => {
-      console.log(resultsUser_id)
       const user_id = resultsUser_id[0].user_id
+      // trying to add filters
 
-      const sqlInvite = `INSERT INTO invite
-      (jurn_id, user_id, inv_status)
-      VALUES
-      (?, ?, "pending")`
+      const sqlCheckInv = `SELECT * 
+      FROM invite
+      WHERE jurn_id = ? AND user_id = ?`
+
       conn.query(
-        sqlInvite,
+        sqlCheckInv,
         [jurn_id, user_id],
-        (errInvite, resultsInvite, fieldsInvite) => {
-          res.json({
-            message: "pending invite"
-          })
+        (errCheckInv, resultsCheckInv, fieldsCheckInv) => {
+          if (resultsCheckInv.length > 0) {
+            if (resultsCheckInv[0].inv_status === "accepted") {
+              res.json({
+                message: "status already accepted"
+              })
+            } else {
+              const sqlUpdInv = `
+            UPDATE invite
+            SET inv_status = "pending" 
+            WHERE invite.jurn_id = ? AND invite.user_id = ?`
+              conn.query(
+                sqlUpdInv,
+                [jurn_id, user_id],
+                (errUpdInv, resultsUpdInv, fieldsUpdInv) => {
+                  res.json({
+                    message: "status updated to pending"
+                  })
+                }
+              )
+            }
+          } else {
+            const sqlInvite = `INSERT INTO invite
+          (jurn_id, user_id, inv_status)
+          VALUES
+          (?, ?, "pending")`
+            conn.query(
+              sqlInvite,
+              [jurn_id, user_id],
+              (errInvite, resultsInvite, fieldsInvite) => {
+                console.log(resultsInvite)
+                res.json({
+                  message: "pending invite"
+                })
+              }
+            )
+          }
         }
       )
     }
