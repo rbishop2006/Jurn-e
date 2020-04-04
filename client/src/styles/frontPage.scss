@@ -10,6 +10,7 @@ body,
   background: url("/JurnEase-background.png");
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center center;
 }
 
 h1,
@@ -48,9 +49,9 @@ h2 {
 
   .tagline {
     position: absolute;
-    width: 25%;
+    width: 20%;
     right: 10%;
-    bottom: 45%;
+    top: 40%;
 
     h1 {
       text-align: center;

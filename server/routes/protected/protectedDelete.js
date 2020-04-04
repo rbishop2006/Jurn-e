@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const conn = require("../db")
+const conn = require("../../db")
 
 router.delete("/reminder/:rem_id", (req, res, next) => {
   const rem_id = req.params.rem_id
@@ -10,7 +10,7 @@ router.delete("/reminder/:rem_id", (req, res, next) => {
     [rem_id],
     (errsqlClear, resultssqlClear, fieldssqlClear) => {
       res.json({
-        message: "reminder deleted"
+        message: "reminder deleted",
       })
     }
   )
@@ -24,7 +24,7 @@ router.delete("/activity/:act_id", (req, res, next) => {
     [act_id],
     (errssqlClearAct, resultsssqlClearAct, fieldsssqlClearAct) => {
       res.json({
-        message: "activity deleted"
+        message: "activity deleted",
       })
     }
   )
