@@ -11,9 +11,11 @@ router.get("/main", (req, res, next) => {
   const sqlId = `SELECT user_id FROM user WHERE email = ?`
   conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
     const user_id = resultsId[0].user_id
-    const sqlLink = `SELECT jurn_id
-    FROM link
-    WHERE user_id = ?`
+    // trying to fix main
+    const sqlLink = `SELECT jurn.jurn_id
+    FROM jurn
+    LEFT JOIN invite ON invite.jurn_id = jurn.jurn_id
+    WHERE invite.user_id = ? AND invite.inv_status = "accepted"`
     conn.query(sqlLink, [user_id], (errLink, resultsLink, fieldsLink) => {
       let jurnIdSql = ""
       resultsLink.forEach((item, i) => {
@@ -23,7 +25,6 @@ router.get("/main", (req, res, next) => {
           jurnIdSql += ` OR invite.jurn_id = ? `
         }
       })
-      console.log(jurnIdSql)
 
       const sqlJurnDetails = `SELECT jurn_Table3.jurn_id, jurn_Table3.jname, jurn_Table3.location, jurn_Table3.start_date,jurn_Table3.end_date, jurn_Table3.going_count, jurn_Table3.pend_count, jurn_Table3.rem_count, COUNT(activity.act) as act_count
       FROM
@@ -42,12 +43,10 @@ router.get("/main", (req, res, next) => {
       GROUP BY jurn_Table2.jurn_id) as jurn_Table3
       LEFT JOIN activity ON activity.jurn_id = jurn_Table3.jurn_id
       GROUP BY jurn_Table3.jurn_id`
-      console.log(sqlJurnDetails)
       conn.query(
         sqlJurnDetails,
         resultsLink.map(item => item.jurn_id),
         (errJurnDetails, resultsJurnDetails, fieldsJurnDetails) => {
-          console.log(errJurnDetails)
           res.json({ main: resultsJurnDetails })
         }
       )
@@ -67,9 +66,12 @@ router.get("/aside", (req, res, next) => {
   conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
     const user_id = resultsId[0].user_id
 
-    const sqlAsideJurns = `SELECT jurn.jurn_id, jurn.jname
+    // trying to fix aside
+
+    const sqlAsideJurns = `SELECT jurn.jname, jurn.jurn_id
     FROM jurn
-    WHERE jurn.user_id = ?`
+    LEFT JOIN invite ON invite.jurn_id = jurn.jurn_id
+    WHERE inv_status = "accepted" AND invite.user_id = ?`
     conn.query(
       sqlAsideJurns,
       [user_id],
