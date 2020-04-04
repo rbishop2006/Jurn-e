@@ -100,6 +100,26 @@ aside {
         }
       }
     }
+
+    .pendList {
+      #menu2 {
+        margin: 10px auto;
+        width: 90%;
+
+        #menuItem2 {
+          display: grid;
+          grid-template-columns: 1fr;
+
+          p {
+            text-align: center;
+          }
+
+          div {
+            display: flex;
+          }
+        }
+      }
+    }
   }
 
   .divider {

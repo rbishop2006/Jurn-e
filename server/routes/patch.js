@@ -84,4 +84,38 @@ router.patch("/updateprofile", (req, res, next) => {
   )
 })
 
+router.patch("/updateaccept", (req, res, next) => {
+  const user_id = req.body.user_id
+  const jurn_id = req.body.jurn_id
+
+  const sqlAccept = `UPDATE invite SET inv_status = "accepted" WHERE user_id = ? AND jurn_id = ?`
+
+  conn.query(
+    sqlAccept,
+    [user_id, jurn_id],
+    (errAccept, resultsAccept, fieldsAccept) => {
+      res.json({
+        message: "invite status updated"
+      })
+    }
+  )
+})
+
+router.patch("/updatedecline", (req, res, next) => {
+  const user_id = req.body.user_id
+  const jurn_id = req.body.jurn_id
+
+  const sqlDecline = `UPDATE invite SET inv_status = "declined" WHERE user_id = ? AND jurn_id = ?`
+
+  conn.query(
+    sqlDecline,
+    [user_id, jurn_id],
+    (errDecline, resultsDecline, fieldsDecline) => {
+      res.json({
+        message: "invite status updated"
+      })
+    }
+  )
+})
+
 module.exports = router
