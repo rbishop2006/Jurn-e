@@ -8,18 +8,24 @@ import "../../styles/dashboard.scss"
 import { useMain } from "../../hooks"
 import { Route } from "react-router-dom"
 
-export default props => {
+export default (props) => {
   const { get } = useMain()
+  console.log(props)
 
   useEffect(() => {
     get()
-  }, [])
+  }, [props])
 
   return (
     <div className="grid">
       <Aside history={props.history} />
       <Header history={props.history} />
-      <Route exact path="/Jurne/dashboard" component={Main} />
+      <Route
+        exact
+        path="/Jurne/dashboard"
+        component={Main}
+        history={props.history}
+      />
       <Route
         exact
         path="/Jurne/dashboard/:jurn_id"

@@ -1,18 +1,17 @@
-import React, { useState } from "react"
+import React, { useEffect } from "react"
 import { Button, Menu, Icon } from "semantic-ui-react"
 import { useAside, useMain } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/aside.scss"
 
-export default props => {
-  const [jurnId, setJurnId] = useState("")
+export default (props) => {
   const {
     aUser,
     aJurns,
     pendingJurns,
     fetchAside,
     sendAccept,
-    sendDecline
+    sendDecline,
   } = useAside()
   const user_id = aUser.user_id
 
@@ -20,7 +19,6 @@ export default props => {
 
   function handleAccept(e, jurn_id) {
     e.preventDefault()
-    setJurnId(jurn_id)
     sendAccept(user_id, jurn_id)
     fetchAside()
     get()
@@ -28,11 +26,14 @@ export default props => {
 
   function handleDecline(e, jurn_id) {
     e.preventDefault()
-    setJurnId(jurn_id)
     sendDecline(user_id, jurn_id)
     fetchAside()
     get()
   }
+
+  useEffect(() => {
+    get()
+  }, [aJurns])
 
   return (
     <div className="jurnesDiv">
@@ -41,16 +42,13 @@ export default props => {
       </h5>
       <div className="jurnList">
         {aJurns.map((jurn, i) => (
-          <Menu key={"jurn" + i} vertical id="menu">
-            <Menu.Item name={jurn.name} active={true} id="menuItem">
-              <p>{jurn.name}</p>
-              <Link to={"/Jurne/dashboard/" + jurn.id}>
-                <Button type="button">
-                  <Icon name="pencil" />
-                </Button>
-              </Link>
-            </Menu.Item>
-          </Menu>
+          <Link key={"jurn" + i} to={"/Jurne/dashboard/final/" + jurn.id}>
+            <Menu id="menu">
+              <Menu.Item name={jurn.name} active={true} id="menuItem">
+                <p>{jurn.name}</p>
+              </Menu.Item>
+            </Menu>
+          </Link>
         ))}
       </div>
       <h5>
@@ -65,13 +63,13 @@ export default props => {
                 <Button
                   value={pendJurn.id}
                   type="button"
-                  onClick={e => handleAccept(e, pendJurn.id)}
+                  onClick={(e) => handleAccept(e, pendJurn.id)}
                 >
                   Accept
                 </Button>
                 <Button
                   type="button"
-                  onClick={e => handleDecline(e, pendJurn.id)}
+                  onClick={(e) => handleDecline(e, pendJurn.id)}
                 >
                   Decline
                 </Button>

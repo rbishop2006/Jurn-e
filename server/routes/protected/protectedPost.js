@@ -53,7 +53,6 @@ router.post("/invite", (req, res, next) => {
               sqlInvite,
               [jurn_id, user_id],
               (errInvite, resultsInvite, fieldsInvite) => {
-                console.log(resultsInvite)
                 res.json({
                   message: "pending invite",
                 })

@@ -5,7 +5,7 @@ import { Icon, Divider, Feed, List } from "semantic-ui-react"
 import { useAside } from "../../hooks"
 import "../../styles/aside.scss"
 
-export default props => {
+export default (props) => {
   const { fetchAside } = useAside()
 
   useEffect(() => {
@@ -16,26 +16,6 @@ export default props => {
     <aside>
       <UserProfile />
       <AsideJurnes />
-      <h5>Users</h5>
-      <List>
-        <List.Item>
-          <List.Icon name="users" />
-          <List.Content>User 1</List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Icon name="marker" />
-          <List.Content>New York, NY</List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Icon name="users" />
-          <List.Content>User 2</List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Icon name="marker" />
-          <List.Content>New York, NY</List.Content>
-        </List.Item>
-      </List>
-      <Divider />
       <h5>Message Area</h5>
       <Feed>
         <Feed.Event>
