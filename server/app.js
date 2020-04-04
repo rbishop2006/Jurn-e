@@ -1,10 +1,11 @@
 const express = require("express")
 const postRoutes = require("./routes/post")
-const getRoutes = require("./routes/get")
-const patchRoutes = require("./routes/patch")
-const deleteRoutes = require("./routes/delete")
+const protectedPostRoutes = require("./routes/protected/protectedPost")
+const protectedGetRoutes = require("./routes/protected/protectedGet")
+const protectedPatchRoutes = require("./routes/protected/protectedPatch")
+const protectedDeleteRoutes = require("./routes/protected/protectedDelete")
 const expressjwt = require("express-jwt")
-const protectedRoutes = require("./routes/protected.js")
+const protectedRoutes = require("./routes/protected/protected.js")
 const app = express()
 const config = require("config")
 const port = 3001
@@ -14,20 +15,37 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 app.use("/api", postRoutes)
-app.use("/api", getRoutes)
-app.use("/api", patchRoutes)
-app.use("/api", deleteRoutes)
+app.use(
+  "/api",
+  expressjwt({ secret: config.get("secret") }),
+  protectedPostRoutes
+)
+app.use(
+  "/api",
+  expressjwt({ secret: config.get("secret") }),
+  protectedGetRoutes
+)
+app.use(
+  "/api",
+  expressjwt({ secret: config.get("secret") }),
+  protectedDeleteRoutes
+)
+app.use(
+  "/api",
+  expressjwt({ secret: config.get("secret") }),
+  protectedPatchRoutes
+)
 
 app.use("/api", expressjwt({ secret: config.get("secret") }), protectedRoutes)
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   console.log(404)
   next(createError(404))
 })
 
 // error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   //set locals, only providing error in development
   res.locals.message = err.messageres.locals.error =
     req.app.get("env") === "development" ? err : {}
@@ -36,7 +54,7 @@ app.use(function(req, res, next) {
   res.status(err.status || 500)
   res.json({
     status: err.status,
-    error: err
+    error: err,
   })
 })
 

@@ -1,6 +1,5 @@
-const express = require("express")
-const router = express.Router()
-const conn = require("../db")
+const router = require("express").Router()
+const conn = require("../../db")
 
 router.patch("/remcomplete", (req, res, next) => {
   const rem_id = req.body.rem_id
@@ -11,7 +10,7 @@ router.patch("/remcomplete", (req, res, next) => {
     [rem_id],
     (errremComplete, resultsremComplete, fieldsremComplete) => {
       res.json({
-        message: "status updated to completed"
+        message: "status updated to completed",
       })
     }
   )
@@ -27,7 +26,7 @@ router.patch("/reminder", (req, res, next) => {
     [status, rem_id],
     (errToggleRem, resultsToggleRem, fieldsToggleRem) => {
       res.json({
-        message: "status updated"
+        message: "status updated",
       })
     }
   )
@@ -42,7 +41,7 @@ router.patch("/actcomplete", (req, res, next) => {
     [act_id],
     (erractComplete, resultsactComplete, fieldsactComplete) => {
       res.json({
-        message: "status updated to completed"
+        message: "status updated to completed",
       })
     }
   )
@@ -58,7 +57,7 @@ router.patch("/activity", (req, res, next) => {
     [status, act_id],
     (errToggleAct, resultsToggleAct, fieldsToggleAct) => {
       res.json({
-        message: "status updated"
+        message: "status updated",
       })
     }
   )
@@ -78,7 +77,7 @@ router.patch("/updateprofile", (req, res, next) => {
     [fname, lname, cellphone, avatar, user_id],
     (errProf, resultsProf, fieldsProf) => {
       res.json({
-        message: "profile updated"
+        message: "profile updated",
       })
     }
   )
@@ -95,7 +94,7 @@ router.patch("/updateaccept", (req, res, next) => {
     [user_id, jurn_id],
     (errAccept, resultsAccept, fieldsAccept) => {
       res.json({
-        message: "invite status updated"
+        message: "invite status updated",
       })
     }
   )
@@ -112,7 +111,7 @@ router.patch("/updatedecline", (req, res, next) => {
     [user_id, jurn_id],
     (errDecline, resultsDecline, fieldsDecline) => {
       res.json({
-        message: "invite status updated"
+        message: "invite status updated",
       })
     }
   )
