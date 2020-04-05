@@ -27,7 +27,7 @@ router.post("/invite", (req, res, next) => {
           if (resultsCheckInv.length > 0) {
             if (resultsCheckInv[0].inv_status === "accepted") {
               res.json({
-                message: "status already accepted",
+                message: "status already accepted"
               })
             } else {
               const sqlUpdInv = `
@@ -39,7 +39,7 @@ router.post("/invite", (req, res, next) => {
                 [jurn_id, user_id],
                 (errUpdInv, resultsUpdInv, fieldsUpdInv) => {
                   res.json({
-                    message: "status updated to pending",
+                    message: "status updated to pending"
                   })
                 }
               )
@@ -54,7 +54,7 @@ router.post("/invite", (req, res, next) => {
               [jurn_id, user_id],
               (errInvite, resultsInvite, fieldsInvite) => {
                 res.json({
-                  message: "pending invite",
+                  message: "pending invite"
                 })
               }
             )
@@ -72,12 +72,12 @@ router.post("/jurn", (req, res, next) => {
   conn.query(checkSQL3, [jname], (err3, results3, fields3) => {
     if (results3[0].count > 0) {
       res.status(409).json({
-        message: "jurn already exists",
+        message: "jurn already exists"
       })
     } else {
       const sql4 = "INSERT INTO jurn (jname, user_id) VALUES (?, ?)"
       conn.query(sql4, [jname, user_id], (err4, results4, fields4) => {
-        const sqlGetJurn_id = `SELECT jurn_id FROM jurn WHERE jname = ?`
+        // const sqlGetJurn_id = `SELECT jurn_id FROM jurn WHERE jname = ?`
         const jurn_id = results4.insertId
         const sqlLinks = `INSERT INTO link (user_id, jurn_id) VALUES (?, ?)`
         conn.query(
@@ -91,10 +91,50 @@ router.post("/jurn", (req, res, next) => {
               sqlStart,
               [jurn_id, user_id],
               (errStart, resultsStart, fieldStart) => {
-                res.json({
-                  message: "jurn added successfully",
-                  id: jurn_id,
-                })
+                const sqlR = `INSERT INTO reminder (rem, status, jurn_id, user_id)
+                VALUES
+                    ("Alert your credit card company", "active", ?, ?),
+                    ("Contact your cell phone company","active",  ?, ?),
+                    ("Notify your home security system operator","active",  ?, ?),
+                    ("Confirm all reservations","active",  ?, ?),
+                    ("Make advance payments on bills that have due dates during your trip","active",  ?, ?),
+                    ("Check the weather","active",  ?, ?),
+                    ("Eat, throw out, or give away any perishable food","active", ?, ?),
+                    ("Leave an itinerary with a friend or family member","active",  ?, ?),
+                    ("Place a hold on your mail delivery","active",  ?, ?),
+                    ("Bring in outdoor furniture","active", ?, ?)`
+                conn.query(
+                  sqlR,
+                  [
+                    jurn_id,
+                    user_id,
+                    jurn_id,
+                    user_id,
+                    jurn_id,
+                    user_id,
+                    jurn_id,
+                    user_id,
+                    jurn_id,
+                    user_id,
+                    jurn_id,
+                    user_id,
+                    jurn_id,
+                    user_id,
+                    jurn_id,
+                    user_id,
+                    jurn_id,
+                    user_id,
+                    jurn_id,
+                    user_id
+                  ],
+                  (errR, resultsR, fieldsR) => {
+                    res.json({
+                      message: "jurn added successfully",
+                      id: jurn_id,
+                      user_id: user_id
+                    })
+                  }
+                )
               }
             )
           }
@@ -111,7 +151,7 @@ router.post("/location", (req, res, next) => {
 
   conn.query(sql8, [loc_name, jurn_id], (err8, results8, fields8) => {
     res.json({
-      message: "location added successfully",
+      message: "location added successfully"
     })
   })
 })
@@ -126,7 +166,7 @@ router.post("/hotel", (req, res, next) => {
     [hotel_name, jurn_id],
     (errHot2, resultsHot2, fieldsHot2) => {
       res.json({
-        message: "hotel added successfully",
+        message: "hotel added successfully"
       })
     }
   )
@@ -144,7 +184,7 @@ router.post("/dates", (req, res, next) => {
     [start_date, end_date, jurn_id],
     (errDateRange, resultsDateRange, fieldsDateRange) => {
       res.json({
-        message: "dates added successfully",
+        message: "dates added successfully"
       })
     }
   )
@@ -152,14 +192,15 @@ router.post("/dates", (req, res, next) => {
 
 router.post("/addrem", (req, res, next) => {
   const jurn_id = req.body.jurn_id
+  const user_id = req.body.user_id
   const rem = req.body.reminder
-  const sqlAddRem = `INSERT INTO reminder (rem, jurn_id) VALUES (?, ?)`
+  const sqlAddRem = `INSERT INTO reminder (rem, jurn_id, user_id) VALUES (?, ?, ?)`
   conn.query(
     sqlAddRem,
-    [rem, jurn_id],
+    [rem, jurn_id, user_id],
     (errAddrem, resultsAddRem, fieldsAddRem) => {
       res.json({
-        message: "rem added successfully",
+        message: "rem added successfully"
       })
     }
   )
@@ -174,7 +215,7 @@ router.post("/addact", (req, res, next) => {
     [act, jurn_id],
     (errAddact, resultsAddact, fieldsAddact) => {
       res.json({
-        message: "act added successfully",
+        message: "act added successfully"
       })
     }
   )
@@ -204,18 +245,18 @@ module.exports = router
 //           }
 //         )
 //       } else {
-//         const sqlR = `INSERT INTO reminder (rem, status, jurn_id)
-//       VALUES
-//           ("Alert your credit card company", "active", ?),
-//           ("Contact your cell phone company","active", ?),
-//           ("Notify your home security system operator","active", ?),
-//           ("Confirm all reservations","active", ?),
-//           ("Make advance payments on bills that have due dates during your trip","active", ?),
-//           ("Check the weather","active", ?),
-//           ("Eat, throw out, or give away any perishable food","active", ?),
-//           ("Leave an itinerary with a friend or family member","active", ?),
-//           ("Place a hold on your mail delivery","active", ?),
-//           ("Bring in outdoor furniture","active", ?)`
+//   const sqlR = `INSERT INTO reminder (rem, status, jurn_id)
+// VALUES
+//     ("Alert your credit card company", "active", ?),
+//     ("Contact your cell phone company","active", ?),
+//     ("Notify your home security system operator","active", ?),
+//     ("Confirm all reservations","active", ?),
+//     ("Make advance payments on bills that have due dates during your trip","active", ?),
+//     ("Check the weather","active", ?),
+//     ("Eat, throw out, or give away any perishable food","active", ?),
+//     ("Leave an itinerary with a friend or family member","active", ?),
+//     ("Place a hold on your mail delivery","active", ?),
+//     ("Bring in outdoor furniture","active", ?)`
 //         conn.query(
 //           sqlR,
 //           [

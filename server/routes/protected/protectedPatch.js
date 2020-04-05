@@ -10,7 +10,7 @@ router.patch("/remcomplete", (req, res, next) => {
     [rem_id],
     (errremComplete, resultsremComplete, fieldsremComplete) => {
       res.json({
-        message: "status updated to completed",
+        message: "status updated to completed"
       })
     }
   )
@@ -26,7 +26,7 @@ router.patch("/reminder", (req, res, next) => {
     [status, rem_id],
     (errToggleRem, resultsToggleRem, fieldsToggleRem) => {
       res.json({
-        message: "status updated",
+        message: "status updated"
       })
     }
   )
@@ -41,7 +41,7 @@ router.patch("/actcomplete", (req, res, next) => {
     [act_id],
     (erractComplete, resultsactComplete, fieldsactComplete) => {
       res.json({
-        message: "status updated to completed",
+        message: "status updated to completed"
       })
     }
   )
@@ -57,7 +57,7 @@ router.patch("/activity", (req, res, next) => {
     [status, act_id],
     (errToggleAct, resultsToggleAct, fieldsToggleAct) => {
       res.json({
-        message: "status updated",
+        message: "status updated"
       })
     }
   )
@@ -77,7 +77,7 @@ router.patch("/updateprofile", (req, res, next) => {
     [fname, lname, cellphone, avatar, user_id],
     (errProf, resultsProf, fieldsProf) => {
       res.json({
-        message: "profile updated",
+        message: "profile updated"
       })
     }
   )
@@ -93,9 +93,48 @@ router.patch("/updateaccept", (req, res, next) => {
     sqlAccept,
     [user_id, jurn_id],
     (errAccept, resultsAccept, fieldsAccept) => {
-      res.json({
-        message: "invite status updated",
-      })
+      const sqlR = `INSERT INTO reminder (rem, status, jurn_id, user_id)
+      VALUES
+          ("Alert your credit card company", "active", ?, ?),
+          ("Contact your cell phone company","active",  ?, ?),
+          ("Notify your home security system operator","active",  ?, ?),
+          ("Confirm all reservations","active",  ?, ?),
+          ("Make advance payments on bills that have due dates during your trip","active",  ?, ?),
+          ("Check the weather","active",  ?, ?),
+          ("Eat, throw out, or give away any perishable food","active", ?, ?),
+          ("Leave an itinerary with a friend or family member","active",  ?, ?),
+          ("Place a hold on your mail delivery","active",  ?, ?),
+          ("Bring in outdoor furniture","active", ?, ?)`
+      conn.query(
+        sqlR,
+        [
+          jurn_id,
+          user_id,
+          jurn_id,
+          user_id,
+          jurn_id,
+          user_id,
+          jurn_id,
+          user_id,
+          jurn_id,
+          user_id,
+          jurn_id,
+          user_id,
+          jurn_id,
+          user_id,
+          jurn_id,
+          user_id,
+          jurn_id,
+          user_id,
+          jurn_id,
+          user_id
+        ],
+        (errR, resultsR, fieldsR) => {
+          res.json({
+            message: "invite status updated"
+          })
+        }
+      )
     }
   )
 })
@@ -111,7 +150,7 @@ router.patch("/updatedecline", (req, res, next) => {
     [user_id, jurn_id],
     (errDecline, resultsDecline, fieldsDecline) => {
       res.json({
-        message: "invite status updated",
+        message: "invite status updated"
       })
     }
   )

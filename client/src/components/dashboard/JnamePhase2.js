@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react"
 import { List, Checkbox, Tab, Form, Radio, Button } from "semantic-ui-react"
+import { useMain, useAside } from "../../hooks"
 import { usePhase2, useRems, useInvited } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/phase2.scss"
 import moment from "moment"
 
 export default props => {
+  const { aUser } = useAside()
+
   const { accepted, updateInvited } = useInvited()
   const [reminder, setReminder] = useState("")
   const { jurnInfo, updatePhase2, activities } = usePhase2()
@@ -18,25 +21,27 @@ export default props => {
     clearRems,
     updateRems
   } = useRems()
+
   const jurn_id = props.match.params.jurn_id
+  const user_id = aUser.user_id
 
   function handleSubmit(e) {
     e.preventDefault()
-    addRem(reminder, jurn_id)
+    addRem(reminder, jurn_id, user_id)
     setReminder("")
   }
   const [view, setView] = useState("all")
 
   function changeView(status) {
     setView(status)
-    filterRems(status, jurn_id)
+    filterRems(status, jurn_id, user_id)
   }
 
   useEffect(() => {
     updatePhase2(jurn_id)
-    updateRems(jurn_id)
+    updateRems(jurn_id, user_id)
     updateInvited(jurn_id)
-  }, [jurn_id, reminder])
+  }, [jurn_id, user_id, reminder])
 
   const panes = [
     {
@@ -142,7 +147,7 @@ export default props => {
                         value={rem.rem}
                         label={rem.rem}
                         checked={rem.status === "completed"}
-                        onChange={e => toggleRem(rem.rem_id, jurn_id)}
+                        onChange={e => toggleRem(rem.rem_id, jurn_id, user_id)}
                       />
                     </span>
                   ) : (
@@ -150,7 +155,7 @@ export default props => {
                   )
                 }
                 checked={rem.status === "completed"}
-                onChange={e => toggleRem(rem.rem_id, jurn_id)}
+                onChange={e => toggleRem(rem.rem_id, jurn_id, user_id)}
               />
             ))}
           </List>
@@ -175,7 +180,12 @@ export default props => {
                 onChange={e => changeView("completed")}
               />
             </Form.Field>
-            <Button type="button" onClick={e => clearRems(jurn_id)}>
+            {/* </Form>
+          <Form onSubmit={e => clearRems(jurn_id, user_id)}>
+            <Button type="submit">Clear Completed</Button>
+            <h5> Reminders left: {remsCount}</h5>
+          </Form> */}
+            <Button type="button" onClick={e => clearRems(jurn_id, user_id)}>
               Clear Completed
             </Button>
             <h5> Reminders left: {remsCount}</h5>
