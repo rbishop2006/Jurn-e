@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import { Button, Menu, Icon } from "semantic-ui-react"
+import React, { useEffect, useState } from "react"
+import { Button, Menu } from "semantic-ui-react"
 import { useAside, useMain } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/aside.scss"
@@ -14,7 +14,8 @@ export default (props) => {
     sendDecline,
   } = useAside()
   const user_id = aUser.user_id
-
+  const pendCount = pendingJurns.length
+  const [hidden2, setHidden2] = useState(true)
   const { get } = useMain()
 
   function handleAccept(e, jurn_id) {
@@ -51,10 +52,13 @@ export default (props) => {
           </Link>
         ))}
       </div>
-      <h5>
-        Jurn<em>(e)</em> invitations
-      </h5>
-      <div className="pendList">
+      <Button
+        className="viewPending"
+        onClick={(e) => (!hidden2 ? setHidden2(true) : setHidden2(false))}
+      >
+        Jurn<em>(e)</em> invitations ({pendCount})
+      </Button>
+      <div className={hidden2 ? "expand2" : "pendList"}>
         {pendingJurns.map((pendJurn, i) => (
           <Menu key={"pendJurn" + i} vertical id="menu2">
             <Menu.Item name={pendJurn.name} active={true} id="menuItem2">

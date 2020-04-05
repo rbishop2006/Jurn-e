@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useAuth } from "react-auth"
 import { Icon, Button, Form, Dropdown } from "semantic-ui-react"
 import { useAside } from "../../hooks"

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import UserProfile from "./UserProfile"
 import AsideJurnes from "./AsideJurnes"
-import { Icon, Divider, Feed, List } from "semantic-ui-react"
+import { Icon, Feed } from "semantic-ui-react"
 import { useAside } from "../../hooks"
 import "../../styles/aside.scss"
 

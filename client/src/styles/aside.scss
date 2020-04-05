@@ -71,6 +71,10 @@ aside {
   }
 
   .jurnesDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     .jurnList {
       min-height: 230px;
       max-height: 230px;
@@ -90,32 +94,42 @@ aside {
       }
     }
 
+    .viewPending {
+      width: 70%;
+      align-self: center;
+    }
+
     .pendList {
-      min-height: 230px;
-      max-height: 230px;
+      height: 230px;
       overflow: auto;
+      transition: height 0.7s;
+    }
 
-      #menu2 {
-        margin: 10px auto;
-        width: 90%;
+    .expand2 {
+      height: 0px;
+      transition: height 0.7s;
+      overflow: hidden;
+    }
 
-        #menuItem2 {
-          display: grid;
-          grid-template-columns: 1fr;
+    #menu2 {
+      margin: 10px auto;
+      width: 90%;
 
-          p {
-            text-align: center;
-          }
+      #menuItem2 {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 3px 0px;
 
-          div {
-            display: flex;
-          }
+        p {
+          text-align: center;
+          margin: 0px 0px 5px 0px;
+        }
+
+        div {
+          display: flex;
+          justify-content: space-around;
         }
       }
     }
-  }
-
-  .divider {
-    margin: 0;
   }
 }
