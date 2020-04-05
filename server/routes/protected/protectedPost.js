@@ -131,7 +131,8 @@ router.post("/jurn", (req, res, next) => {
                   (errR, resultsR, fieldsR) => {
                     res.json({
                       message: "jurn added successfully",
-                      id: jurn_id
+                      id: jurn_id,
+                      user_id: user_id
                     })
                   }
                 )
@@ -242,11 +243,12 @@ router.post("/dates", (req, res, next) => {
 
 router.post("/addrem", (req, res, next) => {
   const jurn_id = req.body.jurn_id
+  const user_id = req.body.user_id
   const rem = req.body.reminder
-  const sqlAddRem = `INSERT INTO reminder (rem, jurn_id) VALUES (?, ?)`
+  const sqlAddRem = `INSERT INTO reminder (rem, jurn_id, user_id) VALUES (?, ?, ?)`
   conn.query(
     sqlAddRem,
-    [rem, jurn_id],
+    [rem, jurn_id, user_id],
     (errAddrem, resultsAddRem, fieldsAddRem) => {
       res.json({
         message: "rem added successfully"
