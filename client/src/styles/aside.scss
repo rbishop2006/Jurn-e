@@ -1,5 +1,5 @@
 aside {
-  background: rgb(175, 221, 239);
+  background: rgb(0, 119, 150);
 
   .userProfile {
     height: 80px;
@@ -31,7 +31,7 @@ aside {
   }
 
   .user {
-    color: rgb(0, 119, 150);
+    color: white;
     padding: 0;
     margin: 1px 2px;
   }
@@ -72,6 +72,7 @@ aside {
 
   .jurnesDiv {
     .jurnList {
+      min-height: 230px;
       max-height: 230px;
       overflow: auto;
 
@@ -80,28 +81,20 @@ aside {
         width: 90%;
 
         #menuItem {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 10px 5px;
+          width: 100%;
 
           p {
             margin: 0;
-          }
-
-          a {
-            margin: 0;
-
-            button {
-              margin: 0px 0px;
-              padding: 5px 0px 5px 5px;
-            }
           }
         }
       }
     }
 
     .pendList {
+      min-height: 230px;
+      max-height: 230px;
+      overflow: auto;
+
       #menu2 {
         margin: 10px auto;
         width: 90%;

@@ -4,11 +4,11 @@ import { Icon, Button, Form, Dropdown } from "semantic-ui-react"
 import { useAside } from "../../hooks"
 import "../../styles/aside.scss"
 
-export default props => {
+export default (props) => {
   const { signout } = useAuth()
   const { aUser, sendProfile } = useAside()
   const user_id = aUser.user_id
-  const [show, setShow] = useState(true)
+  const [hidden, setHidden] = useState(true)
   const [fname, setFname] = useState("")
   const [lname, setLname] = useState("")
   const [cellphone, setCellphone] = useState("")
@@ -19,60 +19,60 @@ export default props => {
       icon: "user",
       text: "Person",
       value: "user",
-      as: Dropdown.Item
+      as: Dropdown.Item,
     },
     {
       icon: "user secret",
       text: "Super Secret",
       value: "user secret",
-      as: Dropdown.Item
+      as: Dropdown.Item,
     },
     {
       icon: "plane",
       text: "Air Traveler",
       value: "plane",
-      as: Dropdown.Item
+      as: Dropdown.Item,
     },
     {
       icon: "ship",
       text: "Cruise Passenger",
       value: "ship",
-      as: Dropdown.Item
+      as: Dropdown.Item,
     },
     {
       icon: "train",
       text: "Train Enthusiast",
       value: "train",
-      as: Dropdown.Item
+      as: Dropdown.Item,
     },
     {
       icon: "car",
       text: "Driver",
       value: "car",
-      as: Dropdown.Item
+      as: Dropdown.Item,
     },
     {
       icon: "bicycle",
       text: "Bicyclist",
       value: "bicycle",
-      as: Dropdown.Item
+      as: Dropdown.Item,
     },
     {
       icon: "motorcycle",
       text: "Motorcyclist",
       value: "motorcycle",
-      as: Dropdown.Item
-    }
+      as: Dropdown.Item,
+    },
   ]
 
   function updateProfile(e) {
     e.preventDefault()
     sendProfile(fname, lname, cellphone, avatar, user_id)
-    setShow(true)
+    setHidden(true)
   }
 
   return (
-    <div className={show ? "userProfile" : "expand"}>
+    <div className={hidden ? "userProfile" : "expand"}>
       <div className="profileDiv">
         <div>
           <Icon name={aUser.avatar} color="grey" size="big" />
@@ -81,13 +81,13 @@ export default props => {
           </p>
           <p className="status"></p>
         </div>
-        <Button className="logOut" onClick={e => signout()}>
+        <Button className="logOut" onClick={(e) => signout()}>
           Log out
         </Button>
       </div>
       <Button
         className="editProfile"
-        onClick={e => (!show ? setShow(true) : setShow(false))}
+        onClick={(e) => (!hidden ? setHidden(true) : setHidden(false))}
       >
         <Icon name="pencil" />
       </Button>
@@ -98,21 +98,21 @@ export default props => {
           label="First name"
           placeholder={aUser.fname}
           value={fname}
-          onChange={e => setFname(e.target.value)}
+          onChange={(e) => setFname(e.target.value)}
         />
         <Form.Input
           fluid
           label="Last name"
           placeholder={aUser.lname}
           value={lname}
-          onChange={e => setLname(e.target.value)}
+          onChange={(e) => setLname(e.target.value)}
         />
         <Form.Input
           fluid
           label="Cell Phone"
           placeholder={aUser.cell_phone}
           value={cellphone}
-          onChange={e => setCellphone(e.target.value)}
+          onChange={(e) => setCellphone(e.target.value)}
         />
         <Dropdown
           placeholder="Select an Avatar"
