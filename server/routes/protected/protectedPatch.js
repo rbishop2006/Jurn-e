@@ -156,4 +156,72 @@ router.patch("/updatedecline", (req, res, next) => {
   )
 })
 
+router.patch("/finaldates", (req, res, next) => {
+  const jurn_id = req.body.jurn_id
+  const date = req.body.date.split(",")
+  const startDate = date[0]
+  const endDate = date[1]
+  const sqlUpdateJurnDate = `UPDATE jurn SET start_date = ?, end_date = ? WHERE jurn_id = ?`
+
+  conn.query(
+    sqlUpdateJurnDate,
+    [startDate, endDate, jurn_id],
+    (errUpdateJurnDate, resultsUpdateJurnDate, fieldsUpdateJurnDate) => {
+      res.json({
+        message: "dates updated",
+      })
+    }
+  )
+})
+
+router.patch("/finallocation", (req, res, next) => {
+  const jurn_id = req.body.jurn_id
+  const location = req.body.location
+  const sqlUpdateJurnLoc = `UPDATE jurn SET location = ? WHERE jurn_id = ?`
+
+  conn.query(
+    sqlUpdateJurnLoc,
+    [location, jurn_id],
+    (errUpdateJurnLoc, resultsUpdateJurnLoc, fieldsUpdateJurnLoc) => {
+      res.json({
+        message: "location updated",
+      })
+    }
+  )
+})
+
+router.patch("/finalhotel", (req, res, next) => {
+  const jurn_id = req.body.jurn_id
+  const hotel = req.body.hotel
+  const sqlUpdateJurnHot = `UPDATE jurn SET hotel = ? WHERE jurn_id = ?`
+
+  conn.query(
+    sqlUpdateJurnHot,
+    [hotel, jurn_id],
+    (errUpdateJurnHot, resultsUpdateJurnHot, fieldsUpdateJurnHot) => {
+      res.json({
+        message: "hotel updated",
+      })
+    }
+  )
+})
+
+router.patch("/finalphoto", (req, res, next) => {
+  const jurn_id = req.body.jurn_id
+  const photo = req.body.photo
+  const sqlUpdateJurnPhoto = `UPDATE jurn 
+  SET photo = ?
+  WHERE jurn_id = ?`
+
+  conn.query(
+    sqlUpdateJurnPhoto,
+    [photo, jurn_id],
+    (errUpdateJurnPhoto, resultsUpdateJurnPhoto, fieldsUpdateJurnPhoto) => {
+      res.json({
+        message: "photo updated",
+      })
+    }
+  )
+})
+
 module.exports = router

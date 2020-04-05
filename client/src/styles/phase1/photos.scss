@@ -1,0 +1,28 @@
+.photoDiv {
+  display: flex;
+  justify-content: center;
+
+  .photoForm {
+    display: flex;
+    align-items: center;
+
+    #dropdown {
+      width: 250px;
+      display: flex;
+      justify-content: space-between;
+
+      div {
+        div {
+          display: flex;
+          align-items: center;
+
+          img {
+            width: 75px;
+            height: 75px;
+            max-height: 75px;
+          }
+        }
+      }
+    }
+  }
+}
