@@ -104,56 +104,6 @@ router.post("/jurn", (req, res, next) => {
   })
 })
 
-router.post("/finaldates", (req, res, next) => {
-  const jurn_id = req.body.jurn_id
-  const date = req.body.date.split(",")
-  const startDate = date[0]
-  const endDate = date[1]
-  const sqlUpdateJurnDate = `UPDATE jurn SET start_date = ?, end_date = ? WHERE jurn_id = ?`
-
-  conn.query(
-    sqlUpdateJurnDate,
-    [startDate, endDate, jurn_id],
-    (errUpdateJurnDate, resultsUpdateJurnDate, fieldsUpdateJurnDate) => {
-      res.json({
-        message: "dates updated",
-      })
-    }
-  )
-})
-
-router.post("/finallocation", (req, res, next) => {
-  const jurn_id = req.body.jurn_id
-  const location = req.body.location
-  const sqlUpdateJurnLoc = `UPDATE jurn SET location = ? WHERE jurn_id = ?`
-
-  conn.query(
-    sqlUpdateJurnLoc,
-    [location, jurn_id],
-    (errUpdateJurnLoc, resultsUpdateJurnLoc, fieldsUpdateJurnLoc) => {
-      res.json({
-        message: "location updated",
-      })
-    }
-  )
-})
-
-router.post("/finalhotel", (req, res, next) => {
-  const jurn_id = req.body.jurn_id
-  const hotel = req.body.hotel
-  const sqlUpdateJurnHot = `UPDATE jurn SET hotel = ? WHERE jurn_id = ?`
-
-  conn.query(
-    sqlUpdateJurnHot,
-    [hotel, jurn_id],
-    (errUpdateJurnHot, resultsUpdateJurnHot, fieldsUpdateJurnHot) => {
-      res.json({
-        message: "hotel updated",
-      })
-    }
-  )
-})
-
 router.post("/location", (req, res, next) => {
   const loc_name = req.body.location
   const jurn_id = req.body.jurn_id

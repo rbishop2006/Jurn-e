@@ -10,7 +10,6 @@ import { Route } from "react-router-dom"
 
 export default (props) => {
   const { get } = useMain()
-  console.log(props)
 
   useEffect(() => {
     get()

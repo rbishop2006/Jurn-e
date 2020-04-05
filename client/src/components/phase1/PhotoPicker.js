@@ -1,74 +1,88 @@
 import React, { useState } from "react"
 import { Form, Button, Dropdown } from "semantic-ui-react"
-// import { usePhase1, usePhase2 } from "../../hooks"
+import { usePhase1 } from "../../hooks"
 import "../../styles/phase1/photos.scss"
 
 export default (props) => {
+  const jurn_id = props.match.params.jurn_id
   const [photo, setPhoto] = useState("")
+  const { updatePhase1, updatePhoto } = usePhase1()
 
   const pictures = [
     {
-      icon: "user",
-      text: "Person",
-      value: "user",
+      image: { src: `/JurnEase-picture2.jpeg` },
+      text: "Jurn(ease)",
+      value: "/JurnEase-picture2.jpeg",
       as: Dropdown.Item,
     },
     {
-      icon: "user secret",
-      text: "Super Secret",
-      value: "user secret",
+      image: { src: `/beach.jpg` },
+      text: "Beach vacation",
+      value: "/beach.jpg",
       as: Dropdown.Item,
     },
     {
-      icon: "plane",
-      text: "Air Traveler",
-      value: "plane",
+      image: { src: `/drinks.jpg` },
+      text: "Night on the Town",
+      value: "/drinks.jpg",
       as: Dropdown.Item,
     },
     {
-      icon: "ship",
-      text: "Cruise Passenger",
-      value: "ship",
+      image: { src: `/downtown.jpg` },
+      text: "Big City Adventure",
+      value: "/downtown.jpg",
       as: Dropdown.Item,
     },
     {
-      icon: "train",
-      text: "Train Enthusiast",
-      value: "train",
+      image: { src: `/lasVegas.jpg` },
+      text: "Vegas Baby!",
+      value: "/lasVegas.jpg",
       as: Dropdown.Item,
     },
     {
-      icon: "car",
-      text: "Driver",
-      value: "car",
+      image: { src: `/golfCourse.jpg` },
+      text: "Golf Getaway",
+      value: "/golfCourse.jpg",
       as: Dropdown.Item,
     },
     {
-      icon: "bicycle",
-      text: "Bicyclist",
-      value: "bicycle",
+      image: { src: `/nature.jpg` },
+      text: "Back to Nature",
+      value: "/nature.jpg",
       as: Dropdown.Item,
     },
     {
-      icon: "motorcycle",
-      text: "Motorcyclist",
-      value: "motorcycle",
+      image: { src: `/lakeHouse.jpg` },
+      text: "Lake Retreat",
+      value: "/lakeHouse.jpg",
+      as: Dropdown.Item,
+    },
+    {
+      image: { src: `/cruiseShip.jpg` },
+      text: "Lets Cruise",
+      value: "/cruiseShip.jpg",
       as: Dropdown.Item,
     },
   ]
 
+  function sendPhoto(e) {
+    e.preventDefault()
+    updatePhoto(jurn_id, photo)
+    updatePhase1(jurn_id)
+  }
+
   return (
-    <div>
-      <Form>
+    <div className="photoDiv">
+      <Form onSubmit={sendPhoto} className="photoForm">
         <Dropdown
+          id="dropdown"
           placeholder="Select a Photo"
-          icon="arrow up"
+          icon="arrow down"
           labeled
           options={pictures}
           button
           value={photo}
           onChange={(e, { value }) => setPhoto(value)}
-          className="photo"
         />
         <Button type="submit" className="updateProfile">
           Update Jurn(<em>e</em>) Photo

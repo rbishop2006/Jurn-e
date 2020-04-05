@@ -38,7 +38,7 @@ export default (props) => {
   return (
     <div className="jurnesDiv">
       <h5>
-        Jurn<em>(e)</em>s
+        My Jurn<em>(e)</em>s
       </h5>
       <div className="jurnList">
         {aJurns.map((jurn, i) => (

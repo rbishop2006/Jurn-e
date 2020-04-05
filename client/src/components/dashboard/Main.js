@@ -1,12 +1,11 @@
 import React, { useEffect } from "react"
 import { Card, Image, Button, Icon } from "semantic-ui-react"
-import { useMain, useRems } from "../../hooks"
+import { useMain } from "../../hooks"
 import { Link } from "react-router-dom"
 import moment from "moment"
 
 export default (props) => {
   const { jurns, get } = useMain()
-  console.log(jurns)
 
   useEffect(() => {
     get()
@@ -19,7 +18,11 @@ export default (props) => {
         <div className="cardDiv">
           {jurns.map((jurn, i) => (
             <Card key={"jurn" + i} centered>
-              <Image src="https://place-hold.it/200x200" />
+              <Image
+                className="photos"
+                src={jurn.photo}
+                alt="Jurn(ease) trip photo"
+              />
               <Card.Content>
                 <Card.Header>
                   {jurn.jname}
