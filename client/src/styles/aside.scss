@@ -1,5 +1,7 @@
+@import "./base.scss";
+
 aside {
-  background: rgb(0, 119, 150);
+  background-color: $firstColor;
 
   .userProfile {
     height: 80px;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { List, Checkbox, Tab, Form, Radio, Button } from "semantic-ui-react"
-import { useMain, useAside } from "../../hooks"
+import { useAside } from "../../hooks"
 import { usePhase2, useRems, useInvited } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/phase2.scss"
 import moment from "moment"
 
-export default props => {
+export default (props) => {
   const { aUser } = useAside()
 
   const { accepted, updateInvited } = useInvited()
@@ -19,7 +19,7 @@ export default props => {
     toggleRem,
     filterRems,
     clearRems,
-    updateRems
+    updateRems,
   } = useRems()
 
   const jurn_id = props.match.params.jurn_id
@@ -57,7 +57,7 @@ export default props => {
             ))}
           </List>
         </Tab.Pane>
-      )
+      ),
     },
     {
       menuItem: `Activities (${activities.length})`,
@@ -69,7 +69,7 @@ export default props => {
             ))}
           </List>
         </Tab.Pane>
-      )
+      ),
     },
     {
       menuItem: "Accommodations",
@@ -79,7 +79,7 @@ export default props => {
             <List.Item>{jurnInfo.hotel}</List.Item>
           </List>
         </Tab.Pane>
-      )
+      ),
     },
     {
       menuItem: "Flights",
@@ -90,7 +90,7 @@ export default props => {
           <p>FLIGHTS lorem ipsum dolor</p>
           {/* <Flights history={props.history} /> */}
         </Tab.Pane>
-      )
+      ),
     },
     {
       menuItem: "Rental Cars",
@@ -101,8 +101,8 @@ export default props => {
           <p>RENTAL CARS lorem ipsum dolor</p>
           {/* <RentalCars history={props.history} /> */}
         </Tab.Pane>
-      )
-    }
+      ),
+    },
   ]
 
   return (
@@ -130,7 +130,7 @@ export default props => {
                 label="add Reminders here..."
                 placeholder='ex. "arrange for a petsitter"'
                 value={reminder}
-                onChange={e => setReminder(e.target.value)}
+                onChange={(e) => setReminder(e.target.value)}
               />
               <Form.Button>Submit</Form.Button>
             </Form>
@@ -147,7 +147,9 @@ export default props => {
                         value={rem.rem}
                         label={rem.rem}
                         checked={rem.status === "completed"}
-                        onChange={e => toggleRem(rem.rem_id, jurn_id, user_id)}
+                        onChange={(e) =>
+                          toggleRem(rem.rem_id, jurn_id, user_id)
+                        }
                       />
                     </span>
                   ) : (
@@ -155,7 +157,7 @@ export default props => {
                   )
                 }
                 checked={rem.status === "completed"}
-                onChange={e => toggleRem(rem.rem_id, jurn_id, user_id)}
+                onChange={(e) => toggleRem(rem.rem_id, jurn_id, user_id)}
               />
             ))}
           </List>
@@ -165,19 +167,19 @@ export default props => {
                 label="All"
                 name="filterRems"
                 checked={view === "all" ? true : false}
-                onChange={e => changeView("all")}
+                onChange={(e) => changeView("all")}
               />
               <Radio
                 label="Active"
                 name="filterRems"
                 checked={view === "active" ? true : false}
-                onChange={e => changeView("active")}
+                onChange={(e) => changeView("active")}
               />
               <Radio
                 label="Completed"
                 name="filterRems"
                 checked={view === "completed" ? true : false}
-                onChange={e => changeView("completed")}
+                onChange={(e) => changeView("completed")}
               />
             </Form.Field>
             {/* </Form>
@@ -185,7 +187,7 @@ export default props => {
             <Button type="submit">Clear Completed</Button>
             <h5> Reminders left: {remsCount}</h5>
           </Form> */}
-            <Button type="button" onClick={e => clearRems(jurn_id, user_id)}>
+            <Button type="button" onClick={(e) => clearRems(jurn_id, user_id)}>
               Clear Completed
             </Button>
             <h5> Reminders left: {remsCount}</h5>

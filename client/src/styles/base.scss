@@ -21,3 +21,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+$baseColor: #e8e8e8;
+$firstColor: #007796;
+$secondColor: #003352;
+$highlightColor: #ff8930;
+$thirdColor: #1c5d99;
+
+@mixin buttonThemed($bT) {
+  background: $bT;
+  color: $baseColor;
+  border: 1px solid $secondColor;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: lighten($bT, 8%);
+    transition: all 0.3s ease;
+    border: 1px solid $highlightColor;
+  }
+  &:active {
+    background: lighten($bT, 12%);
+  }
+}

@@ -1,7 +1,9 @@
 import React, { useEffect } from "react"
 import UserProfile from "./UserProfile"
 import AsideJurnes from "./AsideJurnes"
-import { Icon, Feed } from "semantic-ui-react"
+import Message from "./Message"
+import MessageForm from "./MessageForm"
+// import { Icon, Feed } from "semantic-ui-react"
 import { useAside } from "../../hooks"
 import "../../styles/aside.scss"
 
@@ -16,8 +18,10 @@ export default (props) => {
     <aside>
       <UserProfile />
       <AsideJurnes />
-      <h5>Message Area</h5>
-      <Feed>
+      <h5>Chat Area</h5>
+      <Message />
+      <MessageForm />
+      {/* <Feed>
         <Feed.Event>
           <Feed.Label>
             <img src="https://place-hold.it/25" alt="placeholder" />
@@ -34,7 +38,7 @@ export default (props) => {
             </Feed.Meta>
           </Feed.Content>
         </Feed.Event>
-      </Feed>
+      </Feed> */}
     </aside>
   )
 }

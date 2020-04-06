@@ -1,5 +1,7 @@
+@import "../base.scss";
+
 .suggestDateDiv {
-  background: white;
+  background: $baseColor;
   width: 600px;
   margin: auto;
   display: grid;
