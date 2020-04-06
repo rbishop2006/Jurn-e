@@ -11,14 +11,14 @@ router.get("/main", (req, res, next) => {
   const sqlId = `SELECT user_id FROM user WHERE email = ?`
   conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
     const user_id = resultsId[0].user_id
-    // trying to fix main
-    const sqlLink = `SELECT jurn.jurn_id
+
+    const sqlInit = `SELECT jurn.jname, jurn.jurn_id
     FROM jurn
     LEFT JOIN invite ON invite.jurn_id = jurn.jurn_id
-    WHERE invite.user_id = ? AND invite.inv_status = "accepted"`
-    conn.query(sqlLink, [user_id], (errLink, resultsLink, fieldsLink) => {
+    WHERE inv_status = "accepted" AND invite.user_id = ?`
+    conn.query(sqlInit, [user_id], (errInit, resultsInit, fieldsInit) => {
       let jurnIdSql = ""
-      resultsLink.forEach((item, i) => {
+      resultsInit.forEach((item, i) => {
         if (i === 0) {
           jurnIdSql += " WHERE invite.jurn_id = ? "
         } else {
@@ -45,7 +45,7 @@ router.get("/main", (req, res, next) => {
       GROUP BY jurn_Table3.jurn_id`
       conn.query(
         sqlJurnDetails,
-        resultsLink.map(item => item.jurn_id),
+        resultsInit.map(item => item.jurn_id),
         (errJurnDetails, resultsJurnDetails, fieldsJurnDetails) => {
           res.json({ main: resultsJurnDetails })
         }
@@ -65,8 +65,6 @@ router.get("/aside", (req, res, next) => {
   const sqlId = `SELECT user_id FROM user WHERE email = ?`
   conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
     const user_id = resultsId[0].user_id
-
-    // trying to fix aside
 
     const sqlAsideJurns = `SELECT jurn.jname, jurn.jurn_id
     FROM jurn

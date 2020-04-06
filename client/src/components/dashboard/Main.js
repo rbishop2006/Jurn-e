@@ -4,7 +4,7 @@ import { useMain } from "../../hooks"
 import { Link } from "react-router-dom"
 import moment from "moment"
 
-export default (props) => {
+export default props => {
   const { jurns, get } = useMain()
 
   useEffect(() => {

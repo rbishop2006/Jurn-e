@@ -80,28 +80,6 @@ export default props => {
           </List>
         </Tab.Pane>
       )
-    },
-    {
-      menuItem: "Flights",
-      render: () => (
-        <Tab.Pane attached={false}>
-          <p>FLIGHTS lorem ipsum dolor</p>
-          <p>FLIGHTS lorem ipsum dolor</p>
-          <p>FLIGHTS lorem ipsum dolor</p>
-          {/* <Flights history={props.history} /> */}
-        </Tab.Pane>
-      )
-    },
-    {
-      menuItem: "Rental Cars",
-      render: () => (
-        <Tab.Pane attached={false}>
-          <p>RENTAL CARS lorem ipsum dolor</p>
-          <p>RENTAL CARS lorem ipsum dolor</p>
-          <p>RENTAL CARS lorem ipsum dolor</p>
-          {/* <RentalCars history={props.history} /> */}
-        </Tab.Pane>
-      )
     }
   ]
 
