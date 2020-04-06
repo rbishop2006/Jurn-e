@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react"
-import { List, Checkbox, Tab, Form, Radio, Button } from "semantic-ui-react"
+import {
+  List,
+  Checkbox,
+  Tab,
+  Form,
+  Radio,
+  Button,
+  Icon
+} from "semantic-ui-react"
 import { useMain, useAside } from "../../hooks"
 import { usePhase2, useRems, useInvited } from "../../hooks"
 import { Link } from "react-router-dom"
@@ -86,18 +94,20 @@ export default props => {
   return (
     <div className="phase2">
       <div>
+        <Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
+          <Button type="button">
+            J<em>(e)</em>
+            <Icon name="pencil" />
+          </Button>
+        </Link>
         <h1 className="p2header">{jurnInfo.jname} </h1>
         <em>
-          <h3>{jurnInfo.location}</h3>
+          <h3 className="p2location">{jurnInfo.location}</h3>
         </em>
-        <h4 className="p2location">
+        <h4 className="p2dateRange">
           {moment(jurnInfo.start_date).format("MMM Do, YYYY") + " - "}
           {moment(jurnInfo.end_date).format("MMM Do, YYYY")}
         </h4>
-
-        <Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
-          <Button type="button">Edit</Button>
-        </Link>
       </div>
       <div className="p2ChecklistAndActivies">
         <div>

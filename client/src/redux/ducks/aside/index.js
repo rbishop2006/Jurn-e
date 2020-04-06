@@ -76,6 +76,19 @@ function updateDecline(user_id, jurn_id) {
   }
 }
 
+function removeJurn(user_id, jurn_id) {
+  return new Promise((resolve, reject) => {
+    api
+      .patch("/updateDecline", { user_id, jurn_id })
+      .then(resp => {
+        resolve(resp)
+      })
+      .catch(e => {
+        reject()
+      })
+  })
+}
+
 export function useAside() {
   const dispatch = useDispatch()
   const aJurns = useSelector(appState => appState.AsideState.jurns)
@@ -88,11 +101,13 @@ export function useAside() {
     dispatch(updateAccept(user_id, jurn_id))
   const sendDecline = (user_id, jurn_id) =>
     dispatch(updateDecline(user_id, jurn_id))
+  const delJurn = (user_id, jurn_id) => removeJurn(user_id, jurn_id)
 
   return {
     aJurns,
     aUser,
     pendingJurns,
+    delJurn,
     fetchAside,
     sendProfile,
     sendDecline,

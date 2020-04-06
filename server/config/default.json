@@ -1,6 +1,6 @@
 {
   "db": {
-    "host": "localhost",
+    "host": "jurne.c3jbgd9czvwe.us-east-2.rds.amazonaws.com",
     "user": "jurn-e",
     "password": "7GD&xazNpHrWJkgqN9G-W#A#",
     "database": "jurn-e"
