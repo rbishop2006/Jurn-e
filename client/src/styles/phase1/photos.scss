@@ -1,15 +1,21 @@
 .photoDiv {
-  display: flex;
-  justify-content: center;
-
   .photoForm {
-    display: flex;
-    align-items: center;
+    width: 400px;
+    padding: 10px;
+
+    .photoSel {
+      display: flex;
+      border: 1px solid black;
+      padding: 2px;
+      border-radius: 3px;
+
+      .ui.button {
+        margin: 0;
+      }
+    }
 
     #dropdown {
-      width: 250px;
-      display: flex;
-      justify-content: space-between;
+      width: 325px;
 
       div {
         div {

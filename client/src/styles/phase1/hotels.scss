@@ -1,13 +1,22 @@
 .suggestHotDiv {
-  background: white;
-  width: 600px;
-  margin: auto;
-  display: grid;
-  justify-content: center;
-  border: 1px solid black;
+  width: 400px;
+  padding: 10px;
 
-  .hotelSect {
-    padding: 20px;
-    margin: auto;
+  .hotelSect.input {
+    width: 100%;
+  }
+  .ui.form .fields .field {
+    margin: 0;
+    width: 100%;
+  }
+  .ui.radio.checkbox {
+    margin-left: 8px;
+  }
+  .currentHotAndButton {
+    display: grid;
+    justify-content: center;
+  }
+  .commitLocation {
+    justify-self: center;
   }
 }

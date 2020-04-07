@@ -1,13 +1,17 @@
 .suggestDateDiv {
-  background: white;
-  width: 600px;
-  margin: auto;
-  display: grid;
-  justify-content: center;
-  border: 1px solid black;
+  width: 400px;
+  padding: 10px;
 
-  .datesSect {
-    padding: 20px;
-    margin: auto;
+  .submitDates {
+    margin-bottom: 10px;
+  }
+
+  .currentDatesAndButton {
+    display: grid;
+    justify-content: center;
+  }
+  .commitDates {
+    justify-self: center;
+    text-align: center;
   }
 }

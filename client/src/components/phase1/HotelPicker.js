@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Form, Button, Radio } from "semantic-ui-react"
+import { Form, Button, Radio, Icon } from "semantic-ui-react"
 import { usePhase1, usePhase2 } from "../../hooks"
 import "../../styles/phase1/hotels.scss"
 
@@ -32,17 +32,18 @@ export default props => {
   return (
     <div className="suggestHotDiv">
       <Form onSubmit={handleHotSug}>
-        <h3>Accommodations Section</h3>
+        <h3>Accommodations</h3>
         <Form.Group className="hotelSect">
           <Form.Input
             fluid
-            label="Make a suggestion for accommodations"
+            label="add Suggestions for Accommodations here..."
             placeholder="ex. Four Seasons Maui"
             value={hotel}
             onChange={e => setHotel(e.target.value)}
           />
-
-          <Form.Field inline>
+        </Form.Group>
+        <Form.Group>
+          <Form.Field>
             {hotels.map((hotel, i) => (
               <Radio
                 key={"hotel" + i}
@@ -56,13 +57,19 @@ export default props => {
           </Form.Field>
         </Form.Group>
       </Form>
-      <Form onSubmit={handleFinalHotel} className="commitLocation">
-        <Button type="submit">Commit Changes</Button>
-      </Form>
-      <h4 className="p2location">
-        Current Accommodations:
-        {jurnInfo.hotel}
-      </h4>
+      <div className="currentHotAndButton">
+        <Form onSubmit={handleFinalHotel} className="commitLocation">
+          <Button type="submit">
+            <span>
+              {" "}
+              Save Choice <Icon name="check circle" />{" "}
+            </span>
+          </Button>
+        </Form>
+        <h4 className="">
+          <span>Current Accommodations: {jurnInfo.hotel}</span>
+        </h4>
+      </div>
     </div>
   )
 }

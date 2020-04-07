@@ -1,14 +1,32 @@
 .activitiesDiv {
-  background: white;
-  width: 600px;
-  margin: auto;
-  display: grid;
-  justify-content: center;
-  border: 1px solid black;
+  width: 400px;
+  padding: 10px;
 
-  .activitySect {
-    padding: 20px;
-    margin: auto;
+  .ui.checkbox {
+    display: block;
+  }
+  .ui.form .fields .field {
+    margin: 0;
+    width: 100%;
+  }
+  .p1ActFilters {
+    display: flex;
+    margin-top: 15px;
+    justify-self: center;
+  }
+  .ui.radio.checkbox {
+    margin-left: 8px;
+  }
+  .ui.button {
+    width: 173px;
+    justify-self: center;
+  }
+  .completed {
+    text-decoration: line-through;
+  }
+  .p1filterAndClear {
+    display: grid;
+    text-align: center;
   }
 }
 

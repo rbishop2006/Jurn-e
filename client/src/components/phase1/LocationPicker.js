@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Form, Button, Radio } from "semantic-ui-react"
+import { Form, Button, Radio, Icon } from "semantic-ui-react"
 import { usePhase1, usePhase2 } from "../../hooks"
 import "../../styles/phase1/locations.scss"
 
@@ -37,15 +37,17 @@ export default props => {
   return (
     <div className="suggestLocDiv">
       <Form onSubmit={handleLocSug}>
-        <h3>Locations Section</h3>
+        <h3>Locations</h3>
         <Form.Group className="locationSect">
           <Form.Input
             fluid
-            label="Make a suggestion for locations"
+            label="add Suggestions for Locations here..."
             placeholder="ex. Riviera Maya"
             value={location}
             onChange={e => setLocation(e.target.value)}
           />
+        </Form.Group>
+        <Form.Group>
           <Form.Field inline>
             {locations.map((location, i) => (
               <Radio
@@ -60,13 +62,20 @@ export default props => {
           </Form.Field>
         </Form.Group>
       </Form>
-      <Form onSubmit={handleFinalLocation} className="commitLocation">
-        <Button type="submit">Commit Changes</Button>
-      </Form>
-      <h4 className="p2location">
-        Current Location:
-        {jurnInfo.location}
-      </h4>
+
+      <div className="currentLocAndButton">
+        <Form onSubmit={handleFinalLocation} className="commitLocation">
+          <Button type="submit">
+            <span>
+              {" "}
+              Save Choice <Icon name="check circle" />{" "}
+            </span>
+          </Button>
+        </Form>
+        <h4 className="p2location">
+          <span>Current Location: {jurnInfo.location}</span>
+        </h4>
+      </div>
     </div>
   )
 }

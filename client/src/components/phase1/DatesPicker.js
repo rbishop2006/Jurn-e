@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Form, Button, Radio, List, Checkbox } from "semantic-ui-react"
+import { Form, Button, Radio, List, Checkbox, Icon } from "semantic-ui-react"
 import SemanticDatepicker from "react-semantic-ui-datepickers"
 import moment from "moment"
 import { usePhase1, usePhase2 } from "../../hooks"
@@ -38,18 +38,23 @@ export default props => {
   return (
     <div className="suggestDateDiv">
       <Form onSubmit={handleDateSug}>
-        <h3>Dates Section</h3>
+        <h3>Dates</h3>
         <Form.Group className="datesSect">
           <SemanticDatepicker
             locale="en-US"
             onChange={onChange}
             type="range"
             format="MM-DD-YYYY"
-            pointing="right"
+            pointing="left"
+            label="add Suggestions for Dates here..."
             datePickerOnly={true}
             value={newRange}
           />
-          <Button type="submit">Submit Dates</Button>
+        </Form.Group>
+        <Button className="submitDates" type="submit">
+          Submit Dates
+        </Button>
+        <Form.Group>
           <Form.Field inline>
             {dateRanges.map((date, i) => (
               <Radio
@@ -70,14 +75,22 @@ export default props => {
           </Form.Field>
         </Form.Group>
       </Form>
-      <Form onSubmit={handleFinalDate} className="commitDates">
-        <Button type="submit">Commit Changes</Button>
-      </Form>
-      <h4 className="p2location">
-        Current Selected Dates:
-        {moment(jurnInfo.start_date).format("MMM Do, YYYY") + " - "}
-        {moment(jurnInfo.end_date).format("MMM Do, YYYY")}
-      </h4>
+      <div className="currentDatesAndButton">
+        <Form onSubmit={handleFinalDate} className="commitDates">
+          <Button type="submit">
+            <span>
+              {" "}
+              Save Choice <Icon name="check circle" />{" "}
+            </span>
+          </Button>
+        </Form>
+        <h4 className="commitDates">
+          Current Dates:
+          <br />
+          {moment(jurnInfo.start_date).format("MMM Do, YYYY") + " - "}
+          {moment(jurnInfo.end_date).format("MMM Do, YYYY")}
+        </h4>
+      </div>
     </div>
   )
 }

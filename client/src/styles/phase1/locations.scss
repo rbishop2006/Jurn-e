@@ -1,13 +1,19 @@
 .suggestLocDiv {
-  background: white;
-  width: 600px;
-  margin: auto;
-  display: grid;
-  justify-content: center;
-  border: 1px solid black;
+  width: 400px;
+  padding: 10px;
 
-  .locationSect {
-    padding: 20px;
-    margin: auto;
+  .locationSect.input {
+    width: 100%;
+  }
+  .ui.form .fields .field {
+    margin: 0;
+    width: 100%;
+  }
+  .ui.radio.checkbox {
+    margin-left: 8px;
+  }
+  .currentLocAndButton {
+    display: grid;
+    justify-content: center;
   }
 }

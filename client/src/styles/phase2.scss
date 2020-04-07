@@ -7,6 +7,11 @@
   background: white;
   overflow: auto;
 
+  .p2Edit {
+    display: grid;
+    justify-content: center;
+  }
+
   .p2header {
     text-align: center;
   }
@@ -18,34 +23,57 @@
     text-align: center;
   }
 
-  .p2ChecklistAndActivies {
+  .p2ChecklistAndDetails {
     margin-top: 20px;
     display: flex;
     justify-content: space-around;
 
+    .p2remindersForm {
+      border: 1px solid;
+      padding: 10px;
+      box-shadow: 5px 10px #888888;
+      padding: 10px;
+      border-radius: 5px;
+      width: 400px;
+    }
+
     .p2Checklist {
       margin-bottom: 0;
+    }
+    .P2filters {
+      display: flex;
+      margin-top: 15px;
+      justify-self: center;
+    }
+    .p2filterAndClear {
+      display: grid;
+      text-align: center;
     }
 
     .ui.checkbox {
       display: block;
+    }
+    .ui.button {
+      width: 173px;
+      justify-self: center;
     }
 
     .completed {
       text-decoration: line-through;
     }
 
-    .P2filters {
-      display: flex;
-      margin-top: 15px;
-    }
-
     .ui.radio.checkbox {
-      margin-right: 10px;
+      margin-left: 8px;
     }
     .p2details {
       display: block;
       margin-top: 0;
+      border: 1px solid;
+      padding: 10px;
+      box-shadow: 5px 10px #888888;
+      padding: 10px;
+      border-radius: 5px;
+      width: 400px;
     }
   }
 }

@@ -50,8 +50,10 @@ export default props => {
             onChange={e => setLastName(e.target.value)}
           />
         </Form.Group>
+
         <Button type="submit">Invite</Button>
       </Form>
+
       <List>
         <h3>Pending:</h3>
         {pending.map((pend, i) => (

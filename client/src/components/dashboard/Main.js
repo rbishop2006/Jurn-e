@@ -17,18 +17,20 @@ export default props => {
         {/* This is where we display info about each Jurn in the database */}
         <div className="cardDiv">
           {jurns.map((jurn, i) => (
-            <Card key={"jurn" + i} centered>
+            <Card className="cards" key={"jurn" + i} centered>
               <Image
                 className="photos"
                 src={jurn.photo}
                 alt="Jurn(ease) trip photo"
               />
               <Card.Content>
-                <Card.Header>
+                <Card.Header className="nameAndEdit">
                   {jurn.jname}
                   <Link to={"/Jurne/dashboard/" + jurn.jurn_id}>
                     <Button type="button">
-                      <Icon name="pencil" />
+                      <span>
+                        J<em>(e)</em> <Icon name="pencil" />
+                      </span>
                     </Button>
                   </Link>
                 </Card.Header>

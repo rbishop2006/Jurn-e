@@ -96,97 +96,107 @@ export default props => {
       <div>
         <Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
           <Button type="button">
-            J<em>(e)</em>
-            <Icon name="pencil" />
+            <span>
+              J<em>(e)</em>
+              {"  "} <Icon name="pencil" />
+            </span>
           </Button>
         </Link>
         <h1 className="p2header">{jurnInfo.jname} </h1>
-        <em>
-          <h3 className="p2location">{jurnInfo.location}</h3>
-        </em>
         <h4 className="p2dateRange">
           {moment(jurnInfo.start_date).format("MMM Do, YYYY") + " - "}
           {moment(jurnInfo.end_date).format("MMM Do, YYYY")}
         </h4>
+        <em></em>
       </div>
-      <div className="p2ChecklistAndActivies">
-        <div>
-          <List className="p2Checklist">
-            <Form onSubmit={handleSubmit}>
-              <Form.Input
-                fluid
-                label="add Reminders here..."
-                placeholder='ex. "arrange for a petsitter"'
-                value={reminder}
-                onChange={e => setReminder(e.target.value)}
-              />
-              <Form.Button>Submit</Form.Button>
-            </Form>
-            <h5>Reminders</h5>
+      <div className="p2ChecklistAndDetails">
+        <div className="p2remindersForm">
+          <h4>
+            My Jurn<em>(e)</em> Reminders
+          </h4>
+          <div>
+            <List className="p2Checklist">
+              <Form onSubmit={handleSubmit}>
+                <Form.Input
+                  fluid
+                  label="add Reminders here..."
+                  placeholder='ex. "arrange for a petsitter"'
+                  value={reminder}
+                  onChange={e => setReminder(e.target.value)}
+                />
+                <br />
+              </Form>
 
-            {rems.map((rem, i) => (
-              <Checkbox
-                key={"reminder" + i}
-                value={rem.rem}
-                label={
-                  rem.status === "completed" ? (
-                    <span className="completed">
-                      <Checkbox
-                        value={rem.rem}
-                        label={rem.rem}
-                        checked={rem.status === "completed"}
-                        onChange={e => toggleRem(rem.rem_id, jurn_id, user_id)}
-                      />
-                    </span>
-                  ) : (
-                    rem.rem
-                  )
-                }
-                checked={rem.status === "completed"}
-                onChange={e => toggleRem(rem.rem_id, jurn_id, user_id)}
-              />
-            ))}
-          </List>
-          <Form>
-            <Form.Field className="P2filters">
-              <Radio
-                label="All"
-                name="filterRems"
-                checked={view === "all" ? true : false}
-                onChange={e => changeView("all")}
-              />
-              <Radio
-                label="Active"
-                name="filterRems"
-                checked={view === "active" ? true : false}
-                onChange={e => changeView("active")}
-              />
-              <Radio
-                label="Completed"
-                name="filterRems"
-                checked={view === "completed" ? true : false}
-                onChange={e => changeView("completed")}
-              />
-            </Form.Field>
-            {/* </Form>
+              {rems.map((rem, i) => (
+                <Checkbox
+                  key={"reminder" + i}
+                  value={rem.rem}
+                  label={
+                    rem.status === "completed" ? (
+                      <span className="completed">
+                        <Checkbox
+                          value={rem.rem}
+                          label={rem.rem}
+                          checked={rem.status === "completed"}
+                          onChange={e =>
+                            toggleRem(rem.rem_id, jurn_id, user_id)
+                          }
+                        />
+                      </span>
+                    ) : (
+                      rem.rem
+                    )
+                  }
+                  checked={rem.status === "completed"}
+                  onChange={e => toggleRem(rem.rem_id, jurn_id, user_id)}
+                />
+              ))}
+            </List>
+            <Form className="p2filterAndClear">
+              <Form.Field className="P2filters">
+                <Radio
+                  label="All"
+                  name="filterRems"
+                  checked={view === "all" ? true : false}
+                  onChange={e => changeView("all")}
+                />
+                <Radio
+                  label="Active"
+                  name="filterRems"
+                  checked={view === "active" ? true : false}
+                  onChange={e => changeView("active")}
+                />
+                <Radio
+                  label="Completed"
+                  name="filterRems"
+                  checked={view === "completed" ? true : false}
+                  onChange={e => changeView("completed")}
+                />
+              </Form.Field>
+              {/* </Form>
           <Form onSubmit={e => clearRems(jurn_id, user_id)}>
             <Button type="submit">Clear Completed</Button>
             <h5> Reminders left: {remsCount}</h5>
           </Form> */}
-            <Button type="button" onClick={e => clearRems(jurn_id, user_id)}>
-              Clear Completed
-            </Button>
-            <h5> Reminders left: {remsCount}</h5>
-          </Form>
+              <Button type="button" onClick={e => clearRems(jurn_id, user_id)}>
+                <span>
+                  Clear Completed{"  "}
+                  <Icon name="remove circle" />
+                </span>
+              </Button>
+              <h5> Reminders left: {remsCount}</h5>
+            </Form>
+          </div>
         </div>
         <div className="p2details">
-          <h5>
+          <h4>
             Jurn
             <span>
               <em>(e)</em>
             </span>{" "}
             Details
-          </h5>
+          </h4>
+          <h3 className="p2location">{jurnInfo.location}</h3>
           <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
         </div>
       </div>
