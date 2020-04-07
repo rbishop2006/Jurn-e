@@ -7,12 +7,21 @@ import DatesPicker from "./DatesPicker"
 import LocationPicker from "./LocationPicker"
 import HotelPicker from "./HotelPicker"
 import Activities from "./Activities"
-import { usePhase1 } from "../../hooks"
+import { usePhase1, useAside } from "../../hooks"
 import "../../styles/phase1/phase1.scss"
 
-export default (props) => {
+export default props => {
   const { jname, updatePhase1 } = usePhase1()
   const jurn_id = props.match.params.jurn_id
+  const { aUser, sendDecline, fetchAside } = useAside()
+  const user_id = aUser.user_id
+
+  function handleDecline(e, jurn_id) {
+    //ask about removing prevent default, or other solution
+    e.preventDefault()
+    sendDecline(user_id, jurn_id)
+    fetchAside()
+  }
 
   useEffect(() => {
     updatePhase1(props.match.params.jurn_id)
@@ -20,6 +29,11 @@ export default (props) => {
 
   return (
     <div className="phase1">
+      <Link to="/Jurne/dashboard">
+        <Button type="button" onClick={e => handleDecline(e, jurn_id)}>
+          Remove Jurn<em>(e)</em>
+        </Button>
+      </Link>
       <h1>{jname.jname}</h1>
       <PhotoPicker match={props.match} />
       <InviteUsers match={props.match} />
