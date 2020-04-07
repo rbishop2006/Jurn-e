@@ -26,8 +26,6 @@ router.get("/main", (req, res, next) => {
             jurnIdSql += ` OR invite.jurn_id = ? `
           }
         })
-
-<<<<<<< HEAD
         const sqlJurnDetails = `SELECT jurn_Table3.jurn_id, jurn_Table3.photo, jurn_Table3.jname, jurn_Table3.location, jurn_Table3.start_date,jurn_Table3.end_date, jurn_Table3.going_count, jurn_Table3.pend_count, jurn_Table3.rem_count, COUNT(activity.act) as act_count
         FROM
         (SELECT jurn_Table2.jurn_id, jurn_Table2.photo, jurn_Table2.jname, jurn_Table2.location, jurn_Table2.start_date, jurn_Table2.end_date, jurn_Table2.going_count, jurn_Table2.pend_count, COUNT(reminder.rem) as rem_count
@@ -47,7 +45,7 @@ router.get("/main", (req, res, next) => {
         GROUP BY jurn_Table3.jurn_id`
         conn.query(
           sqlJurnDetails,
-          resultsInit.map(item => item.jurn_id),
+          resultsInit.map((item) => item.jurn_id),
           (errJurnDetails, resultsJurnDetails, fieldsJurnDetails) => {
             res.json({ main: resultsJurnDetails })
           }
@@ -55,32 +53,6 @@ router.get("/main", (req, res, next) => {
       } else {
         res.json({ main: [] })
       }
-=======
-      const sqlJurnDetails = `SELECT jurn_Table3.jurn_id, jurn_Table3.photo, jurn_Table3.jname, jurn_Table3.location, jurn_Table3.start_date,jurn_Table3.end_date, jurn_Table3.going_count, jurn_Table3.pend_count, jurn_Table3.rem_count, COUNT(activity.act) as act_count
-      FROM
-      (SELECT jurn_Table2.jurn_id, jurn_Table2.photo, jurn_Table2.jname, jurn_Table2.location, jurn_Table2.start_date, jurn_Table2.end_date, jurn_Table2.going_count, jurn_Table2.pend_count, COUNT(reminder.rem) as rem_count
-      FROM
-      (SELECT jurn_Table1.jurn_id, jurn_Table1.photo, jurn_Table1.jname, jurn_Table1.location, jurn_Table1.start_date, jurn_Table1.end_date, jurn_Table1.going_count, COUNT(invite.inv_status) as pend_count
-      FROM
-      (SELECT jurn.jurn_id, jurn.jname, jurn.photo, jurn.location, jurn.start_date, jurn.end_date, COUNT(invite.inv_status) as going_count
-      FROM jurn
-      LEFT JOIN invite ON jurn.jurn_id = invite.jurn_id
-      ${jurnIdSql} AND invite.inv_status = "accepted"
-      GROUP BY jurn.jurn_id) as jurn_Table1
-      LEFT JOIN invite ON jurn_Table1.jurn_id = invite.jurn_id AND invite.inv_status = "pending"
-      GROUP BY jurn_Table1.jurn_id) as jurn_Table2
-      LEFT JOIN reminder ON jurn_Table2.jurn_id = reminder.jurn_id AND reminder.user_id = ${user_id}
-      GROUP BY jurn_Table2.jurn_id) as jurn_Table3
-      LEFT JOIN activity ON activity.jurn_id = jurn_Table3.jurn_id
-      GROUP BY jurn_Table3.jurn_id`
-      conn.query(
-        sqlJurnDetails,
-        resultsInit.map((item) => item.jurn_id),
-        (errJurnDetails, resultsJurnDetails, fieldsJurnDetails) => {
-          res.json({ main: resultsJurnDetails })
-        }
-      )
->>>>>>> master
     })
   })
 })

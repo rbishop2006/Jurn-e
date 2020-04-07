@@ -1,17 +1,12 @@
 @import "../base.scss";
 
 .suggestDateDiv {
-<<<<<<< HEAD
-  width: 400px;
-  padding: 10px;
-=======
   background: $baseColor;
-  width: 600px;
+  width: 400px;
   margin: auto;
   display: grid;
   justify-content: center;
   border: 1px solid black;
->>>>>>> master
 
   .submitDates {
     margin-bottom: 10px;
