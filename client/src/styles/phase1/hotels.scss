@@ -1,7 +1,7 @@
 @import "../base.scss";
 
 .suggestHotDiv {
-  width: 400px;
+  width: 430px;
   padding: 10px;
 
   .hotelSect.input {
@@ -16,7 +16,7 @@
   }
   .currentHotAndButton {
     display: grid;
-    justify-content: center;
+    justify-content: right;
   }
   .commitLocation {
     justify-self: center;

@@ -1,7 +1,7 @@
 @import "../base.scss";
 
 .suggestLocDiv {
-  width: 400px;
+  width: 430px;
   padding: 10px;
 
   .locationSect.input {
@@ -16,6 +16,6 @@
   }
   .currentLocAndButton {
     display: grid;
-    justify-content: center;
+    justify-content: right;
   }
 }

@@ -1,7 +1,7 @@
 @import "../base.scss";
 
 .activitiesDiv {
-  width: 400px;
+  width: 430px;
   padding: 10px;
 
   .ui.checkbox {
@@ -30,10 +30,4 @@
     display: grid;
     text-align: center;
   }
-}
-
-.commitPlans {
-  position: absolute;
-  right: 0%;
-  top: 0%;
 }

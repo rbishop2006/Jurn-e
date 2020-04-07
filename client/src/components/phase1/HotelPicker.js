@@ -33,6 +33,9 @@ export default props => {
     <div className="suggestHotDiv">
       <Form onSubmit={handleHotSug}>
         <h3>Accommodations</h3>
+        <h4 className="">
+          <span>Current: {jurnInfo.hotel}</span>
+        </h4>
         <Form.Group className="hotelSect">
           <Form.Input
             fluid
@@ -66,9 +69,6 @@ export default props => {
             </span>
           </Button>
         </Form>
-        <h4 className="">
-          <span>Current Accommodations: {jurnInfo.hotel}</span>
-        </h4>
       </div>
     </div>
   )
