@@ -1,21 +1,25 @@
 import React, { useEffect, useRef } from "react"
-import { useChat } from "../../hooks"
+import { useMessages } from "../../hooks"
 import moment from "moment"
+import "../../styles/aside/messages.scss"
 
 export default (props) => {
-  const { messages } = useChat()
-  const chat = useRef(null)
+  const { messages } = useMessages()
+  // const jurn_id = props.match.params.jurn_id
 
-  useEffect(() => {
-    chat.current.scrollIntoView({ behavior: "smooth" })
-  }, [messages])
+  // useEffect(() => {
+  //   const checkMessages = setInterval(() => {
+  //     checkMessages(jurn_id)
+  //   }, 5000)
+  //   return () => clearInterval(checkMessages)
+  // }, [])
 
   return (
     <section className="messageArea">
       {messages.map((msg, i) => (
         <p key={"message" + i}>
           <strong>
-            <em>{msg.user}:</em>
+            <em>{msg.fname}:</em>
           </strong>
           <span
             className="message"
@@ -26,7 +30,7 @@ export default (props) => {
           <span className="timeStamp">{moment(msg.timestamp).fromNow()}</span>
         </p>
       ))}
-      <div ref={chat} />
+      <div />
     </section>
   )
 }

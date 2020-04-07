@@ -1,7 +1,5 @@
 const express = require("express")
 const app = express()
-const server = require("http").Server(app)
-const io = require("socket.io")(server)
 const postRoutes = require("./routes/post")
 const protectedPostRoutes = require("./routes/protected/protectedPost")
 const protectedGetRoutes = require("./routes/protected/protectedGet")
@@ -10,7 +8,6 @@ const protectedDeleteRoutes = require("./routes/protected/protectedDelete")
 const protectedRoutes = require("./routes/protected/protected.js")
 const expressjwt = require("express-jwt")
 const config = require("config")
-const chat = require("./chat")
 const createError = require("http-errors")
 
 const port = 3001
@@ -60,8 +57,6 @@ app.use(function (req, res, next) {
     error: err,
   })
 })
-
-chat(io)
 
 app.listen(port, () => {
   console.log(`LISTENING ON PORT ${port}`)

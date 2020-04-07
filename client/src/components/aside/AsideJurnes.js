@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Button, Menu } from "semantic-ui-react"
 import { useAside, useMain } from "../../hooks"
 import { Link } from "react-router-dom"
-import "../../styles/aside.scss"
+import "../../styles/aside/asideJurns.scss"
 
 export default (props) => {
   const {

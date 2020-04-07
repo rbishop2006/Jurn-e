@@ -40,6 +40,6 @@ $thirdColor: #1c5d99;
     border: 1px solid $highlightColor;
   }
   &:active {
-    background: lighten($bT, 12%);
+    background: lighten($bT, 20%);
   }
 }

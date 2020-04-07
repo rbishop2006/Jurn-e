@@ -1,64 +1,60 @@
 import React, { useState, useRef } from "react"
-import { useChat, useAside } from "../../hooks"
+import { useMessages, useAside } from "../../hooks"
+import { Form, Dropdown } from "semantic-ui-react"
+import "../../styles/aside/messages.scss"
 
 export default (props) => {
-  const { add } = useChat()
+  const { sendMessage, getMessages } = useMessages()
   const [message, setMessage] = useState("")
-  const { aUser } = useAside()
-  const [fontColor, setFontColor] = useState("#eeeeee")
-  const [fontSize, setFontSize] = useState("12")
+  const { aJurns, aUser } = useAside()
   const inputRef = useRef(null)
+  const timestamp = new Date().getTime()
+  const user_id = aUser.user_id
+  const [jurnId, setJurnId] = useState("")
+
+  const jurns = []
+  aJurns.map((jurn, i) => {
+    return jurns.push({
+      text: jurn.name,
+      value: jurn.id,
+      as: Dropdown.Item,
+    })
+  })
 
   function handleSubmit(e) {
     e.preventDefault()
-    add({
-      user: aUser.fname,
-      msg: message,
-      timestamp: new Date().getTime(),
-      fontColor: fontColor,
-      fontSize: fontSize,
-    })
-
+    sendMessage(user_id, jurnId, message, timestamp)
     setMessage("")
+    // getMessages()
     inputRef.current.focus()
   }
 
-  function keyUp(e) {
-    if (e.key === "Enter") {
-      handleSubmit(e)
-    }
-  }
-
   return (
-    <div className="footer">
-      <form onSubmit={handleSubmit}>
-        <div className="inputDiv">
+    <div className="messageInput">
+      <Form onSubmit={handleSubmit} className="messageForm">
+        <Form.Field>
+          <Dropdown
+            closeOnChange
+            button
+            labeled
+            icon="arrow up"
+            placeholder="Select Jurn(e) to send message to..."
+            value={jurnId}
+            onChange={(e, { value }) => setJurnId(value)}
+            options={jurns}
+          />
+        </Form.Field>
+        <Form.Field className="inputDiv">
           <input
-            style={{ color: fontColor, fontSize: fontSize + "px" }}
             className="messageText"
             value={message}
             type="text"
             onChange={(e) => setMessage(e.target.value)}
-            placeholder={"Send a message..."}
-            onKeyUp={keyUp}
+            placeholder="Send a message..."
             ref={inputRef}
           />
-          <div>
-            <input
-              className="messageColor"
-              type="color"
-              value={fontColor}
-              onChange={(e) => setFontColor(e.target.value)}
-            />
-            <input
-              className="messageSize"
-              type="text"
-              value={fontSize}
-              onChange={(e) => setFontSize(e.target.value)}
-            />
-          </div>
-        </div>
-      </form>
+        </Form.Field>
+      </Form>
     </div>
   )
 }
