@@ -5,7 +5,7 @@ import validator from "validator"
 import { Button, Form } from "semantic-ui-react"
 import "../../styles/Login.scss"
 
-export default props => {
+export default (props) => {
   const { signin } = useAuth()
   const [username, setUsername] = useState("")
   const [usernameError, setUsernameError] = useState("")
@@ -58,11 +58,13 @@ export default props => {
     }
 
     if (valid) {
-      api.post("/register", { username, fname, lname, password }).then(data => {
-        signin(username, password).then(() => {
-          props.history.push("/Jurne/dashboard")
+      api
+        .post("/register", { username, fname, lname, password })
+        .then((data) => {
+          signin(username, password).then(() => {
+            props.history.push("/Jurne/dashboard")
+          })
         })
-      })
     }
   }
 
@@ -81,7 +83,7 @@ export default props => {
             type="email"
             value={username}
             className={usernameError ? "errorBox" : ""}
-            onChange={e => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             placeholder="johnsmith@email.com"
           />
         </Form.Field>
@@ -94,7 +96,7 @@ export default props => {
             type="text"
             value={fname}
             className={fnameError ? "errorBox" : ""}
-            onChange={e => setFname(e.target.value)}
+            onChange={(e) => setFname(e.target.value)}
             placeholder="ex. John"
           />
         </Form.Field>
@@ -107,7 +109,7 @@ export default props => {
             type="text"
             value={lname}
             className={lnameError ? "errorBox" : ""}
-            onChange={e => setLname(e.target.value)}
+            onChange={(e) => setLname(e.target.value)}
             placeholder="ex. Smith"
           />
         </Form.Field>
@@ -120,7 +122,7 @@ export default props => {
             type="password"
             value={password}
             className={passwordError ? "errorBox" : ""}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Create a password"
           />
         </Form.Field>
@@ -133,7 +135,7 @@ export default props => {
             type="password"
             value={confirm}
             className={confirmError ? "errorBox" : ""}
-            onChange={e => setConfirm(e.target.value)}
+            onChange={(e) => setConfirm(e.target.value)}
             placeholder="Re-enter password"
           />
         </Form.Field>

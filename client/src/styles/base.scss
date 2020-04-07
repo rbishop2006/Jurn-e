@@ -27,6 +27,7 @@ $firstColor: #007796;
 $secondColor: #003352;
 $highlightColor: #ff8930;
 $thirdColor: #1c5d99;
+$frontPageColor: #4183c4;
 
 @mixin buttonThemed($bT) {
   background: $bT;
@@ -38,8 +39,33 @@ $thirdColor: #1c5d99;
     background: lighten($bT, 8%);
     transition: all 0.3s ease;
     border: 1px solid $highlightColor;
+    color: $baseColor;
   }
   &:active {
     background: lighten($bT, 20%);
+  }
+}
+
+@mixin formTheme($fT) {
+  border: 1px solid $fT;
+
+  div.field {
+    label {
+      color: $fT;
+    }
+
+    div.input {
+      border: 1px solid $fT;
+      border-radius: 5px;
+
+      input {
+        ::placeholder {
+          color: purple;
+        }
+      }
+      input:focus {
+        color: $fT;
+      }
+    }
   }
 }

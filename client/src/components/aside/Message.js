@@ -11,14 +11,14 @@ export default (props) => {
 
   useEffect(() => {
     const checkMessages = setInterval(() => {
-      getMessages(user_id)
+      getMessages()
     }, 5000)
     return () => clearInterval(checkMessages)
   }, [])
 
   return (
     <section className="messageArea">
-      {/* {messages.map((msg, i) => (
+      {messages.map((msg, i) => (
         <p key={"message" + i}>
           From:
           <strong>
@@ -28,7 +28,7 @@ export default (props) => {
           <span className="message">{msg.message}</span>
           <span className="timeStamp">{moment(msg.timestamp).fromNow()}</span>
         </p>
-      ))} */}
+      ))}
       <div />
     </section>
   )

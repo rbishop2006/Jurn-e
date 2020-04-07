@@ -122,44 +122,39 @@ router.get("/aside", (req, res, next) => {
   })
 })
 
-router.get("/messages/:user_id", (req, res, next) => {
-  console.log(req.profile)
-  const messageResults = {
-    messages: [],
-  }
+router.get("/messages", (req, res, next) => {
+  // const messageResults = {
+  //   messages: [],
+  // }
   const profile = decode(req.headers.authorization.substring(7))
   const email = profile.email
   const sqlId = `SELECT user_id FROM user WHERE email = ?`
   conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
     const user_id = resultsId[0].user_id
-
     const sqlJurnId = `SELECT jurn_id FROM link WHERE user_id = ${user_id}`
     conn.query(sqlJurnId, (errJurnId, resultsJurnId, fieldsJurnId) => {
-      console.log(resultsJurnId)
       if (resultsJurnId.length > 0) {
-        let sqlJurns = ""
+        let sqlJurnId = ""
         resultsJurnId.forEach((item, i) => {
-          console.log(item.jurn_id)
           if (i === 0) {
-            sqlJurns += " WHERE jurn.jurn_id = ? "
+            sqlJurnId += " WHERE jurn.jurn_id = ? "
           } else {
-            sqlJurns += ` OR jurn.jurn_id = ? `
+            sqlJurnId += ` OR jurn.jurn_id = ? `
           }
-
-          const sqlGetMsgs = `SELECT message.message, message.user_id, message.timestamp, message.msg_id, jurn.jname, user.fname, user.lname
-          FROM message
-          LEFT JOIN jurn ON message.jurn_id = jurn.jurn_id
-          LEFT JOIN user ON message.user_id = user.user_id
-          ${sqlJurns}`
-          conn.query(
-            sqlGetMsgs,
-            resultsJurnId.map((item) => item.jurn_id),
-            (errGetMsgs, resultsGetMsgs, fieldsGetMsgs) => {
-              messageResults.messages.push(resultsGetMsgs)
-              res.json({ messages: messageResults })
-            }
-          )
         })
+        const sqlGetMsgs = `SELECT message.message, message.user_id, message.timestamp, message.msg_id, jurn.jname, user.fname, user.lname
+        FROM message
+        LEFT JOIN jurn ON message.jurn_id = jurn.jurn_id
+        LEFT JOIN user ON message.user_id = user.user_id
+        ${sqlJurnId}`
+        let jId = resultsJurnId.map((item) => item.jurn_id)
+        conn.query(
+          sqlGetMsgs,
+          jId,
+          (errGetMsgs, resultsGetMsgs, fieldsGetMsgs) => {
+            res.json({ messages: resultsGetMsgs })
+          }
+        )
       } else {
         res.json({ messages: [] })
       }
