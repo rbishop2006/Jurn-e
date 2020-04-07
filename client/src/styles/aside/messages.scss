@@ -1,11 +1,35 @@
 @import "../base.scss";
 
+.messageArea {
+  height: 400px;
+  overflow: auto;
+  background: blue;
+  padding: 5px 10px;
+  overflow: auto;
+  color: white;
+
+  p {
+    font-size: 1.1em;
+    margin: 0;
+  }
+
+  .message {
+    padding: 0px 8px;
+  }
+
+  .timeStamp {
+    color: #b2b2b2;
+    font-size: 0.7em;
+  }
+}
+
 .messageInput {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 325px;
   height: 100px;
+  z-index: 2;
 
   .messageForm {
     margin: 15px 5px;

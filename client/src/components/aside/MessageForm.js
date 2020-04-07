@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react"
 import { useMessages, useAside } from "../../hooks"
 import { Form, Dropdown } from "semantic-ui-react"
+import moment from "moment"
 import "../../styles/aside/messages.scss"
 
 export default (props) => {
@@ -8,7 +9,7 @@ export default (props) => {
   const [message, setMessage] = useState("")
   const { aJurns, aUser } = useAside()
   const inputRef = useRef(null)
-  const timestamp = new Date().getTime()
+
   const user_id = aUser.user_id
   const [jurnId, setJurnId] = useState("")
 
@@ -23,9 +24,11 @@ export default (props) => {
 
   function handleSubmit(e) {
     e.preventDefault()
+    const timestamp = new Date().getTime()
+    console.log(timestamp)
     sendMessage(user_id, jurnId, message, timestamp)
     setMessage("")
-    // getMessages()
+    getMessages(user_id)
     inputRef.current.focus()
   }
 

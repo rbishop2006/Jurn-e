@@ -45,7 +45,7 @@ router.get("/main", (req, res, next) => {
       GROUP BY jurn_Table3.jurn_id`
       conn.query(
         sqlJurnDetails,
-        resultsLink.map(item => item.jurn_id),
+        resultsLink.map((item) => item.jurn_id),
         (errJurnDetails, resultsJurnDetails, fieldsJurnDetails) => {
           res.json({ main: resultsJurnDetails })
         }
@@ -59,7 +59,7 @@ router.get("/aside", (req, res, next) => {
   const asideResults = {
     jurns: [],
     user: {},
-    pendJurns: []
+    pendJurns: [],
   }
   const email = profile.email
   const sqlId = `SELECT user_id FROM user WHERE email = ?`
@@ -76,15 +76,15 @@ router.get("/aside", (req, res, next) => {
       sqlAsideJurns,
       [user_id],
       (errAsideJurns, resultsAsideJurns, fieldsAsideJurns) => {
-        resultsAsideJurns.forEach(item => {
+        resultsAsideJurns.forEach((item) => {
           if (
-            asideResults.jurns.filter(j => j.id === item.jurn_id).length > 0
+            asideResults.jurns.filter((j) => j.id === item.jurn_id).length > 0
           ) {
-            asideResults.jurns.find(j => j.id === item.jurn_id)
+            asideResults.jurns.find((j) => j.id === item.jurn_id)
           } else {
             asideResults.jurns.push({
               id: item.jurn_id,
-              name: item.jname
+              name: item.jname,
             })
           }
         })
@@ -105,10 +105,10 @@ router.get("/aside", (req, res, next) => {
               sqlPendJurn,
               [user_id],
               (errPendJurn, resultsPendJurn, filedsPendJurn) => {
-                resultsPendJurn.forEach(item => {
+                resultsPendJurn.forEach((item) => {
                   asideResults.pendJurns.push({
                     id: item.jurn_id,
-                    name: item.jname
+                    name: item.jname,
                   })
                 })
                 res.json({ aside: asideResults })
@@ -121,13 +121,30 @@ router.get("/aside", (req, res, next) => {
   })
 })
 
+router.get("/messages/:user_id", (req, res, next) => {
+  // const jurn_id = req.params.jurn_id
+  const user_id = req.params.user_id
+  const sqlGetMsgs = `SELECT message.message, message.user_id, message.timestamp, message.msg_id, jurn.jname, user.fname, user.lname
+  FROM message
+  LEFT JOIN jurn ON message.jurn_id = jurn.jurn_id
+  LEFT JOIN user ON message.user_id = user.user_id
+  WHERE user.user_id = ?`
+  conn.query(
+    sqlGetMsgs,
+    [user_id],
+    (errGetMsgs, resultsGetMsgs, fieldsGetMsgs) => {
+      res.json(resultsGetMsgs)
+    }
+  )
+})
+
 router.get("/phase1/:jurn_id", (req, res, next) => {
   const jurn_id = req.params.jurn_id
   const P1Results = {
     locations: [],
     hotels: [],
     dateRange: [],
-    jname: {}
+    jname: {},
   }
   // Where we get the Jurn name based on the Jurn Id that is sent in URL
   const sqlJname = `SELECT jname FROM jurn WHERE jurn_id = ?`
@@ -139,9 +156,9 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
       sqlLocName,
       [jurn_id],
       (errLocName, resultsLocName, fieldsLocName) => {
-        resultsLocName.forEach(item => {
+        resultsLocName.forEach((item) => {
           P1Results.locations.push({
-            location: item.loc_name
+            location: item.loc_name,
           })
         })
         // Where we retrieve the hotels associated with the Jurn ID
@@ -150,9 +167,9 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
           sqlHotName,
           [jurn_id],
           (errHotName, resultsHotName, fieldsHotName) => {
-            resultsHotName.forEach(item2 => {
+            resultsHotName.forEach((item2) => {
               P1Results.hotels.push({
-                hotel: item2.hotel_name
+                hotel: item2.hotel_name,
               })
             })
             const sqlGetDate = `SELECT start_date, end_date FROM date WHERE date.jurn_id = ?`
@@ -160,10 +177,10 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
               sqlGetDate,
               [jurn_id],
               (errGetDate, resultsGetDate, fieldsGetDate) => {
-                resultsGetDate.forEach(item3 => {
+                resultsGetDate.forEach((item3) => {
                   P1Results.dateRange.push({
                     startDate: item3.start_date,
-                    endDate: item3.end_date
+                    endDate: item3.end_date,
                   })
                 })
                 res.json({ phase1: P1Results })
@@ -181,7 +198,7 @@ router.get("/phase2/:jurn_id", (req, res, next) => {
   const P2Results = {
     jname: {},
     location: {},
-    activities: []
+    activities: [],
   }
   const sqlP2JnameLocName = `SELECT jurn.jname, jurn.location, jurn.hotel, jurn.start_date, jurn.end_date FROM jurn WHERE jurn.jurn_id = ?`
   conn.query(
@@ -196,9 +213,9 @@ router.get("/phase2/:jurn_id", (req, res, next) => {
         sqlActivities,
         [jurn_id],
         (errActivities, resultsActivities, fieldsActivities) => {
-          resultsActivities.forEach(item => {
+          resultsActivities.forEach((item) => {
             P2Results.activities.push({
-              activity: item.act
+              activity: item.act,
             })
           })
           res.json({ phase2: P2Results })
@@ -261,7 +278,7 @@ router.get("/invited/:jurn_id", (req, res, next) => {
   const invitedResults = {
     pending: [],
     accepted: [],
-    declined: []
+    declined: [],
   }
 
   const sqlAcc = `SELECT user.fname, user.lname, user.avatar 
@@ -269,11 +286,11 @@ router.get("/invited/:jurn_id", (req, res, next) => {
   LEFT JOIN user ON invite.user_id = user.user_id
   WHERE inv_status = "accepted" AND jurn_id = ?`
   conn.query(sqlAcc, [jurn_id], (errAcc, resultsAcc, fieldsAcc) => {
-    resultsAcc.forEach(item => {
+    resultsAcc.forEach((item) => {
       invitedResults.accepted.push({
         fname: item.fname,
         lname: item.lname,
-        avatar: item.avatar
+        avatar: item.avatar,
       })
     })
     const sqlPend = `SELECT user.fname, user.lname, user.avatar 
@@ -281,11 +298,11 @@ router.get("/invited/:jurn_id", (req, res, next) => {
     LEFT JOIN user ON invite.user_id = user.user_id
     WHERE inv_status = "pending" AND jurn_id = ?`
     conn.query(sqlPend, [jurn_id], (errPend, resultsPend, fieldsPend) => {
-      resultsPend.forEach(item1 => {
+      resultsPend.forEach((item1) => {
         invitedResults.pending.push({
           fname: item1.fname,
           lname: item1.lname,
-          avatar: item1.avatar
+          avatar: item1.avatar,
         })
       })
       const sqlDec = `SELECT user.fname, user.lname, user.avatar 
@@ -293,11 +310,11 @@ router.get("/invited/:jurn_id", (req, res, next) => {
       LEFT JOIN user ON invite.user_id = user.user_id
       WHERE inv_status = "declined" AND jurn_id = ?`
       conn.query(sqlDec, [jurn_id], (errDec, resultsDec, fieldsDec) => {
-        resultsDec.forEach(item1 => {
+        resultsDec.forEach((item1) => {
           invitedResults.declined.push({
             fname: item1.fname,
             lname: item1.lname,
-            avatar: item1.avatar
+            avatar: item1.avatar,
           })
         })
         res.json({ invited: invitedResults })
