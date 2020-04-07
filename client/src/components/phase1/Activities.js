@@ -38,6 +38,7 @@ export default props => {
     <div className="activitiesDiv">
       <Form onSubmit={handleActivity}>
         <h3>Activities</h3>
+        <h4> Activities left: {actsCount}</h4>
         <Form.Group className="activitySect">
           <Form.Input
             fluid
@@ -101,7 +102,6 @@ export default props => {
                 <Icon name="remove circle" />
               </span>
             </Button>
-            <h5> Activities left: {actsCount}</h5>
           </Form>
         </div>
       </Form>

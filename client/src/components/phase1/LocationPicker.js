@@ -38,6 +38,9 @@ export default props => {
     <div className="suggestLocDiv">
       <Form onSubmit={handleLocSug}>
         <h3>Locations</h3>
+        <h4 className="p2location">
+          <span>Current: {jurnInfo.location}</span>
+        </h4>
         <Form.Group className="locationSect">
           <Form.Input
             fluid
@@ -72,9 +75,6 @@ export default props => {
             </span>
           </Button>
         </Form>
-        <h4 className="p2location">
-          <span>Current Location: {jurnInfo.location}</span>
-        </h4>
       </div>
     </div>
   )

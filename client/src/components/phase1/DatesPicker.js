@@ -5,7 +5,7 @@ import moment from "moment"
 import { usePhase1, usePhase2 } from "../../hooks"
 import "../../styles/phase1/dateSuggest.scss"
 
-export default (props) => {
+export default props => {
   const { sendDates, dateRanges, updatePhase1, updateFinalDates } = usePhase1()
   const { jurnInfo, updatePhase2 } = usePhase2()
   const [newRange, setNewRange] = useState([])
@@ -39,13 +39,20 @@ export default (props) => {
     <div className="suggestDateDiv">
       <Form onSubmit={handleDateSug}>
         <h3>Dates</h3>
+        <h4 className="commitDates">
+          <span>
+            Current:{" "}
+            {moment(jurnInfo.start_date).format("MMM Do, YYYY") + " - "}
+            {moment(jurnInfo.end_date).format("MMM Do, YYYY")}
+          </span>
+        </h4>
         <Form.Group className="datesSect">
           <SemanticDatepicker
             locale="en-US"
             onChange={onChange}
             type="range"
             format="MM-DD-YYYY"
-            pointing="left"
+            pointing="right"
             label="add Suggestions for Dates here..."
             datePickerOnly={true}
             value={newRange}
@@ -66,7 +73,7 @@ export default (props) => {
                 }
                 name="radioGroup3"
                 value={date.startDate + "," + date.endDate}
-                onChange={(e) =>
+                onChange={e =>
                   setFinalDate(date.startDate + "," + date.endDate)
                 }
                 checked={date.startDate + "," + date.endDate === finalDate}
@@ -84,12 +91,6 @@ export default (props) => {
             </span>
           </Button>
         </Form>
-        <h4 className="commitDates">
-          Current Dates:
-          <br />
-          {moment(jurnInfo.start_date).format("MMM Do, YYYY") + " - "}
-          {moment(jurnInfo.end_date).format("MMM Do, YYYY")}
-        </h4>
       </div>
     </div>
   )
