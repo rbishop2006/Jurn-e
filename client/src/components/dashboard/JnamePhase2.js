@@ -6,7 +6,7 @@ import {
   Form,
   Radio,
   Button,
-  Icon,
+  Icon
 } from "semantic-ui-react"
 import { useMain, useAside } from "../../hooks"
 import { usePhase2, useRems, useInvited } from "../../hooks"
@@ -14,7 +14,7 @@ import { Link } from "react-router-dom"
 import "../../styles/phase2.scss"
 import moment from "moment"
 
-export default (props) => {
+export default props => {
   const { aUser } = useAside()
 
   const { accepted, updateInvited } = useInvited()
@@ -27,7 +27,7 @@ export default (props) => {
     toggleRem,
     filterRems,
     clearRems,
-    updateRems,
+    updateRems
   } = useRems()
 
   const jurn_id = props.match.params.jurn_id
@@ -65,7 +65,7 @@ export default (props) => {
             ))}
           </List>
         </Tab.Pane>
-      ),
+      )
     },
     {
       menuItem: `Activities (${activities.length})`,
@@ -77,7 +77,7 @@ export default (props) => {
             ))}
           </List>
         </Tab.Pane>
-      ),
+      )
     },
     {
       menuItem: "Accommodations",
@@ -87,21 +87,13 @@ export default (props) => {
             <List.Item>{jurnInfo.hotel}</List.Item>
           </List>
         </Tab.Pane>
-      ),
-    },
+      )
+    }
   ]
 
   return (
     <div className="phase2">
       <div>
-        <Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
-          <Button type="button">
-            <span>
-              J<em>(e)</em>
-              {"  "} <Icon name="pencil" />
-            </span>
-          </Button>
-        </Link>
         <h1 className="p2header">{jurnInfo.jname} </h1>
         <h4 className="p2dateRange">
           {moment(jurnInfo.start_date).format("MMM Do, YYYY") + " - "}
@@ -122,7 +114,7 @@ export default (props) => {
                   label="add Reminders here..."
                   placeholder='ex. "arrange for a petsitter"'
                   value={reminder}
-                  onChange={(e) => setReminder(e.target.value)}
+                  onChange={e => setReminder(e.target.value)}
                 />
                 <br />
               </Form>
@@ -138,7 +130,7 @@ export default (props) => {
                           value={rem.rem}
                           label={rem.rem}
                           checked={rem.status === "completed"}
-                          onChange={(e) =>
+                          onChange={e =>
                             toggleRem(rem.rem_id, jurn_id, user_id)
                           }
                         />
@@ -148,7 +140,7 @@ export default (props) => {
                     )
                   }
                   checked={rem.status === "completed"}
-                  onChange={(e) => toggleRem(rem.rem_id, jurn_id, user_id)}
+                  onChange={e => toggleRem(rem.rem_id, jurn_id, user_id)}
                 />
               ))}
             </List>
@@ -158,25 +150,22 @@ export default (props) => {
                   label="All"
                   name="filterRems"
                   checked={view === "all" ? true : false}
-                  onChange={(e) => changeView("all")}
+                  onChange={e => changeView("all")}
                 />
                 <Radio
                   label="Active"
                   name="filterRems"
                   checked={view === "active" ? true : false}
-                  onChange={(e) => changeView("active")}
+                  onChange={e => changeView("active")}
                 />
                 <Radio
                   label="Completed"
                   name="filterRems"
                   checked={view === "completed" ? true : false}
-                  onChange={(e) => changeView("completed")}
+                  onChange={e => changeView("completed")}
                 />
               </Form.Field>
-              <Button
-                type="button"
-                onClick={(e) => clearRems(jurn_id, user_id)}
-              >
+              <Button type="button" onClick={e => clearRems(jurn_id, user_id)}>
                 <span>
                   Clear Completed{"  "}
                   <Icon name="remove circle" />
@@ -198,6 +187,14 @@ export default (props) => {
           <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
         </div>
       </div>
+      <Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
+        <Button id="editButton" type="button">
+          <span>
+            J<em>(e)</em>
+            {"  "} <Icon name="pencil" />
+          </span>
+        </Button>
+      </Link>
     </div>
   )
 }

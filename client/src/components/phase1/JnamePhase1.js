@@ -77,13 +77,6 @@ export default props => {
 
   return (
     <div className="phase1">
-      <Button type="button" onClick={e => handleDecline(e, jurn_id)}>
-        <span>
-          Remove Jurn<em>(e)</em>
-          <Icon name="remove" />
-        </span>
-      </Button>
-
       <h1>{jname.jname}</h1>
       <div className="p1tableWrapper">
         <InviteUsers match={props.match} />
@@ -98,15 +91,23 @@ export default props => {
           <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
         </div>
       </div>
-
-      <Link to={"/Jurne/dashboard/final/" + jurn_id} className="commitPlans">
-        <Button type="submit">
+      <div>
+        <Button type="button" onClick={e => handleDecline(e, jurn_id)}>
           <span>
-            <Icon name="arrow right" />
-            My J<em>(e)</em>
+            Remove Jurn<em>(e)</em>
+            <Icon name="remove" />
           </span>
         </Button>
-      </Link>
+
+        <Link to={"/Jurne/dashboard/final/" + jurn_id} className="commitPlans">
+          <Button type="submit">
+            <span>
+              <Icon name="arrow right" />
+              My J<em>(e)</em>
+            </span>
+          </Button>
+        </Link>
+      </div>
     </div>
   )
 }

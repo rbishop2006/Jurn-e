@@ -51,7 +51,11 @@ export default props => {
           />
         </Form.Group>
 
-        <Button type="submit">Invite</Button>
+        <Button id="submitInvite" type="submit">
+          <span>
+            Invite <Icon name="users" />
+          </span>
+        </Button>
       </Form>
 
       <List>
