@@ -21,10 +21,11 @@ function fetchMessages(user_id) {
     api
       .get(`/messages/${user_id}`)
       .then((resp) => {
+        console.log(resp)
         dispatch({
           type: GET_MESSAGES,
           payload: {
-            msgs: resp,
+            msgs: resp.messages,
           },
         })
       })
