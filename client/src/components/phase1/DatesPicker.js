@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react"
-<<<<<<< HEAD
 import { Form, Button, Radio, List, Checkbox, Icon } from "semantic-ui-react"
-=======
-import { Form, Button, Radio } from "semantic-ui-react"
->>>>>>> master
 import SemanticDatepicker from "react-semantic-ui-datepickers"
 import moment from "moment"
 import { usePhase1, usePhase2 } from "../../hooks"
