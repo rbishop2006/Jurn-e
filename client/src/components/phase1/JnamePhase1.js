@@ -42,6 +42,14 @@ export default props => {
       )
     },
     {
+      menuItem: `Dates`,
+      render: () => (
+        <Tab.Pane attached={false}>
+          <DatesPicker match={props.match} />
+        </Tab.Pane>
+      )
+    },
+    {
       menuItem: `Locations`,
       render: () => (
         <Tab.Pane attached={false}>
@@ -57,14 +65,7 @@ export default props => {
         </Tab.Pane>
       )
     },
-    {
-      menuItem: `Dates`,
-      render: () => (
-        <Tab.Pane attached={false}>
-          <DatesPicker match={props.match} />
-        </Tab.Pane>
-      )
-    },
+
     {
       menuItem: `Activities`,
       render: () => (
@@ -77,7 +78,7 @@ export default props => {
 
   return (
     <div className="phase1">
-      <h1>{jname.jname}</h1>
+      <h1 className="p1Header">{jname.jname}</h1>
       <div className="p1tableWrapper">
         <InviteUsers match={props.match} />
 
@@ -91,7 +92,7 @@ export default props => {
           <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
         </div>
       </div>
-      <div>
+      <div className="p1FooterButtons">
         <Button type="button" onClick={e => handleDecline(e, jurn_id)}>
           <span>
             Remove Jurn<em>(e)</em>
@@ -99,7 +100,7 @@ export default props => {
           </span>
         </Button>
 
-        <Link to={"/Jurne/dashboard/final/" + jurn_id} className="commitPlans">
+        <Link to={"/Jurne/dashboard/final/" + jurn_id} className="">
           <Button type="submit">
             <span>
               <Icon name="arrow right" />

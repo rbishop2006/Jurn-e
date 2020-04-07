@@ -106,6 +106,7 @@ export default props => {
           <h4>
             My Jurn<em>(e)</em> Reminders
           </h4>
+          <h4> Reminders left: {remsCount}</h4>
           <div>
             <List className="p2Checklist">
               <Form onSubmit={handleSubmit}>
@@ -165,13 +166,13 @@ export default props => {
                   onChange={e => changeView("completed")}
                 />
               </Form.Field>
+
               <Button type="button" onClick={e => clearRems(jurn_id, user_id)}>
                 <span>
                   Clear Completed{"  "}
                   <Icon name="remove circle" />
                 </span>
               </Button>
-              <h5> Reminders left: {remsCount}</h5>
             </Form>
           </div>
         </div>
@@ -185,16 +186,16 @@ export default props => {
           </h4>
           <h3 className="p2location">{jurnInfo.location}</h3>
           <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+          <Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
+            <Button id="editButton" type="button">
+              <span>
+                J<em>(e)</em>
+                {"  "} <Icon name="pencil" />
+              </span>
+            </Button>
+          </Link>
         </div>
       </div>
-      <Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
-        <Button id="editButton" type="button">
-          <span>
-            J<em>(e)</em>
-            {"  "} <Icon name="pencil" />
-          </span>
-        </Button>
-      </Link>
     </div>
   )
 }
