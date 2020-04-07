@@ -24,11 +24,9 @@ export default (props) => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    const timestamp = new Date().getTime()
-    console.log(timestamp)
-    sendMessage(user_id, jurnId, message, timestamp)
+    sendMessage(user_id, jurnId, message)
     setMessage("")
-    getMessages(user_id)
+    getMessages()
     inputRef.current.focus()
   }
 

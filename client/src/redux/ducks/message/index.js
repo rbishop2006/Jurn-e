@@ -16,15 +16,15 @@ export default (state = initialState, action) => {
   }
 }
 
-function fetchMessages(user_id) {
+function fetchMessages() {
   return (dispatch) => {
     api
-      .get(`/messages/${user_id}`)
+      .get(`/messages`)
       .then((resp) => {
         dispatch({
           type: GET_MESSAGES,
           payload: {
-            msgs: resp,
+            msgs: resp.messages,
           },
         })
       })
@@ -32,18 +32,18 @@ function fetchMessages(user_id) {
   }
 }
 
-function createMessage(user_id, jurnId, message, timestamp) {
+function createMessage(user_id, jurnId, message) {
   return (dispatch) => {
-    api.post("/message", { user_id, jurnId, message, timestamp }).catch()
+    api.post("/message", { user_id, jurnId, message }).catch()
   }
 }
 
 export function useMessages() {
   const dispatch = useDispatch()
   const messages = useSelector((appState) => appState.MessageState.msgs)
-  const getMessages = (user_id) => dispatch(fetchMessages(user_id))
-  const sendMessage = (user_id, jurnId, message, timestamp) =>
-    dispatch(createMessage(user_id, jurnId, message, timestamp))
+  const getMessages = () => dispatch(fetchMessages())
+  const sendMessage = (user_id, jurnId, message) =>
+    dispatch(createMessage(user_id, jurnId, message))
 
   return { messages, getMessages, sendMessage }
 }

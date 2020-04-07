@@ -122,21 +122,44 @@ router.get("/aside", (req, res, next) => {
   })
 })
 
-router.get("/messages/:user_id", (req, res, next) => {
-  // const jurn_id = req.params.jurn_id
-  const user_id = req.params.user_id
-  const sqlGetMsgs = `SELECT message.message, message.user_id, message.timestamp, message.msg_id, jurn.jname, user.fname, user.lname
-  FROM message
-  LEFT JOIN jurn ON message.jurn_id = jurn.jurn_id
-  LEFT JOIN user ON message.user_id = user.user_id
-  WHERE user.user_id = ?`
-  conn.query(
-    sqlGetMsgs,
-    [user_id],
-    (errGetMsgs, resultsGetMsgs, fieldsGetMsgs) => {
-      res.json(resultsGetMsgs)
-    }
-  )
+router.get("/messages", (req, res, next) => {
+  // const messageResults = {
+  //   messages: [],
+  // }
+  const profile = decode(req.headers.authorization.substring(7))
+  const email = profile.email
+  const sqlId = `SELECT user_id FROM user WHERE email = ?`
+  conn.query(sqlId, [email], (errId, resultsId, fieldsId) => {
+    const user_id = resultsId[0].user_id
+    const sqlJurnId = `SELECT jurn_id FROM link WHERE user_id = ${user_id}`
+    conn.query(sqlJurnId, (errJurnId, resultsJurnId, fieldsJurnId) => {
+      if (resultsJurnId.length > 0) {
+        let sqlJurnId = ""
+        resultsJurnId.forEach((item, i) => {
+          if (i === 0) {
+            sqlJurnId += " WHERE jurn.jurn_id = ? "
+          } else {
+            sqlJurnId += ` OR jurn.jurn_id = ? `
+          }
+        })
+        const sqlGetMsgs = `SELECT message.message, message.user_id, message.timestamp, message.msg_id, jurn.jname, user.fname, user.lname
+        FROM message
+        LEFT JOIN jurn ON message.jurn_id = jurn.jurn_id
+        LEFT JOIN user ON message.user_id = user.user_id
+        ${sqlJurnId}`
+        let jId = resultsJurnId.map((item) => item.jurn_id)
+        conn.query(
+          sqlGetMsgs,
+          jId,
+          (errGetMsgs, resultsGetMsgs, fieldsGetMsgs) => {
+            res.json({ messages: resultsGetMsgs })
+          }
+        )
+      } else {
+        res.json({ messages: [] })
+      }
+    })
+  })
 })
 
 router.get("/phase1/:jurn_id", (req, res, next) => {
