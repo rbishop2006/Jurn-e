@@ -7,7 +7,7 @@
 }
 
 .ui.form.loginDiv {
-  @include formTheme($firstColor);
+  @include FormForm_Input($firstColor);
   width: 25%;
   margin: 200px auto;
   border: 3px solid $firstColor;
@@ -17,6 +17,11 @@
   grid-template-columns: 1fr;
   justify-items: center;
   grid-gap: 10px;
+
+  .field {
+    margin: 0;
+    width: 100%;
+  }
 
   .ui.button {
     @include buttonThemed($firstColor);
@@ -38,7 +43,7 @@
 }
 
 .ui.form.registerDiv {
-  @include formTheme($firstColor);
+  @include FormForm_Field($firstColor);
   width: 25%;
   margin: 200px auto;
   border: 3px solid $firstColor;

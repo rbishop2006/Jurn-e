@@ -46,7 +46,7 @@ $frontPageColor: #4183c4;
   }
 }
 
-@mixin formTheme($fT) {
+@mixin FormForm_Input($fT) {
   border: 1px solid $fT;
 
   div.field {
@@ -58,14 +58,35 @@ $frontPageColor: #4183c4;
       border: 1px solid $fT;
       border-radius: 5px;
 
-      input {
-        ::placeholder {
-          color: purple;
-        }
+      ::placeholder {
+        color: scale-color($secondColor, $alpha: -60%);
       }
+
       input:focus {
         color: $fT;
       }
+    }
+  }
+}
+
+@mixin FormForm_Field($fT) {
+  border: 1px solid $fT;
+
+  div.field {
+    label {
+      color: $fT;
+    }
+
+    input {
+      border: 1px solid $fT;
+      border-radius: 5px;
+    }
+
+    input:focus {
+      color: $fT;
+    }
+    ::placeholder {
+      color: scale-color($secondColor, $alpha: -60%);
     }
   }
 }
