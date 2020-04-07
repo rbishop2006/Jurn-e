@@ -8,11 +8,10 @@ export default (props) => {
   const { aUser } = useAside()
   // const jurn_id = props.match.params.jurn_id
   const user_id = aUser.user_id
-  getMessages(user_id)
 
   useEffect(() => {
     const checkMessages = setInterval(() => {
-      getMessages(user_id)
+      getMessages()
     }, 5000)
     return () => clearInterval(checkMessages)
   }, [])
@@ -21,9 +20,11 @@ export default (props) => {
     <section className="messageArea">
       {messages.map((msg, i) => (
         <p key={"message" + i}>
+          From:
           <strong>
             <em>{msg.fname}:</em>
           </strong>
+          <span>to: {msg.jname}</span>
           <span className="message">{msg.message}</span>
           <span className="timeStamp">{moment(msg.timestamp).fromNow()}</span>
         </p>

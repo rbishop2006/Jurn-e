@@ -225,13 +225,13 @@ router.post("/message", (req, res, next) => {
   const user_id = req.body.user_id
   const jurn_id = req.body.jurnId
   const message = req.body.message
-  const timestamp = req.body.timestamp
+  // const timestamp = req.body.timestamp
   const sqlMsg =
-    "INSERT INTO message (message, jurn_id, user_id, timestamp) VALUES (?, ?, ?, ?)"
+    "INSERT INTO message (message, jurn_id, user_id) VALUES (?, ?, ?)"
 
   conn.query(
     sqlMsg,
-    [message, jurn_id, user_id, timestamp],
+    [message, jurn_id, user_id],
     (errMsg, resultsMsg, fieldsMsg) => {
       res.json({
         message: "message added successfully",
