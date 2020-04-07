@@ -5,9 +5,6 @@ import "../../styles/aside/messages.scss"
 
 export default (props) => {
   const { messages, getMessages } = useMessages()
-  const { aUser } = useAside()
-  // const jurn_id = props.match.params.jurn_id
-  const user_id = aUser.user_id
 
   useEffect(() => {
     const checkMessages = setInterval(() => {
