@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react"
 import { useMessages, useAside } from "../../hooks"
 import { Form, Dropdown } from "semantic-ui-react"
-import moment from "moment"
 import "../../styles/aside/messages.scss"
 
 export default (props) => {
@@ -9,7 +8,6 @@ export default (props) => {
   const [message, setMessage] = useState("")
   const { aJurns, aUser } = useAside()
   const inputRef = useRef(null)
-
   const user_id = aUser.user_id
   const [jurnId, setJurnId] = useState("")
 

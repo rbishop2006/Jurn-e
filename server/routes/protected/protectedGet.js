@@ -123,9 +123,6 @@ router.get("/aside", (req, res, next) => {
 })
 
 router.get("/messages", (req, res, next) => {
-  // const messageResults = {
-  //   messages: [],
-  // }
   const profile = decode(req.headers.authorization.substring(7))
   const email = profile.email
   const sqlId = `SELECT user_id FROM user WHERE email = ?`
