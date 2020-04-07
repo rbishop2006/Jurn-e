@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react"
-import { Form, Button, Radio, List, Checkbox } from "semantic-ui-react"
+import { Form, Button, Radio } from "semantic-ui-react"
 import SemanticDatepicker from "react-semantic-ui-datepickers"
 import moment from "moment"
 import { usePhase1, usePhase2 } from "../../hooks"
 import "../../styles/phase1/dateSuggest.scss"
 
-export default props => {
+export default (props) => {
   const { sendDates, dateRanges, updatePhase1, updateFinalDates } = usePhase1()
   const { jurnInfo, updatePhase2 } = usePhase2()
   const [newRange, setNewRange] = useState([])
@@ -61,7 +61,7 @@ export default props => {
                 }
                 name="radioGroup3"
                 value={date.startDate + "," + date.endDate}
-                onChange={e =>
+                onChange={(e) =>
                   setFinalDate(date.startDate + "," + date.endDate)
                 }
                 checked={date.startDate + "," + date.endDate === finalDate}

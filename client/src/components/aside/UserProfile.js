@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useAuth } from "react-auth"
 import { Icon, Button, Form, Dropdown } from "semantic-ui-react"
 import { useAside } from "../../hooks"
-import "../../styles/aside.scss"
+import "../../styles/aside/userProfiles.scss"
 
 export default (props) => {
   const { signout } = useAuth()

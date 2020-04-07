@@ -1,0 +1,66 @@
+@import "../base.scss";
+
+.userProfile {
+  height: 80px;
+  padding: 5px;
+  transition: height 0.7s;
+  overflow: hidden;
+}
+
+.expand {
+  height: 425px;
+  padding: 5px;
+  transition: height 0.7s;
+  overflow: hidden;
+}
+
+.profileDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+
+  .logOut {
+    margin: 0;
+    @include buttonThemed($firstColor);
+  }
+}
+
+.user {
+  color: white;
+  padding: 0;
+  margin: 1px 2px;
+}
+
+.status {
+  width: 10px;
+  height: 10px;
+  background: greenyellow;
+  border-radius: 50%;
+}
+
+.editProfile {
+  align-self: flex-end;
+}
+
+.profileForm {
+  display: flex;
+  flex-direction: column;
+
+  .input {
+    margin: 5px 0px;
+  }
+
+  .dropdown {
+    margin: 0 0 1em 0;
+  }
+
+  .updateProfile {
+    align-self: center;
+    width: 70%;
+  }
+}

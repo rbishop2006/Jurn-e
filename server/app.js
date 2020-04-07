@@ -1,15 +1,16 @@
 const express = require("express")
+const app = express()
 const postRoutes = require("./routes/post")
 const protectedPostRoutes = require("./routes/protected/protectedPost")
 const protectedGetRoutes = require("./routes/protected/protectedGet")
 const protectedPatchRoutes = require("./routes/protected/protectedPatch")
 const protectedDeleteRoutes = require("./routes/protected/protectedDelete")
-const expressjwt = require("express-jwt")
 const protectedRoutes = require("./routes/protected/protected.js")
-const app = express()
+const expressjwt = require("express-jwt")
 const config = require("config")
-const port = 3001
 const createError = require("http-errors")
+
+const port = 3001
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -47,9 +48,8 @@ app.use(function (req, res, next) {
 // error handler
 app.use(function (req, res, next) {
   //set locals, only providing error in development
-  res.locals.message = err.messageres.locals.error =
-    req.app.get("env") === "development" ? err : {}
-
+  res.locals.message = err.message
+  res.locals.error = req.app.get("env") === "development" ? err : {}
   // render the error package
   res.status(err.status || 500)
   res.json({
