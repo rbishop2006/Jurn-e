@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Button, Form } from "semantic-ui-react"
+import { Button, Form, Icon } from "semantic-ui-react"
 import { useMain, useAside } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/dashboard.scss"
@@ -46,7 +46,11 @@ export default props => {
         </Form.Group>
       </Form>
       <Link to="/Jurne/dashboard">
-        <Button type="button">Dashboard</Button>
+        <Button type="button">
+          <span>
+            My Jurn<em>(e)</em>s <Icon name="home" />
+          </span>
+        </Button>
       </Link>
     </header>
   )

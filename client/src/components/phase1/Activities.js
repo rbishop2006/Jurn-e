@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Form, Button, Radio, Checkbox } from "semantic-ui-react"
+import { Form, Button, Radio, Checkbox, Icon } from "semantic-ui-react"
 import { usePhase1, useActs } from "../../hooks"
 import "../../styles/phase1/activities.scss"
 
@@ -37,7 +37,7 @@ export default props => {
   return (
     <div className="activitiesDiv">
       <Form onSubmit={handleActivity}>
-        <h3>Activities Section</h3>
+        <h3>Activities</h3>
         <Form.Group className="activitySect">
           <Form.Input
             fluid
@@ -71,30 +71,39 @@ export default props => {
             />
           ))}
         </Form.Field>
-        <Form.Field className="p1ActFilters">
-          <Radio
-            label="All"
-            name="filterActs"
-            checked={view === "all" ? true : false}
-            onChange={e => changeView("all")}
-          />
-          <Radio
-            label="Active"
-            name="filterActs"
-            checked={view === "active" ? true : false}
-            onChange={e => changeView("active")}
-          />
-          <Radio
-            label="Completed"
-            name="filterActs"
-            checked={view === "completed" ? true : false}
-            onChange={e => changeView("completed")}
-          />
-        </Form.Field>
-        <h5> Activities left: {actsCount}</h5>
-      </Form>
-      <Form onSubmit={e => clearActs(jurn_id)}>
-        <Button type="submit">Clear Completed</Button>
+        <div className="p1filterAndClear">
+          <Form.Field className="p1ActFilters">
+            <Radio
+              label="All"
+              name="filterActs"
+              checked={view === "all" ? true : false}
+              onChange={e => changeView("all")}
+            />
+            <Radio
+              label="Active"
+              name="filterActs"
+              checked={view === "active" ? true : false}
+              onChange={e => changeView("active")}
+            />
+            <Radio
+              label="Completed"
+              name="filterActs"
+              checked={view === "completed" ? true : false}
+              onChange={e => changeView("completed")}
+            />
+          </Form.Field>
+
+          <Form onSubmit={e => clearActs(jurn_id)}>
+            <Button type="submit">
+              {" "}
+              <span>
+                Clear Completed{"  "}
+                <Icon name="remove circle" />
+              </span>
+            </Button>
+            <h5> Activities left: {actsCount}</h5>
+          </Form>
+        </div>
       </Form>
     </div>
   )

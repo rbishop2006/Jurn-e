@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react"
-<<<<<<< HEAD
-import { Form, Button, List } from "semantic-ui-react"
-=======
 import { Form, Button, Radio, List, Checkbox, Icon } from "semantic-ui-react"
->>>>>>> master
 import { useInvited } from "../../hooks"
 import "../../styles/phase1/inviteUsers.scss"
 
-export default (props) => {
+export default props => {
   const {
     pending,
     accepted,
     declined,
     updateInvited,
-    sendInvite,
+    sendInvite
   } = useInvited()
 
   const jurn_id = props.match.params.jurn_id
@@ -44,18 +40,20 @@ export default (props) => {
             label="First Name"
             placeholder="ex. Mary"
             value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={e => setFirstName(e.target.value)}
           />
           <Form.Input
             fluid
             label="Last Name"
             placeholder="ex. Smith"
             value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={e => setLastName(e.target.value)}
           />
         </Form.Group>
+
         <Button type="submit">Invite</Button>
       </Form>
+
       <List>
         <h3>Pending:</h3>
         {pending.map((pend, i) => (

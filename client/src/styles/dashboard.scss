@@ -67,20 +67,33 @@
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-gap: 40px;
 
-      img {
-        width: 290px;
-        height: 290px;
-      }
+      .card {
+        border: 1px solid;
+        padding: 10px;
+        box-shadow: 5px 10px #888888;
+        padding: 10px;
+        border-radius: 5px;
 
-      .header {
-        display: flex;
+        .nameAndEdit {
+          display: flex;
+          justify-content: space-between;
+        }
 
-        a {
-          margin: 0;
+        img {
+          width: 290px;
+          height: 290px;
+        }
 
-          button {
-            margin: 0px 0px;
-            padding: 5px 0px 5px 5px;
+        .header {
+          display: flex;
+
+          a {
+            margin: 0;
+
+            button {
+              margin: 0px 0px;
+              padding: 5px 0px 5px 5px;
+            }
           }
         }
       }
