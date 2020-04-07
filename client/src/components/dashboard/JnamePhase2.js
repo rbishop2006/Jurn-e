@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+<<<<<<< HEAD
 import {
   List,
   Checkbox,
@@ -9,12 +10,16 @@ import {
   Icon
 } from "semantic-ui-react"
 import { useMain, useAside } from "../../hooks"
+=======
+import { List, Checkbox, Tab, Form, Radio, Button } from "semantic-ui-react"
+import { useAside } from "../../hooks"
+>>>>>>> master
 import { usePhase2, useRems, useInvited } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/phase2.scss"
 import moment from "moment"
 
-export default props => {
+export default (props) => {
   const { aUser } = useAside()
 
   const { accepted, updateInvited } = useInvited()
@@ -27,7 +32,7 @@ export default props => {
     toggleRem,
     filterRems,
     clearRems,
-    updateRems
+    updateRems,
   } = useRems()
 
   const jurn_id = props.match.params.jurn_id
@@ -65,7 +70,7 @@ export default props => {
             ))}
           </List>
         </Tab.Pane>
-      )
+      ),
     },
     {
       menuItem: `Activities (${activities.length})`,
@@ -77,7 +82,7 @@ export default props => {
             ))}
           </List>
         </Tab.Pane>
-      )
+      ),
     },
     {
       menuItem: "Accommodations",
@@ -87,8 +92,8 @@ export default props => {
             <List.Item>{jurnInfo.hotel}</List.Item>
           </List>
         </Tab.Pane>
-      )
-    }
+      ),
+    },
   ]
 
   return (
@@ -109,6 +114,7 @@ export default props => {
         </h4>
         <em></em>
       </div>
+<<<<<<< HEAD
       <div className="p2ChecklistAndDetails">
         <div className="p2remindersForm">
           <h4>
@@ -174,10 +180,75 @@ export default props => {
                 />
               </Form.Field>
               {/* </Form>
+=======
+      <div className="p2ChecklistAndActivies">
+        <div>
+          <List className="p2Checklist">
+            <Form onSubmit={handleSubmit}>
+              <Form.Input
+                fluid
+                label="add Reminders here..."
+                placeholder='ex. "arrange for a petsitter"'
+                value={reminder}
+                onChange={(e) => setReminder(e.target.value)}
+              />
+              <Form.Button>Submit</Form.Button>
+            </Form>
+            <h5>Reminders</h5>
+
+            {rems.map((rem, i) => (
+              <Checkbox
+                key={"reminder" + i}
+                value={rem.rem}
+                label={
+                  rem.status === "completed" ? (
+                    <span className="completed">
+                      <Checkbox
+                        value={rem.rem}
+                        label={rem.rem}
+                        checked={rem.status === "completed"}
+                        onChange={(e) =>
+                          toggleRem(rem.rem_id, jurn_id, user_id)
+                        }
+                      />
+                    </span>
+                  ) : (
+                    rem.rem
+                  )
+                }
+                checked={rem.status === "completed"}
+                onChange={(e) => toggleRem(rem.rem_id, jurn_id, user_id)}
+              />
+            ))}
+          </List>
+          <Form>
+            <Form.Field className="P2filters">
+              <Radio
+                label="All"
+                name="filterRems"
+                checked={view === "all" ? true : false}
+                onChange={(e) => changeView("all")}
+              />
+              <Radio
+                label="Active"
+                name="filterRems"
+                checked={view === "active" ? true : false}
+                onChange={(e) => changeView("active")}
+              />
+              <Radio
+                label="Completed"
+                name="filterRems"
+                checked={view === "completed" ? true : false}
+                onChange={(e) => changeView("completed")}
+              />
+            </Form.Field>
+            {/* </Form>
+>>>>>>> master
           <Form onSubmit={e => clearRems(jurn_id, user_id)}>
             <Button type="submit">Clear Completed</Button>
             <h5> Reminders left: {remsCount}</h5>
           </Form> */}
+<<<<<<< HEAD
               <Button type="button" onClick={e => clearRems(jurn_id, user_id)}>
                 <span>
                   Clear Completed{"  "}
@@ -187,6 +258,13 @@ export default props => {
               <h5> Reminders left: {remsCount}</h5>
             </Form>
           </div>
+=======
+            <Button type="button" onClick={(e) => clearRems(jurn_id, user_id)}>
+              Clear Completed
+            </Button>
+            <h5> Reminders left: {remsCount}</h5>
+          </Form>
+>>>>>>> master
         </div>
         <div className="p2details">
           <h4>

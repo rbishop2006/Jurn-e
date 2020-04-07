@@ -4,7 +4,7 @@ import { api } from "react-auth"
 const GET_MAIN = "MAIN/GET_Main"
 
 const initialState = {
-  jurns: []
+  jurns: [],
 }
 
 export default (state = initialState, action) => {
@@ -18,15 +18,15 @@ export default (state = initialState, action) => {
 }
 
 function getMain() {
-  return dispatch => {
+  return (dispatch) => {
     api
       .get("/main")
-      .then(resp => {
+      .then((resp) => {
         dispatch({
           type: GET_MAIN,
           payload: {
-            jurns: resp.main
-          }
+            jurns: resp.main,
+          },
         })
       })
       .catch()
@@ -37,10 +37,10 @@ function createJurn(user_id, jname) {
   return new Promise((resolve, reject) => {
     api
       .post("/jurn", { user_id, jname })
-      .then(resp => {
+      .then((resp) => {
         resolve(resp.id)
       })
-      .catch(e => {
+      .catch((e) => {
         reject()
       })
   })
@@ -48,7 +48,7 @@ function createJurn(user_id, jname) {
 
 export function useMain() {
   const dispatch = useDispatch()
-  const jurns = useSelector(appState => appState.MainState.jurns)
+  const jurns = useSelector((appState) => appState.MainState.jurns)
 
   const get = () => dispatch(getMain())
   const sendJurn = (user_id, jname) => createJurn(user_id, jname)

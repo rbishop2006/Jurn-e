@@ -1,9 +1,10 @@
 import React, { useEffect } from "react"
 import UserProfile from "./UserProfile"
 import AsideJurnes from "./AsideJurnes"
-import { Icon, Divider, Feed, List } from "semantic-ui-react"
+import Message from "./Message"
+import MessageForm from "./MessageForm"
 import { useAside } from "../../hooks"
-import "../../styles/aside.scss"
+import "../../styles/aside/aside.scss"
 
 export default (props) => {
   const { fetchAside } = useAside()
@@ -16,25 +17,9 @@ export default (props) => {
     <aside>
       <UserProfile />
       <AsideJurnes />
-      <h5>Message Area</h5>
-      <Feed>
-        <Feed.Event>
-          <Feed.Label>
-            <img src="https://place-hold.it/25" alt="placeholder" />
-          </Feed.Label>
-          <Feed.Content>
-            <Feed.Summary>
-              <Feed.User>Elliot Fu</Feed.User> added you as a friend
-              <Feed.Date>1 Hour Ago</Feed.Date>
-            </Feed.Summary>
-            <Feed.Meta>
-              <Feed.Like>
-                <Icon name="like" />4 Likes
-              </Feed.Like>
-            </Feed.Meta>
-          </Feed.Content>
-        </Feed.Event>
-      </Feed>
+      <h5>Messages</h5>
+      <Message />
+      <MessageForm />
     </aside>
   )
 }
