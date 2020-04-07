@@ -64,6 +64,7 @@ $frontPageColor: #4183c4;
 
       input:focus {
         color: $fT;
+        text-transform: capitalize;
       }
     }
   }
@@ -84,6 +85,7 @@ $frontPageColor: #4183c4;
 
     input:focus {
       color: $fT;
+      text-transform: capitalize;
     }
     ::placeholder {
       color: scale-color($secondColor, $alpha: -60%);

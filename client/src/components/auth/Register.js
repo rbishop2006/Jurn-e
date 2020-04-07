@@ -17,6 +17,7 @@ export default (props) => {
   const [passwordError, setPasswordError] = useState("")
   const [confirm, setConfirm] = useState("")
   const [confirmError, setConfirmError] = useState("")
+  console.log(fname)
 
   function handleRegister(e) {
     e.preventDefault()
@@ -96,7 +97,7 @@ export default (props) => {
             type="text"
             value={fname}
             className={fnameError ? "errorBox" : ""}
-            onChange={(e) => setFname(e.target.value)}
+            onChange={(e) => setFname(e.target.value.toLowerCase())}
             placeholder="ex. John"
           />
         </Form.Field>
@@ -109,7 +110,7 @@ export default (props) => {
             type="text"
             value={lname}
             className={lnameError ? "errorBox" : ""}
-            onChange={(e) => setLname(e.target.value)}
+            onChange={(e) => setLname(e.target.value.toLowerCase())}
             placeholder="ex. Smith"
           />
         </Form.Field>
