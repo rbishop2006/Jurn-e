@@ -50,7 +50,7 @@ export default props => {
             onChange={e => setLocation(e.target.value)}
           />
         </Form.Group>
-        <Form.Group>
+        <Form.Group className="locRadios">
           <Form.Field inline>
             {locations.map((location, i) => (
               <Radio

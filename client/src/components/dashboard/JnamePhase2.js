@@ -106,7 +106,7 @@ export default props => {
           <h4>
             My Jurn<em>(e)</em> Reminders
           </h4>
-          <h4> Reminders left: {remsCount}</h4>
+          <h4> My Reminders left: {remsCount}</h4>
           <div>
             <List className="p2Checklist">
               <Form onSubmit={handleSubmit}>

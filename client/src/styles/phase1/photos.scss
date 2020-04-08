@@ -2,14 +2,27 @@
 
 .photoDiv {
   .photoForm {
-    width: 430px;
+    width: 400px;
     padding: 10px;
 
     .photoSel {
       display: flex;
-      border: 1px solid black;
+      border: 1px solid $thirdColor;
       padding: 2px;
       border-radius: 3px;
+
+      .ui.button {
+        color: $baseColor;
+        background-color: $firstColor;
+      }
+
+      .ui.dropdown > .text {
+        color: $thirdColor;
+      }
+      .ui.dropdown > .dropdown.icon:before {
+        color: $highlightColor;
+        font-size: larger;
+      }
 
       .ui.button {
         margin: 0;
@@ -20,6 +33,9 @@
       width: 325px;
 
       div {
+        button {
+          @include buttonThemed($firstColor);
+        }
         div {
           display: flex;
           align-items: center;
@@ -28,6 +44,13 @@
             width: 75px;
             height: 75px;
             max-height: 75px;
+          }
+        }
+      }
+      div.visible {
+        div {
+          span {
+            color: $firstColor;
           }
         }
       }
