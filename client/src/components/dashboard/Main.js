@@ -34,7 +34,7 @@ export default props => {
                     </Button>
                   </Link>
                 </Card.Header>
-                <Card.Meta>{jurn.location}</Card.Meta>
+                <Card.Meta id="location">{jurn.location}</Card.Meta>
                 <Card.Meta>
                   {moment(jurn.start_date).format("MMM Do, YYYY") + " - "}
                   {moment(jurn.end_date).format("MMM Do, YYYY")}

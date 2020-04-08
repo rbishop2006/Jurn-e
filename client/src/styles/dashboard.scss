@@ -78,6 +78,15 @@
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-gap: 40px;
 
+      #location {
+        color: $firstColor;
+        font-weight: 600;
+      }
+
+      .ui.card .meta {
+        color: $thirdColor;
+      }
+
       .card {
         border: 1px solid $thirdColor;
         padding: 10px;
@@ -88,6 +97,7 @@
         .nameAndEdit {
           display: flex;
           justify-content: space-between;
+          color: $firstColor;
         }
 
         img {
@@ -104,6 +114,7 @@
             button {
               margin: 0px 0px;
               padding: 5px 0px 5px 5px;
+              @include buttonThemed($firstColor);
             }
           }
         }
