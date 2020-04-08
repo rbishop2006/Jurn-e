@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Button, Menu } from "semantic-ui-react"
+import { Button, Menu, Icon } from "semantic-ui-react"
 import { useAside, useMain } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/aside/asideJurns.scss"
@@ -39,7 +39,7 @@ export default (props) => {
   return (
     <div className="jurnesDiv">
       <h5>
-        My Jurn<em>(e)</em>s
+        My Jurn(<em>e</em>)s
       </h5>
       <div className="jurnList">
         {aJurns.map((jurn, i) => (
@@ -47,6 +47,10 @@ export default (props) => {
             <Menu id="menu">
               <Menu.Item name={jurn.name} active={true} id="menuItem">
                 <p>{jurn.name}</p>
+                <span>
+                  My J<em>(e)</em>
+                  <Icon name="arrow right" />
+                </span>
               </Menu.Item>
             </Menu>
           </Link>
@@ -56,7 +60,7 @@ export default (props) => {
         className="viewPending"
         onClick={(e) => (!hidden2 ? setHidden2(true) : setHidden2(false))}
       >
-        Jurn<em>(e)</em> invitations ({pendCount})
+        Jurn(<em>e</em>) invitations (<span>{pendCount}</span>)
       </Button>
       <div className={hidden2 ? "expand2" : "pendList"}>
         {pendingJurns.map((pendJurn, i) => (

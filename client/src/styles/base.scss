@@ -35,6 +35,14 @@ $frontPageColor: #4183c4;
   border: 1px solid $secondColor;
   transition: all 0.3s ease;
 
+  i {
+    color: $highlightColor;
+  }
+
+  em {
+    color: $highlightColor;
+  }
+
   &:hover {
     background: lighten($bT, 8%);
     transition: all 0.3s ease;

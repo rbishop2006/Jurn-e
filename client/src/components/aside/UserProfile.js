@@ -89,7 +89,8 @@ export default (props) => {
         className="editProfile"
         onClick={(e) => (!hidden ? setHidden(true) : setHidden(false))}
       >
-        <Icon name="pencil" />
+        Edit
+        {/* <Icon name="pencil" /> */}
       </Button>
 
       <Form className="profileForm" onSubmit={updateProfile}>

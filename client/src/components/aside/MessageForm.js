@@ -36,7 +36,7 @@ export default (props) => {
             closeOnChange
             button
             labeled
-            icon="arrow up"
+            icon="arrow down"
             placeholder="Select Jurn(e) to send message to..."
             value={jurnId}
             onChange={(e, { value }) => setJurnId(value)}

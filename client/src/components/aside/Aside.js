@@ -17,7 +17,9 @@ export default (props) => {
     <aside>
       <UserProfile />
       <AsideJurnes />
-      <h5>Messages</h5>
+      <h5>
+        Jurn(<em>e</em>) Messages
+      </h5>
       <MessageForm />
       <Message />
     </aside>

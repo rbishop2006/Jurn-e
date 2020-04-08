@@ -49,14 +49,14 @@ i {
 
 .ui.button.editProfile {
   @include buttonThemed($firstColor);
-  padding: 4px 9px 4px 20px;
+  padding: 4px 9px 4px 9px;
 
   i {
     color: $baseColor;
   }
 }
 
-.profileForm {
+.ui.form.profileForm {
   @include FormForm_Input($firstColor);
   display: flex;
   flex-direction: column;
@@ -70,7 +70,7 @@ i {
     margin: 0 0 1em 0;
 
     i {
-      color: $secondColor;
+      color: $highlightColor;
     }
 
     div.default {
@@ -83,15 +83,22 @@ i {
     border: 1px solid $highlightColor;
 
     i {
-      color: $secondColor;
+      color: $highlightColor;
     }
 
     div.default {
       color: $baseColor;
     }
 
-    div.visible div span {
-      color: $firstColor;
+    div.visible {
+      div {
+        i {
+          color: $secondColor;
+        }
+        span {
+          color: $firstColor;
+        }
+      }
     }
   }
 
