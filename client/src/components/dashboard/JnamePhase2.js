@@ -8,7 +8,7 @@ import {
   Button,
   Icon
 } from "semantic-ui-react"
-import { useMain, useAside } from "../../hooks"
+import { useAside } from "../../hooks"
 import { usePhase2, useRems, useInvited } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/phase2.scss"
@@ -63,7 +63,7 @@ export default props => {
                 <List.Content>
                   {accept.fname + " " + accept.lname + " "}
                   <span className="phoneNumber">
-                    {"ph." + " " + "222-222-2222" + " "}
+                    {"ph." + " " + accept.phone + " "}
                     <Icon name="phone" />
                   </span>
                 </List.Content>
