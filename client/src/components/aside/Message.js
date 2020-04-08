@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react"
-import { useMessages, useAside } from "../../hooks"
+import React, { useEffect } from "react"
+import { useMessages } from "../../hooks"
 import moment from "moment"
 import "../../styles/aside/messages.scss"
 
@@ -17,12 +17,14 @@ export default (props) => {
     <section className="messageArea">
       {messages.map((msg, i) => (
         <p key={"message" + i}>
-          From:
-          <strong>
-            <em>{msg.fname}:</em>
-          </strong>
-          <span>to: {msg.jname}</span>
-          <span className="message">{msg.message}</span>
+          <span className="jurnName">{msg.jname}: </span>
+          <span className="message">{msg.message} </span>
+          <span>From: </span>
+          <span>
+            <strong>
+              <em>{msg.fname} </em>
+            </strong>
+          </span>
           <span className="timeStamp">{moment(msg.timestamp).fromNow()}</span>
         </p>
       ))}

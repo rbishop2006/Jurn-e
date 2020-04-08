@@ -28,13 +28,13 @@
     }
 
     .ui.form {
+      @include FormForm_Field($firstColor);
       width: 50%;
 
-      .inline,
-      .fields {
+      .inline.fields {
         margin: 0;
 
-        .field {
+        div.field {
           padding: 0;
           width: 100%;
           display: grid;
@@ -42,13 +42,24 @@
 
           input {
             width: 100%;
+            color: $firstColor;
+            margin: 0;
+          }
+
+          input:focus {
+            border: 1.4px solid $secondColor;
           }
 
           button {
+            @include buttonThemed($firstColor);
             width: 50%;
           }
         }
       }
+    }
+
+    .ui.button {
+      @include buttonThemed($firstColor);
     }
   }
 
