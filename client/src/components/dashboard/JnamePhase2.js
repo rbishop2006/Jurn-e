@@ -60,7 +60,13 @@ export default props => {
             {accepted.map((accept, i) => (
               <List.Item key={"accept" + i}>
                 <List.Icon name={accept.avatar} />
-                <List.Content>{accept.fname + " " + accept.lname}</List.Content>
+                <List.Content>
+                  {accept.fname + " " + accept.lname + " "}
+                  <span className="phoneNumber">
+                    {"ph." + " " + "222-222-2222" + " "}
+                    <Icon name="phone" />
+                  </span>
+                </List.Content>
               </List.Item>
             ))}
           </List>

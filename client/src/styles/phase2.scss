@@ -15,25 +15,30 @@
   }
 
   .p2header {
+    margin-top: 30px;
     text-align: center;
+    color: $firstColor;
   }
   .p2location {
     text-align: center;
+    color: $firstColor;
   }
 
   .p2dateRange {
     text-align: center;
+    color: $firstColor;
   }
 
   .p2ChecklistAndDetails {
     margin-top: 20px;
     display: flex;
     justify-content: space-around;
+    color: $firstColor;
 
     .p2remindersForm {
-      border: 1px solid;
+      border: 1px solid $thirdColor;
       padding: 10px;
-      box-shadow: 5px 10px #888888;
+      box-shadow: 5px 10px $firstColor;
       padding: 10px;
       border-radius: 5px;
       width: 400px;
@@ -41,6 +46,7 @@
 
     .p2Checklist {
       margin-bottom: 0;
+      @include FormForm_Input($secondColor);
     }
     .P2filters {
       display: flex;
@@ -60,6 +66,15 @@
       width: 173px;
       justify-self: center;
     }
+    .ui.checkbox input.hidden + label {
+      color: $firstColor;
+    }
+    .ui.radio.checkbox label:before {
+      border-color: $firstColor;
+    }
+    .ui.checkbox label:before {
+      border-color: $firstColor;
+    }
 
     .completed {
       text-decoration: line-through;
@@ -71,12 +86,26 @@
     .p2details {
       display: block;
       margin-top: 0;
-      border: 1px solid;
+      border: 1px solid $thirdColor;
       padding: 10px;
-      box-shadow: 5px 10px #888888;
+      box-shadow: 5px 10px $firstColor;
       padding: 10px;
       border-radius: 5px;
       width: 400px;
+    }
+
+    .phoneNumber {
+      font-size: 0.8em;
+    }
+    .ui.secondary.pointing.menu .active.item {
+      color: $highlightColor;
+    }
+    .ui.menu .item {
+      color: $thirdColor;
+    }
+
+    .ui.tab.active {
+      border-color: $firstColor;
     }
   }
   #editButton {
