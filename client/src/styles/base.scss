@@ -47,8 +47,6 @@ $frontPageColor: #4183c4;
 }
 
 @mixin FormForm_Input($fT) {
-  border: 1px solid $fT;
-
   div.field {
     label {
       color: $fT;
@@ -57,6 +55,7 @@ $frontPageColor: #4183c4;
     div.input {
       border: 1px solid $fT;
       border-radius: 5px;
+      color: $fT;
 
       ::placeholder {
         color: scale-color($secondColor, $alpha: -60%);
@@ -64,28 +63,29 @@ $frontPageColor: #4183c4;
 
       input:focus {
         color: $fT;
-        text-transform: capitalize;
+        color: darken($fT, 10%);
+        border-color: $secondColor;
       }
     }
   }
 }
 
-@mixin FormForm_Field($fT) {
-  border: 1px solid $fT;
-
+@mixin FormForm_Field($fT2) {
   div.field {
     label {
-      color: $fT;
+      color: $fT2;
     }
 
     input {
-      border: 1px solid $fT;
+      color: $fT2;
+      border: 1px solid $fT2;
       border-radius: 5px;
     }
 
     input:focus {
-      color: $fT;
-      text-transform: capitalize;
+      color: $fT2;
+      color: darken($fT2, 10%);
+      border-color: $secondColor;
     }
     ::placeholder {
       color: scale-color($secondColor, $alpha: -60%);
