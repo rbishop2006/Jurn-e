@@ -4,7 +4,8 @@
   width: 430px;
   padding: 10px;
 
-  .locationSect.input {
+  .locationSect {
+    @include FormForm_Input($secondColor);
     width: 100%;
   }
   .ui.form .fields .field {
