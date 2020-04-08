@@ -17,6 +17,11 @@ export default (props) => {
   const [passwordError, setPasswordError] = useState("")
   const [confirm, setConfirm] = useState("")
   const [confirmError, setConfirmError] = useState("")
+  const fname2 = fname.toLowerCase()
+  const lname2 = lname.toLowerCase()
+
+  console.log(fname, fname2)
+  console.log(lname, lname2)
 
   function handleRegister(e) {
     e.preventDefault()
@@ -59,7 +64,7 @@ export default (props) => {
 
     if (valid) {
       api
-        .post("/register", { username, fname, lname, password })
+        .post("/register", { username, fname2, lname2, password })
         .then((data) => {
           signin(username, password).then(() => {
             props.history.push("/Jurne/dashboard")
