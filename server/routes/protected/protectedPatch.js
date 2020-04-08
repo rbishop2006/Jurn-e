@@ -10,7 +10,7 @@ router.patch("/remcomplete", (req, res, next) => {
     [rem_id],
     (errremComplete, resultsremComplete, fieldsremComplete) => {
       res.json({
-        message: "status updated to completed"
+        message: "status updated to completed",
       })
     }
   )
@@ -26,7 +26,7 @@ router.patch("/reminder", (req, res, next) => {
     [status, rem_id],
     (errToggleRem, resultsToggleRem, fieldsToggleRem) => {
       res.json({
-        message: "status updated"
+        message: "status updated",
       })
     }
   )
@@ -41,7 +41,7 @@ router.patch("/actcomplete", (req, res, next) => {
     [act_id],
     (erractComplete, resultsactComplete, fieldsactComplete) => {
       res.json({
-        message: "status updated to completed"
+        message: "status updated to completed",
       })
     }
   )
@@ -57,7 +57,7 @@ router.patch("/activity", (req, res, next) => {
     [status, act_id],
     (errToggleAct, resultsToggleAct, fieldsToggleAct) => {
       res.json({
-        message: "status updated"
+        message: "status updated",
       })
     }
   )
@@ -77,7 +77,7 @@ router.patch("/updateprofile", (req, res, next) => {
     [fname, lname, cellphone, avatar, user_id],
     (errProf, resultsProf, fieldsProf) => {
       res.json({
-        message: "profile updated"
+        message: "profile updated",
       })
     }
   )
@@ -127,12 +127,19 @@ router.patch("/updateaccept", (req, res, next) => {
           jurn_id,
           user_id,
           jurn_id,
-          user_id
+          user_id,
         ],
         (errR, resultsR, fieldsR) => {
-          res.json({
-            message: "invite status updated"
-          })
+          const sqlInLink = `INSERT INTO link (jurn_id, user_id) VALUES(?, ?)`
+          conn.query(
+            sqlInLink,
+            [jurn_id, user_id],
+            (errInLink, resultsInLink, fieldsInLink) => {
+              res.json({
+                message: "invite status updated and link added",
+              })
+            }
+          )
         }
       )
     }
@@ -150,7 +157,7 @@ router.patch("/updatedecline", (req, res, next) => {
     [user_id, jurn_id],
     (errDecline, resultsDecline, fieldsDecline) => {
       res.json({
-        message: "invite status updated"
+        message: "invite status updated",
       })
     }
   )

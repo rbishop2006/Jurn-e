@@ -1,6 +1,7 @@
 @import "../base.scss";
 
 h5 {
+  color: $secondColor;
   text-align: center;
   margin: 4px 0px;
 }
@@ -16,6 +17,7 @@ h5 {
     overflow: auto;
 
     #menu {
+      box-shadow: 0 1px 2px 0 $firstColor;
       margin: 10px auto;
       width: 90%;
 
@@ -23,19 +25,21 @@ h5 {
         width: 100%;
 
         p {
+          color: $secondColor;
           margin: 0;
         }
       }
     }
   }
 
-  .viewPending {
+  .ui.button.viewPending {
+    @include buttonThemed($firstColor);
     width: 70%;
     align-self: center;
   }
 
   .pendList {
-    height: 230px;
+    height: 170px;
     overflow: auto;
     transition: height 0.7s;
   }
@@ -56,6 +60,7 @@ h5 {
       padding: 3px 0px;
 
       p {
+        color: $secondColor;
         text-align: center;
         margin: 0px 0px 5px 0px;
       }
@@ -63,6 +68,10 @@ h5 {
       div {
         display: flex;
         justify-content: space-around;
+
+        button {
+          @include buttonThemed($firstColor);
+        }
       }
     }
   }

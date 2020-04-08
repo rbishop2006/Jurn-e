@@ -18,8 +18,8 @@ export default (props) => {
       <UserProfile />
       <AsideJurnes />
       <h5>Messages</h5>
-      <Message />
       <MessageForm />
+      <Message />
     </aside>
   )
 }

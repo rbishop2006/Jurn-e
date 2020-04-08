@@ -8,8 +8,8 @@ const randomString = require("../utils/randomstring.js")
 
 router.post("/register", (req, res, next) => {
   const email = req.body.username
-  const fname = req.body.fname2
-  const lname = req.body.lname2
+  const fname = req.body.fname
+  const lname = req.body.lname
   const fam_id = req.body.fam_id
   const cell_phone = req.body.cell_phone
   const salt = randomString(20)

@@ -57,6 +57,10 @@
   .field {
     margin: 0;
     width: 100%;
+
+    input:focus {
+      border: 1.5px solid $firstColor;
+    }
   }
 
   .ui.button {
