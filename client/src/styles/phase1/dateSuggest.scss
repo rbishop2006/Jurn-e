@@ -10,12 +10,32 @@
   .submitDates {
     margin-bottom: 10px;
   }
+  .datesSect {
+    @include FormForm_Input($secondColor);
+  }
+  .ui.button {
+    @include buttonThemed($firstColor);
+  }
+
+  .photoForm {
+    .ui.active {
+      color: orange;
+    }
+  }
+
+  .ui.checkbox input.hidden + label {
+    color: $firstColor;
+  }
+  .ui.radio.checkbox label:before {
+    border-color: $firstColor;
+  }
 
   .currentDatesAndButton {
     display: grid;
     justify-content: right;
-  }
-  .commitDates {
-    justify-self: center;
+
+    button {
+      @include buttonThemed($firstColor);
+    }
   }
 }

@@ -10,30 +10,44 @@
   overflow: auto;
 
   .p1Header {
+    margin-top: 30px;
     text-align: center;
+    color: $firstColor;
   }
 
   .p1tableWrapper {
     display: flex;
     justify-content: space-around;
+    color: $firstColor;
 
     .selectionsMenu {
-      border: 1px solid black;
+      border: 1px solid $thirdColor;
       padding: 10px;
-      box-shadow: 5px 10px #888888;
+      box-shadow: 5px 10px $firstColor;
       border-radius: 5px;
       margin-top: 0;
       width: 480px;
+
+      .ui.secondary.pointing.menu .active.item {
+        color: $highlightColor;
+      }
+      .ui.menu .item {
+        color: $thirdColor;
+      }
+
+      .ui.tab.active {
+        border-color: $highlightColor;
+      }
     }
   }
-
-  // h1 {
-  //   text-align: center;
-  // }
   .p1FooterButtons {
     display: flex;
     justify-content: space-around;
     margin-top: 30px;
     margin-bottom: 30px;
+
+    button {
+      @include buttonThemed($firstColor);
+    }
   }
 }

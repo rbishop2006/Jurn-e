@@ -4,7 +4,8 @@
   width: 430px;
   padding: 10px;
 
-  .locationSect.input {
+  .locationSect {
+    @include FormForm_Input($secondColor);
     width: 100%;
   }
   .ui.form .fields .field {
@@ -14,8 +15,18 @@
   .ui.radio.checkbox {
     margin-left: 8px;
   }
+  .ui.checkbox input.hidden + label {
+    color: $firstColor;
+  }
+  .ui.radio.checkbox label:before {
+    border-color: $firstColor;
+  }
   .currentLocAndButton {
     display: grid;
     justify-content: right;
+
+    button {
+      @include buttonThemed($firstColor);
+    }
   }
 }

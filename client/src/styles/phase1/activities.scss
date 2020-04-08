@@ -7,14 +7,28 @@
   .ui.checkbox {
     display: block;
   }
+  .activitySect {
+    @include FormForm_Input($secondColor);
+  }
+
   .ui.form .fields .field {
     margin: 0;
+
     width: 100%;
   }
   .p1ActFilters {
     display: flex;
     margin-top: 15px;
     justify-self: center;
+  }
+  .ui.checkbox input.hidden + label {
+    color: $firstColor;
+  }
+  .ui.radio.checkbox label:before {
+    border-color: $firstColor;
+  }
+  .ui.checkbox label:before {
+    border-color: $firstColor;
   }
   .ui.radio.checkbox {
     margin-left: 8px;
@@ -29,5 +43,9 @@
   .p1filterAndClear {
     display: grid;
     text-align: center;
+
+    button {
+      @include buttonThemed($firstColor);
+    }
   }
 }

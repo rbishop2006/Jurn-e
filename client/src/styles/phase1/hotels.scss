@@ -4,7 +4,8 @@
   width: 430px;
   padding: 10px;
 
-  .hotelSect.input {
+  .hotelSect {
+    @include FormForm_Input($secondColor);
     width: 100%;
   }
   .ui.form .fields .field {
@@ -17,8 +18,18 @@
   .currentHotAndButton {
     display: grid;
     justify-content: right;
+
+    button {
+      @include buttonThemed($firstColor);
+    }
   }
   .commitLocation {
     justify-self: center;
+  }
+  .ui.checkbox input.hidden + label {
+    color: $firstColor;
+  }
+  .ui.radio.checkbox label:before {
+    border-color: $firstColor;
   }
 }

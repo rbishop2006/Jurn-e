@@ -43,7 +43,7 @@ export default props => {
                 <Card.Meta>{`Pending invites: ` + jurn.pend_count}</Card.Meta>
                 <Card.Meta>{`Activities planned: ` + jurn.act_count}</Card.Meta>
 
-                <Card.Meta>{`Reminders Left: ` + jurn.rem_count}</Card.Meta>
+                <Card.Meta>{`My Reminders Left: ` + jurn.rem_count}</Card.Meta>
               </Card.Content>
             </Card>
           ))}

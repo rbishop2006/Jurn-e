@@ -56,6 +56,7 @@
       display: block;
     }
     .ui.button {
+      @include buttonThemed($firstColor);
       width: 173px;
       justify-self: center;
     }
@@ -80,6 +81,6 @@
   }
   #editButton {
     margin-top: 18px;
-    width: 85px;
+    width: 90px;
   }
 }
