@@ -75,7 +75,7 @@ export default (props) => {
     <div className={hidden ? "userProfile" : "expand"}>
       <div className="profileDiv">
         <div>
-          <Icon name={aUser.avatar} color="grey" size="big" />
+          <Icon name={aUser.avatar} size="big" />
           <p className="user">
             {aUser.fname} {aUser.lname}
           </p>

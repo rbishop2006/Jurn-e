@@ -1,14 +1,14 @@
 @import "../base.scss";
 
 .userProfile {
-  height: 80px;
+  height: 71px;
   padding: 5px;
   transition: height 0.7s;
   overflow: hidden;
 }
 
 .expand {
-  height: 425px;
+  height: 415px;
   padding: 5px;
   transition: height 0.7s;
   overflow: hidden;
@@ -30,8 +30,12 @@
   }
 }
 
+i {
+  color: $secondColor;
+}
+
 .user {
-  color: white;
+  color: $firstColor;
   padding: 0;
   margin: 1px 2px;
 }
@@ -39,15 +43,21 @@
 .status {
   width: 10px;
   height: 10px;
-  background: greenyellow;
+  background: $highlightColor;
   border-radius: 50%;
 }
 
-.editProfile {
-  align-self: flex-end;
+.ui.button.editProfile {
+  @include buttonThemed($firstColor);
+  padding: 4px 9px 4px 20px;
+
+  i {
+    color: $baseColor;
+  }
 }
 
 .profileForm {
+  @include FormForm_Input($firstColor);
   display: flex;
   flex-direction: column;
 
@@ -56,10 +66,37 @@
   }
 
   .dropdown {
+    @include buttonThemed($firstColor);
     margin: 0 0 1em 0;
+
+    i {
+      color: $secondColor;
+    }
+
+    div.default {
+      color: $baseColor;
+    }
+  }
+
+  .ui.active {
+    @include buttonThemed($firstColor);
+    border: 1px solid $highlightColor;
+
+    i {
+      color: $secondColor;
+    }
+
+    div.default {
+      color: $baseColor;
+    }
+
+    div.visible div span {
+      color: $firstColor;
+    }
   }
 
   .updateProfile {
+    @include buttonThemed($firstColor);
     align-self: center;
     width: 70%;
   }

@@ -3,30 +3,30 @@
 .messageArea {
   height: 400px;
   overflow: auto;
-  background: blue;
+  background: $baseColor;
   padding: 5px 10px;
-  overflow: auto;
-  color: white;
 
   p {
     font-size: 1.1em;
     margin: 0;
-  }
 
-  .message {
-    padding: 0px 8px;
-  }
+    .jurnName {
+      color: $secondColor;
+    }
 
-  .timeStamp {
-    color: #b2b2b2;
-    font-size: 0.7em;
+    .message {
+      color: $firstColor;
+      padding: 0px 8px;
+    }
+
+    .timeStamp {
+      color: $highlightColor;
+      font-size: 0.7em;
+    }
   }
 }
 
 .messageInput {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 325px;
   height: 100px;
   z-index: 2;
@@ -34,49 +34,50 @@
   .messageForm {
     margin: 15px 5px;
 
+    .ui.button.dropdown {
+      color: $firstColor;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+
+      i {
+        color: $highlightColor;
+      }
+    }
+
+    .ui.button.dropdown .menu {
+      color: $secondColor;
+      box-shadow: 0 2px 3px 0 $firstColor;
+      border: 1px solid $firstColor;
+      margin: 10px 0px;
+
+      div span {
+        color: $secondColor;
+      }
+    }
+
     .inputDiv {
       display: flex;
-      border: 1px solid black;
+      border: 1px solid $firstColor;
       border-radius: 10px;
       align-items: center;
       height: 40px;
 
       .messageText {
-        // color: $firstColor;
+        color: $firstColor;
         flex-grow: 2;
         background: transparent;
         border: 0;
         padding: 5px;
         outline: 0;
-
-        .messageText::placeholder {
-          color: $firstColor;
-        }
       }
 
-      .fontColorDiv {
-        display: flex;
-        align-items: center;
-        margin: 0px 5px;
-        justify-content: flex-end;
+      .messageText::placeholder {
+        color: $firstColor;
+      }
 
-        .messageColor {
-          width: 20px;
-          height: 20px;
-          background: transparent;
-          cursor: pointer;
-          border: transparent;
-        }
-
-        .messageSize {
-          background: transparent;
-          width: 20px;
-          height: 20px;
-          color: #0000ff;
-          border: 1px solid black;
-          text-align: center;
-          cursor: pointer;
-        }
+      .messageText:focus {
+        color: $firstColor;
       }
     }
   }
