@@ -29,7 +29,7 @@ export default props => {
                   <Link to={"/Jurne/dashboard/" + jurn.jurn_id}>
                     <Button type="button">
                       <span>
-                        J<em>(e)</em> <Icon name="pencil" />
+                        J(<em>e</em>) <Icon name="pencil" />
                       </span>
                     </Button>
                   </Link>

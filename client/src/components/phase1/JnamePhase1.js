@@ -84,10 +84,7 @@ export default props => {
 
         <div className="selectionsMenu">
           <h4>
-            Jurn
-            <span>
-              <em>(e)</em> Planning
-            </span>
+            Jurn(<em>e</em>) Planning
           </h4>
           <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
         </div>
@@ -95,7 +92,7 @@ export default props => {
       <div className="p1FooterButtons">
         <Button type="button" onClick={e => handleDecline(e, jurn_id)}>
           <span>
-            Remove Jurn<em>(e)</em>
+            Remove Jurn(<em>e</em>)
             <Icon name="remove" />
           </span>
         </Button>
@@ -104,7 +101,7 @@ export default props => {
           <Button type="submit">
             <span>
               <Icon name="arrow right" />
-              My J<em>(e)</em>
+              My J(<em>e</em>)
             </span>
           </Button>
         </Link>

@@ -5,6 +5,10 @@
     width: 400px;
     padding: 10px;
 
+    .icon {
+      color: $highlightColor;
+    }
+
     .photoSel {
       display: flex;
       border: 1px solid $thirdColor;

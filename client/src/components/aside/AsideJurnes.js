@@ -4,14 +4,14 @@ import { useAside, useMain } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/aside/asideJurns.scss"
 
-export default (props) => {
+export default props => {
   const {
     aUser,
     aJurns,
     pendingJurns,
     fetchAside,
     sendAccept,
-    sendDecline,
+    sendDecline
   } = useAside()
   const user_id = aUser.user_id
   const pendCount = pendingJurns.length
@@ -48,7 +48,7 @@ export default (props) => {
               <Menu.Item name={jurn.name} active={true} id="menuItem">
                 <p>{jurn.name}</p>
                 <span>
-                  My J<em>(e)</em>
+                  My J(<em>e</em>)
                   <Icon name="arrow right" />
                 </span>
               </Menu.Item>
@@ -58,7 +58,7 @@ export default (props) => {
       </div>
       <Button
         className="viewPending"
-        onClick={(e) => (!hidden2 ? setHidden2(true) : setHidden2(false))}
+        onClick={e => (!hidden2 ? setHidden2(true) : setHidden2(false))}
       >
         Jurn(<em>e</em>) invitations (<span>{pendCount}</span>)
       </Button>
@@ -71,13 +71,13 @@ export default (props) => {
                 <Button
                   value={pendJurn.id}
                   type="button"
-                  onClick={(e) => handleAccept(e, pendJurn.id)}
+                  onClick={e => handleAccept(e, pendJurn.id)}
                 >
                   Accept
                 </Button>
                 <Button
                   type="button"
-                  onClick={(e) => handleDecline(e, pendJurn.id)}
+                  onClick={e => handleDecline(e, pendJurn.id)}
                 >
                   Decline
                 </Button>

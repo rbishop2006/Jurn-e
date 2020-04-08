@@ -29,6 +29,10 @@ $highlightColor: #ff8930;
 $thirdColor: #1c5d99;
 $frontPageColor: #4183c4;
 
+em {
+  color: $highlightColor;
+}
+
 @mixin buttonThemed($bT) {
   background: $bT;
   color: $baseColor;
