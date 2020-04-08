@@ -110,7 +110,7 @@ export default props => {
       <div className="p2ChecklistAndDetails">
         <div className="p2remindersForm">
           <h4>
-            My Jurn<em>(e)</em> Reminders
+            My Jurn(<em>e</em>) Reminders
           </h4>
           <h4> My Reminders left: {remsCount}</h4>
           <div>
@@ -184,19 +184,14 @@ export default props => {
         </div>
         <div className="p2details">
           <h4>
-            Jurn
-            <span>
-              <em>(e)</em>
-            </span>{" "}
-            Details
+            Jurn(<em>e</em>) Details
           </h4>
           <h3 className="p2location">{jurnInfo.location}</h3>
           <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
           <Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
             <Button id="editButton" type="button">
               <span>
-                J<em>(e)</em>
-                {"  "} <Icon name="pencil" />
+                J(<em>e</em>){"  "} <Icon name="pencil" />
               </span>
             </Button>
           </Link>

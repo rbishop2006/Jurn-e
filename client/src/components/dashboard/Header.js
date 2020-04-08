@@ -4,7 +4,7 @@ import { useMain, useAside } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/dashboard.scss"
 
-export default (props) => {
+export default props => {
   const { sendJurn, get } = useMain()
   const { fetchAside } = useAside()
   const { aUser } = useAside()
@@ -13,7 +13,7 @@ export default (props) => {
   // Function to handle submitting a new Jurn from the below form
   function handleSubmit(e) {
     e.preventDefault()
-    sendJurn(aUser.user_id, newJurn).then((user_id) => {
+    sendJurn(aUser.user_id, newJurn).then(user_id => {
       get()
       fetchAside()
       props.history.push("/Jurne/dashboard/" + user_id)
@@ -32,14 +32,11 @@ export default (props) => {
               className="messageText"
               value={newJurn}
               type="text"
-              onChange={(e) => setNewJurn(e.target.value)}
+              onChange={e => setNewJurn(e.target.value)}
               placeholder="ex. Cancun 2020"
             />
             <Button type="submit">
-              Create a new Jurn
-              <span>
-                <em>(e)</em>
-              </span>
+              Create a new Jurn(<em>e</em>)
             </Button>
           </Form.Field>
         </Form.Group>
@@ -47,7 +44,7 @@ export default (props) => {
       <Link to="/Jurne/dashboard">
         <Button type="button">
           <span>
-            My Jurn<em>(e)</em>s <Icon name="home" />
+            My Jurn(<em>e</em>)s <Icon name="home" />
           </span>
         </Button>
       </Link>
