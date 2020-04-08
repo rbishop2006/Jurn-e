@@ -15,6 +15,7 @@ h5 {
     min-height: 230px;
     max-height: 230px;
     overflow: auto;
+    margin: 0px 0px 10px 0px;
 
     #menu {
       box-shadow: 0 1px 2px 0 $firstColor;
@@ -23,10 +24,20 @@ h5 {
 
       #menuItem {
         width: 100%;
+        display: flex;
+        justify-content: space-between;
 
         p {
           color: $secondColor;
           margin: 0;
+        }
+
+        span {
+          color: $firstColor;
+
+          i {
+            color: $highlightColor;
+          }
         }
       }
     }
@@ -36,6 +47,10 @@ h5 {
     @include buttonThemed($firstColor);
     width: 70%;
     align-self: center;
+
+    span {
+      color: $highlightColor;
+    }
   }
 
   .pendList {

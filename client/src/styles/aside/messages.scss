@@ -1,31 +1,5 @@
 @import "../base.scss";
 
-.messageArea {
-  height: 400px;
-  overflow: auto;
-  background: $baseColor;
-  padding: 5px 10px;
-
-  p {
-    font-size: 1.1em;
-    margin: 0;
-
-    .jurnName {
-      color: $secondColor;
-    }
-
-    .message {
-      color: $firstColor;
-      padding: 0px 8px;
-    }
-
-    .timeStamp {
-      color: $highlightColor;
-      font-size: 0.7em;
-    }
-  }
-}
-
 .messageInput {
   width: 325px;
   height: 100px;
@@ -38,21 +12,26 @@
       color: $firstColor;
       width: 100%;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
 
       i {
         color: $highlightColor;
       }
     }
 
-    .ui.button.dropdown .menu {
-      color: $secondColor;
-      box-shadow: 0 2px 3px 0 $firstColor;
-      border: 1px solid $firstColor;
-      margin: 10px 0px;
-
-      div span {
+    .ui.button.dropdown {
+      div.text {
+        padding-left: 16px;
+      }
+      .menu {
         color: $secondColor;
+        box-shadow: 0 2px 3px 0 $firstColor;
+        border: 1px solid $firstColor;
+        margin: 10px 0px;
+
+        div span {
+          color: $secondColor;
+        }
       }
     }
 
@@ -79,6 +58,40 @@
       .messageText:focus {
         color: $firstColor;
       }
+    }
+  }
+}
+
+.messageArea {
+  height: 400px;
+  overflow: auto;
+  background: $baseColor;
+  padding: 5px 10px;
+
+  div {
+    font-size: 1.1em;
+    margin: 0;
+
+    .jurnName {
+      color: $secondColor;
+
+      strong {
+        padding-left: 5px;
+      }
+
+      .from {
+        margin-left: 15px;
+        font-size: 0.8em;
+      }
+    }
+
+    .message {
+      color: $firstColor;
+    }
+
+    .timeStamp {
+      color: $highlightColor;
+      font-size: 0.7em;
     }
   }
 }

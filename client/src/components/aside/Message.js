@@ -16,17 +16,20 @@ export default (props) => {
   return (
     <section className="messageArea">
       {messages.map((msg, i) => (
-        <p key={"message" + i}>
-          <span className="jurnName">{msg.jname}: </span>
+        <div key={"message" + i}>
+          <div>
+            <p className="jurnName">
+              To:
+              <strong>{msg.jname}</strong>
+              <span className="from">From: </span>{" "}
+              <span>
+                <em>{msg.fname} </em>
+              </span>
+            </p>
+          </div>
           <span className="message">{msg.message} </span>
-          <span>From: </span>
-          <span>
-            <strong>
-              <em>{msg.fname} </em>
-            </strong>
-          </span>
           <span className="timeStamp">{moment(msg.timestamp).fromNow()}</span>
-        </p>
+        </div>
       ))}
       <div />
     </section>
