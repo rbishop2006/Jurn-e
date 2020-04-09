@@ -69,6 +69,10 @@ export default (props) => {
     e.preventDefault()
     sendProfile(fname, lname, cellphone, avatar, user_id)
     setHidden(true)
+    setLname("")
+    setFname("")
+    setCellphone("")
+    setAvatar("")
   }
 
   return (

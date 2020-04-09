@@ -38,7 +38,7 @@
     .p2remindersForm {
       border: 1px solid $thirdColor;
       padding: 10px;
-      box-shadow: 5px 10px $firstColor;
+      box-shadow: 5px 5px $firstColor;
       padding: 10px;
       border-radius: 5px;
       width: 400px;
@@ -88,26 +88,48 @@
       margin-top: 0;
       border: 1px solid $thirdColor;
       padding: 10px;
-      box-shadow: 5px 10px $firstColor;
+      box-shadow: 5px 5px $firstColor;
       padding: 10px;
       border-radius: 5px;
       width: 400px;
-    }
 
-    .phoneNumber {
-      font-size: 0.8em;
-    }
-    .ui.secondary.pointing.menu .active.item {
-      color: $highlightColor;
-    }
-    .ui.menu .item {
-      color: $thirdColor;
-    }
+      .menuDiv {
+        div.secondary.pointing.menu {
+          .item {
+            color: $firstColor;
+          }
 
-    .ui.tab.active {
-      border-color: $firstColor;
+          .item:hover {
+            color: $secondColor;
+          }
+
+          .active.item {
+            color: $highlightColor;
+          }
+        }
+
+        div.segment.active.tab {
+          border-color: $firstColor;
+
+          div.bulleted.list {
+            div.item {
+              i {
+                color: $secondColor;
+              }
+
+              div.content {
+                .phoneNumber {
+                  font-size: 0.8em;
+                  color: $firstColor;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
+
   #editButton {
     margin-top: 18px;
     width: 90px;

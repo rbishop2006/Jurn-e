@@ -61,8 +61,14 @@ i {
   display: flex;
   flex-direction: column;
 
-  .input {
-    margin: 5px 0px;
+  div.field {
+    div.input {
+      input {
+        color: $secondColor;
+        background: $baseColor;
+        border: 0;
+      }
+    }
   }
 
   .dropdown {
