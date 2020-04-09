@@ -2,61 +2,59 @@
 
 .photoDiv {
   .photoForm {
-    width: 400px;
-    padding: 10px;
-
-    .icon {
-      color: $highlightColor;
-    }
-
     .photoSel {
       display: flex;
       border: 1px solid $thirdColor;
       padding: 2px;
       border-radius: 3px;
 
+      #dropdown {
+        width: 325px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        div.text {
+          color: $firstColor;
+        }
+
+        i.icon {
+          color: $highlightColor;
+          font-size: 1.5em;
+          margin: 0px 0px 5px 0px;
+        }
+
+        div.menu {
+          height: 275px;
+          overflow: auto;
+
+          div.item {
+            display: flex;
+            align-items: center;
+            padding: 0;
+
+            img {
+              width: 60px;
+              height: 60px;
+              min-height: 60px;
+            }
+            span {
+              color: $firstColor;
+            }
+          }
+        }
+      }
+
       .ui.button {
         color: $baseColor;
         background-color: $firstColor;
+        @include buttonThemed($firstColor);
+        margin: 5px;
       }
 
-      .ui.dropdown > .text {
-        color: $thirdColor;
-      }
       .ui.dropdown > .dropdown.icon:before {
         color: $highlightColor;
         font-size: larger;
-      }
-
-      .ui.button {
-        margin: 0;
-      }
-    }
-
-    #dropdown {
-      width: 325px;
-
-      div {
-        button {
-          @include buttonThemed($firstColor);
-        }
-        div {
-          display: flex;
-          align-items: center;
-
-          img {
-            width: 75px;
-            height: 75px;
-            max-height: 75px;
-          }
-        }
-      }
-      div.visible {
-        div {
-          span {
-            color: $firstColor;
-          }
-        }
       }
     }
   }
