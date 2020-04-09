@@ -163,6 +163,28 @@ router.patch("/updatedecline", (req, res, next) => {
   )
 })
 
+router.patch("/removejurne", (req, res, next) => {
+  const user_id = req.body.user_id
+  const jurn_id = req.body.jurn_id
+  const sqlDecline = `UPDATE invite SET inv_status = "declined" WHERE user_id = ? AND jurn_id = ?`
+  conn.query(
+    sqlDecline,
+    [user_id, jurn_id],
+    (errDecline, resultsDecline, fieldsDecline) => {
+      const sqlDelLink = `DELETE FROM link WHERE user_id = ? AND jurn_id = ?`
+      conn.query(
+        sqlDelLink,
+        [user_id, jurn_id],
+        (errDelLink, resultsDelLink, fieldsDelLink) => {
+          res.json({
+            message: "invite status updated and Jurne removed",
+          })
+        }
+      )
+    }
+  )
+})
+
 router.patch("/finaldates", (req, res, next) => {
   const jurn_id = req.body.jurn_id
   const date = req.body.date.split(",")

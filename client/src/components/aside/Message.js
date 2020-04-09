@@ -24,7 +24,7 @@ export default (props) => {
               <strong>{msg.jname}</strong>
               <span className="from">From: </span>{" "}
               <span>
-                <em>{msg.fname} </em>
+                <em className="msgName">{msg.fname} </em>
               </span>
             </p>
           </div>

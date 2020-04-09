@@ -3,14 +3,16 @@ import UserProfile from "./UserProfile"
 import AsideJurnes from "./AsideJurnes"
 import Message from "./Message"
 import MessageForm from "./MessageForm"
-import { useAside } from "../../hooks"
+import { useAside, useMessages } from "../../hooks"
 import "../../styles/aside/aside.scss"
 
 export default (props) => {
   const { fetchAside } = useAside()
+  const { getMessages } = useMessages()
 
   useEffect(() => {
     fetchAside()
+    getMessages()
   }, [])
 
   return (

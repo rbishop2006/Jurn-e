@@ -2,8 +2,7 @@
 
 .messageInput {
   width: 325px;
-  height: 100px;
-  z-index: 2;
+  height: 86px;
 
   .messageForm {
     margin: 15px 5px;
@@ -77,6 +76,10 @@
 
       strong {
         padding-left: 5px;
+      }
+
+      .msgName {
+        color: $secondColor;
       }
 
       .from {

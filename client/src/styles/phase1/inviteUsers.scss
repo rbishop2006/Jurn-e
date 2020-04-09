@@ -9,24 +9,30 @@
   margin-top: 0;
   display: grid;
 
-  .ui.form .fields > .field {
-    width: 140px;
-  }
-
-  .ui.list > .item > .icon + .content {
-    color: $firstColor;
-  }
-
-  .ui.form .fields {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    @include FormForm_Input($secondColor);
-  }
-  .ui.form {
+  form.ui.form {
     display: grid;
     justify-content: center;
+
+    .fields {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      @include FormForm_Input($secondColor);
+
+      .field {
+        width: 140px;
+      }
+    }
   }
+
+  div.ui.list {
+    div.item {
+      i {
+        color: $secondColor;
+      }
+    }
+  }
+
   #submitInvite {
     justify-self: center;
     width: 120px;

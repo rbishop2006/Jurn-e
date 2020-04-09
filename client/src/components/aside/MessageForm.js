@@ -3,7 +3,7 @@ import { useMessages, useAside } from "../../hooks"
 import { Form, Dropdown } from "semantic-ui-react"
 import "../../styles/aside/messages.scss"
 
-export default props => {
+export default (props) => {
   const { sendMessage, getMessages } = useMessages()
   const [message, setMessage] = useState("")
   const { aJurns, aUser } = useAside()
@@ -16,7 +16,7 @@ export default props => {
     return jurns.push({
       text: jurn.name,
       value: jurn.id,
-      as: Dropdown.Item
+      as: Dropdown.Item,
     })
   })
 
@@ -37,11 +37,7 @@ export default props => {
             button
             labeled
             icon="arrow down"
-            placeholder={
-              <span>
-                "Select Jurn(<em>e</em>) to send message to..."
-              </span>
-            }
+            placeholder={"Select Jurn(e) to send message to..."}
             value={jurnId}
             onChange={(e, { value }) => setJurnId(value)}
             options={jurns}
@@ -52,7 +48,7 @@ export default props => {
             className="messageText"
             value={message}
             type="text"
-            onChange={e => setMessage(e.target.value)}
+            onChange={(e) => setMessage(e.target.value)}
             placeholder="Send a message..."
             ref={inputRef}
           />

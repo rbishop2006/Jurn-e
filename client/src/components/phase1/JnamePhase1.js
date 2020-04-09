@@ -10,7 +10,7 @@ import Activities from "./Activities"
 import { usePhase1, useAside, useMain } from "../../hooks"
 import "../../styles/phase1/phase1.scss"
 
-export default props => {
+export default (props) => {
   const { jname, updatePhase1 } = usePhase1()
   const jurn_id = props.match.params.jurn_id
   const { aUser, delJurn, fetchAside } = useAside()
@@ -18,7 +18,7 @@ export default props => {
 
   const { get } = useMain()
 
-  function handleDecline(e, jurn_id) {
+  function handleDelete(e, jurn_id) {
     //ask about removing prevent default, or other solution
     e.preventDefault()
     delJurn(user_id, jurn_id).then(() => {
@@ -39,7 +39,7 @@ export default props => {
         <Tab.Pane attached={false}>
           <PhotoPicker match={props.match} />
         </Tab.Pane>
-      )
+      ),
     },
     {
       menuItem: `Dates`,
@@ -47,7 +47,7 @@ export default props => {
         <Tab.Pane attached={false}>
           <DatesPicker match={props.match} />
         </Tab.Pane>
-      )
+      ),
     },
     {
       menuItem: `Locations`,
@@ -55,7 +55,7 @@ export default props => {
         <Tab.Pane attached={false}>
           <LocationPicker match={props.match} />
         </Tab.Pane>
-      )
+      ),
     },
     {
       menuItem: `Accommodations`,
@@ -63,7 +63,7 @@ export default props => {
         <Tab.Pane attached={false}>
           <HotelPicker match={props.match} />
         </Tab.Pane>
-      )
+      ),
     },
 
     {
@@ -72,8 +72,8 @@ export default props => {
         <Tab.Pane attached={false}>
           <Activities match={props.match} />
         </Tab.Pane>
-      )
-    }
+      ),
+    },
   ]
 
   return (
@@ -90,7 +90,7 @@ export default props => {
         </div>
       </div>
       <div className="p1FooterButtons">
-        <Button type="button" onClick={e => handleDecline(e, jurn_id)}>
+        <Button type="button" onClick={(e) => handleDelete(e, jurn_id)}>
           <span>
             Remove Jurn(<em>e</em>)
             <Icon name="remove" />
