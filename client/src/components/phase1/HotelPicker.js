@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Form, Button, Radio, Icon } from "semantic-ui-react"
 import { usePhase1, usePhase2 } from "../../hooks"
 import "../../styles/phase1/hotels.scss"
+import validator from "validator"
 
 export default props => {
   const { updatePhase1, sendHotel, updateFinalHotel, hotels } = usePhase1()
@@ -9,10 +10,19 @@ export default props => {
   const jurn_id = props.match.params.jurn_id
   const [hotel, setHotel] = useState("")
   const [finalHotel, setFinalHotel] = useState("")
+  const [error, setError] = useState(false)
 
   function handleHotSug(e) {
     e.preventDefault()
-    sendHotel(hotel, jurn_id)
+
+    let valid = true
+
+    if (validator.isEmpty(hotel)) {
+      valid = false
+    }
+    if (valid) {
+      sendHotel(hotel, jurn_id)
+    }
     setHotel("")
     updatePhase1(jurn_id)
   }

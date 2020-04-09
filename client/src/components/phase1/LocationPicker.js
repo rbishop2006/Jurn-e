@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Form, Button, Radio, Icon } from "semantic-ui-react"
 import { usePhase1, usePhase2 } from "../../hooks"
 import "../../styles/phase1/locations.scss"
+import validator from "validator"
 
 export default props => {
   const {
@@ -17,7 +18,13 @@ export default props => {
 
   function handleLocSug(e) {
     e.preventDefault()
-    sendLocation(location, jurn_id)
+    let valid = true
+    if (validator.isEmpty(location)) {
+      valid = false
+    }
+    if (valid) {
+      sendLocation(location, jurn_id)
+    }
     setLocation("")
     updatePhase1(jurn_id)
   }
