@@ -86,7 +86,11 @@ export default (props) => {
           <h4>
             Jurn(<em>e</em>) Planning
           </h4>
-          <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+          <Tab
+            className="menuDiv2"
+            menu={{ secondary: true, pointing: true }}
+            panes={panes}
+          />
         </div>
       </div>
       <div className="p1FooterButtons">

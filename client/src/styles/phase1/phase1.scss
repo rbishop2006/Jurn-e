@@ -28,18 +28,28 @@
       margin-top: 0;
       width: 480px;
 
-      .ui.secondary.pointing.menu .active.item {
-        color: $highlightColor;
-      }
-      .ui.menu .item {
-        color: $thirdColor;
-      }
+      .menuDiv2 {
+        div.pointing.secondary.menu {
+          .item {
+            color: $thirdColor;
+          }
 
-      .ui.tab.active {
-        border-color: $firstColor;
+          .item:hover {
+            color: $secondColor;
+          }
+
+          .active.item {
+            color: $highlightColor;
+          }
+        }
+
+        div.segment.tab.active {
+          border-color: $firstColor;
+        }
       }
     }
   }
+
   .p1FooterButtons {
     display: flex;
     justify-content: space-around;
