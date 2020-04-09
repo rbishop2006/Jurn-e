@@ -2,4 +2,10 @@
 
 aside {
   background: #d1d1d1;
+  display: flex;
+  flex-direction: column;
+
+  section {
+    flex-grow: 2;
+  }
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { useMessages } from "../../hooks"
 import moment from "moment"
+// import moment from "moment-timezone"
 import "../../styles/aside/messages.scss"
 
 export default (props) => {
@@ -23,7 +24,7 @@ export default (props) => {
               <strong>{msg.jname}</strong>
               <span className="from">From: </span>{" "}
               <span>
-                <em>{msg.fname} </em>
+                <em className="msgName">{msg.fname} </em>
               </span>
             </p>
           </div>

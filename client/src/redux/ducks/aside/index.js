@@ -6,7 +6,7 @@ const GET_ASIDE = "aside/GET_ASIDE"
 const initialState = {
   jurns: [],
   user: {},
-  pendJurns: []
+  pendJurns: [],
 }
 
 export default (state = initialState, action) => {
@@ -20,17 +20,17 @@ export default (state = initialState, action) => {
 }
 
 function getAside() {
-  return dispatch => {
+  return (dispatch) => {
     api
       .get("/aside")
-      .then(resp => {
+      .then((resp) => {
         dispatch({
           type: GET_ASIDE,
           payload: {
             jurns: resp.aside.jurns,
             user: resp.aside.user,
-            pendJurns: resp.aside.pendJurns
-          }
+            pendJurns: resp.aside.pendJurns,
+          },
         })
       })
       .catch()
@@ -38,39 +38,39 @@ function getAside() {
 }
 
 function updateProfile(fname, lname, cellphone, avatar, user_id) {
-  return dispatch => {
+  return (dispatch) => {
     api
       .patch("/updateprofile", { fname, lname, cellphone, avatar, user_id })
-      .then(resp => {
+      .then((resp) => {
         dispatch(getAside())
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err)
       })
   }
 }
 
 function updateAccept(user_id, jurn_id) {
-  return dispatch => {
+  return (dispatch) => {
     api
       .patch("/updateaccept", { user_id, jurn_id })
-      .then(resp => {
+      .then((resp) => {
         dispatch(getAside())
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err)
       })
   }
 }
 
 function updateDecline(user_id, jurn_id) {
-  return dispatch => {
+  return (dispatch) => {
     api
       .patch("/updateDecline", { user_id, jurn_id })
-      .then(resp => {
+      .then((resp) => {
         dispatch(getAside())
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err)
       })
   }
@@ -79,11 +79,11 @@ function updateDecline(user_id, jurn_id) {
 function removeJurn(user_id, jurn_id) {
   return new Promise((resolve, reject) => {
     api
-      .patch("/updateDecline", { user_id, jurn_id })
-      .then(resp => {
+      .patch("/removejurne", { user_id, jurn_id })
+      .then((resp) => {
         resolve(resp)
       })
-      .catch(e => {
+      .catch((e) => {
         reject()
       })
   })
@@ -91,9 +91,9 @@ function removeJurn(user_id, jurn_id) {
 
 export function useAside() {
   const dispatch = useDispatch()
-  const aJurns = useSelector(appState => appState.AsideState.jurns)
-  const aUser = useSelector(appState => appState.AsideState.user)
-  const pendingJurns = useSelector(appState => appState.AsideState.pendJurns)
+  const aJurns = useSelector((appState) => appState.AsideState.jurns)
+  const aUser = useSelector((appState) => appState.AsideState.user)
+  const pendingJurns = useSelector((appState) => appState.AsideState.pendJurns)
   const sendProfile = (fname, lname, cellphone, avatar, user_id) =>
     dispatch(updateProfile(fname, lname, cellphone, avatar, user_id))
   const fetchAside = () => dispatch(getAside())
@@ -111,6 +111,6 @@ export function useAside() {
     fetchAside,
     sendProfile,
     sendDecline,
-    sendAccept
+    sendAccept,
   }
 }
