@@ -69,18 +69,71 @@ router.patch("/updateprofile", (req, res, next) => {
   const cellphone = req.body.cellphone
   const avatar = req.body.avatar
   const user_id = req.body.user_id
+  // Checking to see if inputs are empty.  If they are all empty, returns nothing and makes no changes
+  if (
+    fname.length === 0 &&
+    lname.length === 0 &&
+    cellphone.length === 0 &&
+    avatar.length === 0
+  ) {
+    res.json({
+      message: "nothing to update",
+    })
+  } else {
+    // This is where we check to see if the individual inputs have content and build the Sql string to insert into the query below
+    let sqlInsert = ""
+    if (fname.length != 0) {
+      if (sqlInsert.length === 0) {
+        sqlInsert += "fname = ?"
+      }
+    }
+    if (lname.length != 0) {
+      if (sqlInsert.length === 0) {
+        sqlInsert += "lname = ?"
+      } else {
+        sqlInsert += ", lname = ?"
+      }
+    }
+    if (cellphone.length != 0) {
+      if (sqlInsert.length === 0) {
+        sqlInsert += "cell_phone = ?"
+      } else {
+        sqlInsert += ", cell_phone = ?"
+      }
+    }
+    if (avatar.length != 0) {
+      if (sqlInsert.length === 0) {
+        sqlInsert += "avatar = ?"
+      } else {
+        sqlInsert += ", avatar = ?"
+      }
+    }
 
-  const sqlProf = `UPDATE user SET fname = ?, lname = ?, cell_phone = ?, avatar = ? WHERE user_id = ?`
+    const sqlProf = `UPDATE user SET ${sqlInsert} WHERE user_id = ?`
+    // Build the array of inputs to put in the query below based on the string produces above
+    let profileArr = []
+    if (fname != 0) {
+      profileArr.push(fname)
+    }
+    if (lname != 0) {
+      profileArr.push(lname)
+    }
+    if (cellphone != 0) {
+      profileArr.push(cellphone)
+    }
+    if (avatar != 0) {
+      profileArr.push(avatar)
+    }
+    if (fname != 0 || lname != 0 || cellphone != 0 || avatar != 0) {
+      profileArr.push(user_id)
+    }
 
-  conn.query(
-    sqlProf,
-    [fname, lname, cellphone, avatar, user_id],
-    (errProf, resultsProf, fieldsProf) => {
+    conn.query(sqlProf, profileArr, (errProf, resultsProf, fieldsProf) => {
       res.json({
         message: "profile updated",
       })
-    }
-  )
+    })
+  }
 })
 
 router.patch("/updateaccept", (req, res, next) => {
