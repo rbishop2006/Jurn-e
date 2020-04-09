@@ -13,12 +13,14 @@ import { usePhase2, useRems, useInvited } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/phase2.scss"
 import moment from "moment"
+import validator from "validator"
 
 export default props => {
   const { aUser } = useAside()
 
   const { accepted, updateInvited } = useInvited()
   const [reminder, setReminder] = useState("")
+
   const { jurnInfo, updatePhase2, activities } = usePhase2()
   const {
     rems,
@@ -35,9 +37,17 @@ export default props => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    addRem(reminder, jurn_id, user_id)
-    setReminder("")
+    let valid = true
+
+    if (validator.isEmpty(reminder)) {
+      valid = false
+    }
+    if (valid) {
+      addRem(reminder, jurn_id, user_id)
+      setReminder("")
+    }
   }
+
   const [view, setView] = useState("all")
 
   function changeView(status) {
