@@ -61,6 +61,13 @@
     input:focus {
       border: 1.5px solid $firstColor;
     }
+    .error {
+      color: #9f3a38;
+    }
+    .errorBox {
+      border-color: #e0b4b4;
+      background: #fff6f6;
+    }
   }
 
   .ui.button {

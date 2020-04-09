@@ -66,7 +66,7 @@ router.post("/invite", (req, res, next) => {
         )
       } else {
         res.status(401).json({
-          message: "Invitee not found"
+          message: "First and Last Name of Invitee not found"
         })
       }
     }
