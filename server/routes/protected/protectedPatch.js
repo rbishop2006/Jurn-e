@@ -10,7 +10,7 @@ router.patch("/remcomplete", (req, res, next) => {
     [rem_id],
     (errremComplete, resultsremComplete, fieldsremComplete) => {
       res.json({
-        message: "status updated to completed",
+        message: "status updated to completed"
       })
     }
   )
@@ -26,7 +26,7 @@ router.patch("/reminder", (req, res, next) => {
     [status, rem_id],
     (errToggleRem, resultsToggleRem, fieldsToggleRem) => {
       res.json({
-        message: "status updated",
+        message: "status updated"
       })
     }
   )
@@ -41,7 +41,7 @@ router.patch("/actcomplete", (req, res, next) => {
     [act_id],
     (erractComplete, resultsactComplete, fieldsactComplete) => {
       res.json({
-        message: "status updated to completed",
+        message: "status updated to completed"
       })
     }
   )
@@ -57,7 +57,7 @@ router.patch("/activity", (req, res, next) => {
     [status, act_id],
     (errToggleAct, resultsToggleAct, fieldsToggleAct) => {
       res.json({
-        message: "status updated",
+        message: "status updated"
       })
     }
   )
@@ -77,7 +77,7 @@ router.patch("/updateprofile", (req, res, next) => {
     avatar.length === 0
   ) {
     res.json({
-      message: "nothing to update",
+      message: "nothing to update"
     })
   } else {
     // This is where we check to see if the individual inputs have content and build the Sql string to insert into the query below
@@ -130,7 +130,7 @@ router.patch("/updateprofile", (req, res, next) => {
 
     conn.query(sqlProf, profileArr, (errProf, resultsProf, fieldsProf) => {
       res.json({
-        message: "profile updated",
+        message: "profile updated"
       })
     })
   }
@@ -180,7 +180,7 @@ router.patch("/updateaccept", (req, res, next) => {
           jurn_id,
           user_id,
           jurn_id,
-          user_id,
+          user_id
         ],
         (errR, resultsR, fieldsR) => {
           const sqlInLink = `INSERT INTO link (jurn_id, user_id) VALUES(?, ?)`
@@ -189,7 +189,7 @@ router.patch("/updateaccept", (req, res, next) => {
             [jurn_id, user_id],
             (errInLink, resultsInLink, fieldsInLink) => {
               res.json({
-                message: "invite status updated and link added",
+                message: "invite status updated and link added"
               })
             }
           )
@@ -210,7 +210,7 @@ router.patch("/updatedecline", (req, res, next) => {
     [user_id, jurn_id],
     (errDecline, resultsDecline, fieldsDecline) => {
       res.json({
-        message: "invite status updated",
+        message: "invite status updated"
       })
     }
   )
@@ -230,7 +230,7 @@ router.patch("/removejurne", (req, res, next) => {
         [user_id, jurn_id],
         (errDelLink, resultsDelLink, fieldsDelLink) => {
           res.json({
-            message: "invite status updated and Jurne removed",
+            message: "invite status updated and Jurne removed"
           })
         }
       )
@@ -240,52 +240,73 @@ router.patch("/removejurne", (req, res, next) => {
 
 router.patch("/finaldates", (req, res, next) => {
   const jurn_id = req.body.jurn_id
-  const date = req.body.date.split(",")
-  const startDate = date[0]
-  const endDate = date[1]
-  const sqlUpdateJurnDate = `UPDATE jurn SET start_date = ?, end_date = ? WHERE jurn_id = ?`
 
-  conn.query(
-    sqlUpdateJurnDate,
-    [startDate, endDate, jurn_id],
-    (errUpdateJurnDate, resultsUpdateJurnDate, fieldsUpdateJurnDate) => {
-      res.json({
-        message: "dates updated",
-      })
-    }
-  )
+  if (req.body.date > 0) {
+    const date = req.body.date.split(",")
+    const startDate = date[0]
+    const endDate = date[1]
+    const sqlUpdateJurnDate = `UPDATE jurn SET start_date = ?, end_date = ? WHERE jurn_id = ?`
+
+    conn.query(
+      sqlUpdateJurnDate,
+      [startDate, endDate, jurn_id],
+      (errUpdateJurnDate, resultsUpdateJurnDate, fieldsUpdateJurnDate) => {
+        res.json({
+          message: "dates updated"
+        })
+      }
+    )
+  } else {
+    res.json({
+      message: "dates not updated"
+    })
+  }
 })
 
 router.patch("/finallocation", (req, res, next) => {
   const jurn_id = req.body.jurn_id
   const location = req.body.location
-  const sqlUpdateJurnLoc = `UPDATE jurn SET location = ? WHERE jurn_id = ?`
 
-  conn.query(
-    sqlUpdateJurnLoc,
-    [location, jurn_id],
-    (errUpdateJurnLoc, resultsUpdateJurnLoc, fieldsUpdateJurnLoc) => {
-      res.json({
-        message: "location updated",
-      })
-    }
-  )
+  if (location.length > 0) {
+    const sqlUpdateJurnLoc = `UPDATE jurn SET location = ? WHERE jurn_id = ?`
+
+    conn.query(
+      sqlUpdateJurnLoc,
+      [location, jurn_id],
+      (errUpdateJurnLoc, resultsUpdateJurnLoc, fieldsUpdateJurnLoc) => {
+        res.json({
+          message: "location updated"
+        })
+      }
+    )
+  } else {
+    res.status(401).json({
+      message: "Please select a location"
+    })
+  }
 })
 
 router.patch("/finalhotel", (req, res, next) => {
   const jurn_id = req.body.jurn_id
   const hotel = req.body.hotel
-  const sqlUpdateJurnHot = `UPDATE jurn SET hotel = ? WHERE jurn_id = ?`
 
-  conn.query(
-    sqlUpdateJurnHot,
-    [hotel, jurn_id],
-    (errUpdateJurnHot, resultsUpdateJurnHot, fieldsUpdateJurnHot) => {
-      res.json({
-        message: "hotel updated",
-      })
-    }
-  )
+  if (hotel.length > 0) {
+    const sqlUpdateJurnHot = `UPDATE jurn SET hotel = ? WHERE jurn_id = ?`
+
+    conn.query(
+      sqlUpdateJurnHot,
+      [hotel, jurn_id],
+      (errUpdateJurnHot, resultsUpdateJurnHot, fieldsUpdateJurnHot) => {
+        res.json({
+          message: "hotel updated"
+        })
+      }
+    )
+  } else {
+    res.status(401).json({
+      message: "Please select an accommodation"
+    })
+  }
 })
 
 router.patch("/finalphoto", (req, res, next) => {
@@ -300,7 +321,7 @@ router.patch("/finalphoto", (req, res, next) => {
     [photo, jurn_id],
     (errUpdateJurnPhoto, resultsUpdateJurnPhoto, fieldsUpdateJurnPhoto) => {
       res.json({
-        message: "photo updated",
+        message: "photo updated"
       })
     }
   )
