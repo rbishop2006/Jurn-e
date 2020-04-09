@@ -10,7 +10,6 @@ export default props => {
   const { fetchAside } = useAside()
   const { aUser } = useAside()
   const [newJurn, setNewJurn] = useState("")
-  const [newJurnError, setNewJurnError] = useState("")
 
   // Function to handle submitting a new Jurn from the below form
 
@@ -20,9 +19,6 @@ export default props => {
 
     if (validator.isEmpty(newJurn)) {
       valid = false
-      setNewJurnError(` Please create a name for your Jurn(e), can't be blank`)
-    } else {
-      setNewJurnError("")
     }
     if (valid) {
       sendJurn(aUser.user_id, newJurn).then(user_id => {
@@ -40,12 +36,11 @@ export default props => {
       <Form onSubmit={handleSubmit} className="create">
         <Form.Group inline>
           <Form.Field>
-            <label className={newJurnError ? "error" : ""} htmlFor="newJurn">
-              add new Jurn(<em>e</em>)s here...{newJurnError && newJurnError}
+            <label htmlFor="newJurn">
+              add new Jurn(<em>e</em>)s here...
             </label>
             <input
               id="newJurn"
-              className={newJurnError ? "errorBox" : "messageText"}
               value={newJurn}
               type="text"
               onChange={e => setNewJurn(e.target.value)}
