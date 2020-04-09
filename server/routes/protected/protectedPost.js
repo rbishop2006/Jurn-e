@@ -13,54 +13,62 @@ router.post("/invite", (req, res, next) => {
     sqlUser_id,
     [fname, lname],
     (errUser_id, resultsUser_id, fieldsUser_id) => {
-      const user_id = resultsUser_id[0].user_id
-      // trying to add filters
+      //trying to fix invite
 
-      const sqlCheckInv = `SELECT * 
-      FROM invite
-      WHERE jurn_id = ? AND user_id = ?`
+      console.log()
+      if (resultsUser_id.length > 0) {
+        const user_id = resultsUser_id[0].user_id
 
-      conn.query(
-        sqlCheckInv,
-        [jurn_id, user_id],
-        (errCheckInv, resultsCheckInv, fieldsCheckInv) => {
-          if (resultsCheckInv.length > 0) {
-            if (resultsCheckInv[0].inv_status === "accepted") {
-              res.json({
-                message: "status already accepted",
-              })
+        const sqlCheckInv = `SELECT * 
+        FROM invite
+        WHERE jurn_id = ? AND user_id = ?`
+
+        conn.query(
+          sqlCheckInv,
+          [jurn_id, user_id],
+          (errCheckInv, resultsCheckInv, fieldsCheckInv) => {
+            if (resultsCheckInv.length > 0) {
+              if (resultsCheckInv[0].inv_status === "accepted") {
+                res.json({
+                  message: "status already accepted"
+                })
+              } else {
+                const sqlUpdInv = `
+              UPDATE invite
+              SET inv_status = "pending" 
+              WHERE invite.jurn_id = ? AND invite.user_id = ?`
+                conn.query(
+                  sqlUpdInv,
+                  [jurn_id, user_id],
+                  (errUpdInv, resultsUpdInv, fieldsUpdInv) => {
+                    res.json({
+                      message: "status updated to pending"
+                    })
+                  }
+                )
+              }
             } else {
-              const sqlUpdInv = `
-            UPDATE invite
-            SET inv_status = "pending" 
-            WHERE invite.jurn_id = ? AND invite.user_id = ?`
+              const sqlInvite = `INSERT INTO invite
+            (jurn_id, user_id, inv_status)
+            VALUES
+            (?, ?, "pending")`
               conn.query(
-                sqlUpdInv,
+                sqlInvite,
                 [jurn_id, user_id],
-                (errUpdInv, resultsUpdInv, fieldsUpdInv) => {
+                (errInvite, resultsInvite, fieldsInvite) => {
                   res.json({
-                    message: "status updated to pending",
+                    message: "pending invite"
                   })
                 }
               )
             }
-          } else {
-            const sqlInvite = `INSERT INTO invite
-          (jurn_id, user_id, inv_status)
-          VALUES
-          (?, ?, "pending")`
-            conn.query(
-              sqlInvite,
-              [jurn_id, user_id],
-              (errInvite, resultsInvite, fieldsInvite) => {
-                res.json({
-                  message: "pending invite",
-                })
-              }
-            )
           }
-        }
-      )
+        )
+      } else {
+        res.status(401).json({
+          message: "Invitee not found"
+        })
+      }
     }
   )
 })
@@ -72,7 +80,7 @@ router.post("/jurn", (req, res, next) => {
   conn.query(checkSQL3, [jname], (err3, results3, fields3) => {
     if (results3[0].count > 0) {
       res.status(409).json({
-        message: "jurn already exists",
+        message: "jurn already exists"
       })
     } else {
       const sql4 = "INSERT INTO jurn (jname, user_id) VALUES (?, ?)"
@@ -125,13 +133,13 @@ router.post("/jurn", (req, res, next) => {
                     jurn_id,
                     user_id,
                     jurn_id,
-                    user_id,
+                    user_id
                   ],
                   (errR, resultsR, fieldsR) => {
                     res.json({
                       message: "jurn added successfully",
                       id: jurn_id,
-                      user_id: user_id,
+                      user_id: user_id
                     })
                   }
                 )
@@ -151,7 +159,7 @@ router.post("/location", (req, res, next) => {
 
   conn.query(sql8, [loc_name, jurn_id], (err8, results8, fields8) => {
     res.json({
-      message: "location added successfully",
+      message: "location added successfully"
     })
   })
 })
@@ -166,7 +174,7 @@ router.post("/hotel", (req, res, next) => {
     [hotel_name, jurn_id],
     (errHot2, resultsHot2, fieldsHot2) => {
       res.json({
-        message: "hotel added successfully",
+        message: "hotel added successfully"
       })
     }
   )
@@ -184,7 +192,7 @@ router.post("/dates", (req, res, next) => {
     [start_date, end_date, jurn_id],
     (errDateRange, resultsDateRange, fieldsDateRange) => {
       res.json({
-        message: "dates added successfully",
+        message: "dates added successfully"
       })
     }
   )
@@ -200,7 +208,7 @@ router.post("/addrem", (req, res, next) => {
     [rem, jurn_id, user_id],
     (errAddrem, resultsAddRem, fieldsAddRem) => {
       res.json({
-        message: "rem added successfully",
+        message: "rem added successfully"
       })
     }
   )
@@ -215,7 +223,7 @@ router.post("/addact", (req, res, next) => {
     [act, jurn_id],
     (errAddact, resultsAddact, fieldsAddact) => {
       res.json({
-        message: "act added successfully",
+        message: "act added successfully"
       })
     }
   )
@@ -234,7 +242,7 @@ router.post("/message", (req, res, next) => {
     [message, jurn_id, user_id],
     (errMsg, resultsMsg, fieldsMsg) => {
       res.json({
-        message: "message added successfully",
+        message: "message added successfully"
       })
     }
   )

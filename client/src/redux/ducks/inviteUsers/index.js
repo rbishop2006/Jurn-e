@@ -37,9 +37,16 @@ function getInvited(jurn_id) {
 }
 
 function createInvite(firstName, lastName, jurn_id) {
-  return dispatch => {
-    api.post("/invite", { firstName, lastName, jurn_id }).catch()
-  }
+  return new Promise((resolve, reject) => {
+    api
+      .post("/invite", { firstName, lastName, jurn_id })
+      .then(resp => {
+        resolve(resp)
+      })
+      .catch(e => {
+        reject()
+      })
+  })
 }
 
 export function useInvited() {
@@ -48,9 +55,8 @@ export function useInvited() {
   const pending = useSelector(appState => appState.InviteState.pending)
   const accepted = useSelector(appState => appState.InviteState.accepted)
   const declined = useSelector(appState => appState.InviteState.declined)
-  const sendInvite = (firstName, lastName, jurn_id) => {
-    dispatch(createInvite(firstName, lastName, jurn_id))
-  }
+  const sendInvite = (firstName, lastName, jurn_id) =>
+    createInvite(firstName, lastName, jurn_id)
 
   return {
     pending,
