@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Button, Form, Icon } from "semantic-ui-react"
 import { useMain, useAside } from "../../hooks"
+import validator from "validator"
 import { Link } from "react-router-dom"
 import "../../styles/dashboard.scss"
 
@@ -11,13 +12,21 @@ export default props => {
   const [newJurn, setNewJurn] = useState("")
 
   // Function to handle submitting a new Jurn from the below form
+
   function handleSubmit(e) {
     e.preventDefault()
-    sendJurn(aUser.user_id, newJurn).then(user_id => {
-      get()
-      fetchAside()
-      props.history.push("/Jurne/dashboard/" + user_id)
-    })
+    let valid = true
+
+    if (validator.isEmpty(newJurn)) {
+      valid = false
+    }
+    if (valid) {
+      sendJurn(aUser.user_id, newJurn).then(user_id => {
+        get()
+        fetchAside()
+        props.history.push("/Jurne/dashboard/" + user_id)
+      })
+    }
     setNewJurn("")
   }
 
@@ -27,9 +36,11 @@ export default props => {
       <Form onSubmit={handleSubmit} className="create">
         <Form.Group inline>
           <Form.Field>
+            <label htmlFor="newJurn">
+              add new Jurn(<em>e</em>)s here...
+            </label>
             <input
               id="newJurn"
-              className="messageText"
               value={newJurn}
               type="text"
               onChange={e => setNewJurn(e.target.value)}

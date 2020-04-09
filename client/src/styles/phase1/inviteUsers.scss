@@ -19,9 +19,18 @@
       justify-content: center;
       @include FormForm_Input($secondColor);
 
-      .field {
-        width: 140px;
+      .prompt.label {
+        white-space: normal;
+        background: #fff !important;
+        border: 1px solid #e0b4b4 !important;
+        color: #9f3a38 !important;
+        width: 350px;
+        text-align: center;
       }
+    }
+
+    .field {
+      width: 183px;
     }
   }
 
