@@ -91,10 +91,25 @@
       grid-gap: 40px;
 
       div.ui.centered {
+        border: 1px solid $thirdColor;
+        box-shadow: 5px 5px $firstColor;
+        border-radius: 5px;
+        padding: 10px 10px 0px 10px;
+        margin: 0px 25px;
+
+        img {
+          width: 290px;
+          height: 290px;
+        }
+
         div.content {
+          div.nameAndEdit {
+            color: $firstColor;
+          }
+
           #location {
             color: $firstColor;
-            font-weight: 600;
+            font-weight: 900;
           }
 
           div.meta {
@@ -107,33 +122,10 @@
               padding: 5px 0px 5px 5px;
               @include buttonThemed($firstColor);
               position: absolute;
-              bottom: 25px;
+              bottom: 16px;
               right: 10px;
             }
           }
-        }
-      }
-
-      .card {
-        border: 1px solid $thirdColor;
-        padding: 10px;
-        box-shadow: 5px 5px $firstColor;
-        padding: 10px;
-        border-radius: 5px;
-
-        .nameAndEdit {
-          display: flex;
-          justify-content: space-between;
-          color: $firstColor;
-        }
-
-        img {
-          width: 290px;
-          height: 290px;
-        }
-
-        .header {
-          display: flex;
         }
       }
     }
