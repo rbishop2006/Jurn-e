@@ -3,13 +3,13 @@ import { Form, Button, Radio, List, Checkbox, Icon } from "semantic-ui-react"
 import { useInvited } from "../../hooks"
 import "../../styles/phase1/inviteUsers.scss"
 
-export default props => {
+export default (props) => {
   const {
     pending,
     accepted,
     declined,
     updateInvited,
-    sendInvite
+    sendInvite,
   } = useInvited()
 
   const jurn_id = props.match.params.jurn_id
@@ -21,13 +21,13 @@ export default props => {
     e.preventDefault()
 
     sendInvite(firstName, lastName, jurn_id)
-      .then(e => {
+      .then((e) => {
         setFirstName("")
         setLastName("")
         updateInvited(jurn_id)
       })
 
-      .catch(e => {
+      .catch((e) => {
         setError(true)
         setFirstName("")
         setLastName("")
@@ -37,6 +37,7 @@ export default props => {
 
   useEffect(() => {
     updateInvited(jurn_id)
+    setError(false)
   }, [jurn_id, firstName, lastName])
 
   return (
@@ -52,7 +53,7 @@ export default props => {
                 ? {
                     content:
                       "Invitee not found: Please enter a valid first and last name",
-                    pointing: "above"
+                    pointing: "above",
                   }
                 : false
             }
@@ -60,7 +61,7 @@ export default props => {
             label="First Name"
             placeholder="ex. Mary"
             value={firstName}
-            onChange={e => setFirstName(e.target.value)}
+            onChange={(e) => setFirstName(e.target.value)}
           />
           <Form.Input
             error={error}
@@ -68,7 +69,7 @@ export default props => {
             label="Last Name"
             placeholder="ex. Smith"
             value={lastName}
-            onChange={e => setLastName(e.target.value)}
+            onChange={(e) => setLastName(e.target.value)}
           />
         </Form.Group>
 

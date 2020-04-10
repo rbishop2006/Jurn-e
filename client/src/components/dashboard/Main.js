@@ -4,7 +4,7 @@ import { useMain } from "../../hooks"
 import { Link } from "react-router-dom"
 import moment from "moment"
 
-export default props => {
+export default (props) => {
   const { jurns, get } = useMain()
 
   useEffect(() => {
@@ -36,8 +36,10 @@ export default props => {
                 </Card.Header>
                 <Card.Meta id="location">{jurn.location}</Card.Meta>
                 <Card.Meta>
-                  {moment(jurn.start_date).format("MMM Do, YYYY") + " - "}
-                  {moment(jurn.end_date).format("MMM Do, YYYY")}
+                  {jurn.start_date &&
+                    moment(jurn.start_date).format("MMM Do, YYYY") + " - "}
+                  {jurn.end_date &&
+                    moment(jurn.end_date).format("MMM Do, YYYY")}
                 </Card.Meta>
                 <Card.Meta>{`People going: ` + jurn.going_count}</Card.Meta>
                 <Card.Meta>{`Pending invites: ` + jurn.pend_count}</Card.Meta>

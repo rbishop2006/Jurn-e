@@ -5,7 +5,7 @@
   height: 86px;
 
   .messageForm {
-    margin: 15px 5px;
+    margin: 15px 5px 0px 5px;
 
     .ui.button.dropdown {
       color: $firstColor;
@@ -34,17 +34,13 @@
       }
     }
 
-    .inputDiv {
-      display: flex;
-      border: 1px solid $firstColor;
-      border-radius: 10px;
-      align-items: center;
+    .field.inputDiv {
+      @include FormForm_Field($firstColor);
       height: 40px;
 
       .messageText {
         color: $firstColor;
         flex-grow: 2;
-        background: transparent;
         border: 0;
         padding: 5px;
         outline: 0;

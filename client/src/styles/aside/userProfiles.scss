@@ -24,6 +24,10 @@
     align-items: center;
   }
 
+  i {
+    color: $secondColor;
+  }
+
   .logOut {
     margin: 0;
     @include buttonThemed($firstColor);

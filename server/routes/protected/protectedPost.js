@@ -259,7 +259,7 @@ router.post("/message", (req, res, next) => {
       }
     )
   } else {
-    res.json({
+    res.status(404).json({
       message: "message not added",
     })
   }

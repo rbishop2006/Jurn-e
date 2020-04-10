@@ -141,7 +141,9 @@ export default (props) => {
         </Form.Field>
         <Button type="submit">Register</Button>
         <div className="linkDiv">
-          <p>Already a Jurn(ease) member?</p>
+          <p>
+            Already a Jurn(<em>ease</em>) member?
+          </p>
           <Link to="/login">Click Here</Link>
         </div>
       </Form>
