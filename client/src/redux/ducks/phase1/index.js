@@ -108,12 +108,6 @@ function finalPhoto(jurn_id, photo) {
   })
 }
 
-// function finalPhoto(jurn_id, photo) {
-//   return (dispatch) => {
-//     api.patch("/finalphoto", { jurn_id, photo }).catch()
-//   }
-// }
-
 export function usePhase1() {
   const dispatch = useDispatch()
   const jname = useSelector((appState) => appState.Phase1State.jname)
