@@ -10,7 +10,6 @@ export default props => {
   const jurn_id = props.match.params.jurn_id
   const [hotel, setHotel] = useState("")
   const [finalHotel, setFinalHotel] = useState("")
-  const [error, setError] = useState(false)
 
   function handleHotSug(e) {
     e.preventDefault()

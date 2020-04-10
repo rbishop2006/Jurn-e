@@ -134,13 +134,3 @@ export function useRems() {
     updateRems
   }
 }
-
-// function remComplete(rem_id, jurn_id) {
-//   return dispatch => {
-//     api.patch("/remcomplete", { rem_id }).then(resp => {
-//       dispatch(getRems(jurn_id))
-//     })
-//   }
-// }
-// const remComp = (rem_id, jurn_id) => dispatch(remComplete(rem_id, jurn_id))
-// remComp,
