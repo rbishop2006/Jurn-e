@@ -24,16 +24,7 @@ export default props => {
                 alt="Jurn(ease) trip photo"
               />
               <Card.Content>
-                <Card.Header className="nameAndEdit">
-                  {jurn.jname}
-                  <Link to={"/Jurne/dashboard/" + jurn.jurn_id}>
-                    <Button type="button">
-                      <span>
-                        J(<em>e</em>) <Icon name="pencil" />
-                      </span>
-                    </Button>
-                  </Link>
-                </Card.Header>
+                <Card.Header className="nameAndEdit">{jurn.jname}</Card.Header>
                 <Card.Meta id="location">{jurn.location}</Card.Meta>
                 <Card.Meta>
                   {moment(jurn.start_date).format("MMM Do, YYYY") + " - "}
@@ -44,6 +35,16 @@ export default props => {
                 <Card.Meta>{`Activities planned: ` + jurn.act_count}</Card.Meta>
 
                 <Card.Meta>{`My Reminders Left: ` + jurn.rem_count}</Card.Meta>
+                <Link
+                  className="p1Edit"
+                  to={"/Jurne/dashboard/" + jurn.jurn_id}
+                >
+                  <Button type="button">
+                    <span>
+                      J(<em>e</em>) <Icon name="pencil" />
+                    </span>
+                  </Button>
+                </Link>
               </Card.Content>
             </Card>
           ))}
