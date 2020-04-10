@@ -30,8 +30,6 @@ function getPhase2(jurn_id) {
         dispatch({
           type: GET_PHASE2,
           payload: resp.phase2
-
-          //trying to display activities
         })
       })
       .catch()
@@ -41,7 +39,6 @@ function getPhase2(jurn_id) {
 export function usePhase2() {
   const dispatch = useDispatch()
   const jurnInfo = useSelector(appState => appState.Phase2State.jurnInfo)
-  // const location = useSelector(appState => appState.Phase2State.location)
   const activities = useSelector(appState => appState.Phase2State.activities)
   const updatePhase2 = jurn_id => dispatch(getPhase2(jurn_id))
 
