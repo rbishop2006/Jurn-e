@@ -28,7 +28,7 @@ router.post("/invite", (req, res, next) => {
             if (resultsCheckInv.length > 0) {
               if (resultsCheckInv[0].inv_status === "accepted") {
                 res.json({
-                  message: "status already accepted"
+                  message: "status already accepted",
                 })
               } else {
                 const sqlUpdInv = `
@@ -40,7 +40,7 @@ router.post("/invite", (req, res, next) => {
                   [jurn_id, user_id],
                   (errUpdInv, resultsUpdInv, fieldsUpdInv) => {
                     res.json({
-                      message: "status updated to pending"
+                      message: "status updated to pending",
                     })
                   }
                 )
@@ -55,7 +55,7 @@ router.post("/invite", (req, res, next) => {
                 [jurn_id, user_id],
                 (errInvite, resultsInvite, fieldsInvite) => {
                   res.json({
-                    message: "pending invite"
+                    message: "pending invite",
                   })
                 }
               )
@@ -63,8 +63,8 @@ router.post("/invite", (req, res, next) => {
           }
         )
       } else {
-        res.status(401).json({
-          message: "First and Last Name of Invitee not found"
+        res.status(404).json({
+          message: "First and Last Name of Invitee not found",
         })
       }
     }
@@ -78,7 +78,7 @@ router.post("/jurn", (req, res, next) => {
   conn.query(checkSQL3, [jname], (err3, results3, fields3) => {
     if (results3[0].count > 0) {
       res.status(409).json({
-        message: "jurn already exists"
+        message: "jurn already exists",
       })
     } else {
       const sql4 = "INSERT INTO jurn (jname, user_id) VALUES (?, ?)"
@@ -131,13 +131,13 @@ router.post("/jurn", (req, res, next) => {
                     jurn_id,
                     user_id,
                     jurn_id,
-                    user_id
+                    user_id,
                   ],
                   (errR, resultsR, fieldsR) => {
                     res.json({
                       message: "jurn added successfully",
                       id: jurn_id,
-                      user_id: user_id
+                      user_id: user_id,
                     })
                   }
                 )
@@ -157,7 +157,7 @@ router.post("/location", (req, res, next) => {
 
   conn.query(sql8, [loc_name, jurn_id], (err8, results8, fields8) => {
     res.json({
-      message: "location added successfully"
+      message: "location added successfully",
     })
   })
 })
@@ -172,7 +172,7 @@ router.post("/hotel", (req, res, next) => {
     [hotel_name, jurn_id],
     (errHot2, resultsHot2, fieldsHot2) => {
       res.json({
-        message: "hotel added successfully"
+        message: "hotel added successfully",
       })
     }
   )
@@ -194,18 +194,18 @@ router.post("/dates", (req, res, next) => {
         [start_date, end_date, jurn_id],
         (errDateRange, resultsDateRange, fieldsDateRange) => {
           res.json({
-            message: "dates added successfully"
+            message: "dates added successfully",
           })
         }
       )
     } else {
       res.json({
-        message: "Please select a valid date range"
+        message: "Please select a valid date range",
       })
     }
   } else {
     res.json({
-      message: "Dates not changed"
+      message: "Dates not changed",
     })
   }
 })
@@ -220,7 +220,7 @@ router.post("/addrem", (req, res, next) => {
     [rem, jurn_id, user_id],
     (errAddrem, resultsAddRem, fieldsAddRem) => {
       res.json({
-        message: "rem added successfully"
+        message: "rem added successfully",
       })
     }
   )
@@ -235,28 +235,34 @@ router.post("/addact", (req, res, next) => {
     [act, jurn_id],
     (errAddact, resultsAddact, fieldsAddact) => {
       res.json({
-        message: "act added successfully"
+        message: "act added successfully",
       })
     }
   )
 })
 
 router.post("/message", (req, res, next) => {
-  const user_id = req.body.user_id
-  const jurn_id = req.body.jurnId
-  const message = req.body.message
-  const sqlMsg =
-    "INSERT INTO message (message, jurn_id, user_id) VALUES (?, ?, ?)"
+  if (req.body.jurnId) {
+    const user_id = req.body.user_id
+    const jurn_id = req.body.jurnId
+    const message = req.body.message
+    const sqlMsg =
+      "INSERT INTO message (message, jurn_id, user_id) VALUES (?, ?, ?)"
 
-  conn.query(
-    sqlMsg,
-    [message, jurn_id, user_id],
-    (errMsg, resultsMsg, fieldsMsg) => {
-      res.json({
-        message: "message added successfully"
-      })
-    }
-  )
+    conn.query(
+      sqlMsg,
+      [message, jurn_id, user_id],
+      (errMsg, resultsMsg, fieldsMsg) => {
+        res.json({
+          message: "message added successfully",
+        })
+      }
+    )
+  } else {
+    res.json({
+      message: "message not added",
+    })
+  }
 })
 
 module.exports = router
