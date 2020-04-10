@@ -112,8 +112,10 @@ export default (props) => {
       <div>
         <h1 className="p2header">{jurnInfo.jname} </h1>
         <h4 className="p2dateRange">
-          {moment(jurnInfo.start_date).format("MMM Do, YYYY") + " - "}
-          {moment(jurnInfo.end_date).format("MMM Do, YYYY")}
+          {jurnInfo.start_date &&
+            moment(jurnInfo.start_date).format("MMM Do, YYYY") + " - "}
+          {jurnInfo.end_date &&
+            moment(jurnInfo.end_date).format("MMM Do, YYYY")}
         </h4>
         <em></em>
       </div>
