@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { useMessages, useAside } from "../../hooks"
 import { Form, Dropdown } from "semantic-ui-react"
 import "../../styles/aside/messages.scss"
@@ -10,6 +10,7 @@ export default (props) => {
   const inputRef = useRef(null)
   const user_id = aUser.user_id
   const [jurnId, setJurnId] = useState("")
+  const [error, setError] = useState(false)
 
   const jurns = []
   aJurns.map((jurn, i) => {
@@ -23,10 +24,21 @@ export default (props) => {
   function handleSubmit(e) {
     e.preventDefault()
     sendMessage(user_id, jurnId, message)
-    setMessage("")
-    getMessages()
-    inputRef.current.focus()
+      .then((e) => {
+        setMessage("")
+        getMessages()
+        inputRef.current.focus()
+      })
+      .catch((e) => {
+        setError(true)
+        setMessage("")
+        getMessages()
+      })
   }
+
+  useEffect(() => {
+    setError(false)
+  }, [jurnId, message])
 
   return (
     <div className="messageInput">
@@ -44,13 +56,20 @@ export default (props) => {
           />
         </Form.Field>
         <Form.Field className="inputDiv">
-          <input
+          <Form.Input
+            error={
+              error
+                ? {
+                    content: "Please select a Jurn",
+                    pointing: "above",
+                  }
+                : false
+            }
             className="messageText"
             value={message}
             type="text"
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Send a message..."
-            ref={inputRef}
           />
         </Form.Field>
       </Form>

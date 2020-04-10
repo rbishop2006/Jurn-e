@@ -33,9 +33,16 @@ function fetchMessages() {
 }
 
 function createMessage(user_id, jurnId, message) {
-  return (dispatch) => {
-    api.post("/message", { user_id, jurnId, message }).catch()
-  }
+  return new Promise((resolve, reject) => {
+    api
+      .post("/message", { user_id, jurnId, message })
+      .then((resp) => {
+        resolve(resp)
+      })
+      .catch((e) => {
+        reject()
+      })
+  })
 }
 
 export function useMessages() {
@@ -43,7 +50,7 @@ export function useMessages() {
   const messages = useSelector((appState) => appState.MessageState.msgs)
   const getMessages = () => dispatch(fetchMessages())
   const sendMessage = (user_id, jurnId, message) =>
-    dispatch(createMessage(user_id, jurnId, message))
+    createMessage(user_id, jurnId, message)
 
   return { messages, getMessages, sendMessage }
 }

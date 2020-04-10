@@ -7,12 +7,40 @@
   display: grid;
   justify-content: left;
 
+  form.ui.form {
+    div.fields {
+      div.inline.field {
+        margin: 10px 0px 0px 0px;
+      }
+    }
+  }
+
+  div.datepickerDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    button {
+      height: 40px;
+      padding: 10px;
+    }
+
+    .datesSect {
+      @include FormForm_Input($secondColor);
+      margin: 0;
+
+      div.field {
+        margin: 0;
+        width: 300px;
+        padding-bottom: 5px;
+      }
+    }
+  }
+
   .submitDates {
     margin-bottom: 10px;
   }
-  .datesSect {
-    @include FormForm_Input($secondColor);
-  }
+
   .ui.button {
     @include buttonThemed($firstColor);
   }
