@@ -90,13 +90,28 @@
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-gap: 40px;
 
-      #location {
-        color: $firstColor;
-        font-weight: 600;
-      }
+      div.ui.centered {
+        div.content {
+          #location {
+            color: $firstColor;
+            font-weight: 600;
+          }
 
-      .ui.card .meta {
-        color: $thirdColor;
+          div.meta {
+            color: $thirdColor;
+          }
+
+          a.p1Edit {
+            button {
+              margin: 0px 0px;
+              padding: 5px 0px 5px 5px;
+              @include buttonThemed($firstColor);
+              position: absolute;
+              bottom: 25px;
+              right: 10px;
+            }
+          }
+        }
       }
 
       .card {
@@ -119,16 +134,6 @@
 
         .header {
           display: flex;
-
-          a {
-            margin: 0;
-
-            button {
-              margin: 0px 0px;
-              padding: 5px 0px 5px 5px;
-              @include buttonThemed($firstColor);
-            }
-          }
         }
       }
     }
