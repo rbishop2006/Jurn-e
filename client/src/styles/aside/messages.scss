@@ -1,97 +1,97 @@
 @import "../base.scss";
 
 .messageInput {
-  width: 325px;
-  height: 86px;
+	width: 325px;
+	height: 86px;
 
-  .messageForm {
-    margin: 15px 5px 0px 5px;
+	.messageForm {
+		margin: 15px 5px 0px 5px;
 
-    .ui.button.dropdown {
-      color: $firstColor;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
+		.ui.button.dropdown {
+			color: $firstColor;
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
 
-      i {
-        color: $highlightColor;
-      }
-    }
+			i {
+				color: $highlightColor;
+			}
+		}
 
-    .ui.button.dropdown {
-      div.text {
-        padding-left: 16px;
-      }
-      .menu {
-        color: $secondColor;
-        box-shadow: 0 2px 3px 0 $firstColor;
-        border: 1px solid $firstColor;
-        margin: 10px 0px;
+		.ui.button.dropdown {
+			div.text {
+				padding-left: 16px;
+			}
+			.menu {
+				color: $secondColor;
+				box-shadow: 0 2px 3px 0 $firstColor;
+				border: 1px solid $firstColor;
+				margin: 10px 0px;
 
-        div span {
-          color: $secondColor;
-        }
-      }
-    }
+				div span {
+					color: $secondColor;
+				}
+			}
+		}
 
-    .field.inputDiv {
-      @include FormForm_Field($firstColor);
-      height: 40px;
+		.field.inputDiv {
+			@include FormForm_Field($firstColor);
+			height: 40px;
 
-      .messageText {
-        color: $firstColor;
-        flex-grow: 2;
-        border: 0;
-        padding: 5px;
-        outline: 0;
-      }
+			.messageText {
+				color: $firstColor;
+				flex-grow: 2;
+				border: 0;
+				padding: 5px;
+				outline: 0;
+			}
 
-      .messageText::placeholder {
-        color: $firstColor;
-      }
+			.messageText::placeholder {
+				color: $firstColor;
+			}
 
-      .messageText:focus {
-        color: $firstColor;
-        background: #d1d1d1;
-      }
-    }
-  }
+			.messageText:focus {
+				color: $firstColor;
+				background: #d1d1d1;
+			}
+		}
+	}
 }
 
 .messageArea {
-  height: 400px;
-  overflow: auto;
-  background: $baseColor;
-  padding: 10px 10px;
+	height: 400px;
+	overflow: auto;
+	background: $baseColor;
+	padding: 10px 10px;
 
-  div {
-    font-size: 1.1em;
-    margin: 0;
+	div {
+		font-size: 1.1em;
+		margin: 0;
 
-    .jurnName {
-      color: $secondColor;
+		.jurnName {
+			color: $secondColor;
 
-      strong {
-        padding-left: 5px;
-      }
+			strong {
+				padding-left: 5px;
+			}
 
-      .msgName {
-        color: $secondColor;
-      }
+			.msgName {
+				color: $secondColor;
+			}
 
-      .from {
-        margin-left: 15px;
-        font-size: 0.8em;
-      }
-    }
+			.from {
+				margin-left: 15px;
+				font-size: 0.8em;
+			}
+		}
 
-    .message {
-      color: $firstColor;
-    }
+		.message {
+			color: $firstColor;
+		}
 
-    .timeStamp {
-      color: $highlightColor;
-      font-size: 0.7em;
-    }
-  }
+		.timeStamp {
+			color: $highlightColor;
+			font-size: 0.7em;
+		}
+	}
 }

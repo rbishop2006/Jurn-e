@@ -1,25 +1,25 @@
 html {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
 }
 
 $baseColor: #e8e8e8;
@@ -30,77 +30,77 @@ $thirdColor: #1c5d99;
 $frontPageColor: #4183c4;
 
 em {
-  color: $highlightColor;
+	color: $highlightColor;
 }
 
 @mixin buttonThemed($bT) {
-  background: $bT;
-  color: $baseColor;
-  border: 1px solid $secondColor;
-  transition: all 0.3s ease;
+	background: $bT;
+	color: $baseColor;
+	border: 1px solid $secondColor;
+	transition: all 0.3s ease;
 
-  i {
-    color: $highlightColor;
-  }
+	i {
+		color: $highlightColor;
+	}
 
-  em {
-    color: $highlightColor;
-  }
+	em {
+		color: $highlightColor;
+	}
 
-  &:hover {
-    background: lighten($bT, 8%);
-    transition: all 0.3s ease;
-    border: 1px solid $highlightColor;
-    color: $baseColor;
-  }
-  &:active {
-    background: lighten($bT, 20%);
-  }
+	&:hover {
+		background: lighten($bT, 8%);
+		transition: all 0.3s ease;
+		border: 1px solid $highlightColor;
+		color: $baseColor;
+	}
+	&:active {
+		background: lighten($bT, 20%);
+	}
 }
 
 @mixin FormForm_Input($fT) {
-  div.field {
-    label {
-      color: $fT;
-    }
+	div.field {
+		label {
+			color: $fT;
+		}
 
-    div.input {
-      border: 1px solid $fT;
-      border-radius: 5px;
-      color: $fT;
+		div.input {
+			border: 1px solid $fT;
+			border-radius: 5px;
+			color: $fT;
 
-      ::placeholder {
-        color: scale-color($secondColor, $alpha: -60%);
-      }
+			::placeholder {
+				color: scale-color($secondColor, $alpha: -60%);
+			}
 
-      input:focus {
-        color: $fT;
-        color: darken($fT, 10%);
-        border-color: $secondColor;
-      }
-    }
-  }
+			input:focus {
+				color: $fT;
+				color: darken($fT, 10%);
+				border-color: $secondColor;
+			}
+		}
+	}
 }
 
 @mixin FormForm_Field($fT2) {
-  div.field {
-    label {
-      color: $fT2;
-    }
+	div.field {
+		label {
+			color: $fT2;
+		}
 
-    input {
-      color: $fT2;
-      border: 1px solid $fT2;
-      border-radius: 5px;
-    }
+		input {
+			color: $fT2;
+			border: 1px solid $fT2;
+			border-radius: 5px;
+		}
 
-    input:focus {
-      color: $fT2;
-      color: darken($fT2, 10%);
-      border-color: $secondColor;
-    }
-    ::placeholder {
-      color: scale-color($secondColor, $alpha: -60%);
-    }
-  }
+		input:focus {
+			color: $fT2;
+			color: darken($fT2, 10%);
+			border-color: $secondColor;
+		}
+		::placeholder {
+			color: scale-color($secondColor, $alpha: -60%);
+		}
+	}
 }
