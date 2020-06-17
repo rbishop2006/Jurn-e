@@ -8586,6 +8586,11 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
+react-auth@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-auth/-/react-auth-1.0.0.tgz#0097c63533d9e0c4e37e0f01255996473ee52cf4"
+  integrity sha1-AJfGNTPZ4MTjfg8BJVmWRz7lLPQ=
+
 react-dev-utils@^10.2.1:
   version "10.2.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-10.2.1.tgz#f6de325ae25fa4d546d09df4bb1befdc6dd19c19"
