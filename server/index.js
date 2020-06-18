@@ -10,6 +10,7 @@ const protectedRoutes = require("./routes/protected/protected.js")
 const expressjwt = require("express-jwt")
 const config = require("config")
 const createError = require("http-errors")
+const envSecret = process.env.secret
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -20,28 +21,28 @@ app.use(express.static(path.join(__dirname, "public")))
 app.use("/api", postRoutes)
 app.use(
 	"/api",
-	expressjwt({ secret: process.env.secret || config.get("secret") }),
+	expressjwt({ secret: envSecret || config.get("secret") }),
 	protectedPostRoutes
 )
 app.use(
 	"/api",
-	expressjwt({ secret: process.env.secret || config.get("secret") }),
+	expressjwt({ secret: envSecret || config.get("secret") }),
 	protectedGetRoutes
 )
 app.use(
 	"/api",
-	expressjwt({ secret: process.env.secret || config.get("secret") }),
+	expressjwt({ secret: envSecret || config.get("secret") }),
 	protectedDeleteRoutes
 )
 app.use(
 	"/api",
-	expressjwt({ secret: process.env.secret || config.get("secret") }),
+	expressjwt({ secret: envSecret || config.get("secret") }),
 	protectedPatchRoutes
 )
 
 app.use(
 	"/api",
-	expressjwt({ secret: process.env.secret || config.get("secret") }),
+	expressjwt({ secret: envSecret || config.get("secret") }),
 	protectedRoutes
 )
 
