@@ -7,6 +7,7 @@ const pool = mysql.createPool({
 	user: process.env.user || config.get("db.user"),
 	password: process.env.password || config.get("db.password"),
 	database: process.env.database || config.get("db.database"),
+	secret: process.env.secret,
 })
 
 // const pool = mysql.createPool({
