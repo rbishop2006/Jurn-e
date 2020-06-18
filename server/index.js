@@ -20,26 +20,30 @@ app.use(express.static(path.join(__dirname, "public")))
 app.use("/api", postRoutes)
 app.use(
 	"/api",
-	expressjwt({ secret: config.get("secret") }),
+	expressjwt({ secret: process.env.secret || config.get("secret") }),
 	protectedPostRoutes
 )
 app.use(
 	"/api",
-	expressjwt({ secret: config.get("secret") }),
+	expressjwt({ secret: rocess.env.secret || config.get("secret") }),
 	protectedGetRoutes
 )
 app.use(
 	"/api",
-	expressjwt({ secret: config.get("secret") }),
+	expressjwt({ secret: rocess.env.secret || config.get("secret") }),
 	protectedDeleteRoutes
 )
 app.use(
 	"/api",
-	expressjwt({ secret: config.get("secret") }),
+	expressjwt({ secret: rocess.env.secret || config.get("secret") }),
 	protectedPatchRoutes
 )
 
-app.use("/api", expressjwt({ secret: config.get("secret") }), protectedRoutes)
+app.use(
+	"/api",
+	expressjwt({ secret: rocess.env.secret || config.get("secret") }),
+	protectedRoutes
+)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
