@@ -79,7 +79,7 @@ router.post("/login", (req, res, next) => {
 						email: email,
 						project: "Jurn-e",
 					},
-					process.env.host || config.get("secret")
+					process.env.secret || config.get("secret")
 				)
 				res.json({
 					token: token,
