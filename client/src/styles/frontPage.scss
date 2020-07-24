@@ -1,66 +1,82 @@
 @import "./base.scss";
 
-html,
-body,
-.app,
-#root,
-.frontWrapper {
-  height: 100%;
-}
-
-.frontWrapper {
-  background: url("/JurnEase-background.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
+#frontWrapper {
+	background: url("/JurnEase-background.png") no-repeat center center/ contain;
 }
 
 h1,
 h2 {
-  text-align: center;
+	text-align: center;
 }
 
 .frontHeader {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 60px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 60px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 
-  a {
-    margin: 0px 20px;
+	a {
+		margin: 0px 20px;
 
-    .signUp {
-      width: 150px;
-      @include buttonThemed($frontPageColor);
-    }
-  }
+		.signUp {
+			width: 150px;
+			@include buttonThemed($frontPageColor);
+		}
+	}
 }
 
 .frontMain {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 60px;
-  color: #4183c4;
+	height: 100vh;
+	color: #4183c4;
 
-  .tagline {
-    position: absolute;
-    width: 20%;
-    right: 10%;
-    top: 40%;
+	.tagline {
+		position: absolute;
+		width: 20%;
+		right: 10%;
+		top: 40%;
 
-    h1 {
-      text-align: center;
-    }
+		h1 {
+			text-align: center;
+		}
 
-    p {
-      word-spacing: 0.3em;
-      letter-spacing: 0.1em;
-    }
-  }
+		p {
+			word-spacing: 0.3em;
+			letter-spacing: 0.1em;
+		}
+	}
+}
+
+@media (max-width: 500px) {
+	#frontWrapper {
+		background: url("/JurnEase-background.png") no-repeat center bottom/ contain;
+
+		.frontHeader {
+			position: static;
+			justify-content: center;
+		}
+
+		.frontMain {
+			position: static;
+			padding: 20px;
+
+			.tagline {
+				position: static;
+				width: 100%;
+
+				p {
+					font-size: 20px;
+					word-spacing: 0;
+					letter-spacing: 0;
+				}
+
+				h3 {
+					font-size: 25px;
+				}
+			}
+		}
+	}
 }
