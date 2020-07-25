@@ -16,6 +16,7 @@ export default (props) => {
 					</Button>
 				</Link>
 			</div>
+			<div className="frontImage"></div>
 			<div className="frontMain">
 				<div className="tagline">
 					<h1>Traveling with family or friends?</h1>
