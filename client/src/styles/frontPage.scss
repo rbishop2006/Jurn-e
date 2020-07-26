@@ -35,11 +35,8 @@ h1 {
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		margin: 300px 8% 0 auto;
-		// position: absolute;
+		margin: 10% 8% 0 auto;
 		width: 300px;
-		// right: 8%;
-		// bottom: 15%;
 
 		h1 {
 			text-align: center;
@@ -66,7 +63,7 @@ h1 {
 		}
 
 		.frontMain {
-			height: calc(100vh - 30vh - 60px);
+			height: fit-content;
 			background: none;
 			position: static;
 			padding: 20px;
