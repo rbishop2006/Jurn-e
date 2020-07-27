@@ -38,6 +38,7 @@ em {
 	color: $baseColor;
 	border: 1px solid $secondColor;
 	transition: all 0.3s ease;
+	margin: 0;
 
 	i {
 		color: $highlightColor;
@@ -74,7 +75,6 @@ em {
 			}
 
 			input:focus {
-				color: $fT;
 				color: darken($fT, 10%);
 				border-color: $secondColor;
 			}

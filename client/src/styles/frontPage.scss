@@ -1,7 +1,6 @@
 @import "./base.scss";
 
 #frontWrapper {
-	background: url("/JurnEase-background.png") no-repeat center center/ contain;
 	height: 100vh;
 }
 
@@ -10,10 +9,6 @@ h1 {
 }
 
 .frontHeader {
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
 	height: 60px;
 	display: flex;
 	justify-content: flex-end;
@@ -23,21 +18,25 @@ h1 {
 		margin: 0px 20px;
 
 		.signUp {
-			width: 150px;
 			@include buttonThemed($frontPageColor);
 		}
 	}
 }
 
 .frontMain {
-	max-height: 100vh;
+	height: calc(100vh - 60px);
 	color: #4183c4;
+	background: url("/JurnEase-background.png") no-repeat center center/ contain;
+	position: relative;
+	display: flex;
 
 	.tagline {
-		position: absolute;
-		width: 20%;
-		right: 10%;
-		top: 40%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin: 10% 8% 0 auto;
+		width: 300px;
 
 		h1 {
 			text-align: center;
@@ -52,8 +51,6 @@ h1 {
 
 @media (max-width: 850px) {
 	#frontWrapper {
-		background: none;
-
 		.frontHeader {
 			position: static;
 			justify-content: center;
@@ -66,12 +63,15 @@ h1 {
 		}
 
 		.frontMain {
+			height: fit-content;
+			background: none;
 			position: static;
 			padding: 20px;
 
 			.tagline {
-				position: static;
 				width: 100%;
+				margin: 0;
+				justify-content: flex-start;
 
 				p {
 					font-size: 20px;
