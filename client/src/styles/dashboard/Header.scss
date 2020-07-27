@@ -1,0 +1,68 @@
+@import "../base.scss";
+
+header {
+	background: $baseColor;
+	text-align: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 2rem;
+
+	img {
+		height: 58px;
+		margin: 0;
+	}
+
+	.ui.form {
+		@include FormForm_Field($firstColor);
+		width: 50%;
+
+		.inline.fields {
+			margin: 0;
+
+			.field > label {
+				color: $secondColor;
+				justify-self: left;
+			}
+
+			div.field {
+				padding: 0;
+				width: 100%;
+				display: grid;
+				justify-items: center;
+
+				input {
+					width: 100%;
+					color: $firstColor;
+					margin: 0;
+				}
+
+				input:focus {
+					border: 1.4px solid $secondColor;
+				}
+				.error {
+					color: #9f3a38;
+				}
+				.errorBox {
+					border-color: #e0b4b4;
+					background: #fff6f6;
+				}
+
+				button {
+					@include buttonThemed($firstColor);
+					width: 50%;
+				}
+			}
+		}
+	}
+
+	.ui.button {
+		@include buttonThemed($firstColor);
+	}
+}
+
+@media (max-width: 500px) {
+	header {
+		background: lightblue;
+	}
+}

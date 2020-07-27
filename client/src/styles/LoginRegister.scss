@@ -18,10 +18,10 @@
 		@include FormForm_Input($firstColor);
 		width: 50%;
 		height: fit-content;
-		margin: 20px 0;
+		margin: 2rem 0;
 		border: 3px solid $firstColor;
 		border-radius: 10px;
-		padding: 30px;
+		padding: 3rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -31,18 +31,41 @@
 			margin: 10px 0;
 			width: 100%;
 
-			input:focus {
-				border: 1.5px solid $firstColor;
+			label {
+				font-size: 1.7rem;
 			}
 
-			.error {
-				color: #9f3a38;
+			input {
+				border: 1px solid $firstColor;
+				border-radius: 5px;
+				color: $firstColor;
+				font-size: 1.7rem;
+
+				&::placeholder {
+					color: scale-color($firstColor, $alpha: -60%);
+				}
 			}
 
-			.errorBox {
-				border-color: #e0b4b4;
-				background: #fff6f6;
+			div.input {
+				input {
+					&:focus {
+						border: 1.5px solid $firstColor;
+					}
+				}
 			}
+
+			div.ui.pointing {
+				font-size: 1.8rem;
+			}
+		}
+
+		.error {
+			color: #9f3a38;
+		}
+
+		.errorBox {
+			border-color: #e0b4b4;
+			background: #fff6f6;
 		}
 
 		.ui.button {
@@ -52,7 +75,9 @@
 
 		.linkDiv {
 			display: flex;
+			align-items: center;
 			margin: 10px 0;
+			font-size: 2rem;
 
 			p {
 				margin: 0px 10px 0px 0px;
@@ -91,6 +116,15 @@
 		.ui.form.loginDiv,
 		.ui.form.registerDiv {
 			width: 95%;
+
+			.linkDiv {
+				flex-direction: column;
+
+				p,
+				a {
+					margin: 0;
+				}
+			}
 		}
 	}
 }

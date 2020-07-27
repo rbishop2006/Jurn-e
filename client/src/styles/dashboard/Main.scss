@@ -1,0 +1,59 @@
+@import "../base.scss";
+
+section {
+	.dashMain {
+		// position: absolute;
+		// top: 120px;
+		// left: 325px;
+		// right: 0;
+		// bottom: 0;
+		background: white;
+		overflow: auto;
+
+		.cardDiv {
+			margin: 40px;
+			display: flex;
+			flex-wrap: wrap;
+			align-content: space-between;
+
+			div.ui.centered {
+				border: 1px solid $thirdColor;
+				box-shadow: 5px 5px $firstColor;
+				border-radius: 5px;
+				padding: 10px 10px 0px 10px;
+				margin: 25px 25px;
+
+				img {
+					width: 290px;
+					height: 290px;
+				}
+
+				div.content {
+					div.nameAndEdit {
+						color: $firstColor;
+					}
+
+					#location {
+						color: $firstColor;
+						font-weight: 900;
+					}
+
+					div.meta {
+						color: $thirdColor;
+					}
+
+					a.p1Edit {
+						button {
+							margin: 0px 0px;
+							padding: 5px 0px 5px 5px;
+							@include buttonThemed($firstColor);
+							position: absolute;
+							bottom: 16px;
+							right: 10px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

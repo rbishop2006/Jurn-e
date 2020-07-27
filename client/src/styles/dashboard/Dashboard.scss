@@ -1,0 +1,32 @@
+@import "../base.scss";
+
+#grid {
+	display: grid;
+	grid-template-columns: 350px auto;
+	grid-template-areas:
+		"sidebar header"
+		"sidebar main"
+		"sidebar main";
+
+	aside {
+		grid-area: sidebar;
+	}
+
+	header {
+		grid-area: header;
+	}
+
+	main {
+		grid-area: main;
+	}
+}
+
+@media (max-width: 500px) {
+	#grid {
+		grid-template-columns: auto;
+		grid-template-areas:
+			"header"
+			"main"
+			"sidebar";
+	}
+}
