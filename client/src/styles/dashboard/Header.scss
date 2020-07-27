@@ -9,40 +9,43 @@ header {
 	padding: 2rem;
 
 	img {
-		height: 58px;
-		margin: 0;
+		width: 10%;
 	}
 
-	.ui.form {
+	.ui.form.create {
 		@include FormForm_Field($firstColor);
 		width: 50%;
 
-		.inline.fields {
+		.fields {
 			margin: 0;
 
-			.field > label {
-				color: $secondColor;
-				justify-self: left;
-			}
-
-			div.field {
+			.field {
 				padding: 0;
 				width: 100%;
-				display: grid;
+				display: flex;
+				flex-direction: column;
 				justify-items: center;
+				align-items: center;
 
-				input {
+				label {
+					color: $secondColor;
+					font-size: 1.6rem;
+				}
+
+				#newJurn {
+					font-size: 1.6rem;
 					width: 100%;
 					color: $firstColor;
-					margin: 0;
 				}
 
 				input:focus {
 					border: 1.4px solid $secondColor;
 				}
+
 				.error {
 					color: #9f3a38;
 				}
+
 				.errorBox {
 					border-color: #e0b4b4;
 					background: #fff6f6;
@@ -58,11 +61,35 @@ header {
 
 	.ui.button {
 		@include buttonThemed($firstColor);
+		font-size: 1.8rem;
 	}
 }
 
 @media (max-width: 500px) {
 	header {
+		padding: 1rem 0;
 		background: lightblue;
+		flex-direction: column;
+
+		img {
+			width: 50%;
+			margin: 0 0 1.5rem 0;
+		}
+
+		.ui.form.create {
+			width: 95%;
+
+			.fields {
+				.field {
+					button {
+						margin: 1rem 0;
+					}
+				}
+			}
+		}
+
+		.ui.button {
+			// font-size: 1.5rem;
+		}
 	}
 }
