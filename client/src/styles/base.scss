@@ -1,25 +1,38 @@
 html {
 	box-sizing: border-box;
+	font-size: 10px;
 }
 
 *,
 *::before,
 *::after {
 	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
 }
 
-body {
+a {
+	text-decoration: none;
+}
+
+ul,
+li {
+	list-style-type: none;
+}
+
+img {
+	display: block;
+	width: 100%;
+}
+
+body,
+#root {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
 		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-}
-
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-		monospace;
 }
 
 $baseColor: #e8e8e8;
@@ -34,6 +47,7 @@ em {
 }
 
 @mixin buttonThemed($bT) {
+	font-size: 1.5rem;
 	background: $bT;
 	color: $baseColor;
 	border: 1px solid $secondColor;
@@ -63,14 +77,15 @@ em {
 	div.field {
 		label {
 			color: $fT;
+			font-size: 1.7rem;
 		}
 
 		div.input {
-			border: 1px solid $fT;
 			border-radius: 5px;
 			color: $fT;
+			font-size: 1.7rem;
 
-			::placeholder {
+			&::placeholder {
 				color: scale-color($secondColor, $alpha: -60%);
 			}
 
