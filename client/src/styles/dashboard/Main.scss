@@ -2,33 +2,29 @@
 
 section {
 	.dashMain {
-		// position: absolute;
-		// top: 120px;
-		// left: 325px;
-		// right: 0;
-		// bottom: 0;
 		background: white;
-		overflow: auto;
 
 		.cardDiv {
-			margin: 40px;
 			display: flex;
 			flex-wrap: wrap;
-			align-content: space-between;
+			justify-content: center;
+			align-items: center;
 
 			div.ui.centered {
 				border: 1px solid var.$thirdColor;
 				box-shadow: 5px 5px var.$firstColor;
 				border-radius: 5px;
-				padding: 10px 10px 0px 10px;
-				margin: 25px 25px;
+				margin: 2.5rem;
 
 				img {
-					width: 290px;
-					height: 290px;
+					padding: 1rem 1rem 0 1rem;
+					background: none;
 				}
 
 				div.content {
+					padding: 1rem;
+					border: none;
+
 					div.nameAndEdit {
 						color: var.$firstColor;
 					}
@@ -43,14 +39,27 @@ section {
 					}
 
 					a.p1Edit {
-						button {
-							margin: 0px 0px;
-							padding: 5px 0px 5px 5px;
-							@include var.buttonThemed(var.$firstColor);
-							position: absolute;
-							bottom: 16px;
-							right: 10px;
-						}
+						@include var.buttonThemed(var.$firstColor);
+						padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+						position: absolute;
+						bottom: 16px;
+						right: 10px;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 500px) {
+	section {
+		.dashMain {
+			.cardDiv {
+				div.ui.centered {
+					margin: 1rem;
+
+					img {
+						display: none;
 					}
 				}
 			}

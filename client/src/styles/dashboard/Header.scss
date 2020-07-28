@@ -10,7 +10,8 @@ header {
 
 	.ui.form.create {
 		@include var.FormForm_Field(var.$firstColor);
-		width: 50%;
+		flex-grow: 2;
+		margin: 0 10%;
 
 		.fields {
 			margin: 0;
@@ -63,13 +64,24 @@ header {
 	}
 }
 
+@media (max-width: 8500px) {
+	header {
+		.ui.form.create {
+			margin: 0 4%;
+
+			.ui.button {
+				padding: 1rem 0.5rem;
+			}
+		}
+	}
+}
+
 @media (max-width: 500px) {
 	header {
 		padding: 1rem 0;
 		flex-direction: column;
 
 		img {
-			// width: 50%;
 			margin: 0 0 1.5rem 0;
 		}
 

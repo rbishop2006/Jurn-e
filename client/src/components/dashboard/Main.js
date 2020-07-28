@@ -42,11 +42,9 @@ export default (props) => {
 									className="p1Edit"
 									to={"/Jurne/dashboard/" + jurn.jurn_id}
 								>
-									<Button type="button">
-										<span>
-											J(<em>e</em>) <Icon name="pencil" />
-										</span>
-									</Button>
+									<span>
+										J(<em>e</em>) <Icon name="pencil" />
+									</span>
 								</Link>
 							</Card.Content>
 						</Card>
