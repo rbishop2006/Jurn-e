@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { Button } from "semantic-ui-react"
 import "../styles/FrontPage.scss"
 
 export default (props) => {
@@ -11,9 +10,7 @@ export default (props) => {
 					Log in
 				</Link>
 				<Link to="/register" className="signUp">
-					{/* <Button type="button" className="signUp"> */}
 					Sign up for <em>free</em>
-					{/* </Button> */}
 				</Link>
 			</div>
 			<div className="frontImage"></div>
