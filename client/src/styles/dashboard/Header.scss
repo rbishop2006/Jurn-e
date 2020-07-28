@@ -6,11 +6,7 @@ header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 2rem;
-
-	img {
-		width: 10%;
-	}
+	padding: 1rem;
 
 	.ui.form.create {
 		@include var.FormForm_Field(var.$firstColor);
@@ -33,7 +29,7 @@ header {
 				}
 
 				#newJurn {
-					font-size: 1.6rem;
+					font-size: 1.4rem;
 					width: 100%;
 					color: var.$firstColor;
 				}
@@ -54,6 +50,8 @@ header {
 				button {
 					@include var.buttonThemed(var.$firstColor);
 					width: 50%;
+					font-size: 1.3rem;
+					padding: 0.75rem 0;
 				}
 			}
 		}
@@ -61,7 +59,7 @@ header {
 
 	.ui.button {
 		@include var.buttonThemed(var.$firstColor);
-		font-size: 1.8rem;
+		font-size: 1.3rem;
 	}
 }
 
@@ -71,7 +69,7 @@ header {
 		flex-direction: column;
 
 		img {
-			width: 50%;
+			// width: 50%;
 			margin: 0 0 1.5rem 0;
 		}
 
@@ -85,6 +83,10 @@ header {
 					}
 				}
 			}
+		}
+
+		.ui.button {
+			display: none;
 		}
 	}
 }

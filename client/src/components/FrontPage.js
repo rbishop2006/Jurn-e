@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { Button } from "semantic-ui-react"
-import "../styles/frontPage.scss"
+import "../styles/FrontPage.scss"
 
 export default (props) => {
 	return (
@@ -10,10 +10,10 @@ export default (props) => {
 				<Link to="/login" className="logIn">
 					Log in
 				</Link>
-				<Link to="/register">
-					<Button type="button" className="signUp">
-						Sign up for <em>free</em>
-					</Button>
+				<Link to="/register" className="signUp">
+					{/* <Button type="button" className="signUp"> */}
+					Sign up for <em>free</em>
+					{/* </Button> */}
 				</Link>
 			</div>
 			<div className="frontImage"></div>

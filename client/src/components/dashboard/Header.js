@@ -32,7 +32,9 @@ export default (props) => {
 
 	return (
 		<header>
-			<img src="/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
+			<Link to="/Jurne/dashboard/">
+				<img src="/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
+			</Link>
 			<Form onSubmit={handleSubmit} className="create">
 				<Form.Group>
 					<Form.Field>
@@ -47,7 +49,7 @@ export default (props) => {
 							placeholder="ex. Cancun 2020"
 						/>
 						<Button type="submit">
-							Create a new Jurn(<em>e</em>)
+							Create Jurn(<em>e</em>)
 						</Button>
 					</Form.Field>
 				</Form.Group>
