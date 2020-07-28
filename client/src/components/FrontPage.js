@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { Button } from "semantic-ui-react"
-import "../styles/FrontPage.scss"
+import "../styles/frontPage.scss"
 
 export default (props) => {
 	return (
