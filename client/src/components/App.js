@@ -2,6 +2,7 @@ import React, { Suspense } from "react"
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 import { AuthProvider, AuthRoute } from "react-auth"
 import "semantic-ui-css/semantic.min.css"
+import "../styles/base.scss"
 
 const FrontPage = React.lazy(() => import("./FrontPage"))
 const Login = React.lazy(() => import("./auth/Login"))
