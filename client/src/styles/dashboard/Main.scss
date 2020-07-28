@@ -1,4 +1,4 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 section {
 	.dashMain {
@@ -17,8 +17,8 @@ section {
 			align-content: space-between;
 
 			div.ui.centered {
-				border: 1px solid $thirdColor;
-				box-shadow: 5px 5px $firstColor;
+				border: 1px solid var.$thirdColor;
+				box-shadow: 5px 5px var.$firstColor;
 				border-radius: 5px;
 				padding: 10px 10px 0px 10px;
 				margin: 25px 25px;
@@ -30,23 +30,23 @@ section {
 
 				div.content {
 					div.nameAndEdit {
-						color: $firstColor;
+						color: var.$firstColor;
 					}
 
 					#location {
-						color: $firstColor;
+						color: var.$firstColor;
 						font-weight: 900;
 					}
 
 					div.meta {
-						color: $thirdColor;
+						color: var.$thirdColor;
 					}
 
 					a.p1Edit {
 						button {
 							margin: 0px 0px;
 							padding: 5px 0px 5px 5px;
-							@include buttonThemed($firstColor);
+							@include var.buttonThemed(var.$firstColor);
 							position: absolute;
 							bottom: 16px;
 							right: 10px;

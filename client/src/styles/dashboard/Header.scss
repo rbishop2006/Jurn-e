@@ -1,7 +1,7 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 header {
-	background: $baseColor;
+	background: var.$baseColor;
 	text-align: center;
 	display: flex;
 	justify-content: space-between;
@@ -13,7 +13,7 @@ header {
 	}
 
 	.ui.form.create {
-		@include FormForm_Field($firstColor);
+		@include var.FormForm_Field(var.$firstColor);
 		width: 50%;
 
 		.fields {
@@ -28,18 +28,18 @@ header {
 				align-items: center;
 
 				label {
-					color: $secondColor;
+					color: var.$secondColor;
 					font-size: 1.6rem;
 				}
 
 				#newJurn {
 					font-size: 1.6rem;
 					width: 100%;
-					color: $firstColor;
+					color: var.$firstColor;
 				}
 
 				input:focus {
-					border: 1.4px solid $secondColor;
+					border: 1.4px solid var.$secondColor;
 				}
 
 				.error {
@@ -52,7 +52,7 @@ header {
 				}
 
 				button {
-					@include buttonThemed($firstColor);
+					@include var.buttonThemed(var.$firstColor);
 					width: 50%;
 				}
 			}
@@ -60,7 +60,7 @@ header {
 	}
 
 	.ui.button {
-		@include buttonThemed($firstColor);
+		@include var.buttonThemed(var.$firstColor);
 		font-size: 1.8rem;
 	}
 }
@@ -68,7 +68,6 @@ header {
 @media (max-width: 500px) {
 	header {
 		padding: 1rem 0;
-		background: lightblue;
 		flex-direction: column;
 
 		img {
@@ -86,10 +85,6 @@ header {
 					}
 				}
 			}
-		}
-
-		.ui.button {
-			// font-size: 1.5rem;
 		}
 	}
 }

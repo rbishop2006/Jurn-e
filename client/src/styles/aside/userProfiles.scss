@@ -1,120 +1,120 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 .userProfile {
-  height: 71px;
-  padding: 5px;
-  transition: height 0.7s;
-  overflow: hidden;
+	height: 71px;
+	padding: 5px;
+	transition: height 0.7s;
+	overflow: hidden;
 }
 
 .expand {
-  height: 415px;
-  padding: 5px;
-  transition: height 0.7s;
-  overflow: hidden;
+	height: 415px;
+	padding: 5px;
+	transition: height 0.7s;
+	overflow: hidden;
 }
 
 .profileDiv {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 
-  div {
-    display: flex;
-    align-items: center;
-  }
+	div {
+		display: flex;
+		align-items: center;
+	}
 
-  i {
-    color: $secondColor;
-  }
+	i {
+		color: var.$secondColor;
+	}
 
-  .logOut {
-    margin: 0;
-    @include buttonThemed($firstColor);
-  }
+	.logOut {
+		margin: 0;
+		@include var.buttonThemed(var.$firstColor);
+	}
 }
 
 i {
-  color: $secondColor;
+	color: var.$secondColor;
 }
 
 .user {
-  color: $firstColor;
-  padding: 0;
-  margin: 1px 2px;
+	color: var.$firstColor;
+	padding: 0;
+	margin: 1px 2px;
 }
 
 .status {
-  width: 10px;
-  height: 10px;
-  background: $highlightColor;
-  border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	background: var.$highlightColor;
+	border-radius: 50%;
 }
 
 .ui.button.editProfile {
-  @include buttonThemed($firstColor);
-  padding: 4px 9px 4px 9px;
+	@include var.buttonThemed(var.$firstColor);
+	padding: 4px 9px 4px 9px;
 
-  i {
-    color: $baseColor;
-  }
+	i {
+		color: var.$baseColor;
+	}
 }
 
 .ui.form.profileForm {
-  @include FormForm_Input($firstColor);
-  display: flex;
-  flex-direction: column;
+	@include var.FormForm_Input(var.$firstColor);
+	display: flex;
+	flex-direction: column;
 
-  div.field {
-    div.input {
-      input {
-        color: $secondColor;
-        background: $baseColor;
-        border: 0;
-      }
-    }
-  }
+	div.field {
+		div.input {
+			input {
+				color: var.$secondColor;
+				background: var.$baseColor;
+				border: 0;
+			}
+		}
+	}
 
-  .dropdown {
-    @include buttonThemed($firstColor);
-    margin: 0 0 1em 0;
+	.dropdown {
+		@include var.buttonThemed(var.$firstColor);
+		margin: 0 0 1em 0;
 
-    i {
-      color: $highlightColor;
-    }
+		i {
+			color: var.$highlightColor;
+		}
 
-    div.default {
-      color: $baseColor;
-    }
-  }
+		div.default {
+			color: var.$baseColor;
+		}
+	}
 
-  .ui.active {
-    @include buttonThemed($firstColor);
-    border: 1px solid $highlightColor;
+	.ui.active {
+		@include var.buttonThemed(var.$firstColor);
+		border: 1px solid var.$highlightColor;
 
-    i {
-      color: $highlightColor;
-    }
+		i {
+			color: var.$highlightColor;
+		}
 
-    div.default {
-      color: $baseColor;
-    }
+		div.default {
+			color: var.$baseColor;
+		}
 
-    div.visible {
-      div {
-        i {
-          color: $secondColor;
-        }
-        span {
-          color: $firstColor;
-        }
-      }
-    }
-  }
+		div.visible {
+			div {
+				i {
+					color: var.$secondColor;
+				}
+				span {
+					color: var.$firstColor;
+				}
+			}
+		}
+	}
 
-  .updateProfile {
-    @include buttonThemed($firstColor);
-    align-self: center;
-    width: 70%;
-  }
+	.updateProfile {
+		@include var.buttonThemed(var.$firstColor);
+		align-self: center;
+		width: 70%;
+	}
 }

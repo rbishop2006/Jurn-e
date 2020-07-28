@@ -1,61 +1,61 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 .photoDiv {
-  .photoForm {
-    .photoSel {
-      display: flex;
-      border: 1px solid $thirdColor;
-      padding: 2px;
-      border-radius: 3px;
+	.photoForm {
+		.photoSel {
+			display: flex;
+			border: 1px solid var.$thirdColor;
+			padding: 2px;
+			border-radius: 3px;
 
-      #dropdown {
-        width: 325px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+			#dropdown {
+				width: 325px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
 
-        div.text {
-          color: $firstColor;
-        }
+				div.text {
+					color: var.$firstColor;
+				}
 
-        i.icon {
-          color: $highlightColor;
-          font-size: 1.5em;
-          margin: 0px 0px 5px 0px;
-        }
+				i.icon {
+					color: var.$highlightColor;
+					font-size: 1.5em;
+					margin: 0px 0px 5px 0px;
+				}
 
-        div.menu {
-          height: 275px;
-          overflow: auto;
+				div.menu {
+					height: 275px;
+					overflow: auto;
 
-          div.item {
-            display: flex;
-            align-items: center;
-            padding: 0;
+					div.item {
+						display: flex;
+						align-items: center;
+						padding: 0;
 
-            img {
-              width: 60px;
-              height: 60px;
-              min-height: 60px;
-            }
-            span {
-              color: $firstColor;
-            }
-          }
-        }
-      }
+						img {
+							width: 60px;
+							height: 60px;
+							min-height: 60px;
+						}
+						span {
+							color: var.$firstColor;
+						}
+					}
+				}
+			}
 
-      .ui.button {
-        color: $baseColor;
-        background-color: $firstColor;
-        @include buttonThemed($firstColor);
-        margin: 5px;
-      }
+			.ui.button {
+				color: var.$baseColor;
+				background-color: var.$firstColor;
+				@include var.buttonThemed(var.$firstColor);
+				margin: 5px;
+			}
 
-      .ui.dropdown > .dropdown.icon:before {
-        color: $highlightColor;
-        font-size: larger;
-      }
-    }
-  }
+			.ui.dropdown > .dropdown.icon:before {
+				color: var.$highlightColor;
+				font-size: larger;
+			}
+		}
+	}
 }

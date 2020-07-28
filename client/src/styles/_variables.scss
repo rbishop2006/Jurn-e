@@ -1,0 +1,86 @@
+@use "sass:color";
+
+// Check color for lightness with
+// @debug lightness(#b1b1b3);
+
+$baseColor: #e8e8e8;
+$firstColor: #007796;
+$secondColor: #003352;
+$highlightColor: #ff8930;
+$thirdColor: #1c5d99;
+$frontPageColor: #4183c4;
+$width: 1200px;
+
+@mixin buttonThemed($bT) {
+	font-size: 1.5rem;
+	background: $bT;
+	color: $baseColor;
+	border: 1px solid $secondColor;
+	transition: all 0.3s ease;
+	margin: 0;
+
+	i {
+		color: $highlightColor;
+	}
+
+	em {
+		color: $highlightColor;
+	}
+
+	&:hover {
+		background: lighten($bT, 8%);
+		transition: all 0.3s ease;
+		border: 1px solid $highlightColor;
+		color: $baseColor;
+	}
+	&:active {
+		background: lighten($bT, 20%);
+	}
+}
+
+@mixin FormForm_Input($fT) {
+	div.field {
+		label {
+			color: $fT;
+			font-size: 1.7rem;
+		}
+
+		div.input {
+			border-radius: 5px;
+			color: $fT;
+			font-size: 1.7rem;
+
+			&::placeholder {
+				color: scale-color($secondColor, $alpha: -60%);
+			}
+
+			input:focus {
+				color: darken($fT, 10%);
+				border-color: $secondColor;
+			}
+		}
+	}
+}
+
+@mixin FormForm_Field($fT2) {
+	div.field {
+		label {
+			color: $fT2;
+		}
+
+		input {
+			color: $fT2;
+			border: 1px solid $fT2;
+			border-radius: 5px;
+		}
+
+		input:focus {
+			color: $fT2;
+			color: darken($fT2, 10%);
+			border-color: $secondColor;
+		}
+		::placeholder {
+			color: scale-color($secondColor, $alpha: -60%);
+		}
+	}
+}

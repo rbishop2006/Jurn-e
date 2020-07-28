@@ -1,4 +1,4 @@
-@import "./base.scss";
+@use 'variables.scss' as var;
 
 #frontWrapper {
 	height: 100vh;
@@ -9,7 +9,7 @@ h1 {
 }
 
 .frontHeader {
-	height: 60px;
+	padding: 1rem;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
@@ -18,14 +18,14 @@ h1 {
 		margin: 0px 20px;
 
 		.signUp {
-			@include buttonThemed($frontPageColor);
+			@include var.buttonThemed(var.$frontPageColor);
 		}
 	}
 }
 
 .frontMain {
-	height: calc(100vh - 60px);
-	color: #4183c4;
+	height: calc(100vh - 84px);
+	color: var.$frontPageColor;
 	background: url("/JurnEase-background.png") no-repeat center center/ contain;
 	position: relative;
 	display: flex;

@@ -1,69 +1,69 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 .suggestDateDiv {
-  // background: $baseColor;
-  width: 430px;
-  margin: auto;
-  display: grid;
-  justify-content: left;
+	// background: var.$baseColor;
+	width: 430px;
+	margin: auto;
+	display: grid;
+	justify-content: left;
 
-  form.ui.form {
-    div.fields {
-      div.inline.field {
-        margin: 10px 0px 0px 0px;
-      }
-    }
-  }
+	form.ui.form {
+		div.fields {
+			div.inline.field {
+				margin: 10px 0px 0px 0px;
+			}
+		}
+	}
 
-  div.datepickerDiv {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+	div.datepickerDiv {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
 
-    button {
-      height: 40px;
-      padding: 10px;
-    }
+		button {
+			height: 40px;
+			padding: 10px;
+		}
 
-    .datesSect {
-      @include FormForm_Input($secondColor);
-      margin: 0;
+		.datesSect {
+			@include var.FormForm_Input(var.$secondColor);
+			margin: 0;
 
-      div.field {
-        margin: 0;
-        width: 300px;
-        padding-bottom: 5px;
-      }
-    }
-  }
+			div.field {
+				margin: 0;
+				width: 300px;
+				padding-bottom: 5px;
+			}
+		}
+	}
 
-  .submitDates {
-    margin-bottom: 10px;
-  }
+	.submitDates {
+		margin-bottom: 10px;
+	}
 
-  .ui.button {
-    @include buttonThemed($firstColor);
-  }
+	.ui.button {
+		@include var.buttonThemed(var.$firstColor);
+	}
 
-  .photoForm {
-    .ui.active {
-      color: orange;
-    }
-  }
+	.photoForm {
+		.ui.active {
+			color: var.$highlightColor;
+		}
+	}
 
-  .ui.checkbox input.hidden + label {
-    color: $firstColor;
-  }
-  .ui.radio.checkbox label:before {
-    border-color: $firstColor;
-  }
+	.ui.checkbox input.hidden + label {
+		color: var.$firstColor;
+	}
+	.ui.radio.checkbox label:before {
+		border-color: var.$firstColor;
+	}
 
-  .currentDatesAndButton {
-    display: grid;
-    justify-content: right;
+	.currentDatesAndButton {
+		display: grid;
+		justify-content: right;
 
-    button {
-      @include buttonThemed($firstColor);
-    }
-  }
+		button {
+			@include var.buttonThemed(var.$firstColor);
+		}
+	}
 }

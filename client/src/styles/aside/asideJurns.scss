@@ -1,96 +1,96 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 h5 {
-  color: $secondColor;
-  text-align: center;
-  margin: 4px 0px;
+	color: var.$secondColor;
+	text-align: center;
+	margin: 4px 0px;
 }
 
 .jurnesDiv {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 
-  .jurnList {
-    min-height: 230px;
-    max-height: 230px;
-    overflow: auto;
-    margin: 0px 0px 10px 0px;
+	.jurnList {
+		min-height: 230px;
+		max-height: 230px;
+		overflow: auto;
+		margin: 0px 0px 10px 0px;
 
-    #menu {
-      box-shadow: 2px 2px 1px 0 $firstColor;
-      margin: 10px auto;
-      width: 90%;
+		#menu {
+			box-shadow: 2px 2px 1px 0 var.$firstColor;
+			margin: 10px auto;
+			width: 90%;
 
-      #menuItem {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
+			#menuItem {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
 
-        p {
-          color: $secondColor;
-          margin: 0;
-        }
+				p {
+					color: var.$secondColor;
+					margin: 0;
+				}
 
-        span {
-          color: $firstColor;
+				span {
+					color: var.$firstColor;
 
-          i {
-            color: $highlightColor;
-          }
-        }
-      }
-    }
-  }
+					i {
+						color: var.$highlightColor;
+					}
+				}
+			}
+		}
+	}
 
-  .ui.button.viewPending {
-    @include buttonThemed($firstColor);
-    width: 70%;
-    align-self: center;
+	.ui.button.viewPending {
+		@include var.buttonThemed(var.$firstColor);
+		width: 70%;
+		align-self: center;
 
-    span {
-      color: $highlightColor;
-    }
-  }
+		span {
+			color: var.$highlightColor;
+		}
+	}
 
-  .pendList {
-    height: 170px;
-    overflow: auto;
-    transition: height 0.7s;
-  }
+	.pendList {
+		height: 170px;
+		overflow: auto;
+		transition: height 0.7s;
+	}
 
-  .expand2 {
-    height: 0px;
-    transition: height 0.7s;
-    overflow: hidden;
-  }
+	.expand2 {
+		height: 0px;
+		transition: height 0.7s;
+		overflow: hidden;
+	}
 
-  #menu2 {
-    margin: 10px auto;
-    width: 90%;
-    box-shadow: 2px 2px 1px 0 $firstColor;
+	#menu2 {
+		margin: 10px auto;
+		width: 90%;
+		box-shadow: 2px 2px 1px 0 var.$firstColor;
 
-    #menuItem2 {
-      display: grid;
-      grid-template-columns: 1fr;
-      padding: 3px 0px;
+		#menuItem2 {
+			display: grid;
+			grid-template-columns: 1fr;
+			padding: 3px 0px;
 
-      p {
-        color: $secondColor;
-        text-align: center;
-        margin: 0px 0px 5px 0px;
-      }
+			p {
+				color: var.$secondColor;
+				text-align: center;
+				margin: 0px 0px 5px 0px;
+			}
 
-      div {
-        display: flex;
-        justify-content: space-around;
+			div {
+				display: flex;
+				justify-content: space-around;
 
-        button {
-          @include buttonThemed($firstColor);
-          margin: 0;
-          padding: 5px 10px;
-        }
-      }
-    }
-  }
+				button {
+					@include var.buttonThemed(var.$firstColor);
+					margin: 0;
+					padding: 5px 10px;
+				}
+			}
+		}
+	}
 }

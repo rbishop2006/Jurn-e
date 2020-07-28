@@ -1,11 +1,11 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 aside {
-  background: #d1d1d1;
-  display: flex;
-  flex-direction: column;
+	background: #d1d1d1;
+	display: flex;
+	flex-direction: column;
 
-  section {
-    flex-grow: 2;
-  }
+	section {
+		flex-grow: 2;
+	}
 }
