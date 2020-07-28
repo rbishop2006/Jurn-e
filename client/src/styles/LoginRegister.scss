@@ -32,14 +32,14 @@
 			width: 100%;
 
 			label {
-				font-size: 1.7rem;
+				font-size: 1.6rem;
 			}
 
 			input {
 				border: 1px solid var.$firstColor;
 				border-radius: 5px;
 				color: var.$firstColor;
-				font-size: 1.7rem;
+				font-size: 1.6rem;
 
 				&::placeholder {
 					color: scale-color(var.$firstColor, $alpha: -60%);
@@ -71,6 +71,7 @@
 		.ui.button {
 			@include var.buttonThemed(var.$firstColor);
 			margin: 10px 0 0 0;
+			font-size: 1.4rem;
 		}
 
 		.linkDiv {

@@ -4,7 +4,7 @@
 	display: grid;
 	grid-template-columns: 350px auto;
 	grid-template-areas:
-		"sidebar header"
+		"header header"
 		"sidebar main"
 		"sidebar main";
 
@@ -23,7 +23,7 @@
 
 @media (max-width: 500px) {
 	#grid {
-		grid-template-columns: auto;
+		grid-template-columns: 100%;
 		grid-template-areas:
 			"header"
 			"main"
