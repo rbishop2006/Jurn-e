@@ -1,52 +1,52 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 .activitiesDiv {
-  width: 430px;
-  padding: 10px;
+	width: 430px;
+	padding: 10px;
 
-  .ui.checkbox {
-    display: block;
-  }
-  .activitySect {
-    @include FormForm_Input($secondColor);
-  }
+	.ui.checkbox {
+		display: block;
+	}
+	.activitySect {
+		@include var.FormForm_Input(var.$secondColor);
+	}
 
-  .ui.form .fields .field {
-    margin: 0;
-    width: 100%;
-  }
-  .p1ActFilters {
-    display: flex;
-    margin-top: 15px;
-    justify-self: center;
-  }
-  .ui.checkbox input.hidden + label {
-    color: $firstColor;
-  }
-  .ui.radio.checkbox label:before {
-    border-color: $firstColor;
-  }
-  .ui.checkbox label:before {
-    border-color: $firstColor;
-  }
-  .ui.radio.checkbox {
-    margin-left: 8px;
-  }
-  .completed {
-    text-decoration: line-through;
-  }
-  .p1filterAndClear {
-    display: grid;
-    text-align: center;
-  }
+	.ui.form .fields .field {
+		margin: 0;
+		width: 100%;
+	}
+	.p1ActFilters {
+		display: flex;
+		margin-top: 15px;
+		justify-self: center;
+	}
+	.ui.checkbox input.hidden + label {
+		color: var.$firstColor;
+	}
+	.ui.radio.checkbox label:before {
+		border-color: var.$firstColor;
+	}
+	.ui.checkbox label:before {
+		border-color: var.$firstColor;
+	}
+	.ui.radio.checkbox {
+		margin-left: 8px;
+	}
+	.completed {
+		text-decoration: line-through;
+	}
+	.p1filterAndClear {
+		display: grid;
+		text-align: center;
+	}
 
-  .ui.form.clear {
-    display: flex;
-    justify-content: center;
+	.ui.form.clear {
+		display: flex;
+		justify-content: center;
 
-    button.clearCompleted {
-      margin: 10px 0px 0px 0px;
-      @include buttonThemed($firstColor);
-    }
-  }
+		button.clearCompleted {
+			margin: 10px 0px 0px 0px;
+			@include var.buttonThemed(var.$firstColor);
+		}
+	}
 }

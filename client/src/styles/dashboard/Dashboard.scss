@@ -1,4 +1,4 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 #grid {
 	display: grid;

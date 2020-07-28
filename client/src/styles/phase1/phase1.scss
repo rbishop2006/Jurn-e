@@ -1,4 +1,4 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 .phase1 {
 	// position: absolute;
@@ -12,18 +12,18 @@
 	.p1Header {
 		margin-top: 30px;
 		text-align: center;
-		color: $firstColor;
+		color: var.$firstColor;
 	}
 
 	.p1tableWrapper {
 		display: flex;
 		justify-content: space-around;
-		color: $firstColor;
+		color: var.$firstColor;
 
 		.selectionsMenu {
-			border: 1px solid $thirdColor;
+			border: 1px solid var.$thirdColor;
 			padding: 10px;
-			box-shadow: 5px 5px $firstColor;
+			box-shadow: 5px 5px var.$firstColor;
 			border-radius: 5px;
 			margin-top: 0;
 			width: 480px;
@@ -31,21 +31,21 @@
 			.menuDiv2 {
 				div.pointing.secondary.menu {
 					.item {
-						color: $thirdColor;
+						color: var.$thirdColor;
 					}
 
 					.item:hover {
-						color: $secondColor;
+						color: var.$secondColor;
 					}
 
 					.active.item {
-						color: $highlightColor;
-						border-color: $firstColor;
+						color: var.$highlightColor;
+						border-color: var.$firstColor;
 					}
 				}
 
 				div.segment.tab.active {
-					border-color: $firstColor;
+					border-color: var.$firstColor;
 				}
 			}
 		}
@@ -58,7 +58,7 @@
 		margin-bottom: 30px;
 
 		button {
-			@include buttonThemed($firstColor);
+			@include var.buttonThemed(var.$firstColor);
 		}
 	}
 }

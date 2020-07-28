@@ -1,4 +1,4 @@
-@import "./base.scss";
+@use 'variables.scss' as var;
 
 #login,
 #register {
@@ -6,7 +6,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	max-width: 1200px;
+	max-width: var.$width;
 	margin: 0 auto;
 
 	.logo {
@@ -15,11 +15,11 @@
 
 	.ui.form.loginDiv,
 	.ui.form.registerDiv {
-		@include FormForm_Input($firstColor);
+		@include var.FormForm_Input(var.$firstColor);
 		width: 50%;
 		height: fit-content;
 		margin: 2rem 0;
-		border: 3px solid $firstColor;
+		border: 3px solid var.$firstColor;
 		border-radius: 10px;
 		padding: 3rem;
 		display: flex;
@@ -36,20 +36,20 @@
 			}
 
 			input {
-				border: 1px solid $firstColor;
+				border: 1px solid var.$firstColor;
 				border-radius: 5px;
-				color: $firstColor;
+				color: var.$firstColor;
 				font-size: 1.7rem;
 
 				&::placeholder {
-					color: scale-color($firstColor, $alpha: -60%);
+					color: scale-color(var.$firstColor, $alpha: -60%);
 				}
 			}
 
 			div.input {
 				input {
 					&:focus {
-						border: 1.5px solid $firstColor;
+						border: 1.5px solid var.$firstColor;
 					}
 				}
 			}
@@ -69,7 +69,7 @@
 		}
 
 		.ui.button {
-			@include buttonThemed($firstColor);
+			@include var.buttonThemed(var.$firstColor);
 			margin: 10px 0 0 0;
 		}
 
@@ -77,16 +77,16 @@
 			display: flex;
 			align-items: center;
 			margin: 10px 0;
-			font-size: 2rem;
+			font-size: 1.5rem;
 
 			p {
 				margin: 0px 10px 0px 0px;
-				color: $secondColor;
+				color: var.$secondColor;
 			}
 
 			a {
 				margin: 0px 0px 0px 10px;
-				color: $firstColor;
+				color: var.$firstColor;
 			}
 		}
 	}

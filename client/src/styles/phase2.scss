@@ -1,138 +1,138 @@
-@import "./base.scss";
+@use 'variables.scss' as var;
 
 .phase2 {
-  position: absolute;
-  top: 120px;
-  left: 325px;
-  right: 0;
-  bottom: 0;
-  background: white;
-  overflow: auto;
+	// position: absolute;
+	// top: 120px;
+	// left: 325px;
+	// right: 0;
+	// bottom: 0;
+	background: white;
+	overflow: auto;
 
-  .p2Edit {
-    display: grid;
-    justify-content: center;
-  }
+	.p2Edit {
+		display: grid;
+		justify-content: center;
+	}
 
-  .p2header {
-    margin-top: 30px;
-    text-align: center;
-    color: $firstColor;
-  }
-  .p2location {
-    text-align: center;
-    color: $firstColor;
-  }
+	.p2header {
+		margin-top: 30px;
+		text-align: center;
+		color: var.$firstColor;
+	}
+	.p2location {
+		text-align: center;
+		color: var.$firstColor;
+	}
 
-  .p2dateRange {
-    text-align: center;
-    color: $firstColor;
-  }
+	.p2dateRange {
+		text-align: center;
+		color: var.$firstColor;
+	}
 
-  .p2ChecklistAndDetails {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
-    color: $firstColor;
+	.p2ChecklistAndDetails {
+		margin-top: 20px;
+		display: flex;
+		justify-content: space-around;
+		color: var.$firstColor;
 
-    .p2remindersForm {
-      border: 1px solid $thirdColor;
-      padding: 10px;
-      box-shadow: 5px 5px $firstColor;
-      padding: 10px;
-      border-radius: 5px;
-      width: 400px;
-    }
+		.p2remindersForm {
+			border: 1px solid var.$thirdColor;
+			padding: 10px;
+			box-shadow: 5px 5px var.$firstColor;
+			padding: 10px;
+			border-radius: 5px;
+			width: 400px;
+		}
 
-    .p2Checklist {
-      margin-bottom: 0;
-      @include FormForm_Input($secondColor);
-    }
-    .P2filters {
-      display: flex;
-      margin-top: 15px;
-      justify-self: center;
-    }
-    .p2filterAndClear {
-      display: grid;
-      text-align: center;
-    }
+		.p2Checklist {
+			margin-bottom: 0;
+			@include var.FormForm_Input(var.$secondColor);
+		}
+		.P2filters {
+			display: flex;
+			margin-top: 15px;
+			justify-self: center;
+		}
+		.p2filterAndClear {
+			display: grid;
+			text-align: center;
+		}
 
-    .ui.checkbox {
-      display: block;
-    }
-    .ui.button {
-      @include buttonThemed($firstColor);
-      width: 173px;
-      justify-self: center;
-    }
-    .ui.checkbox input.hidden + label {
-      color: $firstColor;
-    }
-    .ui.radio.checkbox label:before {
-      border-color: $firstColor;
-    }
-    .ui.checkbox label:before {
-      border-color: $firstColor;
-    }
+		.ui.checkbox {
+			display: block;
+		}
+		.ui.button {
+			@include var.buttonThemed(var.$firstColor);
+			width: 173px;
+			justify-self: center;
+		}
+		.ui.checkbox input.hidden + label {
+			color: var.$firstColor;
+		}
+		.ui.radio.checkbox label:before {
+			border-color: var.$firstColor;
+		}
+		.ui.checkbox label:before {
+			border-color: var.$firstColor;
+		}
 
-    .completed {
-      text-decoration: line-through;
-    }
+		.completed {
+			text-decoration: line-through;
+		}
 
-    .ui.radio.checkbox {
-      margin-left: 8px;
-    }
-    .p2details {
-      display: block;
-      margin-top: 0;
-      border: 1px solid $thirdColor;
-      padding: 10px;
-      box-shadow: 5px 5px $firstColor;
-      padding: 10px;
-      border-radius: 5px;
-      width: 400px;
+		.ui.radio.checkbox {
+			margin-left: 8px;
+		}
+		.p2details {
+			display: block;
+			margin-top: 0;
+			border: 1px solid var.$thirdColor;
+			padding: 10px;
+			box-shadow: 5px 5px var.$firstColor;
+			padding: 10px;
+			border-radius: 5px;
+			width: 400px;
 
-      .menuDiv {
-        div.secondary.pointing.menu {
-          .item {
-            color: $firstColor;
-          }
+			.menuDiv {
+				div.secondary.pointing.menu {
+					.item {
+						color: var.$firstColor;
+					}
 
-          .item:hover {
-            color: $secondColor;
-          }
+					.item:hover {
+						color: var.$secondColor;
+					}
 
-          .active.item {
-            color: $highlightColor;
-            border-color: $firstColor;
-          }
-        }
+					.active.item {
+						color: var.$highlightColor;
+						border-color: var.$firstColor;
+					}
+				}
 
-        div.segment.active.tab {
-          border-color: $firstColor;
+				div.segment.active.tab {
+					border-color: var.$firstColor;
 
-          div.bulleted.list {
-            div.item {
-              i {
-                color: $secondColor;
-              }
+					div.bulleted.list {
+						div.item {
+							i {
+								color: var.$secondColor;
+							}
 
-              div.content {
-                .phoneNumber {
-                  font-size: 0.8em;
-                  color: $firstColor;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+							div.content {
+								.phoneNumber {
+									font-size: 0.8em;
+									color: var.$firstColor;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
-  #editButton {
-    margin-top: 18px;
-    width: 90px;
-  }
+	#editButton {
+		margin-top: 18px;
+		width: 90px;
+	}
 }

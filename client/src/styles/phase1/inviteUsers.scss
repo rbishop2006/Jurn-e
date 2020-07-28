@@ -1,50 +1,50 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 .inviteDiv {
-  border: 1px solid $thirdColor;
-  padding: 10px;
-  width: 480px;
-  box-shadow: 5px 5px $firstColor;
-  border-radius: 5px;
-  margin-top: 0;
-  display: grid;
+	border: 1px solid var.$thirdColor;
+	padding: 10px;
+	width: 480px;
+	box-shadow: 5px 5px var.$firstColor;
+	border-radius: 5px;
+	margin-top: 0;
+	display: grid;
 
-  form.ui.form {
-    display: grid;
-    justify-content: center;
+	form.ui.form {
+		display: grid;
+		justify-content: center;
 
-    .fields {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      @include FormForm_Input($secondColor);
+		.fields {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			@include var.FormForm_Input(var.$secondColor);
 
-      .prompt.label {
-        white-space: normal;
-        background: #fff !important;
-        border: 1px solid #e0b4b4 !important;
-        color: #9f3a38 !important;
-        width: 350px;
-        text-align: center;
-      }
-    }
+			.prompt.label {
+				white-space: normal;
+				background: #fff !important;
+				border: 1px solid #e0b4b4 !important;
+				color: #9f3a38 !important;
+				width: 350px;
+				text-align: center;
+			}
+		}
 
-    .field {
-      width: 183px;
-    }
-  }
+		.field {
+			width: 183px;
+		}
+	}
 
-  div.ui.list {
-    div.item {
-      i {
-        color: $secondColor;
-      }
-    }
-  }
+	div.ui.list {
+		div.item {
+			i {
+				color: var.$secondColor;
+			}
+		}
+	}
 
-  #submitInvite {
-    justify-self: center;
-    width: 120px;
-    @include buttonThemed($firstColor);
-  }
+	#submitInvite {
+		justify-self: center;
+		width: 120px;
+		@include var.buttonThemed(var.$firstColor);
+	}
 }

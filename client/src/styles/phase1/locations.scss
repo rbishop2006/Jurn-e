@@ -1,32 +1,32 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 .suggestLocDiv {
-  width: 430px;
-  padding: 10px;
+	width: 430px;
+	padding: 10px;
 
-  .locationSect {
-    @include FormForm_Input($secondColor);
-    width: 100%;
-  }
-  .ui.form .fields .field {
-    margin: 0;
-    width: 100%;
-  }
-  .ui.radio.checkbox {
-    margin-left: 8px;
-  }
-  .ui.checkbox input.hidden + label {
-    color: $firstColor;
-  }
-  .ui.radio.checkbox label:before {
-    border-color: $firstColor;
-  }
-  .currentLocAndButton {
-    display: grid;
-    justify-content: right;
+	.locationSect {
+		@include var.FormForm_Input(var.$secondColor);
+		width: 100%;
+	}
+	.ui.form .fields .field {
+		margin: 0;
+		width: 100%;
+	}
+	.ui.radio.checkbox {
+		margin-left: 8px;
+	}
+	.ui.checkbox input.hidden + label {
+		color: var.$firstColor;
+	}
+	.ui.radio.checkbox label:before {
+		border-color: var.$firstColor;
+	}
+	.currentLocAndButton {
+		display: grid;
+		justify-content: right;
 
-    button {
-      @include buttonThemed($firstColor);
-    }
-  }
+		button {
+			@include var.buttonThemed(var.$firstColor);
+		}
+	}
 }

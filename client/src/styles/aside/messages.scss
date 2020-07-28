@@ -1,4 +1,4 @@
-@import "../base.scss";
+@use '../../styles/variables' as var;
 
 .messageInput {
 	width: 325px;
@@ -8,13 +8,13 @@
 		margin: 15px 5px 0px 5px;
 
 		.ui.button.dropdown {
-			color: $firstColor;
+			color: var.$firstColor;
 			width: 100%;
 			display: flex;
 			justify-content: space-between;
 
 			i {
-				color: $highlightColor;
+				color: var.$highlightColor;
 			}
 		}
 
@@ -23,23 +23,23 @@
 				padding-left: 16px;
 			}
 			.menu {
-				color: $secondColor;
-				box-shadow: 0 2px 3px 0 $firstColor;
-				border: 1px solid $firstColor;
+				color: var.$secondColor;
+				box-shadow: 0 2px 3px 0 var.$firstColor;
+				border: 1px solid var.$firstColor;
 				margin: 10px 0px;
 
 				div span {
-					color: $secondColor;
+					color: var.$secondColor;
 				}
 			}
 		}
 
 		.field.inputDiv {
-			@include FormForm_Field($firstColor);
+			@include var.FormForm_Field(var.$firstColor);
 			height: 40px;
 
 			.messageText {
-				color: $firstColor;
+				color: var.$firstColor;
 				flex-grow: 2;
 				border: 0;
 				padding: 5px;
@@ -47,11 +47,11 @@
 			}
 
 			.messageText::placeholder {
-				color: $firstColor;
+				color: var.$firstColor;
 			}
 
 			.messageText:focus {
-				color: $firstColor;
+				color: var.$firstColor;
 				background: #d1d1d1;
 			}
 		}
@@ -61,7 +61,7 @@
 .messageArea {
 	height: 400px;
 	overflow: auto;
-	background: $baseColor;
+	background: var.$baseColor;
 	padding: 10px 10px;
 
 	div {
@@ -69,14 +69,14 @@
 		margin: 0;
 
 		.jurnName {
-			color: $secondColor;
+			color: var.$secondColor;
 
 			strong {
 				padding-left: 5px;
 			}
 
 			.msgName {
-				color: $secondColor;
+				color: var.$secondColor;
 			}
 
 			.from {
@@ -86,11 +86,11 @@
 		}
 
 		.message {
-			color: $firstColor;
+			color: var.$firstColor;
 		}
 
 		.timeStamp {
-			color: $highlightColor;
+			color: var.$highlightColor;
 			font-size: 0.7em;
 		}
 	}
