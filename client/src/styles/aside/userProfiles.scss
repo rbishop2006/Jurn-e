@@ -1,36 +1,56 @@
 @use '../../styles/variables' as var;
 
 .userProfile {
-	height: 71px;
-	padding: 5px;
+	height: 80px;
+	padding: 0.5rem 1rem;
 	transition: height 0.7s;
 	overflow: hidden;
 }
 
 .expand {
 	height: 415px;
-	padding: 5px;
+	padding: 0.5rem 1rem;
 	transition: height 0.7s;
 	overflow: hidden;
 }
 
 .profileDiv {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
 
 	div {
+		width: 100%;
 		display: flex;
 		align-items: center;
+		justify-content: space-evenly;
+		margin: 0 0 1rem 0;
+
+		i {
+			color: var.$secondColor;
+		}
 	}
 
-	i {
-		color: var.$secondColor;
-	}
+	div.profileButtons {
+		width: 100%;
+		flex-direction: row;
+		justify-content: space-between;
 
-	.logOut {
-		margin: 0;
-		@include var.buttonThemed(var.$firstColor);
+		.ui.button.editProfile {
+			@include var.buttonThemed(var.$firstColor);
+			padding: 5px 10px;
+
+			i {
+				color: var.$baseColor;
+			}
+		}
+
+		.logOut {
+			margin: 0;
+			@include var.buttonThemed(var.$firstColor);
+			padding: 5px 10px;
+		}
 	}
 }
 
@@ -49,15 +69,6 @@ i {
 	height: 10px;
 	background: var.$highlightColor;
 	border-radius: 50%;
-}
-
-.ui.button.editProfile {
-	@include var.buttonThemed(var.$firstColor);
-	padding: 4px 9px 4px 9px;
-
-	i {
-		color: var.$baseColor;
-	}
 }
 
 .ui.form.profileForm {
