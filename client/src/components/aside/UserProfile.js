@@ -78,20 +78,20 @@ export default (props) => {
 	return (
 		<div className={hidden ? "userProfile" : "expand"}>
 			<div className="profileDiv">
-				<div>
-					<Icon name={aUser.avatar} size="big" />
-					<p className="user">
-						{aUser.fname} {aUser.lname}
-					</p>
-					<p className="status"></p>
-				</div>
-				<div className="profileButtons">
+				<div className="profileHeader">
 					<Button
 						className="editProfile"
 						onClick={(e) => (!hidden ? setHidden(true) : setHidden(false))}
 					>
 						Edit
 					</Button>
+					<div>
+						<Icon name={aUser.avatar} size="big" />
+						<p className="user">
+							{aUser.fname} {aUser.lname}
+						</p>
+						<p className="status"></p>
+					</div>
 					<Button className="logOut" onClick={(e) => signout()}>
 						Log out
 					</Button>

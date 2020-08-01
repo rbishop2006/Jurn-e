@@ -1,7 +1,7 @@
 @use '../../styles/variables' as var;
 
 .userProfile {
-	height: 80px;
+	height: 50px;
 	padding: 0.5rem 1rem;
 	transition: height 0.7s;
 	overflow: hidden;
@@ -19,20 +19,10 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
+	margin: 0 0 1rem 0;
 
-	div {
-		width: 100%;
+	div.profileHeader {
 		display: flex;
-		align-items: center;
-		justify-content: space-evenly;
-		margin: 0 0 1rem 0;
-
-		i {
-			color: var.$secondColor;
-		}
-	}
-
-	div.profileButtons {
 		width: 100%;
 		flex-direction: row;
 		justify-content: space-between;
@@ -43,6 +33,22 @@
 
 			i {
 				color: var.$baseColor;
+			}
+		}
+
+		div {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+
+			p {
+				margin: 0 0.3rem;
+				font-size: 1.4rem;
+			}
+
+			i {
+				color: var.$secondColor;
 			}
 		}
 
@@ -79,9 +85,7 @@ i {
 	div.field {
 		div.input {
 			input {
-				color: var.$secondColor;
-				background: var.$baseColor;
-				border: 0;
+				font-size: 1.2rem;
 			}
 		}
 	}
