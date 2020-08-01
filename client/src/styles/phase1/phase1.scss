@@ -1,41 +1,62 @@
 @use '../../styles/variables' as var;
 
 .phase1 {
-	// position: absolute;
-	// top: 120px;
-	// left: 325px;
-	// right: 0;
-	// bottom: 0;
-	background: white;
-	overflow: auto;
+	display: grid;
+	grid-template-areas:
+		"title title"
+		"invite panes";
+	grid-template-columns: 1fr 1fr;
+	justify-items: center;
 
 	.p1Header {
-		margin-top: 30px;
-		text-align: center;
+		grid-area: title;
 		color: var.$firstColor;
+		margin: 2rem 0;
 	}
 
-	.p1tableWrapper {
-		display: flex;
-		justify-content: space-around;
-		color: var.$firstColor;
+	.inviteUsers {
+		grid-area: invite;
+	}
 
-		.selectionsMenu {
-			border: 1px solid var.$thirdColor;
-			padding: 10px;
-			box-shadow: 5px 5px var.$firstColor;
-			border-radius: 5px;
-			margin-top: 0;
-			width: 480px;
+	.selectionsMenu {
+		grid-area: panes;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		border: 1px solid var.$thirdColor;
+		padding: 1rem;
+		box-shadow: 5px 5px var.$firstColor;
+		border-radius: 5px;
+
+		div.selectionTop {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			h4 {
+				font-size: 1.5rem;
+				color: var.$firstColor;
+			}
 
 			.menuDiv2 {
+				div.segment {
+					border: none;
+					box-shadow: none;
+					margin: 1.5rem 0 0 0;
+					padding: 0;
+				}
+
 				div.pointing.secondary.menu {
-					.item {
-						color: var.$thirdColor;
+					a.item {
+						color: var.$firstColor;
+						font-size: 1.2rem;
+						padding: 0.5rem 1rem;
 					}
 
-					.item:hover {
-						color: var.$secondColor;
+					a.item:hover {
+						color: var.$highlightColor;
+						border-color: var.$firstColor;
 					}
 
 					.active.item {
@@ -43,22 +64,16 @@
 						border-color: var.$firstColor;
 					}
 				}
-
-				div.segment.tab.active {
-					border-color: var.$firstColor;
-				}
 			}
 		}
-	}
 
-	.p1FooterButtons {
-		display: flex;
-		justify-content: space-around;
-		margin-top: 30px;
-		margin-bottom: 30px;
+		.toPhase2 {
+			width: 100%;
 
-		button {
-			@include var.buttonThemed(var.$firstColor);
+			button {
+				@include var.buttonThemed(var.$firstColor);
+				width: 100%;
+			}
 		}
 	}
 }

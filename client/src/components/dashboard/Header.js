@@ -39,7 +39,7 @@ export default (props) => {
 				<Form.Group>
 					<Form.Field>
 						<label htmlFor="newJurn">
-							add new Jurn(<em>e</em>)s here...
+							create new Jurn(<em>e</em>)s here...
 						</label>
 						<input
 							id="newJurn"

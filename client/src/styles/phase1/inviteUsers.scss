@@ -2,21 +2,31 @@
 
 .inviteDiv {
 	border: 1px solid var.$thirdColor;
-	padding: 10px;
+	padding: 1rem;
 	width: 480px;
 	box-shadow: 5px 5px var.$firstColor;
 	border-radius: 5px;
-	margin-top: 0;
-	display: grid;
+	display: flex;
+	flex-direction: column;
+	color: var.$firstColor;
 
 	form.ui.form {
 		display: grid;
-		justify-content: center;
+		grid-template-areas:
+			"h3 h3"
+			"inputs inputs"
+			"button button";
 
-		.fields {
+		h3 {
+			grid-area: h3;
+			font-size: 1.5rem;
+		}
+
+		.fields.inviteSect {
+			grid-area: inputs;
 			display: flex;
 			flex-direction: row;
-			justify-content: center;
+			justify-content: space-around;
 			@include var.FormForm_Input(var.$secondColor);
 
 			.prompt.label {
@@ -24,17 +34,30 @@
 				background: #fff !important;
 				border: 1px solid #e0b4b4 !important;
 				color: #9f3a38 !important;
-				width: 350px;
+				// width: 350px;
 				text-align: center;
 			}
 		}
 
 		.field {
-			width: 183px;
+			padding: 0;
+
+			label {
+				font-size: 1.3rem;
+			}
+		}
+
+		#submitInvite {
+			grid-area: button;
+			// justify-self: center;
+			width: 50%;
+			@include var.buttonThemed(var.$firstColor);
 		}
 	}
 
 	div.ui.list {
+		margin: 0;
+
 		div.item {
 			i {
 				color: var.$secondColor;
@@ -42,9 +65,8 @@
 		}
 	}
 
-	#submitInvite {
-		justify-self: center;
-		width: 120px;
+	button.deleteJurn {
 		@include var.buttonThemed(var.$firstColor);
+		margin: 0;
 	}
 }
