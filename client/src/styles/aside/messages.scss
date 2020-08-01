@@ -59,7 +59,7 @@
 }
 
 .messageArea {
-	// height: 400px;
+	// max-height: 70vh;
 	overflow: auto;
 	background: var.$baseColor;
 	padding: 10px 10px;
@@ -93,5 +93,11 @@
 			color: var.$highlightColor;
 			font-size: 0.7em;
 		}
+	}
+}
+
+@media (max-width: 500px) {
+	.messageArea {
+		max-height: 400px;
 	}
 }
