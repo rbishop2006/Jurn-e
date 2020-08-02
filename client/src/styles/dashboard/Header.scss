@@ -2,7 +2,7 @@
 
 header {
 	background: var.$baseColor;
-	text-align: center;
+	// text-align: center;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -11,18 +11,18 @@ header {
 	.ui.form.create {
 		@include var.FormForm_Field(var.$firstColor);
 		flex-grow: 2;
-		margin: 0 10%;
 
 		.fields {
 			margin: 0;
+			display: flex;
+			justify-content: center;
 
 			.field {
 				padding: 0;
-				width: 100%;
 				display: flex;
 				flex-direction: column;
-				justify-items: center;
 				align-items: center;
+				width: 60%;
 
 				label {
 					color: var.$secondColor;
@@ -30,8 +30,7 @@ header {
 				}
 
 				#newJurn {
-					font-size: 1.4rem;
-					width: 100%;
+					font-size: 1.2rem;
 					color: var.$firstColor;
 				}
 
@@ -51,7 +50,7 @@ header {
 				button {
 					@include var.buttonThemed(var.$firstColor);
 					width: 50%;
-					font-size: 1.3rem;
+					font-size: 1.2rem;
 					padding: 0.75rem 0;
 				}
 			}
@@ -64,13 +63,17 @@ header {
 	}
 }
 
-@media (max-width: 8500px) {
+@media (max-width: 850px) {
 	header {
 		.ui.form.create {
-			margin: 0 4%;
+			.fields {
+				.field {
+					width: 100%;
 
-			.ui.button {
-				padding: 1rem 0.5rem;
+					.ui.button {
+						padding: 1rem 0.5rem;
+					}
+				}
 			}
 		}
 	}

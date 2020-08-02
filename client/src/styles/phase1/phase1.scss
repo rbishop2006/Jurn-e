@@ -12,13 +12,16 @@
 		grid-area: title;
 		color: var.$firstColor;
 		margin: 2rem 0;
+		text-align: center;
 	}
 
 	.inviteUsers {
 		grid-area: invite;
+		width: 80%;
 	}
 
 	.selectionsMenu {
+		width: 80%;
 		grid-area: panes;
 		display: flex;
 		flex-direction: column;
@@ -40,13 +43,6 @@
 			}
 
 			.menuDiv2 {
-				div.segment {
-					border: none;
-					box-shadow: none;
-					margin: 1.5rem 0 0 0;
-					padding: 0;
-				}
-
 				div.pointing.secondary.menu {
 					a.item {
 						color: var.$firstColor;
@@ -64,6 +60,13 @@
 						border-color: var.$firstColor;
 					}
 				}
+
+				div.segment {
+					border: none;
+					box-shadow: none;
+					margin: 1.5rem 0 0 0;
+					padding: 0;
+				}
 			}
 		}
 
@@ -73,6 +76,40 @@
 			button {
 				@include var.buttonThemed(var.$firstColor);
 				width: 100%;
+				font-size: 1.5rem;
+			}
+		}
+	}
+}
+
+@media (max-width: 500px) {
+	.phase1 {
+		grid-template-areas:
+			"title"
+			"invite"
+			"panes";
+		grid-template-columns: 100%;
+		grid-gap: 1rem;
+		margin: 1rem 0;
+
+		.p1Header {
+			margin: 0;
+		}
+
+		.selectionsMenu {
+			div.selectionTop {
+				.menuDiv2 {
+					div.pointing.secondary.menu {
+						display: flex;
+						flex-direction: row;
+						flex-wrap: wrap;
+
+						a.item {
+							align-self: center;
+							margin: 0.25rem 0;
+						}
+					}
+				}
 			}
 		}
 	}
