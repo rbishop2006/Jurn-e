@@ -83,7 +83,7 @@ export default (props) => {
 					<Button type="submit">
 						<span>
 							<Icon name="arrow right" />
-							My J(<em>e</em>)
+							My Jurn(<em>e</em>)
 						</span>
 					</Button>
 				</Link>
