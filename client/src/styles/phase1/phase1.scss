@@ -16,9 +16,11 @@
 
 	.inviteUsers {
 		grid-area: invite;
+		width: 80%;
 	}
 
 	.selectionsMenu {
+		width: 80%;
 		grid-area: panes;
 		display: flex;
 		flex-direction: column;

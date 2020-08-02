@@ -3,7 +3,6 @@
 .inviteDiv {
 	border: 1px solid var.$thirdColor;
 	padding: 1rem;
-	width: 480px;
 	box-shadow: 5px 5px var.$firstColor;
 	border-radius: 5px;
 	display: flex;
@@ -20,6 +19,7 @@
 		h3 {
 			grid-area: h3;
 			font-size: 1.5rem;
+			justify-self: center;
 		}
 
 		.fields.inviteSect {
@@ -27,36 +27,49 @@
 			display: flex;
 			flex-direction: row;
 			justify-content: space-around;
+			margin: 0 0 0.75rem 0;
 			@include var.FormForm_Input(var.$secondColor);
 
 			.prompt.label {
 				white-space: normal;
-				background: #fff !important;
-				border: 1px solid #e0b4b4 !important;
-				color: #9f3a38 !important;
-				// width: 350px;
+				background: #fff;
+				border: 1px solid #e0b4b4;
+				color: #9f3a38;
 				text-align: center;
 			}
 		}
 
 		.field {
 			padding: 0;
+			width: 100%;
 
 			label {
 				font-size: 1.3rem;
+			}
+
+			&:first-child {
+				margin: 0 1rem 0 0;
+			}
+
+			&:last-child {
+				margin: 0 0 0 1rem;
 			}
 		}
 
 		#submitInvite {
 			grid-area: button;
-			// justify-self: center;
+			justify-self: center;
 			width: 50%;
 			@include var.buttonThemed(var.$firstColor);
 		}
 	}
 
 	div.ui.list {
-		margin: 0;
+		margin: 0 0 1rem 0;
+
+		h3 {
+			margin: 0;
+		}
 
 		div.item {
 			i {

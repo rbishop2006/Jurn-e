@@ -111,6 +111,8 @@ export default (props) => {
 						<List.Content>{accept.fname + " " + accept.lname}</List.Content>
 					</List.Item>
 				))}
+			</List>
+			<List>
 				<h3>Declined:</h3>
 				{declined.map((decl, i) => (
 					<List.Item key={"decline" + i}>
