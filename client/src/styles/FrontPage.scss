@@ -11,13 +11,13 @@
 
 		a {
 			margin: 0px 20px;
-			font-size: 1.5rem;
+			font-size: 2rem;
 			font-weight: 700;
 			text-transform: capitalize;
 
 			&.signUp {
 				@include var.buttonThemed(var.$frontPageColor);
-				font-size: 1.4rem;
+				font-size: 1.9rem;
 			}
 		}
 	}
