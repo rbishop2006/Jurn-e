@@ -82,15 +82,15 @@
 	}
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1050px) {
 	.phase1 {
 		grid-template-areas:
 			"title"
 			"invite"
 			"panes";
 		grid-template-columns: 100%;
-		grid-gap: 1rem;
-		margin: 1rem 0;
+		grid-gap: 1.5rem;
+		margin: 1rem 0 2rem 0;
 
 		.p1Header {
 			margin: 0;

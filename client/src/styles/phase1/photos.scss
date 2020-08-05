@@ -20,13 +20,14 @@
 			border-radius: 3px;
 
 			#dropdown {
-				width: 325px;
+				width: 75%;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
 
 				div.text {
 					color: var.$firstColor;
+					font-size: 1.6rem;
 				}
 
 				i.icon {
@@ -42,13 +43,12 @@
 					div.item {
 						display: flex;
 						align-items: center;
-						padding: 0;
+						font-size: 1.3rem;
 
 						img {
-							width: 60px;
-							height: 60px;
-							min-height: 60px;
+							max-height: 4rem;
 						}
+
 						span {
 							color: var.$firstColor;
 						}
@@ -69,9 +69,22 @@
 	}
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1050px) {
 	.photoDiv {
 		.photoForm {
+			.photoSel {
+				#dropdown {
+					width: 75%;
+
+					div.text {
+						font-size: 1.3rem;
+					}
+				}
+
+				.ui.button {
+					padding: 0.5rem;
+				}
+			}
 		}
 	}
 }
