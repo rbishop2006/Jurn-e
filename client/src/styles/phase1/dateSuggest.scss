@@ -8,7 +8,7 @@
 		justify-content: center;
 
 		h3 {
-			font-size: 1.5rem;
+			font-size: 1.8rem;
 			margin: 0;
 		}
 
@@ -69,11 +69,6 @@
 @media (max-width: 1050px) {
 	.suggestDateDiv {
 		form.ui.form {
-			// display: flex;
-			// flex-direction: column;
-			// align-items: center;
-			// justify-content: center;
-
 			div.datepickerDiv {
 				flex-direction: column;
 				align-items: center;
