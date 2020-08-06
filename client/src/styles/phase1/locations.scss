@@ -1,32 +1,74 @@
 @use '../../styles/variables' as var;
 
 .suggestLocDiv {
-	width: 430px;
-	padding: 10px;
+	form.ui.form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 
-	.locationSect {
-		@include var.FormForm_Input(var.$secondColor);
-		width: 100%;
+		h3 {
+			font-size: 1.8rem;
+			margin: 0;
+		}
+
+		h4 {
+			margin: 0 0 1rem 0;
+		}
+
+		.locationSect {
+			@include var.FormForm_Input(var.$secondColor);
+			width: 100%;
+
+			div.field {
+				margin: 0;
+				width: 100%;
+
+				label {
+					color: var.$secondColor;
+					font-size: 1.1rem;
+				}
+			}
+		}
+
+		.fields.locRadios {
+			margin: 1rem;
+
+			div.inline.field {
+				div.radio.checkbox {
+					label {
+						color: var.$firstColor;
+
+						&:before {
+							border-color: var.$secondColor;
+						}
+					}
+				}
+			}
+		}
 	}
-	.ui.form .fields .field {
-		margin: 0;
-		width: 100%;
-	}
-	.ui.radio.checkbox {
-		margin-left: 8px;
-	}
-	.ui.checkbox input.hidden + label {
-		color: var.$firstColor;
-	}
-	.ui.radio.checkbox label:before {
-		border-color: var.$firstColor;
-	}
+
 	.currentLocAndButton {
-		display: grid;
-		justify-content: right;
+		display: flex;
+		justify-content: center;
 
-		button {
-			@include var.buttonThemed(var.$firstColor);
+		form.commitLocation {
+			button {
+				@include var.buttonThemed(var.$firstColor);
+			}
+		}
+	}
+}
+
+@media (max-width: 1050px) {
+	.suggestLocDiv {
+		margin: 0 0 1rem 0;
+
+		form.ui.form {
+			.locationSect {
+				flex-direction: column;
+				align-items: center;
+			}
 		}
 	}
 }
