@@ -61,6 +61,7 @@
 		form.commitDates {
 			button {
 				@include var.buttonThemed(var.$firstColor);
+				margin: 0;
 			}
 		}
 	}

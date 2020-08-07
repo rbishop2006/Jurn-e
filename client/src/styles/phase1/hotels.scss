@@ -1,35 +1,76 @@
 @use '../../styles/variables' as var;
 
 .suggestHotDiv {
-	width: 430px;
-	padding: 10px;
+	form.ui.form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 
-	.hotelSect {
-		@include var.FormForm_Input(var.$secondColor);
-		width: 100%;
-	}
-	.ui.form .fields .field {
-		margin: 0;
-		width: 100%;
-	}
-	.ui.radio.checkbox {
-		margin-left: 8px;
-	}
-	.currentHotAndButton {
-		display: grid;
-		justify-content: right;
+		h3 {
+			font-size: 1.8rem;
+			margin: 0;
+		}
 
-		button {
-			@include var.buttonThemed(var.$firstColor);
+		h4 {
+			margin: 0 0 1rem 0;
+		}
+
+		.hotelSect {
+			@include var.FormForm_Input(var.$secondColor);
+			width: 100%;
+
+			div.field {
+				margin: 0;
+				width: 100%;
+
+				label {
+					color: var.$secondColor;
+					font-size: 1.1rem;
+				}
+			}
+		}
+
+		.fields.hotRadios {
+			margin: 1rem;
+
+			div.field {
+				div.radio.checkbox {
+					label {
+						color: var.$firstColor;
+
+						&:before {
+							border-color: var.$secondColor;
+						}
+					}
+				}
+			}
 		}
 	}
-	.commitLocation {
-		justify-self: center;
+
+	.currentHotAndButton {
+		display: flex;
+		justify-content: center;
+		margin: 0 0 1rem 0;
+
+		form.commitLocation {
+			button {
+				@include var.buttonThemed(var.$firstColor);
+				margin: 0;
+			}
+		}
 	}
-	.ui.checkbox input.hidden + label {
-		color: var.$firstColor;
-	}
-	.ui.radio.checkbox label:before {
-		border-color: var.$firstColor;
+}
+
+@media (max-width: 1050px) {
+	.suggestHotDiv {
+		margin: 0 0 1rem 0;
+
+		form.ui.form {
+			.hotelSect {
+				flex-direction: column;
+				align-items: center;
+			}
+		}
 	}
 }
