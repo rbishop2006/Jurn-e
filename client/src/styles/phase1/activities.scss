@@ -1,52 +1,138 @@
 @use '../../styles/variables' as var;
 
 .activitiesDiv {
-	width: 430px;
-	padding: 10px;
-
-	.ui.checkbox {
-		display: block;
-	}
-	.activitySect {
-		@include var.FormForm_Input(var.$secondColor);
-	}
-
-	.ui.form .fields .field {
-		margin: 0;
-		width: 100%;
-	}
-	.p1ActFilters {
+	form.ui.form {
 		display: flex;
-		margin-top: 15px;
-		justify-self: center;
-	}
-	.ui.checkbox input.hidden + label {
-		color: var.$firstColor;
-	}
-	.ui.radio.checkbox label:before {
-		border-color: var.$firstColor;
-	}
-	.ui.checkbox label:before {
-		border-color: var.$firstColor;
-	}
-	.ui.radio.checkbox {
-		margin-left: 8px;
-	}
-	.completed {
-		text-decoration: line-through;
-	}
-	.p1filterAndClear {
-		display: grid;
-		text-align: center;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		h4 {
+			margin: 0 0 1rem 0;
+		}
+
+		.activitySect {
+			@include var.FormForm_Input(var.$secondColor);
+			width: 100%;
+
+			div.field {
+				margin: 0;
+				width: 100%;
+
+				label {
+					color: var.$secondColor;
+					font-size: 1.1rem;
+				}
+			}
+		}
+
+		.fields.actCheckbox {
+			margin: 1rem;
+
+			div.field {
+				display: flex;
+
+				div.checkbox {
+					margin: 0 0.5rem;
+
+					label {
+						color: var.$firstColor;
+
+						&:before {
+							border-color: var.$secondColor;
+						}
+					}
+
+					&.checked {
+						text-decoration: line-through;
+						color: var.$firstColor;
+
+						span.completed {
+							div.checked.checkbox {
+								margin: 0;
+
+								label {
+									&:after {
+										color: var.$firstColor;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.fields.p1filterAndClear {
+			margin: 1rem;
+
+			div.field.p1ActFilters {
+				display: flex;
+				justify-content: space-evenly;
+				align-items: center;
+				padding: 0;
+
+				div.radio.checkbox {
+					margin: 0 0.5rem;
+
+					input ~ label:after {
+						background-color: var.$firstColor;
+					}
+
+					label {
+						color: var.$firstColor;
+
+						&:before {
+							border-color: var.$secondColor;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	.ui.form.clear {
 		display: flex;
 		justify-content: center;
+		margin: 0 0 1rem 0;
 
 		button.clearCompleted {
-			margin: 10px 0px 0px 0px;
+			margin: 0;
 			@include var.buttonThemed(var.$firstColor);
+		}
+	}
+}
+
+@media (max-width: 1050px) {
+	.activitiesDiv {
+		margin: 0 0 1rem 0;
+
+		form.ui.form {
+			.activitySect {
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.fields.actCheckbox {
+				div.field {
+					flex-direction: column;
+
+					div.checkbox {
+						margin: 0.25rem 0;
+					}
+				}
+			}
+
+			.fields.p1filterAndClear {
+				div.field.p1ActFilters {
+					flex-direction: column;
+					align-items: flex-start;
+
+					div.radio.checkbox {
+						margin: 0.25rem 0;
+					}
+				}
+			}
 		}
 	}
 }

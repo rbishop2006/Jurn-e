@@ -70,7 +70,6 @@ export default (props) => {
 					</Form.Field>
 				</Form.Group>
 			</Form>
-
 			<div className="currentLocAndButton">
 				<Form onSubmit={handleFinalLocation} className="commitLocation">
 					<Button type="submit">
