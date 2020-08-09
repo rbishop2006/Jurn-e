@@ -75,15 +75,15 @@
 				div.radio.checkbox {
 					margin: 0 0.5rem;
 
-					input ~ label:after {
-						background-color: var.$firstColor;
-					}
-
 					label {
 						color: var.$firstColor;
 
 						&:before {
 							border-color: var.$secondColor;
+						}
+
+						&:after {
+							background-color: var.$firstColor;
 						}
 					}
 				}
