@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Form, Button, Dropdown, Icon } from "semantic-ui-react"
-import { usePhase1 } from "../../hooks"
+import { usePhase1, usePhase2 } from "../../hooks"
 import validator from "validator"
 import "../../styles/phase1/photos.scss"
 
@@ -8,6 +8,7 @@ export default (props) => {
 	const jurn_id = props.match.params.jurn_id
 	const [photo, setPhoto] = useState("")
 	const { updatePhase1, updatePhoto } = usePhase1()
+	const { jurnInfo, updatePhase2 } = usePhase2()
 
 	const pictures = [
 		{
@@ -77,16 +78,24 @@ export default (props) => {
 			updatePhoto(jurn_id, photo)
 		}
 		updatePhase1(jurn_id)
+		updatePhase2(jurn_id)
 	}
+
+	useEffect(() => {
+		updatePhase2(jurn_id)
+	}, [jurn_id, jurnInfo])
 
 	return (
 		<div className="photoDiv">
 			<Form onSubmit={sendPhoto} className="photoForm">
-				<h3>Photo</h3>
+				<div className="currentPhoto">
+					<h3>Current Photo:</h3>
+					<img src={jurnInfo.photo} alt="Jurn(e) Cover photo" />
+				</div>
 				<div className="photoSel">
 					<Dropdown
 						id="dropdown"
-						placeholder="Select a Photo"
+						placeholder="Change Photo"
 						labeled
 						options={pictures}
 						button

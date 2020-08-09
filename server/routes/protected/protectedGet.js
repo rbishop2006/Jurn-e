@@ -212,8 +212,6 @@ router.get("/phase1/:jurn_id", (req, res, next) => {
 										endDate: item3.end_date,
 									})
 								})
-								// Get photo for associated with Jurn ID
-								// const sqlGetPhoto = `SELECT `
 								res.json({ phase1: P1Results })
 							}
 						)
@@ -231,7 +229,7 @@ router.get("/phase2/:jurn_id", (req, res, next) => {
 		location: {},
 		activities: [],
 	}
-	const sqlP2JnameLocName = `SELECT jurn.jname, jurn.location, jurn.hotel, jurn.start_date, jurn.end_date FROM jurn WHERE jurn.jurn_id = ?`
+	const sqlP2JnameLocName = `SELECT jurn.jname, jurn.location, jurn.hotel, jurn.start_date, jurn.end_date, jurn.photo FROM jurn WHERE jurn.jurn_id = ?`
 	conn.query(
 		sqlP2JnameLocName,
 		[jurn_id],

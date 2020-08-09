@@ -7,9 +7,19 @@
 		align-items: center;
 		justify-content: center;
 
-		h3 {
-			font-size: 1.8rem;
-			margin: 0;
+		div.currentPhoto {
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+
+			h3 {
+				font-size: 1.8rem;
+				margin: 0;
+			}
+
+			img {
+				width: 40%;
+			}
 		}
 
 		.photoSel {
@@ -73,6 +83,14 @@
 @media (max-width: 1050px) {
 	.photoDiv {
 		.photoForm {
+			div.currentPhoto {
+				flex-direction: column;
+
+				img {
+					width: 100%;
+				}
+			}
+
 			.photoSel {
 				#dropdown {
 					width: 75%;
