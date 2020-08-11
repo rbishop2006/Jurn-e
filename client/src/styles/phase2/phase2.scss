@@ -39,3 +39,37 @@
 		width: 80%;
 	}
 }
+
+@media (max-width: 1050px) {
+	.phase2 {
+		grid-template-areas:
+			"title"
+			"dates"
+			"reminders"
+			"details";
+		grid-template-columns: 100%;
+		grid-gap: 1rem;
+		margin: 1rem 0 2rem 0;
+
+		.p2header {
+			margin: 0;
+			text-align: center;
+		}
+
+		.p2dateRange {
+			margin: 0;
+		}
+	}
+}
+
+@media (max-width: 1050px) {
+	.phase2 {
+		.p2header {
+			font-size: 1.7rem;
+		}
+
+		.p2dateRange {
+			margin: 0;
+		}
+	}
+}

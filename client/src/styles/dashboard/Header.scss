@@ -2,7 +2,6 @@
 
 header {
 	background: var.$baseColor;
-	// text-align: center;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -63,7 +62,7 @@ header {
 	}
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1050px) {
 	header {
 		.ui.form.create {
 			.fields {
@@ -75,6 +74,10 @@ header {
 					}
 				}
 			}
+		}
+
+		.ui.button {
+			display: none;
 		}
 	}
 }
@@ -98,10 +101,6 @@ header {
 					}
 				}
 			}
-		}
-
-		.ui.button {
-			display: none;
 		}
 	}
 }

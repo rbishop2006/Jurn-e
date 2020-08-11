@@ -14,27 +14,27 @@
 
 			&.p2location {
 				text-align: center;
-				font-size: 1.3rem;
+				font-size: 1.5rem;
 				color: var.$firstColor;
 			}
 		}
 
 		.menuDiv {
 			div.secondary.pointing.menu {
-				.item {
+				a.item {
 					color: var.$firstColor;
 					font-size: 1.2rem;
 					padding: 0.5rem 1rem;
-				}
 
-				.item:hover {
-					color: var.$highlightColor;
-					border-color: var.$firstColor;
-				}
+					&:hover {
+						color: var.$highlightColor;
+						border-color: var.$firstColor;
+					}
 
-				.active.item {
-					color: var.$highlightColor;
-					border-color: var.$firstColor;
+					&.active {
+						color: var.$highlightColor;
+						border-color: var.$firstColor;
+					}
 				}
 			}
 
@@ -46,24 +46,36 @@
 
 				div.bulleted.list {
 					div.item {
+						display: flex;
+						align-items: center;
 						font-size: 1.2rem;
 						color: var.$firstColor;
 
 						i {
 							color: var.$secondColor;
+							font-size: 1.5rem;
 						}
 
 						div.content {
+							display: flex;
+							align-items: baseline;
 							color: var.$secondColor;
 
-							.phoneNumber {
-								font-size: 0.8em;
-								color: var.$firstColor;
-								margin: 0 0.25rem;
+							p {
+								margin: 0;
+								font-size: 1.4rem;
 
-								i {
+								&.phoneNumber {
+									font-size: 0.8em;
+									color: var.$firstColor;
 									margin: 0 0.25rem;
 								}
+							}
+
+							i {
+								color: var.$secondColor;
+								margin: 0 0.25rem;
+								font-size: 1.1rem;
 							}
 						}
 					}
@@ -78,6 +90,74 @@
 		#editButton {
 			@include var.buttonThemed(var.$firstColor);
 			width: 100%;
+		}
+	}
+}
+
+@media (max-width: 1050px) {
+	.p2Details {
+		div {
+			.menuDiv {
+				div.secondary.pointing.menu {
+					display: flex;
+					flex-direction: row;
+					flex-wrap: wrap;
+
+					a.item {
+						align-self: center;
+						margin: 0.25rem 0;
+					}
+				}
+
+				div.segment {
+					margin: 1.5rem 0;
+
+					div.bulleted.list {
+						div.item {
+							div.content {
+								display: flex;
+								align-items: baseline;
+								color: var.$secondColor;
+
+								p {
+									font-size: 1.2rem;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 500px) {
+	.p2Details {
+		div {
+			.menuDiv {
+				div.secondary.pointing.menu {
+					flex-direction: column;
+					justify-content: center;
+				}
+
+				div.segment {
+					margin: 1rem 0;
+
+					div.bulleted.list {
+						div.item {
+							align-items: center;
+
+							div.content {
+								flex-direction: column;
+
+								i.phone {
+									display: none;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

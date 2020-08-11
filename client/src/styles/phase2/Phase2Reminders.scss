@@ -96,3 +96,26 @@
 		}
 	}
 }
+
+@media (max-width: 500px) {
+	.p2remindersForm {
+		.p2Checklist {
+			div.p2ReminderCheckbox {
+				div.checkbox {
+					margin: 0.25rem 0;
+				}
+			}
+		}
+
+		form.p2filterAndClear {
+			.field.P2filters {
+				flex-direction: column;
+				align-items: flex-start;
+
+				div.radio.checkbox {
+					margin: 0.25rem 0;
+				}
+			}
+		}
+	}
+}

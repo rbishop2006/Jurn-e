@@ -30,11 +30,12 @@ export default (props) => {
 							<List.Item key={"accept" + i}>
 								<List.Icon name={accept.avatar} />
 								<List.Content>
-									{accept.fname + " " + accept.lname + " "}
-									<span className="phoneNumber">
+									<p>{`${accept.fname} ${accept.lname}`}</p>
+
+									<p className="phoneNumber">
 										ph: {accept.phone && accept.phone}
-										<Icon name="phone" />
-									</span>
+									</p>
+									<Icon name="phone" />
 								</List.Content>
 							</List.Item>
 						))}
