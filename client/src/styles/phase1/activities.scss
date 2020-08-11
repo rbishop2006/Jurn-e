@@ -122,7 +122,13 @@
 					}
 				}
 			}
+		}
+	}
+}
 
+@media (max-width: 500px) {
+	.activitiesDiv {
+		form.ui.form {
 			.fields.p1filterAndClear {
 				div.field.p1ActFilters {
 					flex-direction: column;
