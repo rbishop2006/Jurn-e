@@ -1,0 +1,41 @@
+@use '../../styles/variables.scss' as var;
+
+.phase2 {
+	display: grid;
+	grid-template-areas:
+		"title title"
+		"dates dates"
+		"reminders details";
+	grid-template-columns: 1fr 1fr;
+	justify-items: center;
+
+	.p2header {
+		grid-area: title;
+		color: var.$firstColor;
+		margin: 2rem 0;
+	}
+
+	.p2dateRange {
+		grid-area: dates;
+		color: var.$firstColor;
+		margin: 0 0 2rem 0;
+	}
+
+	.phase2Reminders {
+		grid-area: reminders;
+		border: 1px solid var.$thirdColor;
+		padding: 1rem;
+		box-shadow: 5px 5px var.$firstColor;
+		border-radius: 5px;
+		width: 80%;
+	}
+
+	.phase2Details {
+		grid-area: details;
+		border: 1px solid var.$thirdColor;
+		padding: 1rem;
+		box-shadow: 5px 5px var.$firstColor;
+		border-radius: 5px;
+		width: 80%;
+	}
+}

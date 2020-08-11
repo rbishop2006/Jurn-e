@@ -1,0 +1,98 @@
+@use '../../styles/variables.scss' as var;
+
+.p2remindersForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+
+	h4 {
+		font-size: 1.5rem;
+		margin: 0 0 1rem 0;
+		text-align: center;
+	}
+
+	.p2Checklist {
+		margin-bottom: 0;
+		@include var.FormForm_Input(var.$secondColor);
+
+		form.form {
+			.field {
+				label {
+					font-size: 1.2rem;
+					color: var.$firstColor;
+				}
+			}
+		}
+
+		div.p2ReminderCheckbox {
+			display: flex;
+			flex-direction: column;
+			margin: 1rem 0;
+
+			div.checkbox {
+				margin: 0 0 0.25rem 0;
+
+				label {
+					color: var.$firstColor;
+					font-size: 1.1rem;
+
+					&:before {
+						border-color: var.$secondColor;
+					}
+				}
+
+				&.checked {
+					text-decoration: line-through;
+					color: var.$firstColor;
+
+					span.completed {
+						div.checked.checkbox {
+							margin: 0;
+
+							label {
+								&:after {
+									color: var.$firstColor;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	form.p2filterAndClear {
+		margin: 1rem;
+
+		.field.P2filters {
+			display: flex;
+			justify-content: space-evenly;
+			align-items: center;
+			padding: 0;
+
+			div.radio.checkbox {
+				margin: 0 0.5rem;
+
+				label {
+					color: var.$firstColor;
+
+					&:before {
+						border-color: var.$secondColor;
+					}
+
+					&:after {
+						background-color: var.$firstColor;
+					}
+				}
+			}
+		}
+	}
+
+	form {
+		.ui.button {
+			@include var.buttonThemed(var.$firstColor);
+			width: 100%;
+		}
+	}
+}

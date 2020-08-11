@@ -1,0 +1,83 @@
+@use '../../styles/variables.scss' as var;
+
+.p2Details {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+
+	div {
+		h4 {
+			font-size: 1.5rem;
+			margin: 0 0 1rem 0;
+			text-align: center;
+
+			&.p2location {
+				text-align: center;
+				font-size: 1.3rem;
+				color: var.$firstColor;
+			}
+		}
+
+		.menuDiv {
+			div.secondary.pointing.menu {
+				.item {
+					color: var.$firstColor;
+					font-size: 1.2rem;
+					padding: 0.5rem 1rem;
+				}
+
+				.item:hover {
+					color: var.$highlightColor;
+					border-color: var.$firstColor;
+				}
+
+				.active.item {
+					color: var.$highlightColor;
+					border-color: var.$firstColor;
+				}
+			}
+
+			div.segment {
+				border: none;
+				box-shadow: none;
+				margin: 1.5rem 0 0 0;
+				padding: 0;
+
+				div.bulleted.list {
+					div.item {
+						font-size: 1.2rem;
+						color: var.$firstColor;
+
+						i {
+							color: var.$secondColor;
+						}
+
+						div.content {
+							color: var.$secondColor;
+
+							.phoneNumber {
+								font-size: 0.8em;
+								color: var.$firstColor;
+								margin: 0 0.25rem;
+
+								i {
+									margin: 0 0.25rem;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.p2Edit {
+		width: 100%;
+
+		#editButton {
+			@include var.buttonThemed(var.$firstColor);
+			width: 100%;
+		}
+	}
+}
