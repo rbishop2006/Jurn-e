@@ -116,8 +116,10 @@ export default (props) => {
 				<Form.Input
 					fluid
 					label="Cell Phone"
+					type="tel"
 					placeholder={aUser.cell_phone}
 					value={cellphone}
+					pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
 					onChange={(e) => setCellphone(e.target.value)}
 				/>
 				<Dropdown

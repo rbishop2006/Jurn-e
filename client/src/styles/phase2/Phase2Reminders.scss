@@ -89,10 +89,15 @@
 		}
 	}
 
-	form {
-		.ui.button {
+	form.ui.form {
+		button.ui.button {
 			@include var.buttonThemed(var.$firstColor);
 			width: 100%;
+			font-size: 1.4rem;
+
+			i.icon {
+				margin: 0 0 0 0.5rem;
+			}
 		}
 	}
 }

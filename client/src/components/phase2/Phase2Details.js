@@ -18,7 +18,7 @@ export default (props) => {
 	useEffect(() => {
 		updatePhase2(jurn_id)
 		updateInvited(jurn_id)
-	}, [jurn_id, user_id])
+	}, [jurn_id, user_id, accepted])
 
 	const panes = [
 		{
@@ -26,25 +26,25 @@ export default (props) => {
 			render: () => (
 				<Tab.Pane attached={false}>
 					<List>
-						{accepted.map((accept, i) => (
-							<List.Item key={"accept" + i}>
-								<List.Content>
-									<div>
-										<Icon name={accept.avatar} />
-										<p>{`${accept.fname} ${accept.lname}`}</p>
-									</div>
-									<div>
-										<Icon name="phone" />
-										<a
-											href={`tel:${accept.phone && accept.phone}`}
-											className="phoneNumber"
-										>
-											{accept.phone && accept.phone}
-										</a>
-									</div>
-								</List.Content>
-							</List.Item>
-						))}
+						{accepted.map((accept, i) => {
+							const cellphone = accept.phone && accept.phone.split("-").join("")
+							return (
+								<List.Item key={"accept" + i}>
+									<List.Content>
+										<div>
+											<Icon name={accept.avatar} />
+											<p>{`${accept.fname} ${accept.lname}`}</p>
+										</div>
+										<div>
+											<Icon name="phone" />
+											<a href={`tel:${cellphone}`} className="phoneNumber">
+												{accept.phone && accept.phone}
+											</a>
+										</div>
+									</List.Content>
+								</List.Item>
+							)
+						})}
 					</List>
 				</Tab.Pane>
 			),
@@ -88,9 +88,7 @@ export default (props) => {
 			</div>
 			<Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
 				<Button id="editButton" type="button">
-					<span>
-						Edit <Icon name="pencil" />
-					</span>
+					Edit Jurn(<em>e</em>) <Icon name="pencil" />
 				</Button>
 			</Link>
 		</div>

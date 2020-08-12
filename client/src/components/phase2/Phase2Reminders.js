@@ -114,10 +114,8 @@ export default (props) => {
 			</Form>
 			<Form>
 				<Button type="button" onClick={(e) => clearRems(jurn_id, user_id)}>
-					<span>
-						Clear Completed{"  "}
-						<Icon name="remove circle" />
-					</span>
+					Clear Completed
+					<Icon name="remove circle" />
 				</Button>
 			</Form>
 		</div>

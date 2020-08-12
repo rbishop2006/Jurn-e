@@ -1,15 +1,15 @@
 import React, { useEffect } from "react"
-import { Card, Image, Button, Icon } from "semantic-ui-react"
+import { Card, Image, Icon } from "semantic-ui-react"
 import { useMain } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/dashboard/Main.scss"
 import moment from "moment"
 
 export default (props) => {
-	const { jurns, get } = useMain()
+	const { jurns, fetchMain } = useMain()
 
 	useEffect(() => {
-		get()
+		fetchMain()
 	}, [])
 
 	return (
