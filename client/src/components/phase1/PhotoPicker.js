@@ -90,7 +90,7 @@ export default (props) => {
 			<Form onSubmit={sendPhoto} className="photoForm">
 				<div className="currentPhoto">
 					<h3>Current Photo:</h3>
-					<img src={jurnInfo.photo} alt="Jurn(e) Cover photo" />
+					<img src={jurnInfo.photo} alt="Jurn(e) Cover shot" />
 				</div>
 				<div className="photoSel">
 					<Dropdown

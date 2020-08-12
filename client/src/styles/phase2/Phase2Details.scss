@@ -21,6 +21,10 @@
 
 		.menuDiv {
 			div.secondary.pointing.menu {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+
 				a.item {
 					color: var.$firstColor;
 					font-size: 1.2rem;
@@ -44,6 +48,7 @@
 				margin: 1.5rem 0 0 0;
 				padding: 0;
 
+				div.list,
 				div.bulleted.list {
 					div.item {
 						display: flex;
@@ -51,31 +56,34 @@
 						font-size: 1.2rem;
 						color: var.$firstColor;
 
-						i {
-							color: var.$secondColor;
-							font-size: 1.5rem;
-						}
-
 						div.content {
+							width: 60%;
 							display: flex;
-							align-items: baseline;
+							justify-content: space-between;
 							color: var.$secondColor;
 
-							p {
-								margin: 0;
-								font-size: 1.4rem;
+							div {
+								display: flex;
+								align-items: center;
 
-								&.phoneNumber {
-									font-size: 0.8em;
-									color: var.$firstColor;
-									margin: 0 0.25rem;
+								i {
+									color: var.$secondColor;
+									font-size: 1.5rem;
+									margin: 0 0.7rem 0 0;
 								}
-							}
 
-							i {
-								color: var.$secondColor;
-								margin: 0 0.25rem;
-								font-size: 1.1rem;
+								p {
+									font-size: 1.3rem;
+									margin: 0;
+									color: var.$firstColor;
+								}
+
+								a {
+									&.phoneNumber {
+										font-size: 1rem;
+										color: var.$firstColor;
+									}
+								}
 							}
 						}
 					}
@@ -90,6 +98,11 @@
 		#editButton {
 			@include var.buttonThemed(var.$firstColor);
 			width: 100%;
+			font-size: 1.4rem;
+
+			i.icon {
+				margin: 0 0 0 0.5rem;
+			}
 		}
 	}
 }
@@ -99,10 +112,6 @@
 		div {
 			.menuDiv {
 				div.secondary.pointing.menu {
-					display: flex;
-					flex-direction: row;
-					flex-wrap: wrap;
-
 					a.item {
 						align-self: center;
 						margin: 0.25rem 0;
@@ -112,9 +121,11 @@
 				div.segment {
 					margin: 1.5rem 0;
 
+					div.list,
 					div.bulleted.list {
 						div.item {
 							div.content {
+								width: 100%;
 								display: flex;
 								align-items: baseline;
 								color: var.$secondColor;
@@ -143,15 +154,21 @@
 				div.segment {
 					margin: 1rem 0;
 
+					div.list,
 					div.bulleted.list {
 						div.item {
-							align-items: center;
-
 							div.content {
 								flex-direction: column;
+								align-items: center;
+								margin: 1rem 0;
 
-								i.phone {
-									display: none;
+								div {
+									a {
+										&.phoneNumber {
+											font-size: 1.2rem;
+											color: var.$firstColor;
+										}
+									}
 								}
 							}
 						}
