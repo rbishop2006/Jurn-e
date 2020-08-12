@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Form, Button, Radio, List, Checkbox, Icon } from "semantic-ui-react"
+import { Form, Button, List, Icon } from "semantic-ui-react"
 import { useInvited, useMain, useAside } from "../../hooks"
 import "../../styles/phase1/inviteUsers.scss"
 
@@ -11,7 +11,7 @@ export default (props) => {
 		updateInvited,
 		sendInvite,
 	} = useInvited()
-	const { get } = useMain()
+	const { fetchMain } = useMain()
 
 	const { aUser, delJurn, fetchAside } = useAside()
 	const user_id = aUser.user_id
@@ -44,7 +44,7 @@ export default (props) => {
 		e.preventDefault()
 		delJurn(user_id, jurn_id).then(() => {
 			fetchAside()
-			get()
+			fetchMain()
 			props.history.push("/Jurne/dashboard")
 		})
 	}
