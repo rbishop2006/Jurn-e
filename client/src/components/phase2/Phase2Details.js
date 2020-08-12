@@ -25,19 +25,23 @@ export default (props) => {
 			menuItem: `People going: (${accepted.length})`,
 			render: () => (
 				<Tab.Pane attached={false}>
-					<List bulleted>
+					<List>
 						{accepted.map((accept, i) => (
 							<List.Item key={"accept" + i}>
-								<List.Icon name={accept.avatar} />
 								<List.Content>
-									<p>{`${accept.fname} ${accept.lname}`}</p>
-									<a
-										href={`tel:${accept.phone && accept.phone}`}
-										className="phoneNumber"
-									>
-										ph: {accept.phone && accept.phone}
-									</a>
-									<Icon name="phone" />
+									<div>
+										<Icon name={accept.avatar} />
+										<p>{`${accept.fname} ${accept.lname}`}</p>
+									</div>
+									<div>
+										<Icon name="phone" />
+										<a
+											href={`tel:${accept.phone && accept.phone}`}
+											className="phoneNumber"
+										>
+											{accept.phone && accept.phone}
+										</a>
+									</div>
 								</List.Content>
 							</List.Item>
 						))}
