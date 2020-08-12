@@ -31,10 +31,12 @@ export default (props) => {
 								<List.Icon name={accept.avatar} />
 								<List.Content>
 									<p>{`${accept.fname} ${accept.lname}`}</p>
-
-									<p className="phoneNumber">
+									<a
+										href={`tel:${accept.phone && accept.phone}`}
+										className="phoneNumber"
+									>
 										ph: {accept.phone && accept.phone}
-									</p>
+									</a>
 									<Icon name="phone" />
 								</List.Content>
 							</List.Item>
@@ -83,7 +85,7 @@ export default (props) => {
 			<Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
 				<Button id="editButton" type="button">
 					<span>
-						J(<em>e</em>){"  "} <Icon name="pencil" />
+						Edit <Icon name="pencil" />
 					</span>
 				</Button>
 			</Link>

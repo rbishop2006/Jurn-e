@@ -43,7 +43,7 @@ export default (props) => {
 									to={"/Jurne/dashboard/" + jurn.jurn_id}
 								>
 									<span>
-										J(<em>e</em>) <Icon name="pencil" />
+										Edit <Icon name="pencil" />
 									</span>
 								</Link>
 							</Card.Content>
