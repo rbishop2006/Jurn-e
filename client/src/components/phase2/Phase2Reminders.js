@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { List, Checkbox, Form, Radio, Button, Icon } from "semantic-ui-react"
-import { useAside } from "../../hooks"
-import { usePhase2, useRems } from "../../hooks"
+import { useAside, usePhase2, useRems } from "../../hooks"
 import "../../styles/phase2/Phase2Reminders.scss"
 import validator from "validator"
 

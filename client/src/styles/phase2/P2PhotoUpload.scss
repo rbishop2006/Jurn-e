@@ -1,0 +1,24 @@
+@use '../../styles/variables.scss' as var;
+
+.p2PhotosForm {
+	width: 80%;
+
+	form.ui.form {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		div.field {
+			margin: 0;
+		}
+		button.photoSubmit {
+			@include var.buttonThemed(var.$firstColor);
+			margin: 0;
+		}
+
+		div {
+			width: 300px;
+			height: 300px;
+		}
+	}
+}
