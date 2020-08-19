@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from "react"
 import { Form, Button } from "semantic-ui-react"
 // import { useAside } from "../../hooks"
-// import { usePhase2, useRems } from "../../hooks"
+import { usePhase2 } from "../../hooks"
 import "../../styles/phase2/P2PhotoUpload.scss"
 import validator from "validator"
 
 export default (props) => {
 	const jurn_id = props.match.params.jurn_id
+	const { updatePhase2, sendImage } = usePhase2()
 	const [photoInput, setPhotoInput] = useState("")
 	const [selectedFile, setSelectedFile] = useState("")
 	const [previewSrc, setPreviewSrc] = useState("")
 
-	function handlePhotoSubmit(e) {
-		e.preventDefault()
-		let valid = true
+	// function handlePhotoSubmit(e) {
+	// 	e.preventDefault()
+	// 	let valid = true
 
-		// if (validator.isEmpty(photo)) {
-		// 	valid = false
-		// }
-		// if (valid) {
-		// 	addRem(reminder, jurn_id)
-		// 	setReminder("")
-		// }
-	}
+	// 	// if (validator.isEmpty(photo)) {
+	// 	// 	valid = false
+	// 	// }
+	// 	// if (valid) {
+	// 	// 	addRem(reminder, jurn_id)
+	// 	// 	setReminder("")
+	// 	// }
+	// }
 
 	function handlePhotoInput(e) {
 		e.preventDefault()
@@ -37,6 +38,20 @@ export default (props) => {
 		reader.onloadend = () => {
 			setPreviewSrc(reader.result)
 		}
+	}
+
+	function handlePhotoSubmit(e) {
+		e.preventDefault()
+		if (!previewSrc) {
+			return
+		} else {
+			uploadImage(previewSrc)
+		}
+	}
+
+	const uploadImage = (base64EncodedImage) => {
+		const jurnId = jurn_id
+		sendImage(base64EncodedImage, jurnId)
 	}
 
 	return (

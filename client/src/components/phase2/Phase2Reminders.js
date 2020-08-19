@@ -6,9 +6,7 @@ import validator from "validator"
 
 export default (props) => {
 	const { aUser } = useAside()
-
 	const [reminder, setReminder] = useState("")
-
 	const { updatePhase2 } = usePhase2()
 	const {
 		rems,
