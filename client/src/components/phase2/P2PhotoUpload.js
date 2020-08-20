@@ -12,31 +12,72 @@ export default (props) => {
 	const [previewSrc, setPreviewSrc] = useState("")
 	const jurnName = jurnInfo.jname
 
-	// function handlePhotoSubmit(e) {
-	// 	e.preventDefault()
-	// 	let valid = true
+	console.log(previewSrc)
 
-	// 	// if (validator.isEmpty(photo)) {
-	// 	// 	valid = false
-	// 	// }
-	// 	// if (valid) {
-	// 	// 	addRem(reminder, jurn_id)
-	// 	// 	setReminder("")
-	// 	// }
+	// For single file
+	// function handlePhotoInput(e) {
+	// 	e.preventDefault()
+	// 	console.log(e.target.files)
+	// 	const file = e.target.files[0]
+	// 	previewFile(file)
 	// }
 
-	function handlePhotoInput(e) {
-		e.preventDefault()
-		const file = e.target.files[0]
+	// function previewFile(file) {
+	// 	const reader = new FileReader()
+	// 	reader.readAsDataURL(file)
+	// 	reader.onloadend = () => {
+	// 		setPreviewSrc(reader.result)
+	// 	}
+	// }
 
-		previewFile(file)
-	}
+	// // For multiple files
+	// function handlePhotoInput(e) {
+	// 	e.preventDefault()
+	// 	console.log(e.target.files)
+	// 	const files = e.target.files
+	// 	previewFile(files)
+	// }
 
-	function previewFile(file) {
-		const reader = new FileReader()
-		reader.readAsDataURL(file)
-		reader.onloadend = () => {
-			setPreviewSrc(reader.result)
+	// function previewFile(files) {
+	// 	const newFiles = []
+	// 	for (const file in files) {
+	// 		const reader = new FileReader()
+	// 		reader.readAsDataURL(file)
+	// 		reader.onloadend = () => {
+	// 			newFiles.push(reader.result)
+	// 		}
+	// 	}
+
+	// 	setPreviewSrc(newFiles)
+	// }
+
+	// Try this for multiple files
+	function previewFiles(e) {
+		// const files = document.querySelector("input[type=file]").files
+		const files = e.target.files
+
+		function readAndPreview(file) {
+			// Make sure `file.name` matches our extensions criteria
+			if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+				const reader = new FileReader()
+
+				reader.addEventListener(
+					"load",
+					function () {
+						var image = new Image()
+						image.height = 100
+						image.title = file.name
+						image.src = this.result
+					},
+					false
+				)
+
+				reader.readAsDataURL(file)
+			}
+		}
+
+		if (files) {
+			;[].forEach.call(files, readAndPreview)
 		}
 	}
 
@@ -61,17 +102,20 @@ export default (props) => {
 					name="image"
 					type="file"
 					className="file-upload"
-					label="add Photos of Jurn(e) here..."
+					label="add Photos of this Jurn(e)"
 					data-cloudinary-field="image_id"
 					// data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}"
-					onChange={handlePhotoInput}
-					value={photoInput}
+					onChange={previewFiles}
+					// value={photoInput}
+					multiple
 				/>
 				<Button className="photoSubmit" type="submit">
 					Submit
 				</Button>
-				<div>{previewSrc && <img src={previewSrc} alt="chosen file" />}</div>
 			</Form>
+			<div className="previewDiv">
+				{previewSrc && <img src={previewSrc} alt="chosen file" />}
+			</div>
 		</div>
 	)
 }
