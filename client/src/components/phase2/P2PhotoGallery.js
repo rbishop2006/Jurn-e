@@ -10,7 +10,10 @@ export default (props) => {
 	return (
 		<div className="p2PhotoGallery">
 			<CloudinaryContext cloudName="jurne">
-				<Image publicId="sample" format="jpg">
+				<Image
+					publicId="https://res.cloudinary.com/jurne/image/upload/v1597183579/JurnEase-picture2_nqpkv2.jpg"
+					format="jpg"
+				>
 					<Transformation
 						crop="fill"
 						gravity="faces"
