@@ -30,24 +30,55 @@ export default (props) => {
 	// 	}
 	// }
 
-	// For multiple files
-	function handlePhotoInput(e) {
-		e.preventDefault()
-		console.log(e.target.files)
-		const files = e.target.files
-		previewFile(files)
-	}
+	// // For multiple files
+	// function handlePhotoInput(e) {
+	// 	e.preventDefault()
+	// 	console.log(e.target.files)
+	// 	const files = e.target.files
+	// 	previewFile(files)
+	// }
 
-	function previewFile(files) {
-		const reader = new FileReader()
-		const newFiles = []
-		files.forEach((file) => {
-			reader.readAsDataURL(file)
-			reader.onloadend = () => {
-				newFiles.push(reader.result)
+	// function previewFile(files) {
+	// 	const newFiles = []
+	// 	for (const file in files) {
+	// 		const reader = new FileReader()
+	// 		reader.readAsDataURL(file)
+	// 		reader.onloadend = () => {
+	// 			newFiles.push(reader.result)
+	// 		}
+	// 	}
+
+	// 	setPreviewSrc(newFiles)
+	// }
+
+	// Try this for multiple files
+	function previewFiles(e) {
+		// const files = document.querySelector("input[type=file]").files
+		const files = e.target.files
+
+		function readAndPreview(file) {
+			// Make sure `file.name` matches our extensions criteria
+			if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+				const reader = new FileReader()
+
+				reader.addEventListener(
+					"load",
+					function () {
+						var image = new Image()
+						image.height = 100
+						image.title = file.name
+						image.src = this.result
+					},
+					false
+				)
+
+				reader.readAsDataURL(file)
 			}
-		})
-		setPreviewSrc(newFiles)
+		}
+
+		if (files) {
+			;[].forEach.call(files, readAndPreview)
+		}
 	}
 
 	function handlePhotoSubmit(e) {
@@ -74,7 +105,7 @@ export default (props) => {
 					label="add Photos of this Jurn(e)"
 					data-cloudinary-field="image_id"
 					// data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}"
-					onChange={handlePhotoInput}
+					onChange={previewFiles}
 					// value={photoInput}
 					multiple
 				/>
