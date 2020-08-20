@@ -12,32 +12,42 @@ export default (props) => {
 	const [previewSrc, setPreviewSrc] = useState("")
 	const jurnName = jurnInfo.jname
 
-	// function handlePhotoSubmit(e) {
-	// 	e.preventDefault()
-	// 	let valid = true
+	console.log(previewSrc)
 
-	// 	// if (validator.isEmpty(photo)) {
-	// 	// 	valid = false
-	// 	// }
-	// 	// if (valid) {
-	// 	// 	addRem(reminder, jurn_id)
-	// 	// 	setReminder("")
-	// 	// }
+	// For single file
+	// function handlePhotoInput(e) {
+	// 	e.preventDefault()
+	// 	console.log(e.target.files)
+	// 	const file = e.target.files[0]
+	// 	previewFile(file)
 	// }
 
+	// function previewFile(file) {
+	// 	const reader = new FileReader()
+	// 	reader.readAsDataURL(file)
+	// 	reader.onloadend = () => {
+	// 		setPreviewSrc(reader.result)
+	// 	}
+	// }
+
+	// For multiple files
 	function handlePhotoInput(e) {
 		e.preventDefault()
-		const file = e.target.files[0]
-
-		previewFile(file)
+		console.log(e.target.files)
+		const files = e.target.files
+		previewFile(files)
 	}
 
-	function previewFile(file) {
+	function previewFile(files) {
 		const reader = new FileReader()
-		reader.readAsDataURL(file)
-		reader.onloadend = () => {
-			setPreviewSrc(reader.result)
-		}
+		const newFiles = []
+		files.forEach((file) => {
+			reader.readAsDataURL(file)
+			reader.onloadend = () => {
+				newFiles.push(reader.result)
+			}
+		})
+		setPreviewSrc(newFiles)
 	}
 
 	function handlePhotoSubmit(e) {
@@ -61,17 +71,20 @@ export default (props) => {
 					name="image"
 					type="file"
 					className="file-upload"
-					label="add Photos of Jurn(e) here..."
+					label="add Photos of this Jurn(e)"
 					data-cloudinary-field="image_id"
 					// data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}"
 					onChange={handlePhotoInput}
-					value={photoInput}
+					// value={photoInput}
+					multiple
 				/>
 				<Button className="photoSubmit" type="submit">
 					Submit
 				</Button>
-				<div>{previewSrc && <img src={previewSrc} alt="chosen file" />}</div>
 			</Form>
+			<div className="previewDiv">
+				{previewSrc && <img src={previewSrc} alt="chosen file" />}
+			</div>
 		</div>
 	)
 }
