@@ -7,7 +7,7 @@ import validator from "validator"
 export default (props) => {
 	const { aUser } = useAside()
 	const [reminder, setReminder] = useState("")
-	const { updatePhase2 } = usePhase2()
+	// const { updatePhase2 } = usePhase2()
 	const {
 		rems,
 		remsCount,
@@ -42,9 +42,9 @@ export default (props) => {
 	}
 
 	useEffect(() => {
-		updatePhase2(jurn_id)
+		// updatePhase2(jurn_id)
 		updateRems(jurn_id, user_id)
-	}, [jurn_id, user_id, reminder])
+	}, [jurn_id, user_id])
 
 	return (
 		<div className="p2remindersForm">

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { Form } from "semantic-ui-react"
 // import { useAside } from "../../hooks"
 // import { usePhase2, useRems } from "../../hooks"
 import "../../styles/phase2/Phase2Photos.scss"

@@ -36,9 +36,9 @@ function getPhase2(jurn_id) {
 	}
 }
 
-function postImage(image, jurn_id) {
+function postImage(image, jurnTag) {
 	return (dispatch) => {
-		api.post("/images", { image, jurn_id })
+		api.post("/images", { image, jurnTag })
 	}
 }
 
@@ -47,7 +47,7 @@ export function usePhase2() {
 	const jurnInfo = useSelector((appState) => appState.Phase2State.jurnInfo)
 	const activities = useSelector((appState) => appState.Phase2State.activities)
 	const updatePhase2 = (jurn_id) => dispatch(getPhase2(jurn_id))
-	const sendImage = (image, jurn_id) => dispatch(postImage(image, jurn_id))
+	const sendImage = (image, jurnTag) => dispatch(postImage(image, jurnTag))
 
 	return { jurnInfo, activities, updatePhase2, sendImage }
 }

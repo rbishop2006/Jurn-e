@@ -10,12 +10,11 @@ import moment from "moment"
 
 export default (props) => {
 	const { jurnInfo, updatePhase2 } = usePhase2()
-
 	const jurn_id = props.match.params.jurn_id
 
 	useEffect(() => {
 		updatePhase2(jurn_id)
-	}, [jurn_id])
+	}, [])
 
 	return (
 		<div className="phase2">

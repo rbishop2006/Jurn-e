@@ -6,11 +6,11 @@ import "../../styles/phase2/P2PhotoUpload.scss"
 import validator from "validator"
 
 export default (props) => {
-	const jurn_id = props.match.params.jurn_id
-	const { updatePhase2, sendImage } = usePhase2()
+	const { jurnInfo, updatePhase2, sendImage } = usePhase2()
 	const [photoInput, setPhotoInput] = useState("")
-	const [selectedFile, setSelectedFile] = useState("")
+	// const [selectedFile, setSelectedFile] = useState("")
 	const [previewSrc, setPreviewSrc] = useState("")
+	const jurnName = jurnInfo.jname
 
 	// function handlePhotoSubmit(e) {
 	// 	e.preventDefault()
@@ -50,8 +50,8 @@ export default (props) => {
 	}
 
 	const uploadImage = (base64EncodedImage) => {
-		const jurnId = jurn_id
-		sendImage(base64EncodedImage, jurnId)
+		const jurnTag = jurnName
+		sendImage(base64EncodedImage, jurnTag)
 	}
 
 	return (
@@ -63,7 +63,7 @@ export default (props) => {
 					className="file-upload"
 					label="add Photos of Jurn(e) here..."
 					data-cloudinary-field="image_id"
-					data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}"
+					// data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}"
 					onChange={handlePhotoInput}
 					value={photoInput}
 				/>

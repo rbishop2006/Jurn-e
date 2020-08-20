@@ -1,7 +1,6 @@
 const router = require("express").Router()
 const conn = require("../../db")
-var cloudinary = require("cloudinary")
-const config = require("config")
+const { cloudinary } = require("../../utils/cloudinary.js")
 
 router.post("/invite", (req, res, next) => {
 	const fname = req.body.firstName
@@ -269,14 +268,12 @@ router.post("/message", (req, res, next) => {
 
 router.post("/images", async (req, res, next) => {
 	try {
-		const key = config.cloudinary.get("api_key")
 		const fileString = req.body.image
-		const jurnId = req.body.jurn_id
+		const tag = req.body.jurnTag
 		// console.log(fileString)
-		console.log(jurnId)
+		console.log(tag)
 		const uploadResponse = await cloudinary.uploader.upload(fileString, {
-			api_key: key,
-			upload_preset: `${jurnId}`,
+			tags: tag,
 		})
 		console.log(uploadResponse)
 		res.json({ message: "image added" })
