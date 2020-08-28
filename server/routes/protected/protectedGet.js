@@ -3,6 +3,7 @@ const router = express.Router()
 const conn = require("../../db")
 const decode = require("jsonwebtoken").decode
 const moment = require("moment-timezone")
+const { cloudinary } = require("../../utils/cloudinary.js")
 
 router.get("/main", (req, res, next) => {
 	const profile = decode(req.headers.authorization.substring(7))
@@ -351,6 +352,18 @@ router.get("/invited/:jurn_id", (req, res, next) => {
 			})
 		})
 	})
+})
+
+// Gets with specified Jurn name from cloudinary
+router.get("/images/:jurnName", async (req, res, next) => {
+	const jurnTag = req.params.jurnName
+	console.log(jurnTag)
+	const { resources } = await cloudinary.search
+		.expression(`folder:Jurnes AND tags=${jurnTag}`)
+		.sort_by("CreateDate", "desc")
+		.execute()
+	const publicIds = resources.map((file) => file.public_id)
+	res.send(publicIds)
 })
 
 module.exports = router

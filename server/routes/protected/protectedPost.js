@@ -271,14 +271,12 @@ router.post("/images", async (req, res, next) => {
 		const fileString = req.body.image
 		const tag = req.body.jurnTag
 		// console.log(fileString)
-		console.log(tag)
 		const uploadResponse = await cloudinary.uploader.upload(fileString, {
+			upload_preset: "Jurnes",
 			tags: tag,
 		})
-		console.log(uploadResponse)
 		res.json({ message: "image added" })
 	} catch (err) {
-		console.log(err)
 		res.status(500).json({ err: "Something went wrong" })
 	}
 })
