@@ -1,18 +1,20 @@
 import React, { useEffect } from "react"
 import Phase2Reminders from "./Phase2Reminders"
 import Phase2Details from "./Phase2Details"
+// import Phase2Photos from "./Phase2Photos"
+import P2PhotoUpload from "./P2PhotoUpload"
+import P2PhotoGallery from "./P2PhotoGallery"
 import { usePhase2 } from "../../hooks"
-import "../../styles/phase2/phase2.scss"
+import "../../styles/phase2/JnamePhase2.scss"
 import moment from "moment"
 
 export default (props) => {
 	const { jurnInfo, updatePhase2 } = usePhase2()
-
 	const jurn_id = props.match.params.jurn_id
 
 	useEffect(() => {
 		updatePhase2(jurn_id)
-	}, [jurn_id])
+	}, [])
 
 	return (
 		<div className="phase2">
@@ -27,6 +29,12 @@ export default (props) => {
 			</div>
 			<div className="phase2Details">
 				<Phase2Details match={props.match} />
+			</div>
+			<div className="phase2Upload">
+				<P2PhotoUpload match={props.match} />
+			</div>
+			<div className="phase2Gallery">
+				<P2PhotoGallery match={props.match} />
 			</div>
 		</div>
 	)

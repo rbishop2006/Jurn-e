@@ -5,7 +5,9 @@
 	grid-template-areas:
 		"title title"
 		"dates dates"
-		"reminders details";
+		"reminders details"
+		"upload upload"
+		"gallery gallery";
 	grid-template-columns: 1fr 1fr;
 	justify-items: center;
 
@@ -21,8 +23,8 @@
 		margin: 0 0 2rem 0;
 	}
 
-	.phase2Reminders {
-		grid-area: reminders;
+	.phase2Reminders,
+	.phase2Details {
 		border: 1px solid var.$thirdColor;
 		padding: 1rem;
 		box-shadow: 5px 5px var.$firstColor;
@@ -30,13 +32,24 @@
 		width: 80%;
 	}
 
+	.phase2Reminders {
+		grid-area: reminders;
+	}
+
 	.phase2Details {
 		grid-area: details;
-		border: 1px solid var.$thirdColor;
-		padding: 1rem;
-		box-shadow: 5px 5px var.$firstColor;
-		border-radius: 5px;
-		width: 80%;
+	}
+
+	.phase2Upload {
+		grid-area: upload;
+		margin: 3rem 0;
+		width: 100%;
+	}
+
+	.phase2Gallery {
+		grid-area: gallery;
+		margin: 3rem 0;
+		width: 100%;
 	}
 }
 

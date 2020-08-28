@@ -1,0 +1,49 @@
+@use '../../styles/variables.scss' as var;
+
+.p2PhotosForm {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+
+	form.ui.form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		div.field.file-upload {
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			label {
+				font-size: 1.5rem;
+				color: var.$secondColor;
+			}
+
+			div.ui.input {
+				display: flex;
+				box-shadow: none;
+				border: 1px solid var.$firstColor;
+				border-radius: 5px;
+
+				input {
+					border: none;
+					font-size: 1.2rem;
+					color: var.$firstColor;
+					box-shadow: none;
+				}
+			}
+		}
+	}
+
+	.previewDiv {
+		width: 300px;
+		height: 300px;
+	}
+
+	button.photoSubmit {
+		@include var.buttonThemed(var.$firstColor);
+		margin: 0;
+	}
+}
