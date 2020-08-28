@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { List, Checkbox, Form, Radio, Button, Icon } from "semantic-ui-react"
-import { useAside, usePhase2, useRems } from "../../hooks"
+import { useAside, useRems } from "../../hooks"
 import "../../styles/phase2/Phase2Reminders.scss"
 import validator from "validator"
 
 export default (props) => {
 	const { aUser } = useAside()
 	const [reminder, setReminder] = useState("")
-	// const { updatePhase2 } = usePhase2()
 	const {
 		rems,
 		remsCount,

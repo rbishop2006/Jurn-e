@@ -354,16 +354,23 @@ router.get("/invited/:jurn_id", (req, res, next) => {
 	})
 })
 
-// Gets with specified Jurn name from cloudinary
+// Trying to get images with specified Jurn name from cloudinary
 router.get("/images/:jurnName", async (req, res, next) => {
 	const jurnTag = req.params.jurnName
-	console.log(jurnTag)
-	const { resources } = await cloudinary.search
-		.expression(`folder:Jurnes AND tags=${jurnTag}`)
-		.sort_by("CreateDate", "desc")
-		.execute()
-	const publicIds = resources.map((file) => file.public_id)
-	res.send(publicIds)
+	try {
+		console.log("361" + jurnTag)
+		const { resources } = await cloudinary.search
+			// Still have to figure out tags search
+			.expression(`folder:Jurnes`)
+			.sort_by("created_at", "desc")
+			.execute()
+		console.log("366" + resources)
+		const publicIds = resources.map((file) => file.public_id)
+		console.log(publicIds)
+		res.json(publicIds)
+	} catch (err) {
+		res.status(500).json({ err: "Couldn't find images" })
+	}
 })
 
 module.exports = router
