@@ -38,15 +38,14 @@ function getPhase2(jurn_id) {
 
 // Sends an image to cloudinary and tags it with Jurn name
 function postImage(image, jurnTag) {
+	jurnTag = jurnTag.replace(/\s/g, "")
 	return (dispatch) => {
-		// change the tag name to remove spaces
 		api.post("/images", { image, jurnTag })
 	}
 }
 
-// Gets all images with tag of Jurn name
+// Gets all images with tag of the Jurn name
 function getImages(jurnName) {
-	//  Look for regEx in .replace - this doesn't look right
 	const jurnTag = jurnName && jurnName.replace(/\s/g, "")
 	console.log(jurnTag)
 	return (dispatch) => {

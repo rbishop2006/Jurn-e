@@ -270,7 +270,6 @@ router.post("/images", async (req, res, next) => {
 	try {
 		const fileString = req.body.image
 		const tag = req.body.jurnTag
-		// console.log(fileString)
 		const uploadResponse = await cloudinary.uploader.upload(fileString, {
 			upload_preset: "Jurnes",
 			tags: tag,

@@ -1,19 +1,15 @@
 import React, { useEffect } from "react"
 import { List, Tab, Button, Icon } from "semantic-ui-react"
-// import { useAside } from "../../hooks"
 import { usePhase2, useInvited } from "../../hooks"
 import { Link } from "react-router-dom"
 import "../../styles/phase2/Phase2Details.scss"
 
 export default (props) => {
-	// const { aUser } = useAside()
 	const { accepted, updateInvited } = useInvited()
-	const { jurnInfo, updatePhase2, activities } = usePhase2()
+	const { jurnInfo, activities } = usePhase2()
 	const jurn_id = props.match.params.jurn_id
-	// const user_id = aUser.user_id
 
 	useEffect(() => {
-		// updatePhase2(jurn_id)
 		updateInvited(jurn_id)
 	}, [jurn_id])
 
