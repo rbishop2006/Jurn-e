@@ -36,9 +36,21 @@ function getPhase2(jurn_id) {
 	}
 }
 
+// Sends an image to cloudinary and tags it with Jurn name
 function postImage(image, jurnTag) {
 	return (dispatch) => {
+		// change the tag name to remove spaces
 		api.post("/images", { image, jurnTag })
+	}
+}
+
+// Gets all images with tag of Jurn name
+function getImages(jurnName) {
+	//  Look for regEx in .replace - this doesn't look right
+	const jurnTag = jurnName && jurnName.replace(/\s/g, "")
+	console.log(jurnTag)
+	return (dispatch) => {
+		api.get("/images/" + jurnTag)
 	}
 }
 
@@ -48,6 +60,7 @@ export function usePhase2() {
 	const activities = useSelector((appState) => appState.Phase2State.activities)
 	const updatePhase2 = (jurn_id) => dispatch(getPhase2(jurn_id))
 	const sendImage = (image, jurnTag) => dispatch(postImage(image, jurnTag))
+	const fetchImages = (jurnName) => dispatch(getImages(jurnName))
 
-	return { jurnInfo, activities, updatePhase2, sendImage }
+	return { jurnInfo, activities, updatePhase2, sendImage, fetchImages }
 }

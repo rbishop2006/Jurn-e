@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 // import { useAside } from "../../hooks"
-// import { usePhase2, useRems } from "../../hooks"
+import { usePhase2 } from "../../hooks"
 import "../../styles/phase2/Phase2PhotoGallery.scss"
 import { CloudinaryContext, Image, Transformation } from "cloudinary-react"
 
 export default (props) => {
-	const jurn_id = props.match.params.jurn_id
+	const { jurnInfo, fetchImages } = usePhase2()
+	// const jurn_id = props.match.params.jurn_id
+	const jurnName = jurnInfo.jname
+
+	useEffect(() => {
+		fetchImages(jurnName)
+	})
 
 	return (
 		<div className="p2PhotoGallery">
