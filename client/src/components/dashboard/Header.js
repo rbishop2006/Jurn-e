@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import "../../styles/dashboard/Header.scss"
 
 export default (props) => {
-	const { sendJurn, get } = useMain()
+	const { sendJurn, fetchMain } = useMain()
 	const { fetchAside } = useAside()
 	const { aUser } = useAside()
 	const [newJurn, setNewJurn] = useState("")
@@ -22,7 +22,7 @@ export default (props) => {
 		}
 		if (valid) {
 			sendJurn(aUser.user_id, newJurn).then((user_id) => {
-				get()
+				fetchMain()
 				fetchAside()
 				props.history.push("/Jurne/dashboard/" + user_id)
 			})
