@@ -33,6 +33,7 @@ export default (props) => {
 	useEffect(() => {
 		updatePhase2(jurn_id)
 		updatePhase1(jurn_id)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [jurn_id, finalDate, newRange])
 
 	return (

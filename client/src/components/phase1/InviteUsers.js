@@ -52,6 +52,7 @@ export default (props) => {
 	useEffect(() => {
 		updateInvited(jurn_id)
 		setError(false)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [jurn_id, firstName, lastName])
 
 	return (
