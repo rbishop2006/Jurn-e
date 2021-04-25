@@ -3,86 +3,32 @@
 #frontWrapper {
 	height: 100vh;
 
-	.frontHeader {
-		padding: 1rem;
-		display: flex;
-		justify-content: flex-end;
-		align-items: center;
-
-		a {
-			margin: 0px 20px;
-			font-size: 2rem;
-			font-weight: 700;
-			text-transform: capitalize;
-
-			&.signUp {
-				@include var.buttonThemed(var.$frontPageColor);
-				font-size: 1.9rem;
-			}
-		}
+	a {
+		font-size: 1.5rem;
+		text-transform: capitalize;
 	}
 
 	.frontMain {
-		height: calc(100vh - 84px);
+		height: calc(100vh - 82px);
 		color: var.$frontPageColor;
 		background: url("/JurnEase-background.png") no-repeat center center/ contain;
-		position: relative;
-		display: flex;
 
-		.tagline {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			margin: 10% 8% 0 auto;
-			width: 300px;
-
-			h1 {
-				text-align: center;
-			}
-
-			p {
-				word-spacing: 0.3em;
-				letter-spacing: 0.1em;
-			}
+		p {
+			word-spacing: 0.3em;
+			letter-spacing: 0.1em;
 		}
 	}
 }
 
-@media (max-width: 850px) {
+@media (max-width: var.$smallScreen+"px") {
 	#frontWrapper {
-		.frontHeader {
-			position: static;
-			justify-content: center;
-		}
-
-		.frontImage {
-			background: url("/JurnEase-picture2.jpeg") no-repeat center center/
-				contain;
-			height: 30vh;
-		}
-
 		.frontMain {
-			height: fit-content;
-			background: none;
-			position: static;
-			padding: 20px;
+			background: url("/JurnEase-picture2.jpeg") no-repeat top center/ contain;
 
-			.tagline {
-				width: 100%;
-				margin: 0;
-				justify-content: flex-start;
-
-				p {
-					font-size: 20px;
-					word-spacing: 0;
-					letter-spacing: 0;
-				}
-
-				h3 {
-					font-size: 25px;
-					text-align: center;
-				}
+			p {
+				font-size: 1.2rem;
+				word-spacing: 0;
+				letter-spacing: 0;
 			}
 		}
 	}

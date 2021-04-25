@@ -4,7 +4,7 @@ import { AuthProvider, AuthRoute } from "react-auth"
 import "semantic-ui-css/semantic.min.css"
 import "../styles/base.scss"
 
-const FrontPage = React.lazy(() => import("./FrontPage"))
+const FrontPage = React.lazy(() => import("./front-page"))
 const Login = React.lazy(() => import("./auth/Login"))
 const Register = React.lazy(() => import("./auth/Register"))
 const Dashboard = React.lazy(() => import("./dashboard/Dashboard"))
