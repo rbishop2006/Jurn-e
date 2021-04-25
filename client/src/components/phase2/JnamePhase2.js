@@ -12,6 +12,7 @@ export default (props) => {
 
 	useEffect(() => {
 		updatePhase2(jurn_id)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [jurn_id])
 
 	return (

@@ -18,6 +18,7 @@ export default (props) => {
 	useEffect(() => {
 		updatePhase2(jurn_id)
 		updateInvited(jurn_id)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [jurn_id, user_id, accepted])
 
 	const panes = [

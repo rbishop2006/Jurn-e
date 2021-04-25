@@ -11,6 +11,11 @@ $thirdColor: #1c5d99; // lightness 35.4901960784%
 $frontPageColor: #4183c4; // lightness 51.1764705882%
 $dark: #333333; // lightness  20% -
 $width: 1200px;
+$mobile: 480;
+$smallScreen: 768;
+$tablet: 900;
+$largeScreen: 1280;
+$XLScreen: 1920;
 
 @function setTextColor($color) {
 	@if (lightness($color) > 50) {
@@ -75,33 +80,6 @@ $width: 1200px;
 	}
 }
 
-// // Old button theme
-// @mixin buttonThemed($bT) {
-// 	background: $bT;
-// 	color: $baseColor;
-// 	border: 1px solid $secondColor;
-// 	transition: all 0.3s ease;
-// 	margin: 0;
-
-// 	i {
-// 		color: $highlightColor;
-// 	}
-
-// 	em {
-// 		color: $highlightColor;
-// 	}
-
-// 	&:hover {
-// 		background: lighten($bT, 8%);
-// 		transition: all 0.3s ease;
-// 		border: 1px solid $highlightColor;
-// 		color: $baseColor;
-// 	}
-// 	&:active {
-// 		background: lighten($bT, 20%);
-// 	}
-// }
-
 @mixin FormForm_Input($fT) {
 	div.field {
 		label {
@@ -153,4 +131,20 @@ $width: 1200px;
 			color: scale-color($secondColor, $alpha: -60%);
 		}
 	}
+}
+
+:export {
+	frontPageColor: $frontPageColor;
+	baseColor: $baseColor;
+	firstColor: $firstColor;
+	secondColor: $secondColor;
+	highlightColor: $highlightColor;
+	thirdColor: $thirdColor;
+	frontPageColor: $frontPageColor;
+	dark: $dark;
+	mobile: $mobile;
+	smallScreen: $smallScreen;
+	tablet: $tablet;
+	largeScreen: $largeScreen;
+	XLScreen: $XLScreen;
 }

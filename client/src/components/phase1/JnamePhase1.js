@@ -16,6 +16,7 @@ export default (props) => {
 
 	useEffect(() => {
 		updatePhase1(props.match.params.jurn_id)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.match.params.jurn_id])
 
 	const panes = [

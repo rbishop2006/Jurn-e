@@ -7,23 +7,24 @@ import { useAside, useMessages } from "../../hooks"
 import "../../styles/aside/aside.scss"
 
 export default (props) => {
-  const { fetchAside } = useAside()
-  const { getMessages } = useMessages()
+	const { fetchAside } = useAside()
+	const { getMessages } = useMessages()
 
-  useEffect(() => {
-    fetchAside()
-    getMessages()
-  }, [])
+	useEffect(() => {
+		fetchAside()
+		getMessages()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
-  return (
-    <aside>
-      <UserProfile />
-      <AsideJurnes />
-      <h5>
-        Jurn(<em>e</em>) Messages
-      </h5>
-      <MessageForm />
-      <Message />
-    </aside>
-  )
+	return (
+		<aside>
+			<UserProfile />
+			<AsideJurnes />
+			<h5>
+				Jurn(<em>e</em>) Messages
+			</h5>
+			<MessageForm />
+			<Message />
+		</aside>
+	)
 }

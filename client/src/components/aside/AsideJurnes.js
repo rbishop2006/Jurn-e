@@ -34,6 +34,7 @@ export default (props) => {
 
 	useEffect(() => {
 		fetchMain()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [aJurns])
 
 	return (
