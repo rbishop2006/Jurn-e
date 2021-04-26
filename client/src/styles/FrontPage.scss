@@ -3,20 +3,9 @@
 #frontWrapper {
 	height: 100vh;
 
-	a {
-		font-size: 1.5rem;
-		text-transform: capitalize;
-	}
-
 	.frontMain {
 		height: calc(100vh - 82px);
-		color: var.$frontPageColor;
 		background: url("/JurnEase-background.png") no-repeat center center/ contain;
-
-		p {
-			word-spacing: 0.3em;
-			letter-spacing: 0.1em;
-		}
 	}
 }
 
@@ -24,12 +13,6 @@
 	#frontWrapper {
 		.frontMain {
 			background: url("/JurnEase-picture2.jpeg") no-repeat top center/ contain;
-
-			p {
-				font-size: 1.2rem;
-				word-spacing: 0;
-				letter-spacing: 0;
-			}
 		}
 	}
 }
