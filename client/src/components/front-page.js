@@ -25,19 +25,21 @@ export default function FrontPage(props) {
 					as={Link}
 					to={"/register"}
 					color={"blue"}
-					className={"fw-700"}
 					size={"massive"}
 					compact
 				>
 					sign up for <em>free</em>
 				</Button>
 			</Segment>
-			<Grid columns={3} className={"frontMain"} stackable padded="horizontally">
-				<Grid.Row className={"flex jc-end"}>
+			<Grid
+				columns={3}
+				className={"frontMain"}
+				stackable
+				padded={"horizontally"}
+			>
+				<Grid.Row>
 					<Grid.Column
-						textAlign={
-							width > Number(variables.smallScreen) ? "right" : "center"
-						}
+						floated={"right"}
 						verticalAlign={
 							width > Number(variables.smallScreen) ? "middle" : "bottom"
 						}

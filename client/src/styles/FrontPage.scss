@@ -3,6 +3,10 @@
 #frontWrapper {
 	height: 100vh;
 
+	a {
+		text-transform: capitalize;
+	}
+
 	.frontMain {
 		height: calc(100vh - 82px);
 		background: url("/JurnEase-background.png") no-repeat center center/ contain;
@@ -12,7 +16,7 @@
 @media (max-width: var.$smallScreen+"px") {
 	#frontWrapper {
 		.frontMain {
-			background: url("/JurnEase-picture2.jpeg") no-repeat top center/ contain;
+			background: url("/JurnEase-picture2.jpeg") no-repeat top center/75%;
 		}
 	}
 }
