@@ -13,7 +13,7 @@ export default function FrontPage(props) {
 			<Segment basic className={"flex jc-end ai-center m-0"}>
 				<Button
 					as={Link}
-					to={"/login"}
+					to={"/Login"}
 					basic
 					compact
 					color={"blue"}
@@ -23,7 +23,7 @@ export default function FrontPage(props) {
 				/>
 				<Button
 					as={Link}
-					to={"/register"}
+					to={"/Register"}
 					color={"blue"}
 					size={"massive"}
 					compact

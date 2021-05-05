@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 import { api, useAuth } from "react-auth"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import validator from "validator"
 import { Button, Form } from "semantic-ui-react"
 import "../../styles/LoginRegister.scss"
 
-export default (props) => {
+export default function Register(props) {
 	const { signin } = useAuth()
 	const [username, setUsername] = useState("")
-	const [usernameError, setUsernameError] = useState("")
+	const [usernameError, setUsernameError] = useState()
 	const [fname, setFname] = useState("")
 	const [fnameError, setFnameError] = useState("")
 	const [lname, setLname] = useState("")
@@ -17,8 +17,9 @@ export default (props) => {
 	const [passwordError, setPasswordError] = useState("")
 	const [confirm, setConfirm] = useState("")
 	const [confirmError, setConfirmError] = useState("")
+	const history = useHistory()
 
-	function handleRegister(e) {
+	const handleRegister = async (e) => {
 		e.preventDefault()
 		let valid = true
 
@@ -57,96 +58,109 @@ export default (props) => {
 			setConfirmError("")
 		}
 
+		// if (valid) {
+		// 	api
+		// 		.post("/register", { username, fname, lname, password })
+		// 		.then((data) => {
+		// 			signin(username, password).then(() => {
+		// 				history.push("/Jurne/dashboard")
+		// 			})
+		// 		})
+		// }
+
 		if (valid) {
-			api
-				.post("/register", { username, fname, lname, password })
-				.then((data) => {
-					signin(username, password).then(() => {
-						props.history.push("/Jurne/dashboard")
-					})
-				})
+			await api.post("/register", { username, fname, lname, password })
+
+			await signin(username, password)
+
+			return history.push("/Dashboard/main")
 		}
 	}
 
 	return (
-		<div id="register">
-			<Link to={"/Jurne"} className="logo">
-				<img src="/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
-			</Link>
-			<Form onSubmit={handleRegister} className="registerDiv">
-				<Form.Field>
-					<label className={usernameError ? "error" : ""} htmlFor="email">
-						Email {usernameError && usernameError}
-					</label>
-					<input
-						id="email"
-						type="email"
-						value={username}
-						className={usernameError ? "errorBox" : ""}
-						onChange={(e) => setUsername(e.target.value)}
-						placeholder="johnsmith@email.com"
-					/>
-				</Form.Field>
-				<Form.Field>
-					<label className={fnameError ? "error" : ""} htmlFor="fname">
-						First Name {fnameError && fnameError}
-					</label>
-					<input
-						id="fname"
-						type="text"
-						value={fname}
-						className={fnameError ? "errorBox" : ""}
-						onChange={(e) => setFname(e.target.value)}
-						placeholder="ex. John"
-					/>
-				</Form.Field>
-				<Form.Field>
-					<label className={lnameError ? "error" : ""} htmlFor="lname">
-						Last Name {lnameError && lnameError}
-					</label>
-					<input
-						id="lname"
-						type="text"
-						value={lname}
-						className={lnameError ? "errorBox" : ""}
-						onChange={(e) => setLname(e.target.value)}
-						placeholder="ex. Smith"
-					/>
-				</Form.Field>
-				<Form.Field>
-					<label className={passwordError ? "error" : ""} htmlFor="password">
-						Password {passwordError && passwordError}
-					</label>
-					<input
-						id="password"
-						type="password"
-						value={password}
-						className={passwordError ? "errorBox" : ""}
-						onChange={(e) => setPassword(e.target.value)}
-						placeholder="Create a password"
-					/>
-				</Form.Field>
-				<Form.Field>
-					<label className={confirmError ? "error" : ""} htmlFor="confirm">
-						Confirm Password {confirmError && confirmError}
-					</label>
-					<input
-						id="confirm"
-						type="password"
-						value={confirm}
-						className={confirmError ? "errorBox" : ""}
-						onChange={(e) => setConfirm(e.target.value)}
-						placeholder="Re-enter password"
-					/>
-				</Form.Field>
-				<Button type="submit">Register</Button>
-				<div className="linkDiv">
-					<p>
-						Already a Jurn(<em>ease</em>) member?
-					</p>
-					<Link to="/login">Click Here</Link>
-				</div>
-			</Form>
-		</div>
+		<Form onSubmit={handleRegister} className="registerDiv">
+			{/* <Form.Field>
+				<label className={usernameError ? "error" : ""} htmlFor="email">
+					Email {usernameError && usernameError}
+				</label>
+				<input
+					id="email"
+					type="email"
+					value={username}
+					className={usernameError ? "errorBox" : ""}
+					onChange={(e) => setUsername(e.target.value)}
+					placeholder="johnsmith@email.com"
+				/>
+			</Form.Field> */}
+			<Form.Input
+				inline
+				// id={"email"}
+				type={"email"}
+				// error={usernameError}
+				label={"Email"}
+				placeholder={"ex. JohnSmith@email.com"}
+				value={username}
+				onChange={(_, { value }) => setUsername(value)}
+			/>
+			<Form.Field>
+				<label className={fnameError ? "error" : ""} htmlFor="fname">
+					First Name {fnameError && fnameError}
+				</label>
+				<input
+					id="fname"
+					type="text"
+					value={fname}
+					className={fnameError ? "errorBox" : ""}
+					onChange={(e) => setFname(e.target.value)}
+					placeholder="ex. John"
+				/>
+			</Form.Field>
+			<Form.Field>
+				<label className={lnameError ? "error" : ""} htmlFor="lname">
+					Last Name {lnameError && lnameError}
+				</label>
+				<input
+					id="lname"
+					type="text"
+					value={lname}
+					className={lnameError ? "errorBox" : ""}
+					onChange={(e) => setLname(e.target.value)}
+					placeholder="ex. Smith"
+				/>
+			</Form.Field>
+			<Form.Field>
+				<label className={passwordError ? "error" : ""} htmlFor="password">
+					Password {passwordError && passwordError}
+				</label>
+				<input
+					id="password"
+					type="password"
+					value={password}
+					className={passwordError ? "errorBox" : ""}
+					onChange={(e) => setPassword(e.target.value)}
+					placeholder="Create a password"
+				/>
+			</Form.Field>
+			<Form.Field>
+				<label className={confirmError ? "error" : ""} htmlFor="confirm">
+					Confirm Password {confirmError && confirmError}
+				</label>
+				<input
+					id="confirm"
+					type="password"
+					value={confirm}
+					className={confirmError ? "errorBox" : ""}
+					onChange={(e) => setConfirm(e.target.value)}
+					placeholder="Re-enter password"
+				/>
+			</Form.Field>
+			<Button type="submit">Register</Button>
+			<div className="linkDiv">
+				<p>
+					Already a Jurn(<em>ease</em>) member?
+				</p>
+				<Link to="/login">Click Here</Link>
+			</div>
+		</Form>
 	)
 }
