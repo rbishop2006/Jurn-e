@@ -2,21 +2,21 @@ import React, { useState } from "react"
 import { api, useAuth } from "react-auth"
 import { Link, useHistory } from "react-router-dom"
 import validator from "validator"
-import { Button, Form } from "semantic-ui-react"
+import { Button, Form, Segment, Image } from "semantic-ui-react"
 import "../../styles/LoginRegister.scss"
 
-export default function Register(props) {
+export default function Register() {
 	const { signin } = useAuth()
 	const [username, setUsername] = useState("")
-	const [usernameError, setUsernameError] = useState()
+	const [usernameError, setUsernameError] = useState(false)
 	const [fname, setFname] = useState("")
-	const [fnameError, setFnameError] = useState("")
+	const [fnameError, setFnameError] = useState(false)
 	const [lname, setLname] = useState("")
-	const [lnameError, setLnameError] = useState("")
+	const [lnameError, setLnameError] = useState(false)
 	const [password, setPassword] = useState("")
-	const [passwordError, setPasswordError] = useState("")
+	const [passwordError, setPasswordError] = useState(false)
 	const [confirm, setConfirm] = useState("")
-	const [confirmError, setConfirmError] = useState("")
+	const [confirmError, setConfirmError] = useState(false)
 	const history = useHistory()
 
 	const handleRegister = async (e) => {
@@ -25,48 +25,28 @@ export default function Register(props) {
 
 		if (!validator.isEmail(username)) {
 			valid = false
-			setUsernameError(` - Please enter valid email address`)
-		} else {
-			setUsernameError("")
+			setUsernameError(true)
 		}
 
 		if (!validator.isAlpha(fname, "en-US")) {
 			valid = false
-			setFnameError(` - Can't be blank & can only contain letters`)
-		} else {
-			setFnameError("")
+			setFnameError(true)
 		}
 
 		if (!validator.isAlpha(lname, "en-US")) {
 			valid = false
-			setLnameError(` - Can't be blank & can only contain letters`)
-		} else {
-			setLnameError("")
+			setLnameError(true)
 		}
 
-		if (!validator.isAlphanumeric(password, "en-US")) {
+		if (!validator.isLength(password, { min: 8, max: 30 })) {
 			valid = false
-			setPasswordError(` - Can't be blank`)
-		} else {
-			setPasswordError("")
+			setPasswordError(true)
 		}
 
 		if (!validator.equals(confirm, password)) {
 			valid = false
-			setConfirmError(` - Must match password`)
-		} else {
-			setConfirmError("")
+			setConfirmError(true)
 		}
-
-		// if (valid) {
-		// 	api
-		// 		.post("/register", { username, fname, lname, password })
-		// 		.then((data) => {
-		// 			signin(username, password).then(() => {
-		// 				history.push("/Jurne/dashboard")
-		// 			})
-		// 		})
-		// }
 
 		if (valid) {
 			await api.post("/register", { username, fname, lname, password })
@@ -78,89 +58,83 @@ export default function Register(props) {
 	}
 
 	return (
-		<Form onSubmit={handleRegister} className="registerDiv">
-			{/* <Form.Field>
-				<label className={usernameError ? "error" : ""} htmlFor="email">
-					Email {usernameError && usernameError}
-				</label>
-				<input
-					id="email"
-					type="email"
+		<Segment padded basic className={"logInRegister"}>
+			<Image as={Link} to={"/"} src={"/JurnEase-logo.png"} alt={"Jurn(ease)"} />
+			<Form onSubmit={handleRegister} size={"big"}>
+				<Form.Input
+					className={"mt-4"}
+					type={"email"}
+					error={
+						usernameError && {
+							content: `Please enter valid email address`,
+							pointing: "below",
+						}
+					}
+					label={"Email"}
+					placeholder={"ex. JohnSmith@email.com"}
 					value={username}
-					className={usernameError ? "errorBox" : ""}
-					onChange={(e) => setUsername(e.target.value)}
-					placeholder="johnsmith@email.com"
+					onChange={(_, { value }) => setUsername(value)}
 				/>
-			</Form.Field> */}
-			<Form.Input
-				inline
-				// id={"email"}
-				type={"email"}
-				// error={usernameError}
-				label={"Email"}
-				placeholder={"ex. JohnSmith@email.com"}
-				value={username}
-				onChange={(_, { value }) => setUsername(value)}
-			/>
-			<Form.Field>
-				<label className={fnameError ? "error" : ""} htmlFor="fname">
-					First Name {fnameError && fnameError}
-				</label>
-				<input
-					id="fname"
-					type="text"
+				<Form.Input
+					type={"text"}
+					error={
+						fnameError && {
+							content: `Can't be blank & can only contain letters`,
+							pointing: "below",
+						}
+					}
+					label={"First Name"}
+					placeholder={"ex. John"}
 					value={fname}
-					className={fnameError ? "errorBox" : ""}
-					onChange={(e) => setFname(e.target.value)}
-					placeholder="ex. John"
+					onChange={(_, { value }) => setFname(value)}
 				/>
-			</Form.Field>
-			<Form.Field>
-				<label className={lnameError ? "error" : ""} htmlFor="lname">
-					Last Name {lnameError && lnameError}
-				</label>
-				<input
-					id="lname"
-					type="text"
+				<Form.Input
+					type={"text"}
+					error={
+						lnameError && {
+							content: `Can't be blank & can only contain letters`,
+							pointing: "below",
+						}
+					}
+					label={"Last Name"}
+					placeholder={"ex. Smith"}
 					value={lname}
-					className={lnameError ? "errorBox" : ""}
-					onChange={(e) => setLname(e.target.value)}
-					placeholder="ex. Smith"
+					onChange={(_, { value }) => setLname(value)}
 				/>
-			</Form.Field>
-			<Form.Field>
-				<label className={passwordError ? "error" : ""} htmlFor="password">
-					Password {passwordError && passwordError}
-				</label>
-				<input
-					id="password"
-					type="password"
+				<Form.Input
+					type={"password"}
+					error={
+						passwordError && {
+							content: `Must be between 8 and 30 characters`,
+							pointing: "below",
+						}
+					}
+					label={"Password"}
+					placeholder={"Create a password"}
 					value={password}
-					className={passwordError ? "errorBox" : ""}
-					onChange={(e) => setPassword(e.target.value)}
-					placeholder="Create a password"
+					onChange={(_, { value }) => setPassword(value)}
 				/>
-			</Form.Field>
-			<Form.Field>
-				<label className={confirmError ? "error" : ""} htmlFor="confirm">
-					Confirm Password {confirmError && confirmError}
-				</label>
-				<input
-					id="confirm"
-					type="password"
+				<Form.Input
+					type={"password"}
+					error={
+						confirmError && {
+							content: `Must match password`,
+							pointing: "below",
+						}
+					}
+					label={"Confirm Password"}
+					placeholder={"Re-enter password"}
 					value={confirm}
-					className={confirmError ? "errorBox" : ""}
-					onChange={(e) => setConfirm(e.target.value)}
-					placeholder="Re-enter password"
+					onChange={(_, { value }) => setConfirm(value)}
 				/>
-			</Form.Field>
-			<Button type="submit">Register</Button>
-			<div className="linkDiv">
-				<p>
-					Already a Jurn(<em>ease</em>) member?
-				</p>
-				<Link to="/login">Click Here</Link>
-			</div>
-		</Form>
+				<Button type="submit">Register</Button>
+				<Segment basic className="flex jc-center">
+					<p>
+						Already a Jurn(<em>ease</em>) member?
+					</p>
+					<Link to="/Login">Click Here</Link>
+				</Segment>
+			</Form>
+		</Segment>
 	)
 }

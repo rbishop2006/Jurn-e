@@ -67,7 +67,7 @@
 			}
 
 			.ui.button {
-				@include var.buttonThemed(var.$firstColor);
+				@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 				margin: 5px;
 				padding: 1rem;
 			}

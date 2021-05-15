@@ -62,7 +62,7 @@
 			grid-area: button;
 			justify-self: center;
 			width: 50%;
-			@include var.buttonThemed(var.$firstColor);
+			@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 		}
 	}
 
@@ -81,7 +81,7 @@
 	}
 
 	button.deleteJurn {
-		@include var.buttonThemed(var.$firstColor);
+		@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 		margin: 0;
 		font-size: 1.5rem;
 	}

@@ -74,7 +74,7 @@
 			width: 100%;
 
 			button {
-				@include var.buttonThemed(var.$firstColor);
+				@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 				width: 100%;
 				font-size: 1.5rem;
 			}

@@ -39,7 +39,7 @@ section {
 					}
 
 					a.p1Edit {
-						@include var.buttonThemed(var.$firstColor);
+						@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 						padding: 0.5rem 0.5rem 0.5rem 0.75rem;
 						position: absolute;
 						bottom: 16px;

@@ -47,7 +47,7 @@ header {
 				}
 
 				button {
-					@include var.buttonThemed(var.$firstColor);
+					@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 					width: 50%;
 					font-size: 1.2rem;
 					padding: 0.75rem 0;
@@ -57,7 +57,7 @@ header {
 	}
 
 	.ui.button {
-		@include var.buttonThemed(var.$firstColor);
+		@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 		font-size: 1.3rem;
 	}
 }

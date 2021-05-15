@@ -28,7 +28,7 @@
 		justify-content: space-between;
 
 		.ui.button.editProfile {
-			@include var.buttonThemed(var.$firstColor);
+			@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 			padding: 5px 10px;
 
 			i {
@@ -54,7 +54,7 @@
 
 		.logOut {
 			margin: 0;
-			@include var.buttonThemed(var.$firstColor);
+			@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 			padding: 5px 10px;
 		}
 	}
@@ -92,7 +92,7 @@ i {
 	}
 
 	.dropdown {
-		@include var.buttonThemed(var.$firstColor);
+		@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 		margin: 0 0 1em 0;
 
 		i {
@@ -105,7 +105,7 @@ i {
 	}
 
 	.ui.active {
-		@include var.buttonThemed(var.$firstColor);
+		@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 		border: 1px solid var.$highlightColor;
 
 		i {
@@ -129,7 +129,7 @@ i {
 	}
 
 	.updateProfile {
-		@include var.buttonThemed(var.$firstColor);
+		@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 		align-self: center;
 		width: 70%;
 	}

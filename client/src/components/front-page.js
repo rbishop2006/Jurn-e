@@ -5,7 +5,7 @@ import "../styles/FrontPage.scss"
 import variables from "../styles/_variables.scss"
 import { useWindowWidth } from "../hooks/use-window-width"
 
-export default function FrontPage(props) {
+export default function FrontPage() {
 	const { width } = useWindowWidth()
 
 	return (
