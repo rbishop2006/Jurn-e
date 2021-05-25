@@ -1,22 +1,25 @@
 import React, { useState } from "react"
 import { useAuth } from "react-auth"
-import { Link } from "react-router-dom"
-import { Button, Form } from "semantic-ui-react"
+import { Link, useHistory } from "react-router-dom"
+import { Button, Form, Image, Segment } from "semantic-ui-react"
 import "../../styles/LoginRegister.scss"
 
-export default (props) => {
+export default function Login() {
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
 	const [error, setError] = useState(false)
 	const { signin } = useAuth()
+	const history = useHistory()
 
+	// TODO - maybe do an async function here??
 	function handleLogin(e) {
 		e.preventDefault()
 		signin(username, password)
 			.then((profile) => {
-				props.history.push("/Jurne/dashboard")
+				history.push("/Dashboard/main")
 			})
 			.catch((e) => {
+				console.error(e)
 				setError(true)
 				setPassword("")
 				setUsername("")
@@ -24,38 +27,36 @@ export default (props) => {
 	}
 
 	return (
-		<div id="login">
-			<Link to={"/Jurne"} className="logo">
-				<img src="/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
-			</Link>
-			<Form onSubmit={handleLogin} className="loginDiv">
+		<Segment padded basic className={"logInRegister"}>
+			<Image as={Link} to={"/"} src={"/JurnEase-logo.png"} alt={"Jurn(ease)"} />
+			<Form onSubmit={handleLogin} size={"big"}>
 				<Form.Input
+					type={"email"}
+					className={"mt-4"}
 					error={
 						error
 							? { content: "Invalid username or password", pointing: "below" }
 							: false
 					}
-					fluid
-					label="Email"
-					placeholder="ex. JohnSmith@email.com"
+					label={"Email"}
+					placeholder={"ex. JohnSmith@email.com"}
 					value={username}
-					onChange={(e) => setUsername(e.target.value)}
+					onChange={(_, { value }) => setUsername(value)}
 				/>
 				<Form.Input
 					error={error}
-					fluid
-					label="Password"
-					placeholder="password"
+					label={"Password"}
+					placeholder={"password"}
 					value={password}
-					type="password"
-					onChange={(e) => setPassword(e.target.value)}
+					type={"password"}
+					onChange={(_, { value }) => setPassword(value)}
 				/>
 				<Button type="submit">Log in</Button>
-				<div className="linkDiv">
+				<Segment basic className="flex jc-center">
 					<p>New user?</p>
-					<Link to="/register">Register Here</Link>
-				</div>
+					<Link to="/Register">Register Here</Link>
+				</Segment>
 			</Form>
-		</div>
+		</Segment>
 	)
 }

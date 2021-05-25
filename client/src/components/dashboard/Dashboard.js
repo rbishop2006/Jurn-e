@@ -15,18 +15,18 @@ export default (props) => {
 			<main>
 				<Route
 					exact
-					path="/Jurne/dashboard"
+					path="/Dashboard/main"
 					component={Main}
 					history={props.history}
 				/>
 				<Route
 					exact
-					path="/Jurne/dashboard/:jurn_id"
+					path="/Dashboard/Jurne/:jurn_id"
 					component={JnamePhase1}
 					history={props.history}
 				/>
 				<Route
-					path="/Jurne/dashboard/final/:jurn_id"
+					path="/Dashboard/final/:jurn_id"
 					component={JnamePhase2}
 					history={props.history}
 				/>

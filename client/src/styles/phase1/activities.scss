@@ -98,7 +98,7 @@
 
 		button.clearCompleted {
 			margin: 0;
-			@include var.buttonThemed(var.$firstColor);
+			@include var.buttonThemed(var.$firstColor, var.$highlightColor);
 		}
 	}
 }

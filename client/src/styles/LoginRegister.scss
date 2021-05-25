@@ -1,129 +1,38 @@
 @use 'variables.scss' as var;
 
-#login,
-#register {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+.logInRegister {
 	max-width: var.$width;
-	margin: 0 auto;
+	margin: auto;
+	text-align: center;
 
-	.logo {
-		margin: 100px 0 0 0;
-	}
-
-	.ui.form.loginDiv,
-	.ui.form.registerDiv {
+	.form {
+		max-width: 50%;
+		margin: auto;
 		@include var.FormForm_Input(var.$firstColor);
-		width: 50%;
-		height: fit-content;
-		margin: 2rem 0;
-		border: 3px solid var.$firstColor;
-		border-radius: 10px;
-		padding: 3rem;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: space-evenly;
-
-		.field {
-			margin: 10px 0;
-			width: 100%;
-
-			label {
-				font-size: 1.6rem;
-			}
-
-			input {
-				border: 1px solid var.$firstColor;
-				border-radius: 5px;
-				color: var.$firstColor;
-				font-size: 1.6rem;
-
-				&::placeholder {
-					color: scale-color(var.$firstColor, $alpha: -60%);
-				}
-			}
-
-			div.input {
-				input {
-					&:focus {
-						border: 1.5px solid var.$firstColor;
-					}
-				}
-			}
-
-			div.ui.pointing {
-				font-size: 1.8rem;
-			}
-		}
-
-		.error {
-			color: #9f3a38;
-		}
-
-		.errorBox {
-			border-color: #e0b4b4;
-			background: #fff6f6;
-		}
 
 		.ui.button {
-			@include var.buttonThemed(var.$firstColor);
-			margin: 10px 0 0 0;
+			@include var.buttonThemed(var.$firstColor, var.$firstColor);
 			font-size: 1.4rem;
 		}
 
-		.linkDiv {
-			display: flex;
-			align-items: center;
-			margin: 10px 0;
-			font-size: 1.5rem;
-
-			p {
-				margin: 0px 10px 0px 0px;
-				color: var.$secondColor;
-			}
-
+		.segment {
 			a {
-				margin: 0px 0px 0px 10px;
-				color: var.$firstColor;
+				margin-left: 1rem;
 			}
 		}
 	}
 }
 
-@media (max-width: 850px) {
-	#login,
-	#register {
-		.logo {
-			margin: 50px 0 0 0;
-		}
+@media (max-width: var.$smallScreen+"px") {
+	.ui.segment.logInRegister {
+		.form {
+			max-width: 100%;
 
-		.ui.form.loginDiv,
-		.ui.form.registerDiv {
-			width: 75%;
-		}
-	}
-}
-
-@media (max-width: 500px) {
-	#login,
-	#register {
-		.logo {
-			margin: 20px 0 0 0;
-		}
-
-		.ui.form.loginDiv,
-		.ui.form.registerDiv {
-			width: 95%;
-
-			.linkDiv {
+			.segment {
 				flex-direction: column;
 
-				p,
 				a {
-					margin: 0;
+					margin-left: 0;
 				}
 			}
 		}
