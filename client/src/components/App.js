@@ -5,8 +5,8 @@ import "semantic-ui-css/semantic.min.css"
 import "../styles/base.scss"
 
 const FrontPage = React.lazy(() => import("./front-page"))
-const Login = React.lazy(() => import("./auth/login"))
-const Register = React.lazy(() => import("./auth/register"))
+const Login = React.lazy(() => import("./auth/Login"))
+const Register = React.lazy(() => import("./auth/Register"))
 const Dashboard = React.lazy(() => import("./dashboard/Dashboard"))
 
 export default (props) => {

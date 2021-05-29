@@ -27,7 +27,7 @@ export default function Login() {
 	}
 
 	return (
-		<Segment padded basic className={"logInRegister"}>
+		<Segment padded basic id={"logInRegister"}>
 			<Image as={Link} to={"/"} src={"/JurnEase-logo.png"} alt={"Jurn(ease)"} />
 			<Form onSubmit={handleLogin} size={"big"}>
 				<Form.Input

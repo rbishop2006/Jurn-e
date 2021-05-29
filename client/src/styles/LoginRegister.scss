@@ -1,6 +1,6 @@
 @use 'variables.scss' as var;
 
-.logInRegister {
+#logInRegister {
 	max-width: var.$width;
 	margin: auto;
 	text-align: center;
@@ -24,7 +24,7 @@
 }
 
 @media (max-width: var.$smallScreen+"px") {
-	.ui.segment.logInRegister {
+	.ui.segment#logInRegister {
 		.form {
 			max-width: 100%;
 
