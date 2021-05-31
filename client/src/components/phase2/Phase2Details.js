@@ -87,7 +87,7 @@ export default (props) => {
 					panes={panes}
 				/>
 			</div>
-			<Link to={"/Jurne/dashboard/" + jurn_id} className="p2Edit">
+			<Link to={`/Dashboard/Jurne/${jurn_id}/planning`} className="p2Edit">
 				<Button id="editButton" type="button">
 					Edit Jurn(<em>e</em>) <Icon name="pencil" />
 				</Button>

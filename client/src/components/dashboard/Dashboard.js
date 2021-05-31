@@ -21,12 +21,13 @@ export default (props) => {
 				/>
 				<Route
 					exact
-					path="/Dashboard/Jurne/:jurn_id"
+					path="/Dashboard/Jurne/:jurn_id/planning"
 					component={JnamePhase1}
 					history={props.history}
 				/>
 				<Route
-					path="/Dashboard/final/:jurn_id"
+					exact
+					path="/Dashboard/Jurne/:jurn_id"
 					component={JnamePhase2}
 					history={props.history}
 				/>

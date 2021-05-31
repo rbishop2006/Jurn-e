@@ -21,10 +21,10 @@ export default (props) => {
 			valid = false
 		}
 		if (valid) {
-			sendJurn(aUser.user_id, newJurn).then((user_id) => {
+			sendJurn(aUser.user_id, newJurn).then((jurnId) => {
 				fetchMain()
 				fetchAside()
-				props.history.push("/Jurne/dashboard/" + user_id)
+				props.history.push(`/Dashboard/Jurne/${jurnId}/planning`)
 			})
 		}
 		setNewJurn("")
@@ -32,7 +32,7 @@ export default (props) => {
 
 	return (
 		<header>
-			<Link to="/Jurne/dashboard/">
+			<Link to="/Dashboard/Main">
 				<img src="/JurnEase-logo.png" alt="Jurn(ease) logo"></img>
 			</Link>
 			<Form onSubmit={handleSubmit} className="create">
@@ -54,7 +54,7 @@ export default (props) => {
 					</Form.Field>
 				</Form.Group>
 			</Form>
-			<Link to="/Jurne/dashboard">
+			<Link to="/Dashboard/main">
 				<Button type="button">
 					<span>
 						My Jurn(<em>e</em>)s <Icon name="home" />

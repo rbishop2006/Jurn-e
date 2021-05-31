@@ -78,30 +78,29 @@ $XLScreen: 1920;
 	}
 }
 
-@mixin FormForm_Input($fT) {
+@mixin FormForm_Input($color) {
 	div.field {
 		label {
-			color: $fT;
-			// font-size: 1.7rem;
+			text-align: start;
+			color: $color;
 		}
 
 		div.input {
 			border-radius: 5px;
-			color: $fT;
-			// background: white;
-			// font-size: 1.7rem;
+			color: $color;
 
 			input {
 				background: white;
-				border: 1px solid $fT;
-			}
+				border: 1px solid $color;
+				color: $color;
 
-			&::placeholder {
-				color: scale-color($secondColor, $alpha: -60%);
+				&::placeholder {
+					color: scale-color($color, $alpha: -60%);
+				}
 			}
 
 			input:focus {
-				color: darken($fT, 10%);
+				color: darken($color, 10%);
 				border-color: $secondColor;
 			}
 		}

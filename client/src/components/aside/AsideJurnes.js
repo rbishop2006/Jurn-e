@@ -5,14 +5,8 @@ import { Link } from "react-router-dom"
 import "../../styles/aside/asideJurns.scss"
 
 export default (props) => {
-	const {
-		aUser,
-		aJurns,
-		pendingJurns,
-		fetchAside,
-		sendAccept,
-		sendDecline,
-	} = useAside()
+	const { aUser, aJurns, pendingJurns, fetchAside, sendAccept, sendDecline } =
+		useAside()
 	const user_id = aUser.user_id
 	const pendCount = pendingJurns.length
 	const [hidden2, setHidden2] = useState(true)
@@ -44,7 +38,7 @@ export default (props) => {
 			</h5>
 			<div className="jurnList">
 				{aJurns.map((jurn, i) => (
-					<Link key={"jurn" + i} to={"/Jurne/dashboard/final/" + jurn.id}>
+					<Link key={"jurn" + i} to={`/Dashboard/Jurne/${jurn.id}`}>
 						<Menu id="menu">
 							<Menu.Item name={jurn.name} active={true} id="menuItem">
 								<p>{jurn.name}</p>

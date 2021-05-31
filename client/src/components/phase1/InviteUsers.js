@@ -4,13 +4,8 @@ import { useInvited, useMain, useAside } from "../../hooks"
 import "../../styles/phase1/inviteUsers.scss"
 
 export default (props) => {
-	const {
-		pending,
-		accepted,
-		declined,
-		updateInvited,
-		sendInvite,
-	} = useInvited()
+	const { pending, accepted, declined, updateInvited, sendInvite } =
+		useInvited()
 	const { fetchMain } = useMain()
 
 	const { aUser, delJurn, fetchAside } = useAside()
@@ -45,7 +40,7 @@ export default (props) => {
 		delJurn(user_id, jurn_id).then(() => {
 			fetchAside()
 			fetchMain()
-			props.history.push("/Jurne/dashboard")
+			props.history.push("/Dashboard/main")
 		})
 	}
 

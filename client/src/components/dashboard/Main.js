@@ -39,7 +39,10 @@ export default (props) => {
 								<Card.Meta>{`Activities planned: ` + jurn.act_count}</Card.Meta>
 
 								<Card.Meta>{`My Reminders Left: ` + jurn.rem_count}</Card.Meta>
-								<Link className="p1Edit" to={"/JurnEase/Jurne/" + jurn.jurn_id}>
+								<Link
+									className="p1Edit"
+									to={`/Dashboard/Jurne/${jurn.jurn_id}/planning`}
+								>
 									<span>
 										Edit <Icon name="pencil" />
 									</span>

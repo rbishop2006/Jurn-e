@@ -67,7 +67,7 @@ export default (props) => {
 		<div className="phase1">
 			<h1 className="p1Header">{jname.jname}</h1>
 			<div className="inviteUsers">
-				<InviteUsers match={props.match} />
+				<InviteUsers match={props.match} history={props.history} />
 			</div>
 			<div className="selectionsMenu">
 				<div className="selectionTop">
@@ -80,7 +80,7 @@ export default (props) => {
 						panes={panes}
 					/>
 				</div>
-				<Link className="toPhase2" to={"/Jurne/dashboard/final/" + jurn_id}>
+				<Link className="toPhase2" to={`/Dashboard/Jurne/${jurn_id}`}>
 					<Button type="submit">
 						<span>
 							<Icon name="arrow right" />
