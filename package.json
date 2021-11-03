@@ -30,7 +30,7 @@
 		"semantic-ui-react": "^1.0.0",
 		"react-semantic-ui-datepickers": "^2.8.0",
 		"moment": "^2.27.0",
-		"validator": "^13.1.1",
+		"validator": "^13.7.0",
 		"axios": "^0.21.1",
 		"jsonwebtoken": "^8.5.1",
 		"config": "^3.3.1",
